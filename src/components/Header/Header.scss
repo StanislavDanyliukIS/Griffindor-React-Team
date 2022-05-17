@@ -1,0 +1,38 @@
+.header{
+  padding: 0.5vh 0;
+  border-bottom: 1px #E6E7E9 solid;
+  &__logo{
+    cursor: pointer;
+    transition: 0.1s;
+    &:hover{
+      transition: 0.1s;
+      opacity: 0.7;
+    }
+  }
+  &__theme{
+    padding-top: 0.6vh;
+    cursor: pointer;
+    color: #282c34;
+    transition: 0.2s;
+    &:hover{
+      color: #000000;
+      transition: 0.2s;
+    }
+  }
+  &__user{
+    display: flex;
+    cursor: pointer;
+    &_info{
+      text-align: left;
+    }
+    &_name{
+      color: #1e293b;
+    }
+  }
+}
+.container-xl{
+  display: flex;
+  flex-wrap: inherit;
+  align-items: center;
+  justify-content: space-between;
+}
