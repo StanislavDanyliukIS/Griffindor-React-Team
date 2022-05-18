@@ -1,0 +1,10 @@
+export { default as AboutUs } from './AboutUs/AboutUs';
+export { default as Event } from './Event/Event';
+export { default as Events } from './Events/Events';
+export { default as Home } from './Home/Home';
+export { default as Login } from './Login/Login';
+export { default as Managers } from './Managers/Managers';
+export { default as Members } from './Members/Members';
+export { default as Profile } from './Profile/Profile';
+export { default as Settings } from './Settings/Settings';
+export { default as NotFound } from './NotFound/NotFound';
