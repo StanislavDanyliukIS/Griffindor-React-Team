@@ -1,0 +1,28 @@
+li {
+	list-style: none;
+}
+
+.navbar {
+	padding-top: 1.5vh;
+	padding-bottom: 0;
+	border-bottom: 1px #e6e7e9 solid;
+	&__nav {
+		display: flex;
+		padding-left: 0;
+	}
+	&__item {
+		display: flex;
+		justify-content: center;
+		color: rgba(31, 30, 29, 0.67);
+		transition: 0.1s;
+		cursor: pointer;
+		text-decoration: none;
+		&:hover {
+			transition: 0.1s;
+			color: #000000;
+		}
+	}
+	&__page {
+		font-size: 1.1rem;
+	}
+}
