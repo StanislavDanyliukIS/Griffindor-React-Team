@@ -1,4 +1,4 @@
-const Events = () => {
+const EventsManager = () => {
 	return (
 		<div className='container'>
 			<main>
@@ -62,4 +62,4 @@ const Events = () => {
 	);
 };
 
-export default Events;
+export default EventsManager;
