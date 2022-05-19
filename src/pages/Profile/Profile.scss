@@ -1,0 +1,21 @@
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  background-color: #f2f3f4;
+}
+.profil-title {
+  margin-bottom: 30px;
+}
+.profile-photo {
+  padding-left: 40px;
+}
+.card {
+  min-height: 74vh;
+}
+.list-unstyled {
+  margin-top: 15px;
+}
+.edit-btn {
+  min-width: 200px;
+}
