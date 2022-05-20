@@ -1,6 +1,6 @@
-import "./Manager.scss";
+import "./ManagerList.scss";
 
-const Manager = ({name, number}) => {
+const ManagerList = ({name, number}) => {
   return(
       <>
           <div className={" col-md border rounded p-5 py-2 m-2 bg-white"}>
@@ -25,4 +25,4 @@ const Manager = ({name, number}) => {
   )
 }
 
-export default Manager;
+export default ManagerList;
