@@ -1,10 +1,11 @@
-.container {
+.managers-container {
   max-width: 100%;
   margin: 0 auto;
   padding: 20px;
+  min-height: 79vh;
 }
 
-.btn-table-create {
+.btn-create-user {
   display: block;
   margin: 20px auto;
   padding: 10px;
@@ -16,9 +17,20 @@
   margin-right: auto;
 }
 
-.events-manager-add {
+.managers-add-user {
   display: flex;
   justify-content: center;
   gap: 20px;
   padding: 5px;
+}
+
+.btn-edit {
+  display: flex;
+  padding: 10px 20px;
+  margin-left: auto;
+}
+
+.btn-delete {
+  display: flex;
+  padding: 10px 20px;
 }
