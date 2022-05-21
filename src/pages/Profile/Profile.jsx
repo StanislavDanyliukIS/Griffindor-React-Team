@@ -1,14 +1,13 @@
-
 import { useNavigate } from "react-router";
 
 import "./Profile.scss";
 
 const Profile = () => {
   const navigation = useNavigate();
-  const handleClick = () => navigation("settings", { replace: true });
+  const handleClick = () => navigation("settings");
   return (
     <div>
-      <div className="profile-page">
+      <div className="profile-page bg-light">
         <div class="container">
           <h3 className="profil-title">Profile</h3>
           <div class="profile-field col-lg-12 mb-4 mb-sm-5">
@@ -16,7 +15,8 @@ const Profile = () => {
               <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
                 <div class="row align-items-center">
                   <div class="col-lg-6 mb-4 mb-lg-0">
-                    <img  className ="profile-photo"
+                    <img
+                      className="profile-photo"
                       src="https://bootdey.com/img/Content/avatar/avatar7.png"
                       alt="..."
                     />

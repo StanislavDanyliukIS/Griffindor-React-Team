@@ -2,15 +2,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 79vh;
   width: 100vw;
-  background-color: #f2f3f4;
 }
 
 .singin-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   padding: 50px 40px;
   background-color: #ffffff;
   border: 1px solid #e6e7e9;
@@ -22,17 +20,17 @@
   font-size: 22px;
   font-weight: bold;
   color: #1e293b;
+  margin-bottom: 30px;
 }
 
 .login-input-label {
   margin-right: auto;
+  margin: 20px 0 10px 0;
 }
 .login-btn {
   margin-top: 20px;
 }
-.form-control {
-  margin-bottom: 20px;
-}
+
 .form-input-password {
   position: relative;
 }
@@ -53,4 +51,11 @@
 }
 .forgot-password {
   text-decoration: none;
+}
+.hide-text-danger {
+  visibility: hidden;
+}
+.text-danger {
+  display: flex;
+  margin: 5px 0 20px 0;
 }

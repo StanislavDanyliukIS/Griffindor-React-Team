@@ -5,6 +5,9 @@ import eye from "./eye.png";
 
 const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
+  const [paswordValidation, setPasswordValidation] =
+    useState("hide-text-danger");
+  const [emailValidation, setEmailValidation] = useState("hide-text-danger");
   const [passwordVisibility, setPasswordVisibility] = useState("password");
 
   const { email, password } = user;
@@ -16,8 +19,28 @@ const Login = () => {
     });
   };
 
+  const validatePasswordClass = () => {
+    setPasswordValidation(
+      password.length >= 6 ? "hide-text-danger" : "text-danger"
+    );
+  };
+
+  const validateEmailClass = () => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    setEmailValidation(
+      re.test(String(email).toLowerCase()) ? "hide-text-danger" : "text-danger"
+    );
+    return re.test(String(email).toLowerCase());
+  };
+
   const handleClick = () => {
-    if (!email && !password) {
+    if (
+      (!!email &&
+        !!password &&
+        password.length >= 6 &&
+        validateEmailClass()) === false
+    ) {
       return;
     }
     sessionStorage.setItem("user", JSON.stringify(user));
@@ -31,7 +54,7 @@ const Login = () => {
   };
 
   return (
-    <div className="login-page">
+    <div className="login-page bg-light">
       <form className="singin-form">
         <p className="form-title">Login to your account</p>
         <label htmlFor="inputEmail4" className="login-input-label">
@@ -45,7 +68,9 @@ const Login = () => {
           placeholder="Enter email"
           value={email}
           onChange={handleChange}
+          required
         />
+        <span className={emailValidation}>Incorrect email address</span>
         <label htmlFor="inputPassword4" className="login-input-label">
           Password
         </label>
@@ -62,12 +87,18 @@ const Login = () => {
             placeholder="Password"
             value={password}
             onChange={handleChange}
+            required
           />
           <img className="eye" src={eye} alt="eye" onClick={handleVisibility} />
+          <span className={paswordValidation}>
+            Password should be at least 6 characters
+          </span>
         </div>
         <button
           onClick={(e) => {
             e.preventDefault();
+            validatePasswordClass();
+            validateEmailClass(email);
             setTimeout(handleClick, 1000);
           }}
           className="btn btn-primary d-sm-inline-block login-btn"

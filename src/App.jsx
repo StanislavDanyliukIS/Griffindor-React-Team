@@ -7,6 +7,8 @@ import Managers from "./pages/Managers/Managers";
 import Events from "./pages/Events/Events";
 import NotFound from "./pages/NotFound/NotFound";
 import Profile from "./pages/Profile/Profile";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import Login from "./pages/Login/Login";
 
 const App = () => {
   return (
