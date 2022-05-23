@@ -69,15 +69,21 @@ const ManagersList = () => {
 			</div>
 			<div className={'page-body pt-4'}>
 				<div className={'container-xl'}>
-					<div className={'managers-row row'}>
-						{results.map(item => (
-							<ManagerList
-								key={Math.random() * 10000000}
-								name={item.name}
-								number={item.number}
-							/>
-						))}
-					</div>
+					{results.length!==0
+					?
+						<div className={'managers-row row'}>
+							{results.map(item => (
+								<ManagerList
+									key={Math.random() * 10000000}
+									name={item.name}
+									number={item.number}
+								/>
+							))}
+						</div>
+					:
+						<div className={"text-center text-muted m-auto fs-1 pt-5"}>
+							No one was found
+						</div>}
 				</div>
 			</div>
 		</div>

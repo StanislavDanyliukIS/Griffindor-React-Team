@@ -172,7 +172,11 @@ const Header = () => {
 						</Link>
 					</li>
 					<li>
-						<Link className={'navbar__item pe-md-5'} to='/managers'>
+						{isAuth && role==="user"
+						?
+							""
+						:
+							<Link className={'navbar__item pe-md-5'} to='/managers'>
 								<span className={'navbar__img pe-md-2'}>
 									<svg
 										xmlns='http://www.w3.org/2000/svg'
@@ -186,8 +190,8 @@ const Header = () => {
 										<path d='M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.373 5.373 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2H2Z' />
 									</svg>
 								</span>
-							<span className={'navbar__page'}>Managers</span>
-						</Link>
+								<span className={'navbar__page'}>Managers</span>
+							</Link>}
 					</li>
 					<li>
 						<Link className={'navbar__item pe-md-5'} to='/events'>
