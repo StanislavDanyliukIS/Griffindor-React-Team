@@ -1,8 +1,13 @@
-import './Events.scss';
 import {useSorting} from "../../hook/useSorting";
 
+import {events} from "../../constants/events";
+
+import './Events.scss';
+
 const Events = () => {
-	const { items, requestSort } = useSorting("");
+	const { items, requestSort, sorting } = useSorting(events);
+
+	console.log(items)
 	return (
 		<div className='container'>
 			<main>
@@ -38,27 +43,28 @@ const Events = () => {
 				<table className='table'>
 					<thead>
 						<tr>
-							<th scope='col'>Date</th>
-							<th scope='col'>Events</th>
-							<th scope='col'>Score</th>
+							<th scope='col'
+								onClick={() => requestSort('date')}>
+								Date
+							</th>
+							<th scope='col'
+								onClick={() => requestSort('name')}>
+								Events
+							</th>
+							<th scope='col'
+								onClick={() => requestSort('score')}>
+								Score
+							</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th scope='row'>18.05.2022</th>
-							<td>Adaptation hour</td>
-							<td>100</td>
+					{items.map(item => (
+						<tr key={Math.random()*100000000}>
+							<th scope='row'>{item.date.substr(0,10) +" "+ item.date.substr(11,8)}</th>
+							<td>{item.name}</td>
+							<td>{item.score}</td>
 						</tr>
-						<tr>
-							<th scope='row'>17.05.2022</th>
-							<td>Communication in the Remote Era</td>
-							<td>100</td>
-						</tr>
-						<tr>
-							<th scope='row'>16.05.2022</th>
-							<td>Webinar - Structures and Methods</td>
-							<td>100</td>
-						</tr>
+					))}
 					</tbody>
 				</table>
 			</main>
