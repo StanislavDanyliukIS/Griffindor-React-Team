@@ -6,21 +6,21 @@ const Events = () => {
       <main>
         <form className="events-manager-add">
           <input
-            class="form-control"
+            className="form-control"
             type="date"
             name="date"
             required="required"
             placeholder="Enter a date"
           />
           <input
-            class="form-control"
+            className="form-control"
             type="text"
             name="event"
             required="required"
             placeholder="Enter the event"
           />
           <input
-            class="form-control"
+            className="form-control"
             type="number"
             name="score"
             required="required"

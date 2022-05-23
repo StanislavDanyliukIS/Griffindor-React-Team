@@ -1,20 +1,30 @@
 import { useState } from "react";
 
+import { users } from "../../App";
+import { useNavigate } from "react-router";
+
 import "./Login.scss";
 import eye from "./eye.png";
 
 const Login = () => {
-  const [user, setUser] = useState({ email: "", password: "" });
+  const [userData, setUserData] = useState({ email: "", password: "" });
   const [paswordValidation, setPasswordValidation] =
     useState("hide-text-danger");
   const [emailValidation, setEmailValidation] = useState("hide-text-danger");
   const [passwordVisibility, setPasswordVisibility] = useState("password");
+  const navigate = useNavigate();
 
-  const { email, password } = user;
+  const { email, password } = userData;
+
+  const setUserToLocaleStorage = (data) => {
+    sessionStorage.setItem("user", JSON.stringify(data));
+    setUserData({ email: "", password: "" });
+    navigate("/", { replace: true });
+  };
 
   const handleChange = (e) => {
-    setUser({
-      ...user,
+    setUserData({
+      ...userData,
       [e.target.name]: e.target.value,
     });
   };
@@ -23,6 +33,7 @@ const Login = () => {
     setPasswordValidation(
       password.length >= 6 ? "hide-text-danger" : "text-danger"
     );
+    return password.length >= 6;
   };
 
   const validateEmailClass = () => {
@@ -34,23 +45,23 @@ const Login = () => {
     return re.test(String(email).toLowerCase());
   };
 
-  const handleClick = () => {
-    if (
-      (!!email &&
-        !!password &&
-        password.length >= 6 &&
-        validateEmailClass()) === false
-    ) {
-      return;
-    }
-    sessionStorage.setItem("user", JSON.stringify(user));
-    setUser({ email: "", password: "" });
-  };
-
   const handleVisibility = () => {
     setPasswordVisibility(
       passwordVisibility === "password" ? "text" : "password"
     );
+  };
+
+  const showAlert = () =>
+    validatePasswordClass() && validateEmailClass()
+      ? alert("User do not exist, please contact to your manager.")
+      : null;
+
+  const checkUser = () => {
+    const result = users.filter(
+      (user) =>
+        user.email === userData.email && user.password === userData.password
+    );
+    result.length ? setUserToLocaleStorage(result[0]) : showAlert();
   };
 
   return (
@@ -95,11 +106,11 @@ const Login = () => {
           </span>
         </div>
         <button
-          onClick={(e) => {
+          onClick={async (e) => {
             e.preventDefault();
             validatePasswordClass();
-            validateEmailClass(email);
-            setTimeout(handleClick, 1000);
+            validateEmailClass();
+            setTimeout(checkUser, 1000);
           }}
           className="btn btn-primary d-sm-inline-block login-btn"
         >
