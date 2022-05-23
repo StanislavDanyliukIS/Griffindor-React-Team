@@ -1,6 +1,8 @@
 import './Events.scss';
+import {useSorting} from "../../hook/useSorting";
 
 const Events = () => {
+	const { items, requestSort } = useSorting("");
 	return (
 		<div className='container'>
 			<main>
