@@ -1,5 +1,8 @@
 import React from 'react';
+
 import {useSorting} from "../../../../hook/useSorting";
+
+import {getClassNames} from "../../../../functions/getClassNames";
 
 import {users} from "../../../../App";
 
@@ -8,7 +11,8 @@ import './MembersManagement.scss';
 const MembersManagement = () => {
 	const members = users.filter(item=> item.role ==="user");
 
-	const { items, requestSort } = useSorting(members);
+	const { items, requestSort, sorting } = useSorting(members);
+
 	return (
 		<div className='members-container'>
 			<main>
@@ -45,24 +49,29 @@ const MembersManagement = () => {
 					<thead>
 					<tr>
 						<th scope='col'
-							onClick={() => requestSort('name')}>
-							Name
+							onClick={() => requestSort('name')}
+							className={getClassNames('name', sorting)}>
+								Name
 						</th>
 						<th scope='col'
-							onClick={() => requestSort('email')}>
+							onClick={() => requestSort('email')}
+							className={getClassNames('email', sorting)}>
 							Email
 						</th>
 						<th scope='col'>Telephone</th>
 						<th scope='col'
-							onClick={() => requestSort('organization')}>
+							onClick={() => requestSort('organization')}
+							className={getClassNames('organization', sorting)}>
 							Company
 						</th>
 						<th scope='col'
-							onClick={() => requestSort('score')}>
+							onClick={() => requestSort('score')}
+							className={getClassNames('score', sorting)}>
 							Score
 						</th>
 						<th scope='col'
-							onClick={() => requestSort('birthday')}>
+							onClick={() => requestSort('birthday')}
+							className={getClassNames('birthday', sorting)}>
 							Date of Birth
 						</th>
 						<th scope='col'></th>

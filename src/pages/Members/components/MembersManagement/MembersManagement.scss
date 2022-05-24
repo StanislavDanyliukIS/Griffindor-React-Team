@@ -34,3 +34,14 @@
   display: flex;
   padding: 10px 20px;
 }
+
+.ascending{
+  &::after{
+    content: " ↓";
+  }
+}
+.descending{
+  &::after{
+    content: " ↑";
+  }
+}
