@@ -45,6 +45,7 @@ const ForgotPassword = () => {
           placeholder="Enter email"
           value={email}
           onChange={handleChange}
+          onBlur={validateEmailClass}
         ></input>
         <div className="btn-block">
           <img
@@ -52,14 +53,11 @@ const ForgotPassword = () => {
             src={letter}
             alt="letter"
           />
-          <span className={`${emailValidation} incorrect-email`}>
-            Incorrect email address
-          </span>
+          <span className={`${emailValidation}`}>Incorrect email address</span>
           <button
             className="btn btn-primary d-sm-inline-block forgotpassword-btn"
             onClick={(e) => {
               e.preventDefault();
-              validateEmailClass();
               if (validateEmailClass()) {
                 setEmail("");
                 navigate("/login");
