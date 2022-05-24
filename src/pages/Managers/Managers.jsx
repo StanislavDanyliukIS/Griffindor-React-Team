@@ -11,14 +11,13 @@ const Managers = () => {
 
     return (
         <div className={"managers bg-light"}>
-            {(isAuth && role ==="admin")
-                ?
-                <ManagersManagement/>
-                :""}
-            {(isAuth && role==="manager")
-                ?
-                <ManagerList/>
-            :<NotFound/>}
+            {(() => {
+                if (isAuth && role === "admin") {
+                    return <ManagersManagement/>
+                } else if (isAuth && role === "manager") {
+                    return <ManagerList/>
+                }
+            })()}
         </div>
     );
 };

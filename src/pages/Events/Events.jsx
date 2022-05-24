@@ -1,5 +1,7 @@
 import {useSorting} from "../../hook/useSorting";
 
+import {getClassNames} from "../../functions/getClassNames";
+
 import {events} from "../../constants/events";
 
 import './Events.scss';
@@ -43,15 +45,18 @@ const Events = () => {
 					<thead>
 						<tr>
 							<th scope='col'
-								onClick={() => requestSort('date')}>
+								onClick={() => requestSort('date')}
+								className={getClassNames('date', sorting)}>
 								Date
 							</th>
 							<th scope='col'
-								onClick={() => requestSort('name')}>
+								onClick={() => requestSort('name')}
+								className={getClassNames('name', sorting)}>
 								Events
 							</th>
 							<th scope='col'
-								onClick={() => requestSort('score')}>
+								onClick={() => requestSort('score')}
+								className={getClassNames('score', sorting)}>
 								Score
 							</th>
 						</tr>
