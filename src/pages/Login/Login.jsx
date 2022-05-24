@@ -1,21 +1,24 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import Footer from "../../components/Footer/Footer";
 
 import { users } from "../../App";
 import { useNavigate } from "react-router";
+import { useAuth } from "../../hook/useAuth";
 
 import "./Login.scss";
 import eye from "./eye.png";
 
 const Login = () => {
   const [userData, setUserData] = useState({ email: "", password: "" });
-  const [paswordValidation, setPasswordValidation] =
-    useState("hide-text-danger");
   const [emailValidation, setEmailValidation] = useState("hide-text-danger");
-  const [uservValidation, setUserValidation] = useState("hide-text-danger");
+  const [userValidation, setUserValidation] = useState("hide-text-danger");
   const [passwordVisibility, setPasswordVisibility] = useState("password");
   const navigate = useNavigate();
+  const { isAuth } = useAuth();
+  const inputRef = useRef(null);
+
+  const focusOnPasswordInput = () => inputRef.current.focus();
 
   const { email, password } = userData;
 
@@ -36,20 +39,11 @@ const Login = () => {
     });
   };
 
-  const validatePasswordClass = () => {
-    setPasswordValidation(
-      password.length >= 6 || password.length == 0
-        ? "hide-text-danger"
-        : "text-danger"
-    );
-    return password.length >= 6;
-  };
-
   const validateEmailClass = () => {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     setEmailValidation(
-      re.test(String(email).toLowerCase()) || email.length == 0
+      re.test(String(email).toLowerCase()) || email.length === 0
         ? "hide-text-danger"
         : "text-danger"
     );
@@ -62,24 +56,31 @@ const Login = () => {
     );
   };
 
-  const showUserNotFoundText = () =>
-    validatePasswordClass() && validateEmailClass()
-      ? setUserValidation("text-danger")
-      : null;
+  const clearPasword = () =>
+    !isAuth ? setUserData({ email, password: "" }) : null;
 
-  const checkUser = () => {
+  const showUserNotFoundText = () => {
+    if (validateEmailClass()) {
+      setUserValidation("text-danger");
+    }
+    return null;
+  };
+
+  const checkUser = async () => {
     const result = users.filter(
       (user) =>
         user.email === userData.email && user.password === userData.password
     );
     result.length ? setUserToLocaleStorage(result[0]) : showUserNotFoundText();
+    clearPasword();
+    focusOnPasswordInput();
   };
 
   return (
     <div className="login-page bg-light">
       <form className="singin-form">
         <p className="form-title">Login to your account</p>
-        <span className={uservValidation}>
+        <span className={userValidation}>
           Incorrect email address or password!
         </span>
         <label htmlFor="inputEmail4" className="login-input-label">
@@ -110,6 +111,7 @@ const Login = () => {
           </span>
           <input
             type={passwordVisibility}
+            ref={inputRef}
             name="password"
             className="form-control login-input "
             id="inputPassword4"
@@ -117,12 +119,9 @@ const Login = () => {
             value={password}
             onChange={handleChange}
             required
-            onBlur={validatePasswordClass}
+            // onBlur={validatePasswordClass}
           />
           <img className="eye" src={eye} alt="eye" onClick={handleVisibility} />
-          <span className={paswordValidation}>
-            Password should be at least 6 characters
-          </span>
         </div>
         <button
           onClick={(e) => {
