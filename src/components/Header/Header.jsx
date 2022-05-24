@@ -1,24 +1,24 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
-import { useSelector, useDispatch } from 'react-redux';
-import { toggleTheme } from '../../store/themeSlice';
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTheme } from "../../store/themeSlice";
 
-import { useAuth } from '../../hook/useAuth';
+import { useAuth } from "../../hook/useAuth";
 
-import './Header.scss';
+import "./Header.scss";
 
 const Header = () => {
-	const navigate = useNavigate();
-	const moveToLogin = () => navigate('login', { replace: true });
-	const moveToProfile = () => navigate('profile');
-	const theme = useSelector(state => state.theme.theme);
-	const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const moveToLogin = () => navigate("login", { replace: true });
+  const moveToProfile = () => navigate("profile");
+  const theme = useSelector((state) => state.theme.theme);
+  const dispatch = useDispatch();
 
-	const { isAuth, name, role } = useAuth();
+  const { name, role } = useAuth();
 
-	const logout = () => {
-		sessionStorage.clear();
-	};
+  const logout = () => {
+    sessionStorage.clear();
+  };
 
 	return (
 	<>

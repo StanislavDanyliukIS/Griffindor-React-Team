@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../components/Footer/Footer";
 
 import "./ForgotPassword.scss";
 import letter from "./white-letter.png";
@@ -10,7 +11,7 @@ const ForgotPassword = () => {
   const navigate = useNavigate();
 
   const handleSendMeBack = () => {
-    navigate("login");
+    navigate("/login");
   };
 
   const handleChange = (e) => {
@@ -51,6 +52,9 @@ const ForgotPassword = () => {
             src={letter}
             alt="letter"
           />
+          <span className={`${emailValidation} incorrect-email`}>
+            Incorrect email address
+          </span>
           <button
             className="btn btn-primary d-sm-inline-block forgotpassword-btn"
             onClick={(e) => {
@@ -58,21 +62,22 @@ const ForgotPassword = () => {
               validateEmailClass();
               if (validateEmailClass()) {
                 setEmail("");
+                navigate("/login");
               }
             }}
           >
             Send me new password
           </button>
-          <span className={emailValidation}>Incorrect email address</span>
         </div>
       </form>
       <p className="sendmeback">
         Forget it,{" "}
-        <a className="back-linck" href="forgotInput" onClick={handleSendMeBack}>
+        <span className="back-linck text-primary" onClick={handleSendMeBack}>
           send me back
-        </a>{" "}
+        </span>{" "}
         to the login screen.
       </p>
+      <Footer />
     </div>
   );
 };

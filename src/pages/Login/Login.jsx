@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import Footer from "../../components/Footer/Footer";
+
 import { users } from "../../App";
 import { useNavigate } from "react-router";
 
@@ -20,6 +22,10 @@ const Login = () => {
     sessionStorage.setItem("user", JSON.stringify(data));
     setUserData({ email: "", password: "" });
     navigate("/", { replace: true });
+  };
+
+  const moveToForgotPasswordInput = () => {
+    navigate("/forgot");
   };
 
   const handleChange = (e) => {
@@ -87,9 +93,12 @@ const Login = () => {
         </label>
 
         <div className="form-input-password">
-          <a href="inputPassword4" className="forgot-password">
+          <span
+            className="forgot-password text-primary"
+            onClick={moveToForgotPasswordInput}
+          >
             I forgot password
-          </a>
+          </span>
           <input
             type={passwordVisibility}
             name="password"
@@ -106,7 +115,7 @@ const Login = () => {
           </span>
         </div>
         <button
-          onClick={async (e) => {
+          onClick={(e) => {
             e.preventDefault();
             validatePasswordClass();
             validateEmailClass();
@@ -117,6 +126,7 @@ const Login = () => {
           Login
         </button>
       </form>
+      <Footer />
     </div>
   );
 };
