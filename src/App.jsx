@@ -9,8 +9,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import Profile from "./pages/Profile/Profile";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Login from "./pages/Login/Login";
-import {useAuth} from "./hook/useAuth";
-import Footer from "./components/Footer/Footer";
+import RequiredAuth from "./hoc/RequiredAuth";
 
 export const users = [
   {
@@ -86,31 +85,26 @@ export const users = [
 ];
 
 const App = () => {
-
-  const {isAuth} = useAuth();
-
   return (
     <>
       <Routes>
-        {/*{isAuth?*/}
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="login" element={<Login />} />
-              <Route path="profile" element={<Profile />} />
-              <Route path="forgot" element={<ForgotPassword />} />
-              <Route path="members" element={<Members />} />
-              <Route path="managers" element={<Managers />} />
-              <Route path="events" element={<Events />} />
-              <Route path="*" element={<NotFound />} />
-            </Route>
-        {/*:
-            <>
-              <Route path="/" element={<Login />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="*" element={<Login />} />
-              <Route path="/forgot" element={<ForgotPassword />} />
-            </>
-            }*/}
+        <Route path="login" element={<Login />} />
+        <Route path="forgot" element={<ForgotPassword />} />
+        <Route
+          path="/"
+          element={
+            <RequiredAuth>
+              <Layout />
+            </RequiredAuth>
+          }
+        >
+          <Route index element={<Home />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="members" element={<Members />} />
+          <Route path="managers" element={<Managers />} />
+          <Route path="events" element={<Events />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
     </>
   );
