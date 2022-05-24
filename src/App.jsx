@@ -20,6 +20,8 @@ export const users = [
     number: "1234567890",
     password: "111111",
     organization: "eLogic",
+    birthday:"1995-12-17T03:24:00",
+    score:0
   },
   {
     name: "Yeva",
@@ -28,6 +30,8 @@ export const users = [
     number: "1234567890",
     password: "111111",
     organization: "SoftServe",
+    birthday:"2001-12-17T03:24:00",
+    score:30
   },
   {
     name: "Tanya",
@@ -36,6 +40,8 @@ export const users = [
     number: "1234567890",
     password: "111111",
     organization: "InventorSoft",
+    birthday:"2020-12-17T03:24:00",
+    score:20
   },
   {
     name: "Matroskin",
@@ -44,6 +50,8 @@ export const users = [
     number: "1234567890",
     password: "111111",
     organization: "ASD",
+    birthday:"2006-12-17T03:24:00",
+    score:50
   },
   {
     name: "Leopold",
@@ -52,6 +60,8 @@ export const users = [
     number: "1234567890",
     password: "111111",
     organization: "SharpMinds",
+    birthday:"1976-12-17T03:24:00",
+    score:40
   },
   {
     name: "Tiger",
@@ -60,6 +70,8 @@ export const users = [
     number: "1234567890",
     password: "111111",
     organization: "EPAM",
+    birthday:"1986-12-17T03:24:00",
+    score:24
   },
   {
     name: "Tom",
@@ -68,6 +80,8 @@ export const users = [
     number: "1234567890",
     password: "111111",
     organization: "Pub24",
+    birthday:"1998-12-17T03:24:00",
+    score:31
   },
 ];
 

@@ -7,7 +7,6 @@ import './Events.scss';
 const Events = () => {
 	const { items, requestSort, sorting } = useSorting(events);
 
-	console.log(items)
 	return (
 		<div className='container'>
 			<main>
