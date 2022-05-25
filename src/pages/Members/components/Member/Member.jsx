@@ -1,7 +1,6 @@
 import './Member.scss';
 
 const MemberList = ({ name, number, organization }) => {
-	console.log(organization);
 	return (
 		<>
 			<div className={'member-container col-md  rounded p-5 py-2 m-2 '}>
