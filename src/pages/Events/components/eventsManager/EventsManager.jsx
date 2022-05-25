@@ -1,3 +1,5 @@
+import './EventsManager.scss';
+
 const EventsManager = () => {
 	return (
 		<div className='container'>

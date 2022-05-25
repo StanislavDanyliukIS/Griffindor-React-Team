@@ -1,13 +1,13 @@
 import { useRef, useState } from "react";
 
-import Footer from "../../components/Footer/Footer";
+import Footer from '../../components/Footer/Footer';
 
 import { users } from "../../App";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../hook/useAuth";
 
-import "./Login.scss";
-import eye from "./eye.png";
+import './Login.scss';
+import eye from './eye.png';
 
 const Login = () => {
   const [userData, setUserData] = useState({ email: "", password: "" });
@@ -20,24 +20,24 @@ const Login = () => {
 
   const focusOnPasswordInput = () => inputRef.current.focus();
 
-  const { email, password } = userData;
+	const { email, password } = userData;
 
-  const setUserToLocaleStorage = (data) => {
-    sessionStorage.setItem("user", JSON.stringify(data));
-    setUserData({ email: "", password: "" });
-    navigate("/", { replace: true });
-  };
+	const setUserToLocaleStorage = data => {
+		sessionStorage.setItem('user', JSON.stringify(data));
+		setUserData({ email: '', password: '' });
+		navigate('/', { replace: true });
+	};
 
-  const moveToForgotPasswordInput = () => {
-    navigate("/forgot");
-  };
+	const moveToForgotPasswordInput = () => {
+		navigate('/forgot');
+	};
 
-  const handleChange = (e) => {
-    setUserData({
-      ...userData,
-      [e.target.name]: e.target.value,
-    });
-  };
+	const handleChange = e => {
+		setUserData({
+			...userData,
+			[e.target.name]: e.target.value,
+		});
+	};
 
   const validateEmailClass = () => {
     const re =
@@ -50,11 +50,11 @@ const Login = () => {
     return re.test(String(email).toLowerCase());
   };
 
-  const handleVisibility = () => {
-    setPasswordVisibility(
-      passwordVisibility === "password" ? "text" : "password"
-    );
-  };
+	const handleVisibility = () => {
+		setPasswordVisibility(
+			passwordVisibility === 'password' ? 'text' : 'password'
+		);
+	};
 
   const clearPasword = () =>
     !isAuth ? setUserData({ email, password: "" }) : null;
