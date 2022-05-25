@@ -1,3 +1,4 @@
+
 import { useRef, useState } from "react";
 
 import Footer from '../../components/Footer/Footer';
@@ -10,6 +11,7 @@ import './Login.scss';
 import eye from './eye.png';
 
 const Login = () => {
+
   const [userData, setUserData] = useState({ email: "", password: "" });
   const [emailValidation, setEmailValidation] = useState("hide-text-danger");
   const [userValidation, setUserValidation] = useState("hide-text-danger");
@@ -55,6 +57,7 @@ const Login = () => {
 			passwordVisibility === 'password' ? 'text' : 'password'
 		);
 	};
+
 
   const clearPasword = () =>
     !isAuth ? setUserData({ email, password: "" }) : null;
@@ -136,5 +139,6 @@ const Login = () => {
       <Footer />
     </div>
   );
+
 };
 export default Login;
