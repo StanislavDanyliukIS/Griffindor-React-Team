@@ -1,3 +1,5 @@
+import './EventsUser.scss';
+
 const EventsUser = () => {
 	return (
 		<div className='container'>

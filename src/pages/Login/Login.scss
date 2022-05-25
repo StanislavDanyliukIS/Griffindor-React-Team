@@ -1,65 +1,65 @@
 .login-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  width: 100vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	width: 100vw;
 }
 
 .singin-form {
-  display: flex;
-  flex-direction: column;
-  padding: 50px 40px;
-  background-color: #ffffff;
-  border: 1px solid #e6e7e9;
-  border-radius: 4px;
-  width: 500px;
-  box-shadow: rgb(30 41 59 / 4%) 0 2px 4px;
+	display: flex;
+	flex-direction: column;
+	padding: 50px 40px;
+	background-color: var(--primary);
+	border: 1px solid var(--border-color);
+	border-radius: 4px;
+	width: 500px;
+	box-shadow: rgb(30 41 59 / 4%) 0 2px 4px;
 }
 .form-title {
-  font-size: 22px;
-  font-weight: bold;
-  color: #1e293b;
-  margin-bottom: 30px;
+	font-size: 22px;
+	font-weight: bold;
+	color: var(--text-color);
+	margin-bottom: 30px;
 }
 
 .login-input-label {
-  margin-right: auto;
-  margin: 20px 0 10px 0;
+	margin-right: auto;
+	margin: 20px 0 10px 0;
 }
 .login-btn {
-  margin-top: 20px;
+	margin-top: 20px;
 }
 
 .form-input-password {
-  position: relative;
+	position: relative;
 }
 .eye {
-  position: absolute;
-  top: 4px;
-  right: 20px;
-  height: 30px;
-  width: 30px;
-  opacity: 0.6;
-  cursor: pointer;
+	position: absolute;
+	top: 4px;
+	right: 20px;
+	height: 30px;
+	width: 30px;
+	opacity: 0.6;
+	cursor: pointer;
 }
 .forgot-password {
-  position: absolute;
-  right: 0;
-  top: -33px;
-  display: flex;
-  cursor: pointer;
+	position: absolute;
+	right: 0;
+	top: -33px;
+	display: flex;
+	cursor: pointer;
 }
 .forgot-password {
-  text-decoration: none;
+	text-decoration: none;
 }
 .hide-text-danger {
-  visibility: hidden;
+	visibility: hidden;
 }
 .text-danger {
-  display: flex;
+	display: flex;
 }
 .login-input {
-  margin-bottom: 5px;
+	margin-bottom: 5px;
 }
