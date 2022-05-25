@@ -1,13 +1,14 @@
-import './MemberList.scss';
+import './Member.scss';
 
 const MemberList = ({ name, number, organization }) => {
+	console.log(organization);
 	return (
 		<>
-			<div className={' col-md border rounded p-5 py-2 m-2 bg-white'}>
+			<div className={'member-container col-md  rounded p-5 py-2 m-2 '}>
 				<div className={'managers-item p-4 text-center'}>
 					<span className={'managers-img rounded-circle m-auto mb-2'}></span>
-					<h5 className={'m-0 mb-2 pt-2'}> {name}</h5>
-					<div className={'text-muted py-1'}>
+					<h5 className={'managers-text m-0 mb-2 pt-2'}> {name}</h5>
+					<div className={' py-1'}>
 						<span className={'organization-icon px-1'}>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
@@ -26,7 +27,7 @@ const MemberList = ({ name, number, organization }) => {
 						</span>
 						<span className={'organization-text'}>{organization}</span>
 					</div>
-					<div className={'text-muted'}>
+					<div>
 						<span className={'number-icon px-1'}>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
