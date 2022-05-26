@@ -1,45 +1,44 @@
-
 import { useRef, useState } from "react";
-
-import Footer from '../../components/Footer/Footer';
-
-import { users } from "../../App";
 import { useNavigate } from "react-router";
-import { useAuth } from "../../hook/useAuth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { doc, getDoc } from "firebase/firestore";
 
-import './Login.scss';
-import eye from './eye.png';
+import { auth } from "../../firebase";
+import { logIn } from "../../store/authSlice";
+import { db } from "../../firebase";
+
+import { addUserData } from "../../store/userDataSlicer";
+
+import "./Login.scss";
+import eye from "./eye.png";
 
 const Login = () => {
-
   const [userData, setUserData] = useState({ email: "", password: "" });
   const [emailValidation, setEmailValidation] = useState("hide-text-danger");
   const [userValidation, setUserValidation] = useState("hide-text-danger");
   const [passwordVisibility, setPasswordVisibility] = useState("password");
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuth } = useAuth();
-  const inputRef = useRef(null);
+  const inputRef = useRef();
 
-  const focusOnPasswordInput = () => inputRef.current.focus();
+  const focusOnPasswordInput = () => {
+    return inputRef.current.focus();
+  };
 
-	const { email, password } = userData;
+  const { email, password } = userData;
 
-	const setUserToLocaleStorage = data => {
-		sessionStorage.setItem('user', JSON.stringify(data));
-		setUserData({ email: '', password: '' });
-		navigate('/', { replace: true });
-	};
+  const moveToForgotPasswordInput = () => {
+    navigate("/forgot");
+  };
 
-	const moveToForgotPasswordInput = () => {
-		navigate('/forgot');
-	};
-
-	const handleChange = e => {
-		setUserData({
-			...userData,
-			[e.target.name]: e.target.value,
-		});
-	};
+  const handleChange = (e) => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const validateEmailClass = () => {
     const re =
@@ -52,31 +51,50 @@ const Login = () => {
     return re.test(String(email).toLowerCase());
   };
 
-	const handleVisibility = () => {
-		setPasswordVisibility(
-			passwordVisibility === 'password' ? 'text' : 'password'
-		);
-	};
-
+  const handleVisibility = () => {
+    setPasswordVisibility(
+      passwordVisibility === "password" ? "text" : "password"
+    );
+  };
 
   const clearPasword = () =>
-    !isAuth ? setUserData({ email, password: "" }) : null;
+    !email ? setUserData({ email, password: "" }) : null;
 
   const showUserNotFoundText = () => {
     if (validateEmailClass()) {
+      focusOnPasswordInput();
       setUserValidation("text-danger");
+      clearPasword();
     }
     return null;
   };
 
-  const checkUser = async () => {
-    const result = users.filter(
-      (user) =>
-        user.email === userData.email && user.password === userData.password
-    );
-    result.length ? setUserToLocaleStorage(result[0]) : showUserNotFoundText();
-    clearPasword();
-    focusOnPasswordInput();
+  const checkUser = (authUser) => {
+    const res = authUser ? showUserNotFoundText() : null;
+    console.log(res);
+  };
+
+  const handleLogin = (email, password) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        dispatch(
+          logIn({
+            email: user.email,
+            id: user.uid,
+            token: user.accessToken,
+          })
+        );
+        navigate("/", { replace: true });
+        return {
+          email: user.email,
+          id: user.uid,
+          token: user.accessToken,
+        };
+      })
+      .then((data) => {
+        const docRef = doc(db, `users`, data.id);
+        getDoc(docRef).then((resp) => dispatch(addUserData(resp.data())));
+      });
   };
 
   return (
@@ -122,23 +140,21 @@ const Login = () => {
             value={password}
             onChange={handleChange}
             required
-            // onBlur={validatePasswordClass}
           />
           <img className="eye" src={eye} alt="eye" onClick={handleVisibility} />
         </div>
         <button
           onClick={(e) => {
             e.preventDefault();
-            setTimeout(checkUser, 1000);
+            handleLogin(email, password);
+            checkUser(email);
           }}
           className="btn btn-primary d-sm-inline-block login-btn"
         >
           Login
         </button>
       </form>
-      <Footer />
     </div>
   );
-
 };
 export default Login;

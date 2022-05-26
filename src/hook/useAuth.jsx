@@ -1,17 +1,13 @@
-export const useAuth = () => {
-  if (!JSON.parse(sessionStorage.getItem("user"))) {
-    return { isAuth: false };
-  }
-  const { name, role, email, number, organization } = JSON.parse(
-    sessionStorage.getItem("user")
-  );
 
+import { useSelector } from "react-redux";
+
+export const useAuth = () => {
+  const user = useSelector((state) => state.auth.userInfo);
+  const { id, email, token } = user;
   return {
     isAuth: !!email,
-    name,
-    role,
+    id,
     email,
-    number,
-    organization,
+    token,
   };
 };

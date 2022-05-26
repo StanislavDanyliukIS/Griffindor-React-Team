@@ -1,9 +1,16 @@
 .managers{
   min-height: 79vh;
+  background-color: var(--secondary);
   &-img{
     display: block;
     background: #282c34;
     width: 7vw;
     height: 7vw;
   }
+}
+.page-name {
+  color: var(--text-color);
+}
+.page-result{
+  color: var(--subText-color);
 }
