@@ -58,21 +58,7 @@ const Login = () => {
   };
 
   const clearPasword = () =>
-    !email ? setUserData({ email, password: "" }) : null;
-
-  const showUserNotFoundText = () => {
-    if (validateEmailClass()) {
-      focusOnPasswordInput();
-      setUserValidation("text-danger");
-      clearPasword();
-    }
-    return null;
-  };
-
-  const checkUser = (authUser) => {
-    const res = authUser ? showUserNotFoundText() : null;
-    console.log(res);
-  };
+    validateEmailClass() ? setUserData({ email, password: "" }) : null;
 
   const handleLogin = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
@@ -94,6 +80,12 @@ const Login = () => {
       .then((data) => {
         const docRef = doc(db, `users`, data.id);
         getDoc(docRef).then((resp) => dispatch(addUserData(resp.data())));
+      })
+      .catch((error) => {
+        clearPasword();
+        focusOnPasswordInput();
+        setUserValidation('text-danger')
+        console.log(error);
       });
   };
 
@@ -147,7 +139,6 @@ const Login = () => {
           onClick={(e) => {
             e.preventDefault();
             handleLogin(email, password);
-            checkUser(email);
           }}
           className="btn btn-primary d-sm-inline-block login-btn"
         >
