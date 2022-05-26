@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import ManagerList from '../ManagerList/ManagerList';
+import Manager from '../Manager/Manager';
 
 import './ManagersList.scss';
 
@@ -47,7 +47,7 @@ const ManagersList = () => {
 		: managersArr.filter(manager => manager.name.includes(searchName));
 
 	return (
-		<div className={'managers bg-light'}>
+		<div className={'managers'}>
 			<div className={'page-header'}>
 				<div className={'container-xl'}>
 					<h3 className={'page-name pt-2'}> Managers </h3>
@@ -55,7 +55,7 @@ const ManagersList = () => {
 			</div>
 			<div className={'page-search container-xl '}>
 				<div>
-					<span className={'text-muted'}> {results.length + ' managers'} </span>
+					<span className={"page-result"}> {results.length + ' managers'} </span>
 				</div>
 				<div>
 					<input
@@ -71,9 +71,9 @@ const ManagersList = () => {
 				<div className={'container-xl'}>
 					{results.length!==0
 					?
-						<div className={'managers-row row'}>
+						<div className={'managers-row row w-100'}>
 							{results.map(item => (
-								<ManagerList
+								<Manager
 									key={Math.random() * 10000000}
 									name={item.name}
 									number={item.number}
