@@ -1,47 +1,69 @@
 .managers-container {
-  max-width: 100%;
+  display: block;
   margin: 0 auto;
   padding: 20px;
   min-height: 79vh;
 }
 
+.title-management {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  font-weight: 600;
+  color: #000;
+  display: flex;
+  align-items: center;
+}
+
 .btn-create-user {
   display: block;
-  margin: 20px auto;
+  margin-left: auto;
   padding: 10px;
+  margin-bottom: 1rem;
+  box-shadow: 1px 2px 5px #d3d3d3;
 }
 
 .table {
   margin-top: auto;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 1px 2px 5px #d3d3d3;
 }
 
-.managers-add-user {
+.members-add-user {
   display: flex;
   justify-content: center;
   gap: 20px;
-  padding: 5px;
+  padding: 10px;
+  box-shadow: 1px 2px 5px #d3d3d3;
+}
+
+.btn-create-user-text {
+  padding: 10px;
 }
 
 .btn-edit {
   display: flex;
   padding: 10px 20px;
   margin-left: auto;
+  box-shadow: 1px 2px 5px #d3d3d3;
 }
 
 .btn-delete {
   display: flex;
   padding: 10px 20px;
+  box-shadow: 1px 2px 5px #d3d3d3;
 }
 
-.ascending{
-  &::after{
+.ascending {
+  &::after {
     content: " ↓";
   }
 }
-.descending{
-  &::after{
+.descending {
+  &::after {
     content: " ↑";
   }
 }

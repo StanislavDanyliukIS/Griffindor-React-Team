@@ -1,19 +1,20 @@
-import { Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
-import Layout from './components/Layout/Layout';
-import Home from './pages/Home/Home';
-import Members from './pages/Members/Members';
-import Managers from './pages/Managers/Managers';
-import Events from './pages/Events/Events';
-import NotFound from './pages/NotFound/NotFound';
-import Profile from './pages/Profile/Profile';
-import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
-import Login from './pages/Login/Login';
-import RequiredAuth from './hoc/RequiredAuth';
+import Layout from "./components/Layout/Layout";
+import Home from "./pages/Home/Home";
+import Members from "./pages/Members/Members";
+import Managers from "./pages/Managers/Managers";
+import Events from "./pages/Events/Events";
+import NotFound from "./pages/NotFound/NotFound";
+import Profile from "./pages/Profile/Profile";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import Login from "./pages/Login/Login";
+import RequiredAuth from "./hoc/RequiredAuth";
 
 export const users = [
+
 	{
 		name: 'Adam',
 		role: 'admin',
@@ -84,38 +85,39 @@ export const users = [
 		birthday: '1998-12-17T03:24:00',
 		score: 31,
 	},
+
 ];
 
 const App = () => {
-	const theme = useSelector(state => state.theme);
+  const theme = useSelector((state) => state.theme);
 
-	useEffect(() => {
-		document.documentElement.dataset.theme = theme;
-		sessionStorage.setItem('theme', theme);
-	}, [theme]);
-	return (
-		<>
-			<Routes>
-				<Route path='login' element={<Login />} />
-				<Route path='forgot' element={<ForgotPassword />} />
-				<Route
-					path='/'
-					element={
-						<RequiredAuth>
-							<Layout />
-						</RequiredAuth>
-					}
-				>
-					<Route index element={<Home />} />
-					<Route path='profile' element={<Profile />} />
-					<Route path='members' element={<Members />} />
-					<Route path='managers' element={<Managers />} />
-					<Route path='events' element={<Events />} />
-					<Route path='*' element={<NotFound />} />
-				</Route>
-			</Routes>
-		</>
-	);
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    sessionStorage.setItem("theme", theme);
+  }, [theme]);
+  return (
+    <>
+      <Routes>
+        <Route path="login" element={<Login />} />
+        <Route path="forgot" element={<ForgotPassword />} />
+        <Route
+          path="/"
+          element={
+            <RequiredAuth>
+              <Layout />
+            </RequiredAuth>
+          }
+        >
+          <Route index element={<Home />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="members" element={<Members />} />
+          <Route path="managers" element={<Managers />} />
+          <Route path="events" element={<Events />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </>
+  );
 };
 
 export default App;
