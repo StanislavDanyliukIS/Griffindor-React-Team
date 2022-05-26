@@ -1,14 +1,16 @@
 .member-container {
 	background-color: var(--primary);
 	border: 1px var(--border-color) solid;
+
 }
 
-.managers-item {
+.members-item {
+	min-width: 12vw;
 	color: var(--subText-color);
-	.managers-img {
+	.members-img {
 		background-color: var(--subText-color);
 	}
-	.managers-text {
+	.members-text {
 		color: var(--text-color);
 	}
 }
