@@ -1,13 +1,8 @@
 import ManagerList from "./components/ManagersList/ManagersList";
 import ManagersManagement from "./components/ManagersManagement/ManagersManagement";
-
-
 import "./Managers.scss";
 import { useAuth } from "../../hook/useAuth";
 import { useUserData } from "../../hook/useUserData";
-import ManagersManagement from "./components/ManagersManagement/ManagersManagement";
-import NotFound from "../NotFound/NotFound";
-
 
 const Managers = () => {
   const { isAuth } = useAuth();
