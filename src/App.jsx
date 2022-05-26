@@ -17,7 +17,7 @@ export const users = [
 	{
 		name: 'Adam',
 		role: 'admin',
-		email: 'fgfdgdfg@gmail.com',
+		email: 'admin@gmail.com',
 		number: '1234567890',
 		password: '111111',
 		organization: 'eLogic',
@@ -47,7 +47,7 @@ export const users = [
 	{
 		name: 'Matroskin',
 		role: 'manager',
-		email: 'retdsf@gmail.com',
+		email: 'manager@gmail.com',
 		number: '1234567890',
 		password: '111111',
 		organization: 'ASD',
@@ -57,7 +57,7 @@ export const users = [
 	{
 		name: 'Leopold',
 		role: 'user',
-		email: 'sdfgag@gmail.com',
+		email: 'user@gmail.com',
 		number: '1234567890',
 		password: '111111',
 		organization: 'SharpMinds',

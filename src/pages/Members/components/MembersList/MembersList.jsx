@@ -82,7 +82,7 @@ const Members = () => {
 				<div className={'container-xl'}>
 					<div className={'container-xl'}>
 						{results.length !== 0 ? (
-							<div className={'managers-row row'}>
+							<div className={'members-row row w-100'}>
 								{results.map(item => (
 									<Member
 										key={Math.random() * 10000000}

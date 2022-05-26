@@ -4,6 +4,8 @@ import ThemeSwitch from './components/ThemeSwitch';
 // import cn from 'classnames';
 // import { useSelector, useDispatch } from 'react-redux';
 // import { toggleTheme } from '../../store/themeSlice';
+import logo_white from "./../../imgs/logo_white.png";
+import logo_black from "./../../imgs/logo_black.png";
 
 import { useAuth } from '../../hook/useAuth';
 
@@ -22,13 +24,19 @@ const Header = () => {
 	const logout = () => {
 		sessionStorage.clear();
 	};
-
 	return (
 		<>
 			<div className={`header ${theme}`}>
 				<div className={'container-xl'}>
 					<Link className={'header__logo pe-0 pe-md-3'} to='/'>
-						<h1>logo</h1>
+						<div className={"header__logo_item"}>
+							{theme==="light"
+								?
+								<img className={"header__logo_img"} src={logo_black}/>
+								:
+								<img className={"header__logo_img"} src={logo_white}/>
+							}
+						</div>
 					</Link>
 					<div className={'header__user pe-0 pe-md-3'}>
 						<div className={'header__theme pe-md-5'}>

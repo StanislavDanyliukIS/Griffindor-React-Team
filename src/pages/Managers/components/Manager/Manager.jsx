@@ -1,13 +1,13 @@
-import "./ManagerList.scss";
+import "./Manager.scss";
 
-const ManagerList = ({name, number}) => {
+const Manager = ({name, number}) => {
   return(
       <>
-          <div className={" col-md border rounded p-5 py-2 m-2 bg-white"}>
+          <div className={"manager-container col-md  p-5 py-2 m-2 "}>
               <div className={"managers-item p-4 text-center"}>
                   <span className={"managers-img rounded-circle m-auto mb-2"}></span>
                   <h5 className={"m-0 mb-2 pt-2"}> {name}</h5>
-                  <div className={"text-muted"}>
+                  <div >
 									<span className={"number-icon px-1"}>
 										<svg xmlns="http://www.w3.org/2000/svg" width="16"
                                              height="16" fill="currentColor"
@@ -25,4 +25,4 @@ const ManagerList = ({name, number}) => {
   )
 }
 
-export default ManagerList;
+export default Manager;

@@ -1,9 +1,9 @@
 import ManagerList from "./components/ManagersList/ManagersList";
+import ManagersManagement from "./components/ManagersManagement/ManagersManagement";
+
+import {useAuth} from "../../hook/useAuth";
 
 import "./Managers.scss";
-import {useAuth} from "../../hook/useAuth";
-import ManagersManagement from "./components/ManagersManagement/ManagersManagement";
-import NotFound from "../NotFound/NotFound";
 
 const Managers = () => {
 
