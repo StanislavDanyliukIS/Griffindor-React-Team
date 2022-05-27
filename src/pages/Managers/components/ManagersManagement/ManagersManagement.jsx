@@ -85,7 +85,7 @@ const ManagersManagement = () => {
 						placeholder='Password'
 					/>
 				</form> */}
-        <h2 className="title-management">Managers Management</h2>
+        <h3 className="title-management">Managers Management</h3>
         <button
           onClick={() => {
             setModalOpen(true);
