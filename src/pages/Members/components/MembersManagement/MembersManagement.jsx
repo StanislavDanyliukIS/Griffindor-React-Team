@@ -19,7 +19,7 @@ const MembersManagement = () => {
     let q;
     q = query(
         collection(db, "users"),
-        where("role", "==", "manager"));
+        where("role", "==", "user"));
 
     const membersList = onSnapshot(q, (querySnapshot) => {
       let membersArray = [];
@@ -78,29 +78,6 @@ const MembersManagement = () => {
   return (
     <div className="container-xl members-container">
       <main>
-        {/* <form className="members-add-user">
-          <input
-            className="form-control"
-            type="text"
-            name="text"
-            required="required"
-            placeholder="Name"
-          />
-          <input
-            className="form-control"
-            type="email"
-            name="email"
-            required="required"
-            placeholder="Email"
-          />
-          <input
-            className="form-control"
-            type="password"
-            name="password"
-            required="required"
-            placeholder="Password"
-          />
-        </form> */}
         <h3 className="title-management">Members Management</h3>
         <button
           onClick={() => {
@@ -130,14 +107,14 @@ const MembersManagement = () => {
               <th
                 scope="col"
                 onClick={() => requestSort("name")}
-                className={getClassNames("name", sorting)}
+                className={`${getClassNames("name", sorting)} w-15`}
               >
                 Name
               </th>
               <th
                 scope="col"
                 onClick={() => requestSort("email")}
-                className={getClassNames("email", sorting)}
+                className={`${getClassNames("email", sorting)} w-15`}
               >
                 Email
               </th>
@@ -145,21 +122,21 @@ const MembersManagement = () => {
               <th
                 scope="col"
                 onClick={() => requestSort("organization")}
-                className={getClassNames("organization", sorting)}
+                className={`${getClassNames("organization", sorting)} w-10`}
               >
                 Company
               </th>
               <th
                 scope="col"
                 onClick={() => requestSort("score")}
-                className={getClassNames("score", sorting)}
+                className={`${getClassNames("score", sorting)} w-15`}
               >
                 Score
               </th>
               <th
                 scope="col"
                 onClick={() => requestSort("birthday")}
-                className={getClassNames("birthday", sorting)}
+                className={`${getClassNames("birthday", sorting)} w-15`}
               >
                 Date of Birth
               </th>

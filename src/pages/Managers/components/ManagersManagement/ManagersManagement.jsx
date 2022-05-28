@@ -1,5 +1,5 @@
 import { useSorting } from "../../../../hook/useSorting";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
 import { getClassNames } from "../../../../functions/getClassNames";
 
@@ -10,12 +10,30 @@ import { EditField } from "../../../../components/EditField/EditField";
 import { ReadField } from "../../../../components/ReadField/ReadField";
 
 import "./ManagersManagement.scss";
+import {collection, onSnapshot, query, where} from "firebase/firestore";
+import {db} from "../../../../firebase";
 
 const ManagersManagement = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [managers, setManagers] = useState(
-    users.filter((item) => item.role === "manager")
-  );
+  const [managers, setManagers] = useState([]);
+
+  useEffect(() => {
+    let q;
+    q = query(
+        collection(db, "users"),
+        where("role", "==", "manager"));
+
+    const managersList = onSnapshot(q, (querySnapshot) => {
+      let managersArray = [];
+
+      querySnapshot.forEach((doc) => {
+        managersArray.push({...doc.data(), id: doc.id});
+      });
+      setManagers(managersArray);
+    });
+    return () => managersList();
+
+  }, []);
 
   const { items, requestSort, sorting } = useSorting(managers);
 
@@ -114,14 +132,14 @@ const ManagersManagement = () => {
               <th
                 scope="col"
                 onClick={() => requestSort("name")}
-                className={getClassNames("name", sorting)}
+                className={`${getClassNames("name", sorting)} w-15`}
               >
                 Name
               </th>
               <th
                 scope="col"
                 onClick={() => requestSort("email")}
-                className={getClassNames("email", sorting)}
+                className={`${getClassNames("email", sorting)} w-15`}
               >
                 Email
               </th>
@@ -129,21 +147,21 @@ const ManagersManagement = () => {
               <th
                 scope="col"
                 onClick={() => requestSort("organization")}
-                className={getClassNames("organization", sorting)}
+                className={`${getClassNames("organization", sorting)} w-10`}
               >
                 Company
               </th>
               <th
                 scope="col"
                 onClick={() => requestSort("score")}
-                className={getClassNames("score", sorting)}
+                className={`${getClassNames("score", sorting)} w-15`}
               >
                 Score
               </th>
               <th
                 scope="col"
                 onClick={() => requestSort("birthday")}
-                className={getClassNames("birthday", sorting)}
+                className={`${getClassNames("birthday", sorting)} w-15`}
               >
                 Date of Birth
               </th>
