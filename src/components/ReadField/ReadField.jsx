@@ -7,7 +7,7 @@ export const ReadField = ({ handleEditClick, handleDeleteClick, item }) => {
         {item.name}
       </th>
       <td className="table-text-content">{item.email}</td>
-      <td className="table-text-content">{item.number}</td>
+      <td className="table-text-content">{item.phone}</td>
       <td className="table-text-content">{item.organization}</td>
       <td className="table-text-content">{item.score}</td>
       <td className="table-row-birth table-text-content">{item.birthday}</td>

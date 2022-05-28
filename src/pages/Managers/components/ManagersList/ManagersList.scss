@@ -14,3 +14,11 @@
 .page-result{
   color: var(--subText-color);
 }
+
+.loadMore{
+  &__btn{
+    background: var(--primary);
+    color: var(--text-color);
+    border: 1px solid var(--secondary);
+  }
+}
