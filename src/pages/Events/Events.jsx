@@ -5,6 +5,7 @@ import { getClassNames } from "../../functions/getClassNames";
 import { events } from "../../constants/events";
 
 import "./Events.scss";
+import {useEffect, useState} from "react";
 
 const Events = () => {
   const { items, requestSort, sorting } = useSorting(events);
