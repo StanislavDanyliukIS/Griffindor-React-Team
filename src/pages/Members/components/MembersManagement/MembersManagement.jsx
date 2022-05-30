@@ -19,55 +19,54 @@ const MembersManagement = () => {
 
   const { items, requestSort, sorting } = useSorting(members);
 
-  const [addUser, setAddUser] = useState("");
+  const [addFormData, setAddFormData] = useState("");
   const [editFormData, setEditFormData] = useState("");
   const [editUser, setEditUser] = useState(null);
 
-  // const handleAddUser = (event) => {
-  //   event.preventDefault();
+  const handleAddFormChange = (event) => {
+    event.preventDefault();
 
-  //   const fieldName = event.target.getAttribute("name");
-  //   const fieldValue = event.target.value;
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
 
-  //   const newAddUser = { ...addUser };
-  //   newAddUser[fieldName] = fieldValue;
+    const newFormData = { ...addFormData };
+    newFormData[fieldName] = fieldValue;
 
-  //   setAddUser(newAddUser);
-  // };
+    setAddFormData(newFormData);
+  };
 
-  // const handleAddUserSubmit = (event) => {
-  //   event.preventDefault();
+  const handleAddFormSubmit = (event) => {
+    event.preventDefault();
 
-  //   const newPerson = {
-  //     name: addUser.name,
-  //     email: addUser.email,
-  //     telephone: addUser.telephone,
-  //     organization: addUser.organization,
-  //     score: addUser.score,
-  //     birthday: addUser.birthday,
-  //   };
+    const newPerson = {
+      name: addFormData.name,
+      email: addFormData.email,
+      telephone: addFormData.telephone,
+      organization: addFormData.organization,
+      score: addFormData.score,
+      birthday: addFormData.birthday,
+    };
 
-  //   const newPersons = [...items, newPerson];
-  //   setMembers(newPersons);
-  // };
+    const newPersons = [...items, newPerson];
+    setMembers(newPersons);
+  };
 
-  // const handleEditFormSubmit = (event) => {
-  //   event.preventDefault();
-  //   const editedContact = {
-  //     id: editUser,
-  //     name: editFormData.name,
-  //     email: editFormData.email,
-  //     telephone: editFormData.telephone,
-  //     organization: editFormData.organization,
-  //     score: editFormData.score,
-  //     birthday: editFormData.birthday,
-  //   };
-  //   const newPersons = [...items];
-  //   const index = items.findIndex((item) => item.name === editUser);
-  //   newPersons[index] = editedContact;
-  //   setMembers(newPersons);
-  //   setEditUser(null);
-  // };
+  const handleEditFormSubmit = (event) => {
+    event.preventDefault();
+    const editedContact = {
+      name: editFormData.name,
+      email: editFormData.email,
+      telephone: editFormData.telephone,
+      organization: editFormData.organization,
+      score: editFormData.score,
+      birthday: editFormData.birthday,
+    };
+    const newPersons = [...items];
+    const index = items.findIndex((item) => item.name === editUser);
+    newPersons[index] = editedContact;
+    setMembers(newPersons);
+    setEditUser(null);
+  };
 
   const handleEditFormChange = (event) => {
     event.preventDefault();
@@ -108,29 +107,6 @@ const MembersManagement = () => {
   return (
     <div className="container-xl members-container">
       <main>
-        {/* <form className="members-add-user">
-          <input
-            className="form-control"
-            type="text"
-            name="text"
-            required="required"
-            placeholder="Name"
-          />
-          <input
-            className="form-control"
-            type="email"
-            name="email"
-            required="required"
-            placeholder="Email"
-          />
-          <input
-            className="form-control"
-            type="password"
-            name="password"
-            required="required"
-            placeholder="Password"
-          />
-        </form> */}
         <h2 className="title-management">Members Management</h2>
         <button
           onClick={() => {
@@ -152,7 +128,13 @@ const MembersManagement = () => {
           </svg>
           <span className="btn-create-user-text">Add a new user</span>
         </button>
-        {modalOpen && <Modal setModalOpen={setModalOpen} />}
+        {modalOpen && (
+          <Modal
+            setModalOpen={setModalOpen}
+            handleAddFormChange={handleAddFormChange}
+            handleAddFormSubmit={handleAddFormSubmit}
+          />
+        )}
 
         <table className="table-secondary table table-hover">
           <thead>
@@ -204,6 +186,7 @@ const MembersManagement = () => {
                   <EditField
                     editFormData={editFormData}
                     handleEditFormChange={handleEditFormChange}
+                    handleEditFormSubmit={handleEditFormSubmit}
                     handleCancelClick={handleCancelClick}
                   />
                 ) : (

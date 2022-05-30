@@ -80,7 +80,7 @@ export const EditField = ({
           aria-label="Basic mixed styles example"
         >
           <button
-            // onChange={handleEditFormSubmit}
+            onClick={handleEditFormSubmit}
             type="submit"
             class="btn btn-success"
           >
@@ -113,10 +113,6 @@ export const EditField = ({
             </svg>
           </button>
         </div>
-        {/* <button type="submit">Save</button>
-        <button type="button" onClick={handleCancelClick}>
-          Cancel
-        </button> */}
       </td>
     </tr>
   );
