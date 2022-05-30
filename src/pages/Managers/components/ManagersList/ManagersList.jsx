@@ -28,7 +28,7 @@ const ManagersList = () => {
 			q = query(
 				collection(db, "users"),
 				limit(limitNumber),
-				where("role", "==", "user"));
+				where("role", "==", "manager"));
 
 		const managersList = onSnapshot(q, (querySnapshot) => {
 			let managersArray = [];
