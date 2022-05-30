@@ -1,9 +1,8 @@
 
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import ThemeSwitch from "./components/ThemeSwitch";
-// import cn from 'classnames';
 import { useDispatch, useSelector } from "react-redux";
-// import { toggleTheme } from '../../store/themeSlice';
+
 import logo_white from "./../../imgs/logo_white.png";
 import logo_black from "./../../imgs/logo_black.png";
 
@@ -18,7 +17,7 @@ const Header = () => {
   const navigate = useNavigate();
   const moveToLogin = () => navigate("login", { replace: true });
   const moveToProfile = () => navigate("profile");
-  // const theme = useSelector(state => state.theme.theme);
+
   const dispatch = useDispatch();
 
   const { name, role } = useUserData();

@@ -2,7 +2,7 @@
 	--primary: #ffffff;
 	--secondary: #f5f7fb;
 	--text-color: #1e293b;
-	--subText-color: #626976;
+	--subtext-color: #626976;
 	--border-color: #e6e7e9;
 }
 
@@ -10,18 +10,28 @@
 	--primary: #1e293b;
 	--secondary: #1b2434;
 	--text-color: #ffffff;
-	--subText-color: #e6e7e9;
+	--subtext-color: #e6e7e9;
 	--border-color: #293345;
 }
-.w-10 { width: 10%; }
-.w-15 { width: 15%; }
-.w-20 { width: 20%; }
-.w-30 { width: 30%; }
-.w-35 { width: 35%; }
+.w-10 {
+	width: 10%;
+}
+.w-15 {
+	width: 15%;
+}
+.w-20 {
+	width: 20%;
+}
+.w-30 {
+	width: 30%;
+}
+.w-35 {
+	width: 35%;
+}
 
 body {
 	background-color: var(--secondary);
-	color: var(--subText-color);
+	color: var(--subtext-color);
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
 		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
 import {
 	collection,
@@ -6,15 +6,11 @@ import {
 	onSnapshot,
 	limit,
 	where,
-
-} from "firebase/firestore";
-import {db} from "../../../../firebase";
+} from 'firebase/firestore';
+import { db } from '../../../../firebase';
 
 import Manager from '../Manager/Manager';
-
 import './ManagersList.scss';
-import ManagersManagement from "../ManagersManagement/ManagersManagement";
-
 
 const ManagersList = () => {
 	const limited = 16;
@@ -25,21 +21,21 @@ const ManagersList = () => {
 
 	useEffect(() => {
 		let q;
-			q = query(
-				collection(db, "users"),
-				limit(limitNumber),
-				where("role", "==", "manager"));
+		q = query(
+			collection(db, 'users'),
+			limit(limitNumber),
+			where('role', '==', 'manager')
+		);
 
-		const managersList = onSnapshot(q, (querySnapshot) => {
+		const managersList = onSnapshot(q, querySnapshot => {
 			let managersArray = [];
 
-			querySnapshot.forEach((doc) => {
-				managersArray.push({...doc.data(), id: doc.id});
+			querySnapshot.forEach(doc => {
+				managersArray.push({ ...doc.data(), id: doc.id });
 			});
 			setManagers(managersArray);
 		});
 		return () => managersList();
-
 	}, [limitNumber]);
 
 	const handleChange = event => {
@@ -59,7 +55,10 @@ const ManagersList = () => {
 			</div>
 			<div className={'page-search container-xl '}>
 				<div>
-					<span className={"page-result"}> {results.length + ' managers'} </span>
+					<span className={'page-result'}>
+						{' '}
+						{results.length + ' managers'}{' '}
+					</span>
 				</div>
 				<div>
 					<input
@@ -73,8 +72,7 @@ const ManagersList = () => {
 			</div>
 			<div className={'page-body pt-4'}>
 				<div className={'container-xl'}>
-					{results.length!==0
-					?
+					{results.length !== 0 ? (
 						<div className={'managers-row row w-100'}>
 							{results.map(item => (
 								<Manager
@@ -82,27 +80,30 @@ const ManagersList = () => {
 									name={item.name}
 									number={item.phone}
 								/>
-
 							))}
 						</div>
-					:
-						<div className={"text-center text-muted m-auto fs-1 pt-5"}>
+					) : (
+						<div className={'text-center text-muted m-auto fs-1 pt-5'}>
 							No one was found
-						</div>}
+						</div>
+					)}
 				</div>
 			</div>
-			<div className={"container-xl"}>
-				<div className={"loadMore  m-auto"}>
+			<div className={'container-xl'}>
+				<div className={'loadMore  m-auto'}>
 					{(() => {
-						if (results.length>limited) {
+						if (results.length > limited) {
 							return (
 								<button
-									type={"button"}
-									className={"loadMore__btn btn "}
-									onClick={() => {setLimitNumber(limitNumber + limited)}}>
+									type={'button'}
+									className={'loadMore__btn btn '}
+									onClick={() => {
+										setLimitNumber(limitNumber + limited);
+									}}
+								>
 									Show {limited} more
 								</button>
-							)
+							);
 						}
 					})()}
 				</div>

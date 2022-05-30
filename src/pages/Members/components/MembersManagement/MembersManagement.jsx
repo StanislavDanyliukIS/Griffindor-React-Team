@@ -35,7 +35,6 @@ const MembersManagement = () => {
 
   const { items, requestSort, sorting } = useSorting(members);
 
-  /*const [addUser, setAddUser] = useState("");*/
   const [editFormData, setEditFormData] = useState("");
   const [editUser, setEditUser] = useState(null);
 

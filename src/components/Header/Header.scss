@@ -17,21 +17,20 @@
 	border-bottom: 1px var(--border-color) solid;
 
 	&__logo {
-		color: var(--subText-color);
+		color: var(--subtext-color);
 		cursor: pointer;
 		transition: 0.1s;
 		text-decoration: none;
-		&_item{
+		&_item {
 			width: 6vw;
 			height: 5vh;
 		}
-		&_img{
+		&_img {
 			width: 5vw;
 			height: 100%;
-
 		}
 		&:hover {
-			color: var(--subText-color);
+			color: var(--subtext-color);
 			transition: 0.1s;
 			opacity: 0.7;
 		}
@@ -39,9 +38,9 @@
 	&__theme {
 		padding-top: 0.6vh;
 		cursor: pointer;
-		color: var(--subText-color);
+		color: var(--subtext-color);
 		&:hover {
-			color: var(--subText-color);
+			color: var(--subtext-color);
 			transition: 0.1s;
 			opacity: 0.7;
 		}
@@ -49,12 +48,12 @@
 	&__user {
 		display: flex;
 		cursor: pointer;
-		color: var(--subText-color);
+		color: var(--subtext-color);
 		&_info {
 			text-align: left;
 		}
 		&_role {
-			color: var(--subText-color);
+			color: var(--subtext-color);
 		}
 	}
 }
@@ -81,13 +80,13 @@ li {
 	&__item {
 		display: flex;
 		justify-content: center;
-		color: var(--subText-color);
+		color: var(--subtext-color);
 		transition: 0.1s;
 		cursor: pointer;
 		text-decoration: none;
 		&:hover {
 			transition: 0.1s;
-			color: var(--subText-color);
+			color: var(--subtext-color);
 		}
 	}
 	&__page {
