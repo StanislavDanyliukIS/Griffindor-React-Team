@@ -1,15 +1,15 @@
 .manager-container {
-  border: 1px var(--border-color) solid;
-  background-color: var(--primary) ;
+	border: 1px var(--border-color) solid;
+	background-color: var(--primary);
 }
 
 .manager-item {
-  min-width: 12vw;
-  color: var(--text-color);
-  .manager-text {
-    color: var(--text-color);
-  }
+	min-width: 12vw;
+	color: var(--text-color);
+	.manager-text {
+		color: var(--text-color);
+	}
 }
-.managers-img{
-  background-color: var(--subText-color);
+.managers-img {
+	background-color: var(--subtext-color);
 }

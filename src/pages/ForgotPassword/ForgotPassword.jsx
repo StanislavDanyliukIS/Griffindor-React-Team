@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 
 import './ForgotPassword.scss';
-import letter from './white-letter.png';
+import letter from '../../imgs/white-letter.png';
 
 const ForgotPassword = () => {
 	const [email, setEmail] = useState('');
@@ -75,7 +75,6 @@ const ForgotPassword = () => {
 				</span>{' '}
 				to the login screen.
 			</p>
-			<Footer />
 		</div>
 	);
 };

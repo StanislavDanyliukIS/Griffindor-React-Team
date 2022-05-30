@@ -3,7 +3,7 @@ import './Member.scss';
 const MemberList = ({ name, number, organization }) => {
 	return (
 		<>
-			<div className={'member-container  col-sm  rounded px-5 py-2 m-2 '}>
+			<div className={'member-container col-sm  rounded px-5 py-2 m-2 '}>
 				<div className={'members-item p-4 text-center col m-auto'}>
 					<span className={'members-img rounded-circle m-auto mb-2'}></span>
 					<h5 className={'members-text m-0 mb-2 pt-2'}> {name}</h5>

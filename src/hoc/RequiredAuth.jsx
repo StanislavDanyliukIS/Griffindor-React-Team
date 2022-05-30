@@ -1,13 +1,12 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
-import { useAuth } from "../hook/useAuth";
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../hook/useAuth';
 
 const RequiredAuth = ({ children }) => {
-  const { isAuth } = useAuth();
+	const { isAuth } = useAuth();
 
-  if (!isAuth) {
-    return <Navigate to="/login" />;
-  }
-  return children;
+	if (!isAuth) {
+		return <Navigate to='/login' />;
+	}
+	return children;
 };
 export default RequiredAuth;
