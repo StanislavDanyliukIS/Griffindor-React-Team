@@ -13,6 +13,61 @@ import {db} from "../../../../firebase";
 
 const MembersManagement = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [members, setMembers] = useState(
+    users.filter((item) => item.role === "user")
+  );
+
+  const { items, requestSort, sorting } = useSorting(members);
+
+  const [addFormData, setAddFormData] = useState("");
+  const [editFormData, setEditFormData] = useState("");
+  const [editUser, setEditUser] = useState(null);
+
+  const handleAddFormChange = (event) => {
+    event.preventDefault();
+
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...addFormData };
+    newFormData[fieldName] = fieldValue;
+
+    setAddFormData(newFormData);
+  };
+
+  const handleAddFormSubmit = (event) => {
+    event.preventDefault();
+
+    const newPerson = {
+      name: addFormData.name,
+      email: addFormData.email,
+      telephone: addFormData.telephone,
+      organization: addFormData.organization,
+      score: addFormData.score,
+      birthday: addFormData.birthday,
+    };
+
+    const newPersons = [...items, newPerson];
+    setMembers(newPersons);
+  };
+
+  const handleEditFormSubmit = (event) => {
+    event.preventDefault();
+    const editedContact = {
+      name: editFormData.name,
+      email: editFormData.email,
+      telephone: editFormData.telephone,
+      organization: editFormData.organization,
+      score: editFormData.score,
+      birthday: editFormData.birthday,
+    };
+    const newPersons = [...items];
+    const index = items.findIndex((item) => item.name === editUser);
+    newPersons[index] = editedContact;
+    setMembers(newPersons);
+    setEditUser(null);
+  };
+// modal 
   const [members, setMembers] = useState([]);
 
   useEffect(() => {
@@ -37,6 +92,7 @@ const MembersManagement = () => {
 
   const [editFormData, setEditFormData] = useState("");
   const [editUser, setEditUser] = useState(null);
+// modal
 
   const handleEditFormChange = (event) => {
     event.preventDefault();
@@ -98,7 +154,13 @@ const MembersManagement = () => {
           </svg>
           <span className="btn-create-user-text">Add a new user</span>
         </button>
-        {modalOpen && <Modal setModalOpen={setModalOpen} />}
+        {modalOpen && (
+          <Modal
+            setModalOpen={setModalOpen}
+            handleAddFormChange={handleAddFormChange}
+            handleAddFormSubmit={handleAddFormSubmit}
+          />
+        )}
 
         <table className="table-secondary table table-hover">
           <thead>
@@ -148,10 +210,11 @@ const MembersManagement = () => {
               <>
                 {editUser === item.id ? (
                   <EditField
-                      key={item.id}
-                      editFormData={editFormData}
-                      handleEditFormChange={handleEditFormChange}
-                      handleCancelClick={handleCancelClick}
+                    key={item.id}
+                    editFormData={editFormData}
+                    handleEditFormChange={handleEditFormChange}
+                    handleEditFormSubmit={handleEditFormSubmit}
+                    handleCancelClick={handleCancelClick}
                   />
                 ) : (
                   <ReadField
