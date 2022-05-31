@@ -57,6 +57,7 @@ const Login = () => {
   const clearPasword = () =>
     validateEmailClass() ? setUserData({ email, password: "" }) : null;
 
+
   const handleLogin = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
