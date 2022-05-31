@@ -1,14 +1,9 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { doc, getDoc } from "firebase/firestore";
 
-import { auth } from "../../firebase";
 import { logIn } from "../../store/authSlice";
-import { db } from "../../firebase";
-
-import { addUserData } from "../../store/userDataSlicer";
 
 import "./Login.scss";
 import eye from "./eye.png";
@@ -19,8 +14,10 @@ const Login = () => {
   const [userValidation, setUserValidation] = useState("hide-text-danger");
   const [passwordVisibility, setPasswordVisibility] = useState("password");
 
+  const auth = getAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const inputRef = useRef();
 
   const focusOnPasswordInput = () => {
@@ -63,28 +60,14 @@ const Login = () => {
   const handleLogin = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        dispatch(
-          logIn({
-            email: user.email,
-            id: user.uid,
-            token: user.accessToken,
-          })
-        );
-        navigate("/", { replace: true });
-        return {
-          email: user.email,
-          id: user.uid,
-          token: user.accessToken,
-        };
+        dispatch(logIn({ uid: user.uid }));
+        localStorage.setItem("isAuth", !!user.uid);
       })
-      .then((data) => {
-        const docRef = doc(db, `users`, data.id);
-        getDoc(docRef).then((resp) => dispatch(addUserData(resp.data())));
-      })
+      .then()
       .catch((error) => {
         clearPasword();
         focusOnPasswordInput();
-        setUserValidation('text-danger')
+        setUserValidation("text-danger");
         console.log(error);
       });
   };

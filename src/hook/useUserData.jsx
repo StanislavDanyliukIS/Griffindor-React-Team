@@ -1,8 +1,11 @@
 import { useSelector } from "react-redux";
 
 export const useUserData = () => {
+  const userData = useSelector((state) => state.data.userData);
+ 
   const { name, role, email, organization, phone, score, rate, birthday } =
-    useSelector((state) => state.data.userData);
+    userData;
+
   return {
     name,
     role,

@@ -1,50 +1,83 @@
-
+import { useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import ThemeSwitch from "./components/ThemeSwitch";
-// import cn from 'classnames';
 import { useDispatch, useSelector } from "react-redux";
-// import { toggleTheme } from '../../store/themeSlice';
-import logo_white from "./../../imgs/logo_white.png";
-import logo_black from "./../../imgs/logo_black.png";
+import { useLocation } from "react-router";
+
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase";
 
 import { useUserData } from "../../hook/useUserData";
-import { logOut } from "../../store/authSlice";
-import { clearUserData } from "../../store/userDataSlicer";
+
+import ThemeSwitch from "./components/ThemeSwitch";
+
+import { addUserData, clearUserData } from "../../store/userDataSlicer";
+import { logOut, logIn } from "../../store/authSlice";
+import { logined, unlogined } from "../../store/statusSlicer";
+
+import logo_white from "./../../imgs/logo_white.png";
+import logo_black from "./../../imgs/logo_black.png";
 
 import "./Header.scss";
 
 const Header = () => {
-  const theme = useSelector((state) => state.theme);
   const navigate = useNavigate();
-  const moveToLogin = () => navigate("login", { replace: true });
-  const moveToProfile = () => navigate("profile");
-  // const theme = useSelector(state => state.theme.theme);
   const dispatch = useDispatch();
+  const location = useLocation();
 
-  const { name, role } = useUserData();
+  const { name } = useUserData();
+  const role = localStorage.getItem("role");
+  const theme = useSelector((state) => state.theme);
 
+  const moveToProfile = () => navigate("profile");
 
-	const logout = () => {
-		sessionStorage.clear();
-	};
-	return (
-		<>
-			<div className={`header ${theme}`}>
-				<div className={'container-xl'}>
-					<Link className={'header__logo pe-0 pe-md-3'} to='/'>
-						<div className={"header__logo_item"}>
-							{theme==="light"
-								?
-								<img className={"header__logo_img"} src={logo_black}/>
-								:
-								<img className={"header__logo_img"} src={logo_white}/>
-							}
-						</div>
-					</Link>
-					<div className={'header__user pe-0 pe-md-3'}>
-						<div className={'header__theme pe-md-5'}>
-							<ThemeSwitch />
-						</div>
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        dispatch(logined(!!uid));
+        dispatch(logIn({ uid: user.uid }));
+        const docRef = doc(db, `users`, uid);
+        getDoc(docRef).then((resp) => {
+          dispatch(addUserData(resp.data()));
+          localStorage.setItem("role", resp.data().role);
+          navigate(location.pathname, { replace: true });
+        });
+      } else {
+        dispatch(unlogined(false));
+      }
+    });
+  }, []);
+
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        dispatch(logOut());
+        dispatch(clearUserData());
+        localStorage.clear();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  return (
+    <>
+      <div className={`header ${theme}`}>
+        <div className={"container-xl"}>
+          <Link className={"header__logo pe-0 pe-md-3"} to="/">
+            <div className={"header__logo_item"}>
+              {theme === "light" ? (
+                <img className={"header__logo_img"} src={logo_black} />
+              ) : (
+                <img className={"header__logo_img"} src={logo_white} />
+              )}
+            </div>
+          </Link>
+          <div className={"header__user pe-0 pe-md-3"}>
+            <div className={"header__theme pe-md-5"}>
+              <ThemeSwitch />
+            </div>
 
             <div className={"dropdown"}>
               <div
@@ -70,10 +103,7 @@ const Header = () => {
                       className="dropdown-item"
                       to={"/login"}
                       onClick={() => {
-                        moveToLogin();
                         logout();
-                        dispatch(logOut());
-                        dispatch(clearUserData());
                       }}
                     >
                       Log out
