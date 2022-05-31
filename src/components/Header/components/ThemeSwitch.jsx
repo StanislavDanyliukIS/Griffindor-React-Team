@@ -10,18 +10,7 @@ const ThemeSwitch = () => {
 		dispatch(toggleTheme(theme === 'dark' ? 'light' : 'dark'));
 
 	return (
-		// <div
-		// 	className={cn(
-		// 		className,
-		// 		styles.root,
-		// 		theme === 'dark' ? styles.dark : styles.light
-		// 	)}
-		// 	onClick={handleChange}
-		// />
-		<span
-			// onClick={() => dispatch(toggleTheme())}
-			onClick={handleChange}
-		>
+		<span onClick={handleChange}>
 			{theme === 'dark' ? (
 				<svg
 					xmlns='http://www.w3.org/2000/svg'

@@ -1,50 +1,50 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import {
+	collection,
+	query,
+	onSnapshot,
+	limit,
+	where,
+} from 'firebase/firestore';
+import { db } from '../../../../firebase';
 
 import Manager from '../Manager/Manager';
-
 import './ManagersList.scss';
 
-const managersArr = [
-	{
-		name: 'Lolik',
-		number: '23545363',
-	},
-	{
-		name: 'Bolik',
-		number: '12343242',
-	},
-	{
-		name: 'Alcoholic',
-		number: '4353234245',
-	},
-	{
-		name: 'Shokoladnyy',
-		number: '234243123',
-	},
-	{
-		name: 'Zayats',
-		number: '2342355',
-	},
-	{
-		name: 'Laskavyy',
-		number: '4574364254',
-	},
-	{
-		name: 'Merzavets',
-		number: '678674573',
-	},
-];
-
 const ManagersList = () => {
+	const limited = 16;
+
+	const [managers, setManagers] = useState([]);
 	const [searchName, setSearchName] = useState('');
+	const [limitNumber, setLimitNumber] = useState(limited);
+
+	useEffect(() => {
+		let q;
+		q = query(
+			collection(db, 'users'),
+			limit(limitNumber),
+			where('role', '==', 'manager')
+		);
+
+		const managersList = onSnapshot(q, querySnapshot => {
+			let managersArray = [];
+
+			querySnapshot.forEach(doc => {
+				managersArray.push({ ...doc.data(), id: doc.id });
+			});
+			setManagers(managersArray);
+		});
+		return () => managersList();
+	}, [limitNumber]);
 
 	const handleChange = event => {
 		setSearchName(event.target.value);
 	};
 
 	const results = !searchName
-		? managersArr
-		: managersArr.filter(manager => manager.name.includes(searchName));
+		? managers
+		: managers.filter(manager => manager.name.includes(searchName));
 
 	return (
 		<div className={'managers'}>
@@ -55,7 +55,10 @@ const ManagersList = () => {
 			</div>
 			<div className={'page-search container-xl '}>
 				<div>
-					<span className={"page-result"}> {results.length + ' managers'} </span>
+					<span className={'page-result'}>
+						{' '}
+						{results.length + ' managers'}{' '}
+					</span>
 				</div>
 				<div>
 					<input
@@ -69,21 +72,40 @@ const ManagersList = () => {
 			</div>
 			<div className={'page-body pt-4'}>
 				<div className={'container-xl'}>
-					{results.length!==0
-					?
+					{results.length !== 0 ? (
 						<div className={'managers-row row w-100'}>
 							{results.map(item => (
 								<Manager
 									key={Math.random() * 10000000}
 									name={item.name}
-									number={item.number}
+									number={item.phone}
 								/>
 							))}
 						</div>
-					:
-						<div className={"text-center text-muted m-auto fs-1 pt-5"}>
+					) : (
+						<div className={'text-center text-muted m-auto fs-1 pt-5'}>
 							No one was found
-						</div>}
+						</div>
+					)}
+				</div>
+			</div>
+			<div className={'container-xl'}>
+				<div className={'loadMore  m-auto'}>
+					{(() => {
+						if (results.length > limited) {
+							return (
+								<button
+									type={'button'}
+									className={'loadMore__btn btn '}
+									onClick={() => {
+										setLimitNumber(limitNumber + limited);
+									}}
+								>
+									Show {limited} more
+								</button>
+							);
+						}
+					})()}
 				</div>
 			</div>
 		</div>

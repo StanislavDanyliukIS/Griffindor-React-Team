@@ -14,7 +14,6 @@ import Login from "./pages/Login/Login";
 import RequiredAuth from "./hoc/RequiredAuth";
 import LoginAccess from "./hoc/LoginAccess";
 
-
 export const users = [
   {
     name: "Adam",

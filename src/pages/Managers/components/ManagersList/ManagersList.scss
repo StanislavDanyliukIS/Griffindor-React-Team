@@ -1,16 +1,24 @@
-.managers{
-  min-height: 79vh;
-  background-color: var(--secondary);
-  &-img{
-    display: block;
-    background: #282c34;
-    width: 7vw;
-    height: 7vw;
-  }
+.managers {
+	min-height: 79vh;
+	background-color: var(--secondary);
+	&-img {
+		display: block;
+		background: #282c34;
+		width: 7vw;
+		height: 7vw;
+	}
 }
 .page-name {
-  color: var(--text-color);
+	color: var(--text-color);
 }
-.page-result{
-  color: var(--subText-color);
+.page-result {
+	color: var(--subtext-color);
+}
+
+.loadMore {
+	&__btn {
+		background: var(--primary);
+		color: var(--text-color);
+		border: 1px solid var(--secondary);
+	}
 }

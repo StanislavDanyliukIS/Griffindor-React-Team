@@ -1,77 +1,77 @@
 export const EditField = ({
-  editFormData,
-  handleEditFormChange,
-  handleEditFormSubmit,
-  handleCancelClick,
+	editFormData,
+	handleEditFormChange,
+	handleEditFormSubmit,
+	handleCancelClick,
 }) => {
-  return (
-    <tr>
-      <td>
-        <input
-          className="form-control user-form"
-          type="text"
-          name="name"
-          value={editFormData.name}
-          required="required"
-          placeholder="Name"
-          onChange={handleEditFormChange}
-        />
-      </td>
-      <td>
-        <input
-          className="form-control user-form"
-          type="email"
-          name="email"
-          value={editFormData.email}
-          required="required"
-          placeholder="Email"
-          onChange={handleEditFormChange}
-        />
-      </td>
-      <td>
-        <input
-          className="form-control user-form"
-          type="text"
-          name="telephone"
-          value={editFormData.telephone}
-          required="required"
-          placeholder="Telephone"
-          onChange={handleEditFormChange}
-        />
-      </td>
-      <td>
-        <input
-          className="form-control user-form"
-          type="text"
-          name="organization"
-          value={editFormData.organization}
-          required="required"
-          placeholder="Company"
-          onChange={handleEditFormChange}
-        />
-      </td>
-      <td>
-        <input
-          className="form-control user-form"
-          type="number"
-          name="score"
-          value={editFormData.score}
-          required="required"
-          placeholder="Score"
-          onChange={handleEditFormChange}
-        />
-      </td>
-      <td>
-        <input
-          className="form-control user-form"
-          type="date"
-          name="birthday"
-          value={editFormData.birthday}
-          required="required"
-          placeholder="Date of birth"
-          onChange={handleEditFormChange}
-        />
-      </td>
+	return (
+		<tr>
+			<td>
+				<input
+					className='form-control user-form'
+					type='text'
+					name='name'
+					value={editFormData.name}
+					required='required'
+					placeholder='Name'
+					onChange={handleEditFormChange}
+				/>
+			</td>
+			<td>
+				<input
+					className='form-control user-form'
+					type='email'
+					name='email'
+					value={editFormData.email}
+					required='required'
+					placeholder='Email'
+					onChange={handleEditFormChange}
+				/>
+			</td>
+			<td>
+				<input
+					className='form-control user-form'
+					type='text'
+					name='telephone'
+					value={editFormData.phone}
+					required='required'
+					placeholder='Telephone'
+					onChange={handleEditFormChange}
+				/>
+			</td>
+			<td>
+				<input
+					className='form-control user-form'
+					type='text'
+					name='organization'
+					value={editFormData.organization}
+					required='required'
+					placeholder='Company'
+					onChange={handleEditFormChange}
+				/>
+			</td>
+			<td>
+				<input
+					className='form-control user-form'
+					type='number'
+					name='score'
+					value={editFormData.score}
+					required='required'
+					placeholder='Score'
+					onChange={handleEditFormChange}
+				/>
+			</td>
+			<td>
+				<input
+					className='form-control user-form'
+					type='date'
+					name='birthday'
+					value={editFormData.birthday}
+					required='required'
+					placeholder='Date of birth'
+					onChange={handleEditFormChange}
+				/>
+			</td>
 
       <td>
         <div
@@ -80,7 +80,7 @@ export const EditField = ({
           aria-label="Basic mixed styles example"
         >
           <button
-            // onChange={handleEditFormSubmit}
+            onClick={handleEditFormSubmit}
             type="submit"
             class="btn btn-success"
           >
@@ -113,10 +113,6 @@ export const EditField = ({
             </svg>
           </button>
         </div>
-        {/* <button type="submit">Save</button>
-        <button type="button" onClick={handleCancelClick}>
-          Cancel
-        </button> */}
       </td>
     </tr>
   );

@@ -1,14 +1,13 @@
 .member-container {
 	background-color: var(--primary);
 	border: 1px var(--border-color) solid;
-
 }
 
 .members-item {
 	min-width: 12vw;
-	color: var(--subText-color);
+	color: var(--subtext-color);
 	.members-img {
-		background-color: var(--subText-color);
+		background-color: var(--subtext-color);
 	}
 	.members-text {
 		color: var(--text-color);

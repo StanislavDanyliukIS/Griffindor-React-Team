@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { logIn } from "../../store/authSlice";
 
 import "./Login.scss";
-import eye from "./eye.png";
+import eye from "../../imgs/eye.png";
 
 const Login = () => {
   const [userData, setUserData] = useState({ email: "", password: "" });
@@ -73,7 +73,7 @@ const Login = () => {
   };
 
   return (
-    <div className="login-page bg-light">
+    <div className="login-page">
       <form className="singin-form">
         <p className="form-title">Login to your account</p>
         <span className={userValidation}>
