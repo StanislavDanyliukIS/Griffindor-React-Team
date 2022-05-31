@@ -3,6 +3,7 @@ import themeReducer from "./themeSlice";
 import userReducer from "./userSlice";
 import authReducer from "./authSlice";
 import userDataSlicer from "./userDataSlicer";
+import crudReducer from "./crudSlice";
 
 export default configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
     user: userReducer,
     auth: authReducer,
     data: userDataSlicer,
+    crud: crudReducer,
   },
 });

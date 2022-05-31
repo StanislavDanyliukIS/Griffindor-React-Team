@@ -70,7 +70,7 @@ const Login = () => {
 						token: user.accessToken,
 					})
 				);
-				navigate('/', { replace: true });
+
 				return {
 					email: user.email,
 					id: user.uid,
@@ -79,7 +79,11 @@ const Login = () => {
 			})
 			.then(data => {
 				const docRef = doc(db, `users`, data.id);
-				getDoc(docRef).then(resp => dispatch(addUserData(resp.data())));
+				getDoc(docRef).then(resp => {
+					console.log(resp.data())
+					dispatch(addUserData(resp.data())
+				)});
+				navigate('/', { replace: true });
 			})
 			.catch(error => {
 				clearPasword();
