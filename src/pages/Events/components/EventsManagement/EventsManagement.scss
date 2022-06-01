@@ -1,7 +1,8 @@
-.container {
-	max-width: 100%;
-	margin: 0 auto;
-	padding: 20px;
+.events {
+	min-height: 79vh;
+}
+.page-name {
+	color: var(--text-color);
 }
 
 .btn-table-create {
@@ -11,7 +12,7 @@
 }
 
 .table {
-	margin-top: auto;
+	margin-top: 2%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -21,4 +22,15 @@
 	justify-content: center;
 	gap: 20px;
 	padding: 5px;
+}
+
+.ascending {
+	&::after {
+		content: ' ↓';
+	}
+}
+.descending {
+	&::after {
+		content: ' ↑';
+	}
 }
