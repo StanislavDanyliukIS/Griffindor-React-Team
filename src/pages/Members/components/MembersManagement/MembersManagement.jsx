@@ -8,10 +8,23 @@ import {EditField} from "../../../../components/EditField/EditField";
 import {ReadField} from "../../../../components/ReadField/ReadField";
 
 import "./MembersManagement.scss";
-import {collection, onSnapshot, query, where, addDoc, updateDoc, doc, getDoc, deleteDoc, documentId} from "firebase/firestore";
-import {db} from "../../../../firebase";
+import {
+    collection,
+    onSnapshot,
+    query,
+    where,
+    addDoc,
+    updateDoc,
+    doc,
+    getDoc,
+    deleteDoc,
+    setDoc,
+} from "firebase/firestore";
+import {db, app} from "../../../../firebase";
 
-import {createUser,editUsers, removeUser} from "../../../../store/crudSlice";
+
+
+import {createUser, updateUser, deleteUser} from "../../../../store/crudSlice";
 import {useDispatch} from "react-redux";
 import {createUserWithEmailAndPassword, getAuth} from "firebase/auth";
 
@@ -46,6 +59,7 @@ const MembersManagement = () => {
 
     }, []);
 
+
     const handleAddFormChange = (event) => {
         event.preventDefault();
 
@@ -59,20 +73,19 @@ const MembersManagement = () => {
     };
 
     const handleAddFormSubmit = (event) => {
-        createUserWithEmailAndPassword(auth, addFormData.email, password)
+        event.preventDefault();
+        createUserWithEmailAndPassword( auth, addFormData.email, password)
             .then((userCredential) => {
                 // Signed in
                 dispatch(
                     createUser({
                         email: userCredential.user.email,
                         id: userCredential.user.uid,
-                        token: userCredential.user.accessToken,
                     }),
                 )
                 return {
                     email: userCredential.user.email,
                     id: userCredential.user.uid,
-                    token: userCredential.user.accessToken,
                 }
             })
             .then((data) => {
@@ -98,8 +111,7 @@ const MembersManagement = () => {
                 }
             })
             .then((user) => {
-                addDoc(collection(db, "users"), {
-                    uid:user.id,
+                setDoc(doc(db, "users", user.id), {
                     email: user.email,
                     name: user.name,
                     role: user.role,
@@ -108,12 +120,9 @@ const MembersManagement = () => {
                     organization: user.organization,
                     telephone: user.telephone,
                 });
-                console.log(documentId())
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // ..
+                console.error(error);
             });
     };
 
@@ -133,9 +142,9 @@ const MembersManagement = () => {
         const item = items.filter((el) => el.id === editFormData.id);
         const document = doc(db, "users", item[0].id);
         getDoc(document)
-            .then((data)=>{
+            .then((data) => {
                 dispatch(
-                    editUsers({
+                    updateUser({
                         name: editedContact.name,
                         score: editedContact.score,
                         birthday: editedContact.birthday,
@@ -150,7 +159,7 @@ const MembersManagement = () => {
                     organization: editedContact.organization,
                     telephone: editedContact.telephone,
                 });
-        })
+            })
         setEditUser(null);
     };
 
@@ -169,10 +178,31 @@ const MembersManagement = () => {
     };
 
     const handleDeleteClick = (itemId) => {
-        const newItems = [...items];
+        /*const newItems = [...items];
         const index = items.findIndex((item) => item.id === itemId);
         newItems.splice(index, 1);
-        setMembers(newItems);
+        setMembers(newItems);*/
+        const user = items.filter((el) => el.id === itemId);
+        const document = doc(db, "users", user[0].id);
+
+        getDoc(document)
+            .then(()=>{
+                deleteDoc(document);
+                dispatch(
+                    deleteUser({
+                        email: null,
+                        token: null,
+                        id: null,
+                        name: null,
+                        role: null,
+                        score: null,
+                        birthday: null,
+                        organization: null,
+                        telephone: null,
+                    })
+                )
+            })
+
     };
 
     const handleEditClick = (event, item) => {

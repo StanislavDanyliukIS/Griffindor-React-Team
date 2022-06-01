@@ -27,14 +27,14 @@ const crudSlice = createSlice({
             state.organization = action.payload.organization;
             state.telephone = action.payload.telephone;
         },
-        editUsers(state, action){
+        updateUser(state, action){
             state.name = action.payload.name;
             state.score = action.payload.score;
             state.birthday = action.payload.birthday;
             state.organization = action.payload.organization;
             state.telephone = action.payload.telephone;
         },
-        removeUser(state, action){
+        deleteUser(state, action){
             state.email= null;
             state.token= null;
             state.id= null;
@@ -48,6 +48,6 @@ const crudSlice = createSlice({
     }
 })
 
-export const {createUser, editUsers, removeUser} = crudSlice.actions;
+export const {createUser, updateUser, deleteUser} = crudSlice.actions;
 
 export default crudSlice.reducer;
