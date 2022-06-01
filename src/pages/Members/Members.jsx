@@ -1,18 +1,16 @@
-import MembersList from './components/MembersList/MembersList';
+import MembersList from "./components/MembersList/MembersList";
+import MembersManagement from "./components/MembersManagement/MembersManagement";
 
-import './Members.scss';
-import { useAuth } from '../../hook/useAuth';
-import MembersManagement from './components/MembersManagement/MembersManagement';
-import {useUserData} from "../../hook/useUserData";
+import "./Members.scss";
 
 const Members = () => {
-	const { isAuth } = useAuth();
-	const { role } = useUserData();
-	return (
-		<div className={'members '}>
-			{isAuth && role === 'user' ? <MembersList /> : <MembersManagement />}
-		</div>
-	);
+  const role = localStorage.getItem("role");
+
+  return (
+    <div className={"members"}>
+      {role === "user" ? <MembersList /> : <MembersManagement />}
+    </div>
+  );
 };
 
 export default Members;
