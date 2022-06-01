@@ -8,7 +8,7 @@ import { auth } from '../../firebase';
 import { logIn } from '../../store/authSlice';
 import { db } from '../../firebase';
 
-import { addUserData } from '../../store/userDataSlicer';
+import { addUserData } from '../../store/userDataSlice';
 
 import './Login.scss';
 import eye from '../../imgs/eye.png';

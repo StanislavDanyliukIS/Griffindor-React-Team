@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const getTheme = () => {
-	const theme = `${window?.sessionStorage?.getItem('theme')}`;
+	const theme = `${window?.localStorage?.getItem('theme')}`;
 	if (['light', 'dark'].includes(theme)) return theme;
 
 	return 'light';

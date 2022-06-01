@@ -1,61 +1,18 @@
-import { useSorting } from '../../hook/useSorting';
+import { useAuth } from '../../hook/useAuth';
+import { useUserData } from '../../hook/useUserData';
 
-import { getClassNames } from '../../functions/getClassNames';
-import { events } from '../../constants/events';
+import EventsUser from './components/EventsUser/EventsUser';
+import EventsManagement from './components/EventsManagement/EventsManagement';
 
 import './Events.scss';
 
 const Events = () => {
-	const { items, requestSort, sorting } = useSorting(events);
+	const { isAuth } = useAuth();
+	const { role } = useUserData();
 
 	return (
-		<div className='container'>
-			<main>
-				<button
-					type='button'
-					className='btn btn-outline-secondary btn-table-create'
-				>
-					Create a new Event
-				</button>
-				<table className='table'>
-					<thead>
-						<tr>
-							<th
-								scope='col'
-								onClick={() => requestSort('date')}
-								className={getClassNames('date', sorting)}
-							>
-								Date
-							</th>
-							<th
-								scope='col'
-								onClick={() => requestSort('name')}
-								className={getClassNames('name', sorting)}
-							>
-								Events
-							</th>
-							<th
-								scope='col'
-								onClick={() => requestSort('score')}
-								className={getClassNames('score', sorting)}
-							>
-								Score
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						{items.map(item => (
-							<tr key={Math.random() * 100000000}>
-								<th scope='row'>
-									{item.date.substr(0, 10) + ' ' + item.date.substr(11, 8)}
-								</th>
-								<td>{item.name}</td>
-								<td>{item.score}</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
-			</main>
+		<div className='events'>
+			{isAuth && role === 'user' ? <EventsUser /> : <EventsManagement />}
 		</div>
 	);
 };

@@ -1,12 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { setEventsData } from './store/eventsSlice';
+import { db } from './firebase';
+import { collection, onSnapshot, query } from 'firebase/firestore';
 
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home/Home';
 import Members from './pages/Members/Members';
 import Managers from './pages/Managers/Managers';
 import Events from './pages/Events/Events';
+import Event from './pages/Event/Event';
 import NotFound from './pages/NotFound/NotFound';
 import Profile from './pages/Profile/Profile';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
@@ -88,11 +93,24 @@ export const users = [
 
 const App = () => {
 	const theme = useSelector(state => state.theme);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		document.documentElement.dataset.theme = theme;
-		sessionStorage.setItem('theme', theme);
+		localStorage.setItem('theme', theme);
 	}, [theme]);
+
+	useEffect(() => {
+		const q = query(collection(db, 'events'));
+		onSnapshot(q, querySnapshot => {
+			const eventsArray = [];
+
+			querySnapshot.forEach(doc => {
+				eventsArray.push({ ...doc.data(), id: doc.id });
+			});
+			dispatch(setEventsData(eventsArray));
+		});
+	}, []);
 	return (
 		<>
 			<Routes>
@@ -111,6 +129,7 @@ const App = () => {
 					<Route path='members' element={<Members />} />
 					<Route path='managers' element={<Managers />} />
 					<Route path='events' element={<Events />} />
+					<Route path='events/:title' element={<Event />} />
 				</Route>
 				<Route path='*' element={<NotFound />} />
 			</Routes>
