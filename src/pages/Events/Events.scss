@@ -1,35 +1,37 @@
-.container {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 20px;
+.events {
+	min-height: 79vh;
+	padding: 20px;
+}
+.page-name {
+	color: var(--text-color);
 }
 
 .btn-table-create {
-  display: block;
-  margin: 20px auto;
-  padding: 10px;
+	display: block;
+	margin: 20px auto;
+	padding: 10px;
 }
 
 .table {
-  margin-top: auto;
-  margin-left: auto;
-  margin-right: auto;
+	margin-top: 2%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .events-manager-add {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  padding: 5px;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	padding: 5px;
 }
 
-.ascending{
-  &::after{
-    content: " ↓";
-  }
+.ascending {
+	&::after {
+		content: ' ↓';
+	}
 }
-.descending{
-  &::after{
-    content: " ↑";
-  }
+.descending {
+	&::after {
+		content: ' ↑';
+	}
 }
