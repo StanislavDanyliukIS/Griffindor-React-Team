@@ -34,7 +34,6 @@ const Header = () => {
   const role = localStorage.getItem("role");
   const theme = useSelector((state) => state.theme);
 
-
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
