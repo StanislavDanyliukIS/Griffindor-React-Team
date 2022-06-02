@@ -120,17 +120,17 @@ const MembersManagement = () => {
                     organization: user.organization,
                     telephone: user.telephone,
                 })
-                signOut(auth)
-                    .then(() => {
-                        dispatch(logOut());
-                        dispatch(clearUserData());
-                        localStorage.clear();
-                    })
             })
-
             .catch((error) => {
                 console.error(error);
             });
+
+        signOut(auth)
+            .then(() => {
+                dispatch(logOut());
+                dispatch(clearUserData());
+                localStorage.clear();
+            })
     };
 
     const handleEditFormSubmit = (event) => {
