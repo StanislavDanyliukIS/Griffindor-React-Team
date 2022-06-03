@@ -15,7 +15,7 @@ const NotFound = () => {
 						<Link to='/' className='btn btn-primary'>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
-								class='icon'
+								className='icon'
 								width='24'
 								height='24'
 								viewBox='0 0 24 24'
