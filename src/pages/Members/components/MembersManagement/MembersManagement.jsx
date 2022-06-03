@@ -27,7 +27,7 @@ import {createUser, updateUser, deleteUser} from "../../../../store/crudSlice";
 import {useDispatch} from "react-redux";
 import {createUserWithEmailAndPassword, getAuth, signOut} from "firebase/auth";
 import {logOut} from "../../../../store/authSlice";
-import {clearUserData} from "../../../../store/userDataSlicer";
+import {clearUserData} from "../../../../store/userDataSlice";
 
 
 const MembersManagement = () => {

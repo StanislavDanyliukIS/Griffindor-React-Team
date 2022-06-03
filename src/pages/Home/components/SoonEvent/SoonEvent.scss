@@ -1,0 +1,14 @@
+.soon_event{
+  border-bottom: 2px solid var(--secondary);
+  &-number{
+    padding-right: 1vw;
+    border-right: 2px solid var(--border-color);
+    color: var(--subtext-color);
+  }
+  &-name{
+    color: var(--text-color);
+  }
+  &-date{
+    color: var(--subtext-color);
+  }
+}
