@@ -7,24 +7,28 @@ import { Modal } from '../../../../components/Modal/Modal';
 import { EditField } from '../../../../components/EditField/EditField';
 import { ReadField } from '../../../../components/ReadField/ReadField';
 
-import './MembersManagement.scss';
-import {
-	collection,
-	onSnapshot,
-	query,
-	where,
-	addDoc,
-	updateDoc,
-	doc,
-	getDoc,
-	deleteDoc,
-	documentId,
-} from 'firebase/firestore';
-import { db } from '../../../../firebase';
 
-import { createUser, editUsers, removeUser } from '../../../../store/crudSlice';
-import { useDispatch } from 'react-redux';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import "./MembersManagement.scss";
+import {
+    collection,
+    onSnapshot,
+    query,
+    where,
+    addDoc,
+    updateDoc,
+    doc,
+    getDoc,
+    deleteDoc,
+    setDoc,
+} from "firebase/firestore";
+import {db, app, auth} from "../../../../firebase";
+
+import {createUser, updateUser, deleteUser} from "../../../../store/crudSlice";
+import {useDispatch} from "react-redux";
+import {createUserWithEmailAndPassword, getAuth, signOut} from "firebase/auth";
+import {logOut} from "../../../../store/authSlice";
+import {clearUserData} from "../../../../store/userDataSlicer";
+
 
 const MembersManagement = () => {
 	const auth = getAuth();
@@ -57,8 +61,11 @@ const MembersManagement = () => {
 	const handleAddFormChange = event => {
 		event.preventDefault();
 
-		const fieldName = event.target.getAttribute('name');
-		const fieldValue = event.target.value;
+
+
+    const handleAddFormChange = (event) => {
+        event.preventDefault();
+
 
 		const newFormData = { ...addFormData };
 		newFormData[fieldName] = fieldValue;
@@ -125,41 +132,105 @@ const MembersManagement = () => {
 			});
 	};
 
-	const handleEditFormSubmit = event => {
-		event.preventDefault();
-		const editedContact = {
-			name: editFormData.name,
-			email: editFormData.email,
-			telephone: editFormData.telephone,
-			organization: editFormData.organization,
-			score: editFormData.score,
-			birthday: editFormData.birthday,
-		};
-		/*const newPersons = [...items];*/
-		/*newPersons[index] = editedContact;
+
+    const handleAddFormSubmit = (event) => {
+        event.preventDefault();
+        createUserWithEmailAndPassword( auth, addFormData.email, password)
+            .then((userCredential) => {
+                // Signed in
+                dispatch(
+                    createUser({
+                        email: userCredential.user.email,
+                        id: userCredential.user.uid,
+                    }),
+                )
+                return {
+                    email: userCredential.user.email,
+                    id: userCredential.user.uid,
+                }
+            })
+            .then((data) => {
+                dispatch(
+                    createUser({
+                        name: addFormData.name,
+                        role: "user",
+                        score: addFormData.score,
+                        birthday: addFormData.birthday,
+                        organization: addFormData.organization,
+                        telephone: addFormData.telephone,
+                    })
+                )
+                return {
+                    id: data.id,
+                    email: data.email,
+                    name: addFormData.name,
+                    role: "user",
+                    score: addFormData.score,
+                    birthday: addFormData.birthday,
+                    organization: addFormData.organization,
+                    telephone: addFormData.telephone,
+                }
+            })
+            .then((user) => {
+                setDoc(doc(db, "users", user.id), {
+                    email: user.email,
+                    name: user.name,
+                    role: user.role,
+                    score: user.score,
+                    birthday: user.birthday,
+                    organization: user.organization,
+                    telephone: user.telephone,
+                })
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+        signOut(auth)
+            .then(() => {
+                dispatch(logOut());
+                dispatch(clearUserData());
+                localStorage.clear();
+            })
+    };
+
+    const handleEditFormSubmit = (event) => {
+        event.preventDefault();
+        const editedContact = {
+            name: editFormData.name,
+            email: editFormData.email,
+            telephone: editFormData.telephone,
+            organization: editFormData.organization,
+            score: editFormData.score,
+            birthday: editFormData.birthday,
+        };
+        /*const newPersons = [...items];*/
+        /*newPersons[index] = editedContact;
         setMembers(newPersons);*/
-		const item = items.filter(el => el.id === editFormData.id);
-		const document = doc(db, 'users', item[0].id);
-		getDoc(document).then(data => {
-			dispatch(
-				editUsers({
-					name: editedContact.name,
-					score: editedContact.score,
-					birthday: editedContact.birthday,
-					organization: editedContact.organization,
-					telephone: editedContact.telephone,
-				})
-			);
-			updateDoc(doc(db, 'users', item[0].id), {
-				name: editedContact.name,
-				score: editedContact.score,
-				birthday: editedContact.birthday,
-				organization: editedContact.organization,
-				telephone: editedContact.telephone,
-			});
-		});
-		setEditUser(null);
-	};
+        const item = items.filter((el) => el.id === editFormData.id);
+        const document = doc(db, "users", item[0].id);
+        getDoc(document)
+            .then((data) => {
+                dispatch(
+                    updateUser({
+                        name: editedContact.name,
+                        score: editedContact.score,
+                        birthday: editedContact.birthday,
+                        organization: editedContact.organization,
+                        telephone: editedContact.telephone,
+                    })
+                )
+                updateDoc(doc(db, "users", item[0].id), {
+                    name: editedContact.name,
+                    score: editedContact.score,
+                    birthday: editedContact.birthday,
+                    organization: editedContact.organization,
+                    telephone: editedContact.telephone,
+                });
+            })
+        setEditUser(null);
+    };
+
 
 	const handleEditFormChange = event => {
 		event.preventDefault();
@@ -175,12 +246,35 @@ const MembersManagement = () => {
 		setEditUser(null);
 	};
 
-	const handleDeleteClick = itemId => {
-		const newItems = [...items];
-		const index = items.findIndex(item => item.id === itemId);
-		newItems.splice(index, 1);
-		setMembers(newItems);
-	};
+
+    const handleDeleteClick = (itemId) => {
+        /*const newItems = [...items];
+        const index = items.findIndex((item) => item.id === itemId);
+        newItems.splice(index, 1);
+        setMembers(newItems);*/
+        const user = items.filter((el) => el.id === itemId);
+        const document = doc(db, "users", user[0].id);
+
+        getDoc(document)
+            .then(()=>{
+                deleteDoc(document);
+                dispatch(
+                    deleteUser({
+                        email: null,
+                        token: null,
+                        id: null,
+                        name: null,
+                        role: null,
+                        score: null,
+                        birthday: null,
+                        organization: null,
+                        telephone: null,
+                    })
+                )
+            })
+
+    };
+
 
 	const handleEditClick = (event, item) => {
 		event.preventDefault();
