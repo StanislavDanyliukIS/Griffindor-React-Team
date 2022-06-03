@@ -13,7 +13,7 @@ import { useUserData } from "../../hook/useUserData";
 
 import ThemeSwitch from "./components/ThemeSwitch";
 
-import { addUserData, clearUserData } from "../../store/userDataSlicer";
+import { addUserData, clearUserData } from "../../store/userDataSlice";
 import { logOut, logIn } from "../../store/authSlice";
 import { logined, unlogined } from "../../store/statusSlicer";
 
