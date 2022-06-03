@@ -20,13 +20,13 @@ import {
     deleteDoc,
     setDoc,
 } from "firebase/firestore";
-import {db, app} from "../../../../firebase";
-
-
+import {db, app, auth} from "../../../../firebase";
 
 import {createUser, updateUser, deleteUser} from "../../../../store/crudSlice";
 import {useDispatch} from "react-redux";
-import {createUserWithEmailAndPassword, getAuth} from "firebase/auth";
+import {createUserWithEmailAndPassword, getAuth, signOut} from "firebase/auth";
+import {logOut} from "../../../../store/authSlice";
+import {clearUserData} from "../../../../store/userDataSlicer";
 
 const MembersManagement = () => {
     const auth = getAuth();
@@ -119,11 +119,18 @@ const MembersManagement = () => {
                     birthday: user.birthday,
                     organization: user.organization,
                     telephone: user.telephone,
-                });
+                })
             })
             .catch((error) => {
                 console.error(error);
             });
+
+        signOut(auth)
+            .then(() => {
+                dispatch(logOut());
+                dispatch(clearUserData());
+                localStorage.clear();
+            })
     };
 
     const handleEditFormSubmit = (event) => {
