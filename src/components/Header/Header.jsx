@@ -1,28 +1,30 @@
-import { useEffect } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router";
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router';
 
-import { signOut, onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../../firebase";
+import { signOut, onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '../../firebase';
+
+import { useUserData } from '../../hook/useUserData';
+
+import ThemeSwitch from './components/ThemeSwitch';
+
+import { addUserData, clearUserData } from '../../store/userDataSlice';
+import { logOut, logIn } from '../../store/authSlice';
+import { logined, unlogined } from '../../store/statusSlicer';
 
 
-import { useUserData } from "../../hook/useUserData";
+import logo_white from './../../imgs/logo_white.png';
+import logo_black from './../../imgs/logo_black.png';
 
-import ThemeSwitch from "./components/ThemeSwitch";
 
-import { addUserData, clearUserData } from "../../store/userDataSlice";
-import { logOut, logIn } from "../../store/authSlice";
-import { logined, unlogined } from "../../store/statusSlicer";
-
-import logo_white from "./../../imgs/logo_white.png";
-import logo_black from "./../../imgs/logo_black.png";
-
-import "./Header.scss";
+import './Header.scss';
 
 const Header = () => {
+
   const navigate = useNavigate();
 
   const moveToProfile = () => navigate("profile");
@@ -224,6 +226,7 @@ const Header = () => {
       </div>
     </>
   );
+
 };
 
 export default Header;

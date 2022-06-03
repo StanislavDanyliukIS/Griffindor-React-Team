@@ -1,9 +1,11 @@
-import './Modal.scss';
+import './ModalEvent.scss';
 
-export const Modal = ({
+export const ModalEvent = ({
 	setModalOpen,
+	setFormData,
 	handleAddFormSubmit,
 	handleAddFormChange,
+	initValueForNewEvent,
 }) => {
 	return (
 		<div className='modalBackground'>
@@ -12,6 +14,7 @@ export const Modal = ({
 					<button
 						onClick={() => {
 							setModalOpen(false);
+							setFormData(initValueForNewEvent);
 						}}
 					>
 						<svg
@@ -39,44 +42,17 @@ export const Modal = ({
 
 					<input
 						className='form-control user-form'
-						type='email'
-						name='email'
-						required='required'
-						placeholder='Email'
-						onChange={handleAddFormChange}
-					/>
-
-					<input
-						className='form-control user-form'
-						type='text'
-						name='telephone'
-						required='required'
-						placeholder='Telephone'
-						onChange={handleAddFormChange}
-					/>
-
-					<input
-						className='form-control user-form'
-						type='text'
-						name='organization'
-						required='required'
-						placeholder='Company'
-						onChange={handleAddFormChange}
-					/>
-
-					<input
-						className='form-control user-form'
 						type='number'
-						name='score'
+						name='points'
 						required='required'
-						placeholder='Score'
+						placeholder='Points'
 						onChange={handleAddFormChange}
 					/>
 
 					<input
 						className='form-control user-form'
 						type='date'
-						name='birthday'
+						name='date'
 						required='required'
 						placeholder='Date of birth'
 						onChange={handleAddFormChange}
@@ -87,6 +63,7 @@ export const Modal = ({
 						className='btn btn-danger footer-btn'
 						onClick={() => {
 							setModalOpen(false);
+							setFormData(initValueForNewEvent);
 						}}
 					>
 						Cancel
