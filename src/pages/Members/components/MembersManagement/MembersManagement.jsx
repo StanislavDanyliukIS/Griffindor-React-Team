@@ -14,7 +14,6 @@ import {
     onSnapshot,
     query,
     where,
-    addDoc,
     updateDoc,
     doc,
     getDoc,
@@ -58,14 +57,11 @@ const MembersManagement = () => {
 		return () => membersList();
 	}, []);
 
-	const handleAddFormChange = event => {
-		event.preventDefault();
-
-
-
     const handleAddFormChange = (event) => {
         event.preventDefault();
 
+		const fieldName = event.target.getAttribute('name');
+		const fieldValue = event.target.value;
 
 		const newFormData = { ...addFormData };
 		newFormData[fieldName] = fieldValue;
@@ -73,71 +69,10 @@ const MembersManagement = () => {
 		setAddFormData(newFormData);
 	};
 
-	const handleAddFormSubmit = event => {
-		createUserWithEmailAndPassword(auth, addFormData.email, password)
-			.then(userCredential => {
-				// Signed in
-				dispatch(
-					createUser({
-						email: userCredential.user.email,
-						id: userCredential.user.uid,
-						token: userCredential.user.accessToken,
-					})
-				);
-				return {
-					email: userCredential.user.email,
-					id: userCredential.user.uid,
-					token: userCredential.user.accessToken,
-				};
-			})
-			.then(data => {
-				dispatch(
-					createUser({
-						name: addFormData.name,
-						role: 'user',
-						score: addFormData.score,
-						birthday: addFormData.birthday,
-						organization: addFormData.organization,
-						telephone: addFormData.telephone,
-					})
-				);
-				return {
-					id: data.id,
-					email: data.email,
-					name: addFormData.name,
-					role: 'user',
-					score: addFormData.score,
-					birthday: addFormData.birthday,
-					organization: addFormData.organization,
-					telephone: addFormData.telephone,
-				};
-			})
-			.then(user => {
-				addDoc(collection(db, 'users'), {
-					uid: user.id,
-					email: user.email,
-					name: user.name,
-					role: user.role,
-					score: user.score,
-					birthday: user.birthday,
-					organization: user.organization,
-					telephone: user.telephone,
-				});
-				console.log(documentId());
-			})
-			.catch(error => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				// ..
-			});
-	};
-
-
     const handleAddFormSubmit = (event) => {
         event.preventDefault();
         createUserWithEmailAndPassword( auth, addFormData.email, password)
             .then((userCredential) => {
-                // Signed in
                 dispatch(
                     createUser({
                         email: userCredential.user.email,
