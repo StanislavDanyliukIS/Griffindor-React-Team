@@ -5,7 +5,7 @@ export const ModalEvent = ({
 	setFormData,
 	handleAddFormSubmit,
 	handleAddFormChange,
-	initValueForNewEvent,
+	initValue,
 }) => {
 	return (
 		<div className='modalBackground'>
@@ -14,7 +14,7 @@ export const ModalEvent = ({
 					<button
 						onClick={() => {
 							setModalOpen(false);
-							setFormData(initValueForNewEvent);
+							setFormData(initValue);
 						}}
 					>
 						<svg
@@ -43,7 +43,7 @@ export const ModalEvent = ({
 					<input
 						className='form-control user-form'
 						type='number'
-						name='points'
+						name='score'
 						required='required'
 						placeholder='Points'
 						onChange={handleAddFormChange}
@@ -63,7 +63,7 @@ export const ModalEvent = ({
 						className='btn btn-danger footer-btn'
 						onClick={() => {
 							setModalOpen(false);
-							setFormData(initValueForNewEvent);
+							setFormData(initValue);
 						}}
 					>
 						Cancel
