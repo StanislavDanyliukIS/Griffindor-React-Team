@@ -10,7 +10,7 @@ const Event = () => {
 	const [event, setEvent] = useState({
 		date: '',
 		name: '',
-		points: '',
+		score: '',
 		participants: [],
 	});
 	const eventsData = useSelector(state => state.events.eventsData);

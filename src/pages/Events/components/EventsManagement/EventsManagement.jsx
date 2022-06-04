@@ -1,8 +1,14 @@
 import { useSorting } from '../../../../hook/useSorting';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { db } from '../../../../firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import {
+	collection,
+	addDoc,
+	query,
+	onSnapshot,
+	where,
+} from 'firebase/firestore';
 
 import { getClassNames } from '../../../../functions/getClassNames';
 
@@ -16,14 +22,14 @@ const EventsManagement = () => {
 	const eventsData = useSelector(state => state.events.eventsData);
 	const { items, requestSort, sorting } = useSorting(eventsData);
 
-	const initValueForNewEvent = {
+	const [initValue, setInitValue] = useState({
 		date: '',
 		name: '',
-		points: '',
+		score: '',
 		participants: [],
-	};
+	});
 	const [modalOpen, setModalOpen] = useState(false);
-	const [formData, setFormData] = useState(initValueForNewEvent);
+	const [formData, setFormData] = useState(initValue);
 
 	const handleAddFormChange = e => {
 		e.preventDefault();
@@ -38,17 +44,37 @@ const EventsManagement = () => {
 	};
 	const handleAddFormSubmit = async e => {
 		e.preventDefault();
-		if (JSON.stringify(initValueForNewEvent) !== JSON.stringify(formData)) {
+		if (JSON.stringify(initValue) !== JSON.stringify(formData)) {
 			await addDoc(collection(db, 'events'), {
 				date: formData.date,
 				name: formData.name,
 				participants: formData.participants,
-				score: formData.points,
+				score: formData.score,
 			});
 		}
 		setModalOpen(false);
-		setFormData(initValueForNewEvent);
+		setFormData(initValue);
 	};
+
+	useEffect(() => {
+		const q = query(collection(db, 'users'), where('role', '==', 'user'));
+
+		onSnapshot(q, querySnapshot => {
+			const participantsArray = [];
+
+			querySnapshot.forEach(doc => {
+				participantsArray.push({
+					id: doc.id,
+					user: doc.data().name,
+					attended: true,
+					extrapoints: null,
+					comment: '',
+				});
+			});
+			setInitValue(prev => ({ ...prev, participants: participantsArray }));
+		});
+	}, []);
+
 	return (
 		<main>
 			<div className={'container-xl'}>
@@ -59,6 +85,7 @@ const EventsManagement = () => {
 				className='btn btn-outline-secondary btn-table-create'
 				onClick={() => {
 					setModalOpen(true);
+					setFormData(initValue);
 				}}
 			>
 				Create a new Event
@@ -69,7 +96,7 @@ const EventsManagement = () => {
 					setFormData={setFormData}
 					handleAddFormChange={handleAddFormChange}
 					handleAddFormSubmit={handleAddFormSubmit}
-					initValueForNewEvent={initValueForNewEvent}
+					initValue={initValue}
 				/>
 			)}
 			<div className={'container-xl'}>

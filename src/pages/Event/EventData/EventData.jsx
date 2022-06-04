@@ -7,7 +7,7 @@ const EventData = ({ event }) => {
 	const { items, requestSort, sorting } = useSorting(event.participants);
 	const [extrapoints, setExtrapoints] = useState(null);
 	const [comment, setComments] = useState('');
-	console.log(event);
+
 	const handleEditPoints = () => {};
 	const handleEditComment = () => {};
 	return (
