@@ -1,21 +1,30 @@
 .profile-page {
-	display: flex;
-	flex-direction: column;
-	padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
 }
 .profil-title {
-	margin-bottom: 30px;
+  margin-bottom: 30px;
+}
+.image-container {
+  max-width: 40%;
 }
 .profile-photo {
-	padding-left: 40px;
+  border-radius: 50%;
+  height: 300px;
 }
 .card {
-	min-height: 66vh;
-	background-color: var(--primary);
+  min-height: 66vh;
+  background-color: var(--primary);
 }
 .list-unstyled {
-	margin-top: 15px;
+  margin-top: 15px;
 }
 .edit-btn {
-	min-width: 200px;
+  min-width: 200px;
+}
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

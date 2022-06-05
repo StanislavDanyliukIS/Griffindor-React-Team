@@ -1,0 +1,14 @@
+.change-photo-form,
+.image-change-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.image-change-container {
+  max-width: 40%;
+}
+.change-photo {
+  height: 220px;
+}
