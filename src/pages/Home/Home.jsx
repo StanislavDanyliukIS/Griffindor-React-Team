@@ -1,7 +1,7 @@
 import './Home.scss';
 import Scorers from "./components/Scorers/Scorers";
 import SoonEvents from "./components/SoonEvents/SoonEvents";
-import Rating from "./components/Rating/Rating";
+import Carrousel from "./components/Carrousel/Carrousel";
 
 const Home = () => {
 	return (
@@ -14,7 +14,7 @@ const Home = () => {
 				<div className={"container-xl pt-3"}>
 					<div className={"row w-100"}>
 						<SoonEvents/>
-						<Rating/>
+						<Carrousel/>
 					</div>
 				</div>
 			</div>
