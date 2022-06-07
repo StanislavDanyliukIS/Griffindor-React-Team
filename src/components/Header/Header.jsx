@@ -1,30 +1,27 @@
-import { useEffect } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router';
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router";
 
-import { signOut, onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
-import { auth, db } from '../../firebase';
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase";
 
-import { useUserData } from '../../hook/useUserData';
+import { useUserData } from "../../hook/useUserData";
 
-import ThemeSwitch from './components/ThemeSwitch';
+import ThemeSwitch from "./components/ThemeSwitch";
 
-import { addUserData, clearUserData } from '../../store/userDataSlice';
-import { logOut, logIn } from '../../store/authSlice';
-import { logined, unlogined } from '../../store/statusSlicer';
+import { addUserData, clearUserData } from "../../store/userDataSlice";
+import { logOut, logIn } from "../../store/authSlice";
+import { logined, unlogined } from "../../store/statusSlicer";
 
+import logo_white from "./../../imgs/logo_white.png";
+import logo_black from "./../../imgs/logo_black.png";
 
-import logo_white from './../../imgs/logo_white.png';
-import logo_black from './../../imgs/logo_black.png';
-
-
-import './Header.scss';
+import "./Header.scss";
 
 const Header = () => {
-
   const navigate = useNavigate();
 
   const moveToProfile = () => navigate("profile");
@@ -35,6 +32,7 @@ const Header = () => {
   const { name } = useUserData();
   const role = localStorage.getItem("role");
   const theme = useSelector((state) => state.theme);
+  const { userImageUrl } = useUserData();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -53,7 +51,6 @@ const Header = () => {
       }
     });
   }, []);
-
   const logout = () => {
     signOut(auth)
       .then(() => {
@@ -116,19 +113,30 @@ const Header = () => {
                   </li>
                 </ul>
                 <div className={"header__user_img pe-md-1"}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="40"
-                    fill="currentColor"
-                    className="bi bi-person-circle"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                    <path
-                      fillRule="evenodd"
-                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+                  {userImageUrl ? (
+                    <img
+                      src={userImageUrl}
+                      alt="..."
+                      width="40"
+                      fill="currentColor"
+                      className="user-image"
+                      viewBox="0 0 16 16"
                     />
-                  </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="40"
+                      fill="currentColor"
+                      className="bi bi-person-circle"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                      <path
+                        fillRule="evenodd"
+                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+                      />
+                    </svg>
+                  )}
                 </div>
                 <div className={"header__user_info d-xl-block ps-2"}>
                   <div className={"header__user_name"}>{name}</div>
@@ -226,7 +234,6 @@ const Header = () => {
       </div>
     </>
   );
-
 };
 
 export default Header;
