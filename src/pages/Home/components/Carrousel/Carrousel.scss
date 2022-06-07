@@ -1,0 +1,48 @@
+.carrousel{
+  &-container{
+    height: 31vh;
+    min-width: 40vw;
+    max-width: 40vw;
+    overflow: hidden;
+  }
+  &_box{
+    height: 89%;
+  }
+  &-navlink{
+    text-decoration: none;
+  }
+}
+.left-arrow{
+  width: 3vw;
+  height: 97.5%;
+  padding-top: 14vh;
+  margin-right: -3vw;
+  color: #626976;
+  z-index: 10;
+  text-align: center;
+  opacity: 0.2 ;
+  background: lightgrey;
+  transition: 0.1s;
+  cursor: pointer;
+  &:hover{
+    transition: 0.1s;
+    opacity: 0.4 ;
+  }
+}
+.right-arrow{
+  cursor: pointer;
+  width: 3vw;
+  height: 97.5%;
+  padding-top: 14vh;
+  margin-left: -3vw;
+  color: #626976;
+  z-index: 10;
+  opacity: 0.2 ;
+  text-align: center;
+  background: lightgrey;
+  transition: 0.1s;
+  &:hover{
+    transition: 0.1s;
+    opacity: 0.4 ;
+  }
+}
