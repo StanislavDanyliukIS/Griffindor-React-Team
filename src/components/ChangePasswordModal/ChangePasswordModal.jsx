@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
-import { getAuth, updatePassword } from "firebase/auth";
+import { doc, updateDoc } from "firebase/firestore";
+import { getAuth, updatePassword, signOut } from "firebase/auth";
+import { db } from "../../firebase";
+
+import { useUserData } from "../../hook/useUserData";
+import { useAuth } from "../../hook/useAuth";
+
+import { logOut } from "../../store/authSlice";
+import { clearUserData } from "../../store/userDataSlice";
 
 import "./ChangePasswordModal.scss";
+import { useDispatch } from "react-redux";
 
 const ChangePasswordModal = () => {
   const [passwordObj, setPasswordObj] = useState({
@@ -10,28 +20,57 @@ const ChangePasswordModal = () => {
     newPassword_1: "",
     newPassword_2: "",
   });
-  const [password, setNewPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [worning, setWorning] = useState("text-hiden");
 
-  const createNewPassword = () =>
-    passwordObj.newPassword_1 === passwordObj.newPassword_2
-      ? setNewPassword(passwordObj.newPassword_1)
-      : setNewPassword(false);
+  const dispatch = useDispatch();
+
+  const { password } = useUserData();
+  const { uid } = useAuth();
+
+  useEffect(() => createNewPassword(), [passwordObj]);
 
   const handleChange = (e) => {
     setPasswordObj({ ...passwordObj, [e.target.name]: e.target.value });
   };
 
+  const navigate = useNavigate();
+
+  const moveToprofile = () => {
+    navigate(-1);
+  };
+
+  const createNewPassword = () => {
+    passwordObj.newPassword_1 === passwordObj.newPassword_2
+      ? setNewPassword(passwordObj.newPassword_1)
+      : setNewPassword(false);
+  };
+
   const changePassword = () => {
+    if (passwordObj.currentPassword !== password) {
+      throw new Error("Incorrect password!");
+    }
     const auth = getAuth();
     const user = auth.currentUser;
-    console.log(password);
-    updatePassword(user, password)
+
+    updatePassword(user, newPassword)
+      .then(() =>
+        updateDoc(doc(db, "users", uid), {
+          password: newPassword,
+        })
+      )
       .then(() => {
-        console.log(user);
+        signOut(auth)
+          .then(() => {
+            dispatch(logOut());
+            dispatch(clearUserData());
+            localStorage.clear();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
-        console.log(user);
         console.log(error);
       });
   };
@@ -117,7 +156,11 @@ const ChangePasswordModal = () => {
           >
             Submit
           </button>
-          <button type="button" className="btn btn-outline-dark">
+          <button
+            type="button"
+            className="btn btn-outline-dark"
+            onClick={moveToprofile}
+          >
             Cancel
           </button>
         </div>
