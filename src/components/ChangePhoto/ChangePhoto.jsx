@@ -1,44 +1,55 @@
 import React, { useEffect, useState } from "react";
-import { doc, updateDoc } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
+import {
+  getDownloadURL,
+  ref,
+  uploadBytes,
+  deleteObject,
+} from "firebase/storage";
 import { db, storage } from "../../firebase";
 import { useNavigate } from "react-router";
 
 import { useAuth } from "../../hook/useAuth";
 import { useUserData } from "../../hook/useUserData";
+import { useDispatch } from "react-redux";
+
+import { addUserData } from "../../store/userDataSlice";
 
 import "./ChangePhoto.scss";
 
 const ChangePhoto = () => {
-  const [photoUser, setPhoto] = useState({});
+  const [photoUser, setPhoto] = useState();
   const [image, setImage] = useState("");
+
+  const dispatch = useDispatch();
 
   const { uid } = useAuth();
   const { photo, userImageUrl } = useUserData();
   const navigate = useNavigate();
 
-  const userImage = userImageUrl
-    ? userImageUrl
-    : "https://bootdey.com/img/Content/avatar/avatar7.png";
-
-  useEffect(() => setPhoto({ name: photo }), [photo]);
+  useEffect(() => {
+    setImage(userImageUrl);
+  }, [userImageUrl]);
 
   const loadData = (e) => {
     e.preventDefault();
     const file = photoUser;
     const storageRef = ref(storage, `photos/${file.name}`);
     uploadBytes(storageRef, file)
-      .then((resp) => console.log("Uploaded file ", image, " ", resp))
+      .then(() => {
+        const desertRef = ref(storage, `photos/${photo}`);
+
+        deleteObject(desertRef).catch((error) => {
+          console.log(error);
+        });
+      })
       .then(() =>
         updateDoc(doc(db, "users", uid), {
           photo: photoUser.name,
         })
       )
       .then(() => setPhoto({ name: photo }))
-      .then(() => getData())
-      .then(() => {
-        navigate(-1);
-      });
+      .then(() => getData());
   };
 
   const getData = () => {
@@ -47,8 +58,14 @@ const ChangePhoto = () => {
         setImage(url);
         updateDoc(doc(db, "users", uid), {
           userImageUrl: url,
+        }).then((data) => {
+          const docRef = doc(db, `users`, uid);
+          getDoc(docRef).then((resp) => dispatch(addUserData(resp.data())));
+          return data;
         });
-        console.log("Uploadet image to: ", url);
+      })
+      .then(() => {
+        navigate(-1);
       })
       .catch((error) => {
         console.log(error);
@@ -57,7 +74,7 @@ const ChangePhoto = () => {
 
   return (
     <div className="image-change-container col-lg-6 mb-4 mb-lg-0">
-      <img className="change-photo" src={userImage} alt="..." />
+      <img className="change-photo" src={image} alt="..." />
       <form className="change-photo-form form-group mb-3 row" action="">
         <input
           type="file"
@@ -66,7 +83,12 @@ const ChangePhoto = () => {
             setPhoto(e.target.files[0]);
           }}
         />
-        <button type="submit" className="btn btn-primary" onClick={loadData}>
+        <button
+          type="submit"
+          className="btn btn-primary"
+          onClick={loadData}
+          disabled={photoUser ? false : true}
+        >
           Submit
         </button>
       </form>
