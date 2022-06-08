@@ -4,8 +4,10 @@
 	padding: 20px;
 }
 
+.table-container {
+	flex-direction: column;
+}
 .event-table {
-	margin-top: 6%;
 	margin-left: auto;
 	margin-right: auto;
 }
