@@ -26,7 +26,6 @@ const Profile = () => {
 
   useEffect(() => {
     setPhoto(userImageUrl);
-    console.log(userImageUrl);
   }, [userImageUrl]);
 
   return (
