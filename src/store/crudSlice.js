@@ -10,6 +10,9 @@ const initialState = {
     birthday: null,
     organization: null,
     telephone: null,
+    userImageUrl: null,
+    photo: null,
+    password: null,
 }
 
 const crudSlice = createSlice({
@@ -26,6 +29,9 @@ const crudSlice = createSlice({
             state.birthday = action.payload.birthday;
             state.organization = action.payload.organization;
             state.telephone = action.payload.telephone;
+            state.userImageUrl = action.payload.userImageUrl;
+            state.photo = action.payload.photo;
+            state.password = action.payload.password;
         },
         updateUser(state, action){
             state.name = action.payload.name;
@@ -33,6 +39,9 @@ const crudSlice = createSlice({
             state.birthday = action.payload.birthday;
             state.organization = action.payload.organization;
             state.telephone = action.payload.telephone;
+            state.userImageUrl = action.payload.userImageUrl;
+            state.photo = action.payload.photo;
+            state.password = action.payload.password;
         },
         deleteUser(state, action){
             state.email= null;
@@ -44,6 +53,9 @@ const crudSlice = createSlice({
             state.birthday= null;
             state.organization= null;
             state.telephone= null;
+            state.userImageUrl= null;
+            state.photo= null;
+            state.password= null;
         }
     }
 })
