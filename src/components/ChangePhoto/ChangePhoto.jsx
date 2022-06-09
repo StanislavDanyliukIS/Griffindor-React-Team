@@ -20,12 +20,14 @@ import "./ChangePhoto.scss";
 const ChangePhoto = () => {
   const [photoUser, setPhoto] = useState();
   const [image, setImage] = useState("");
+  const [imagePreviwe, setImagePreviwe] = useState();
 
   const dispatch = useDispatch();
 
   const { uid } = useAuth();
   const { photo, userImageUrl } = useUserData();
   const navigate = useNavigate();
+
 
   useEffect(() => {
     setImage(userImageUrl);
@@ -38,7 +40,6 @@ const ChangePhoto = () => {
     uploadBytes(storageRef, file)
       .then(() => {
         const desertRef = ref(storage, `photos/${photo}`);
-
         deleteObject(desertRef).catch((error) => {
           console.log(error);
         });
@@ -72,15 +73,23 @@ const ChangePhoto = () => {
       });
   };
 
+  const userImage = image
+    ? image
+    : "https://bootdey.com/img/Content/avatar/avatar7.png";
+
+  const showImage = imagePreviwe ? imagePreviwe : userImage;
+
   return (
     <div className="image-change-container col-lg-6 mb-4 mb-lg-0">
-      <img className="change-photo" src={image} alt="..." />
+      <img className="change-photo" src={showImage} alt="..." />
+
       <form className="change-photo-form form-group mb-3 row" action="">
         <input
           type="file"
           className="form-control form-control-sm"
           onChange={(e) => {
             setPhoto(e.target.files[0]);
+            setImagePreviwe(URL.createObjectURL(e.target.files[0]));
           }}
         />
         <button

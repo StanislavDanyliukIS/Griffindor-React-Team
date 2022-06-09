@@ -7,8 +7,18 @@
   gap: 20px;
 }
 .image-change-container {
-  max-width: 40%;
+  width: 40%;
+  @media screen and (max-width: 700px) {
+    width: 100%;
+  }
 }
 .change-photo {
-  height: 220px;
+  height: 300px;
+  margin-top: 16px;
+}
+.change-photo-form {
+  margin-top: 24px;
+  @media screen and (max-width: 700px) {
+    width: 100%;
+  }
 }

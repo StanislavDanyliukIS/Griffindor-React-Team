@@ -22,6 +22,8 @@ const ChangePasswordModal = () => {
   });
   const [newPassword, setNewPassword] = useState("");
   const [worning, setWorning] = useState("text-hiden");
+  const [passwordLength, setPasswordLength] = useState("text-hiden");
+  const [passwordCheck, setPasswordCheck] = useState("text-hiden");
 
   const dispatch = useDispatch();
 
@@ -41,15 +43,36 @@ const ChangePasswordModal = () => {
   };
 
   const createNewPassword = () => {
-    passwordObj.newPassword_1 === passwordObj.newPassword_2
+    passwordObj.newPassword_1 === passwordObj.newPassword_2 &&
+    passwordObj.currentPassword === password
       ? setNewPassword(passwordObj.newPassword_1)
       : setNewPassword(false);
   };
 
+  const checkCurrentPassword = () => {
+    setPasswordCheck(
+      passwordObj.currentPassword === password ? "text-hiden" : "text-danger"
+    );
+  };
+
+  const checkPasswordLength = () => {
+    setPasswordLength(
+      passwordObj.newPassword_1.length >= 6 ||
+        passwordObj.newPassword_1.length === 0
+        ? "text-hiden"
+        : "text-danger"
+    );
+  };
+
   const changePassword = () => {
-    if (passwordObj.currentPassword !== password) {
+    if (
+      passwordObj.currentPassword !== password ||
+      passwordObj.newPassword_1.length < 6 ||
+      newPassword === false
+    ) {
       throw new Error("Incorrect password!");
     }
+
     const auth = getAuth();
     const user = auth.currentUser;
 
@@ -77,7 +100,8 @@ const ChangePasswordModal = () => {
 
   const passwordNotMatch = () => {
     setWorning(
-      passwordObj.newPassword_1 === passwordObj.newPassword_2
+      passwordObj.newPassword_1 === passwordObj.newPassword_2 ||
+        passwordObj.newPassword_2.length === 0
         ? "text-hiden"
         : "text-danger"
     );
@@ -85,9 +109,9 @@ const ChangePasswordModal = () => {
 
   return (
     <div className="changepassword-field card-body">
-      <form>
-        <div className="form-group mb-3 row">
-          <label className="form-label col-3 col-form-label">
+      <form className="change-password-form">
+        <div className="password-input form-group mb-3 row current-password-input">
+          <label className="password-label form-label col-3 col-form-label">
             Current Password
           </label>
           <div className="col">
@@ -100,29 +124,34 @@ const ChangePasswordModal = () => {
               onChange={handleChange}
             />
             <small className="form-hint">Enter your current password.</small>
+            <span className={passwordCheck}>Incorrect curent password.</span>
           </div>
         </div>
-        <div className="form-group mb-3 row">
-          <label className="form-label col-3 col-form-label">
+        <div className="password-input  form-group mb-3 row">
+          <label className="password-label form-label col-3 col-form-label">
             New Password
           </label>
           <div className="col">
             <input
               type="password"
-              className="form-control"
+              className={`form-control`}
               placeholder="Password"
               name="newPassword_1"
               value={passwordObj.newPassword_1}
               onChange={handleChange}
+              onBlur={checkPasswordLength}
             />
             <small className="form-hint">
               Enter your new password, your password must be 6-20 characters
               long.
             </small>
+            <span className={passwordLength}>
+              Password should contain at least 6 characters.
+            </span>
           </div>
         </div>
-        <div className="form-group mb-3 row">
-          <label className="form-label col-3 col-form-label">
+        <div className="password-input form-group mb-3 row">
+          <label className="password-label form-label col-3 col-form-label">
             New Password
           </label>
           <div className="col">
@@ -143,9 +172,10 @@ const ChangePasswordModal = () => {
         <div className="form-footer">
           <button
             type="submit"
-            className="btn btn-primary"
+            className="password-btn btn btn-primary"
             onClick={(e) => {
               e.preventDefault();
+              checkCurrentPassword();
               changePassword();
               setPasswordObj({
                 currentPassword: "",
@@ -158,7 +188,7 @@ const ChangePasswordModal = () => {
           </button>
           <button
             type="button"
-            className="btn btn-outline-dark"
+            className="password-btn btn btn-outline-dark"
             onClick={moveToprofile}
           >
             Cancel
