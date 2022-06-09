@@ -28,6 +28,10 @@ const Profile = () => {
     setPhoto(userImageUrl);
   }, [userImageUrl]);
 
+  const userImage = photo
+    ? photo
+    : "https://bootdey.com/img/Content/avatar/avatar7.png";
+
   return (
     <div className="profile-page ">
       <div className="container-xl">
@@ -37,9 +41,9 @@ const Profile = () => {
         <div className="profile-field col-lg-12 mb-4 mb-sm-5">
           <div className="card card-style1 border-0">
             <div className="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
-              <div className="row align-items-center">
+              <div className="container-content row align-items-center">
                 <div className="image-container col-lg-6 mb-4 mb-lg-0">
-                  <img className="profile-photo" src={photo} alt="..." />
+                  <img className="profile-photo" src={userImage} alt="..." />
                 </div>
 
                 <div className="info-container col-lg-6 px-xl-10">
@@ -91,7 +95,7 @@ const Profile = () => {
                     </li>
                   </ul>
                   <button
-                    className="btn btn-primary d-sm-inline-block edit-btn"
+                    className="edit-btn btn btn-primary d-sm-inline-block edit-btn"
                     onClick={moveToEdit}
                   >
                     Edit

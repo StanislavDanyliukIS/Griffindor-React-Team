@@ -7,10 +7,20 @@
   margin-bottom: 30px;
 }
 .image-container {
-  max-width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 }
 .profile-photo {
   height: 300px;
+  @media screen and (max-width: 600px) {
+    width: 250px;
+    height: 250px;
+  }
 }
 .card {
   min-height: 66vh;
@@ -22,8 +32,16 @@
 .edit-btn {
   min-width: 200px;
 }
-.image-container {
+
+.info-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  @media screen and (max-width: 600px) {
+    align-items: center;
+  }
 }
+.edit-btn {
+  max-width: 200px;
+}
+
