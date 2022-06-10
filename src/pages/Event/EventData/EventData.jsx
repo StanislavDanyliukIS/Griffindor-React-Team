@@ -1,13 +1,4 @@
-import {
-	arrayUnion,
-	collection,
-	doc,
-	getDoc,
-	onSnapshot,
-	query,
-	setDoc,
-	updateDoc,
-} from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { db } from '../../../firebase';
@@ -21,7 +12,6 @@ const EventData = ({ event }) => {
 	const [editUser, setEditUser] = useState('');
 	const [editUserData, setEditUserData] = useState('');
 	const [participantsData, setParticipantsData] = useState([]);
-
 
 	useEffect(() => {
 		setParticipantsData(event.participants);
@@ -53,7 +43,6 @@ const EventData = ({ event }) => {
 		newFormData.attended = checked;
 		setEditUserData(newFormData);
 	};
-	// console.log(eventData);
 
 	const handleEditFormSubmit = e => {
 		e.preventDefault();
@@ -70,7 +59,6 @@ const EventData = ({ event }) => {
 		updateDoc(eventRef, {
 			participants: partData,
 		});
-		console.log(partData);
 		setEditUser(null);
 	};
 	return (
@@ -106,7 +94,7 @@ const EventData = ({ event }) => {
 						>
 							Attended the event
 						</th>
-						<th scope='col' className={"theme"}></th>
+						<th scope='col' className={'theme'}></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -138,7 +126,7 @@ const EventData = ({ event }) => {
 									</td>
 									<td>
 										<input
-											className='form-check-input check theme'
+											className='form-check-input '
 											type='checkbox'
 											id='flexCheckChecked'
 											onChange={handleEditCheckChange}
@@ -190,10 +178,10 @@ const EventData = ({ event }) => {
 								</tr>
 							) : (
 								<tr key={item.id}>
-									<td className={"theme"}>{item.user}</td>
-									<td className={"theme"}>{item.extrapoints}</td>
-									<td className={"theme"}>{item.comment}</td>
-									<td className={"theme"}>
+									<td className={'theme'}>{item.user}</td>
+									<td className={'theme'}>{item.extrapoints}</td>
+									<td className={'theme'}>{item.comment}</td>
+									<td className={'theme'}>
 										<input
 											className='form-check-input check '
 											type='checkbox'
