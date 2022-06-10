@@ -67,7 +67,7 @@ const EventsManagement = () => {
 					id: doc.id,
 					user: doc.data().name,
 					attended: true,
-					extrapoints: null,
+					extrapoints: '',
 					comment: '',
 				});
 			});

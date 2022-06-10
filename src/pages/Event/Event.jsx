@@ -18,9 +18,9 @@ const Event = () => {
 	useEffect(() => {
 		const findEvent = eventsData.find(items => items.id === id);
 		setEvent(findEvent);
-	}, []);
+	});
 
-	return event !== null ? (
+	return event ? (
 		<div className='container'>
 			<div className={'container-xl'}>
 				<h3 className={'page-name pt-2'}> {`${event.name} event`} </h3>
