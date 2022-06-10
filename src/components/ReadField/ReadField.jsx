@@ -2,16 +2,16 @@ import './ReadField.scss';
 
 export const ReadField = ({ handleEditClick, handleDeleteClick, item }) => {
 	return (
-		<tr className='table-light'>
-			<th scope='row' className='table-subtitle table-text-content'>
+		<tr className={"theme bg-theme"}>
+			<th scope='row' className='table-subtitle table-text-content theme'>
 				{item.name}
 			</th>
-			<td className='table-text-content'>{item.email}</td>
-			<td className='table-text-content'>{item.telephone}</td>
-			<td className='table-text-content'>{item.organization}</td>
-			<td className='table-text-content'>{item.score}</td>
-			<td className='table-row-birth table-text-content'>{item.birthday}</td>
-			<td className='table-btn table-text-content'>
+			<td className='table-text-content theme'>{item.email}</td>
+			<td className='table-text-content theme'>{item.telephone}</td>
+			<td className='table-text-content theme'>{item.organization}</td>
+			<td className='table-text-content theme'>{item.score}</td>
+			<td className='table-row-birth table-text-content theme'>{item.birthday}</td>
+			<td className='table-btn table-text-content theme'>
 				<button
 					onClick={event => handleEditClick(event, item)}
 					type='button'
@@ -33,7 +33,7 @@ export const ReadField = ({ handleEditClick, handleDeleteClick, item }) => {
 					</svg>
 				</button>
 			</td>
-			<td className='table-btn'>
+			<td className='table-btn theme'>
 				<button
 					onClick={() => handleDeleteClick(item.id)}
 					type='button'

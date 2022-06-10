@@ -100,27 +100,27 @@ const EventsManagement = () => {
 				/>
 			)}
 			<div className={'container-xl'}>
-				<table className='table table-hover'>
+				<table className='table  theme'>
 					<thead>
 						<tr>
 							<th
 								scope='col'
 								onClick={() => requestSort('name')}
-								className={getClassNames('name', sorting)}
+								className={`${getClassNames('name', sorting)} theme w-25`}
 							>
 								Name
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('date')}
-								className={getClassNames('date', sorting)}
+								className={`${getClassNames('date', sorting)} theme w-25`}
 							>
 								Date
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('score')}
-								className={getClassNames('score', sorting)}
+								className={`${getClassNames('score', sorting)} theme w-50`}
 							>
 								Points for attending
 							</th>

@@ -22,6 +22,7 @@ const EventData = ({ event }) => {
 	const [editUserData, setEditUserData] = useState('');
 	const [participantsData, setParticipantsData] = useState([]);
 
+
 	useEffect(() => {
 		setParticipantsData(event.participants);
 	}, [event]);
@@ -74,38 +75,38 @@ const EventData = ({ event }) => {
 	};
 	return (
 		<div className='container-xl table-container'>
-			<table className='table table-hover event-table'>
+			<table className='table event-table'>
 				<thead>
 					<tr>
 						<th
 							scope='col'
 							onClick={() => requestSort('name')}
-							className={getClassNames('name', sorting)}
+							className={`${getClassNames('name', sorting)} w-20 theme`}
 						>
 							Users
 						</th>
 						<th
 							scope='col'
 							onClick={() => requestSort('score')}
-							className={getClassNames('score', sorting)}
+							className={`${getClassNames('score', sorting)} w-20 theme`}
 						>
 							Extra points
 						</th>
 						<th
 							scope='col'
 							onClick={() => requestSort('comment')}
-							className={getClassNames('comment', sorting)}
+							className={`${getClassNames('comment', sorting)}  w-25 theme`}
 						>
 							Comment
 						</th>
 						<th
 							scope='col'
 							onClick={() => requestSort('attended')}
-							className={getClassNames('attended', sorting)}
+							className={`${getClassNames('attended', sorting)} theme`}
 						>
 							Attended the event
 						</th>
-						<th scope='col'></th>
+						<th scope='col' className={"theme"}></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -116,7 +117,7 @@ const EventData = ({ event }) => {
 									<td>{item.user}</td>
 									<td>
 										<input
-											className='form-control user-form'
+											className='form-control user-form theme'
 											type='number'
 											name='extrapoints'
 											value={editUserData.extrapoints}
@@ -127,7 +128,7 @@ const EventData = ({ event }) => {
 									</td>
 									<td>
 										<input
-											className='form-control user-form'
+											className='form-control user-form theme'
 											type='text'
 											name='comment'
 											value={editUserData.comment}
@@ -137,7 +138,7 @@ const EventData = ({ event }) => {
 									</td>
 									<td>
 										<input
-											className='form-check-input check'
+											className='form-check-input check theme'
 											type='checkbox'
 											id='flexCheckChecked'
 											onChange={handleEditCheckChange}
@@ -146,7 +147,7 @@ const EventData = ({ event }) => {
 									</td>
 									<td>
 										<div
-											className='btn-group'
+											className='btn-group theme'
 											role='group'
 											aria-label='Basic mixed styles example'
 										>
@@ -189,23 +190,23 @@ const EventData = ({ event }) => {
 								</tr>
 							) : (
 								<tr key={item.id}>
-									<td>{item.user}</td>
-									<td>{item.extrapoints}</td>
-									<td>{item.comment}</td>
-									<td>
+									<td className={"theme"}>{item.user}</td>
+									<td className={"theme"}>{item.extrapoints}</td>
+									<td className={"theme"}>{item.comment}</td>
+									<td className={"theme"}>
 										<input
-											className='form-check-input check'
+											className='form-check-input check '
 											type='checkbox'
 											id='flexCheckChecked'
 											checked={item.attended}
 											disabled
 										/>
 									</td>
-									<td className='table-btn table-text-content'>
+									<td className='table-btn table-text-content theme'>
 										<button
 											onClick={() => handleEditClick(item)}
 											type='button'
-											className='btn btn-outline-secondary btn-edit'
+											className='btn btn-outline-secondary btn-edit '
 										>
 											<svg
 												xmlns='http://www.w3.org/2000/svg'

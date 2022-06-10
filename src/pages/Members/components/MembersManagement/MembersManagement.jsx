@@ -98,6 +98,9 @@ const MembersManagement = () => {
 						birthday: addFormData.birthday,
 						organization: addFormData.organization,
 						telephone: addFormData.telephone,
+						password: password,
+						userImageUrl: null,
+						photo: null,
 					})
 				);
 				return {
@@ -109,6 +112,9 @@ const MembersManagement = () => {
 					birthday: addFormData.birthday,
 					organization: addFormData.organization,
 					telephone: addFormData.telephone,
+					password: password,
+					userImageUrl: null,
+					photo: null,
 				};
 			})
 			.then(user => {
@@ -120,6 +126,9 @@ const MembersManagement = () => {
 					birthday: user.birthday,
 					organization: user.organization,
 					telephone: user.telephone,
+					password: password,
+					userImageUrl: null,
+					photo: null,
 				});
 			})
 			.catch(error => {
@@ -184,10 +193,7 @@ const MembersManagement = () => {
 	};
 
 	const handleDeleteClick = itemId => {
-		/*const newItems = [...items];
-        const index = items.findIndex((item) => item.id === itemId);
-        newItems.splice(index, 1);
-        setMembers(newItems);*/
+
 		const user = items.filter(el => el.id === itemId);
 		const document = doc(db, 'users', user[0].id);
 
@@ -204,6 +210,9 @@ const MembersManagement = () => {
 					birthday: null,
 					organization: null,
 					telephone: null,
+					userImageUrl: null,
+					photo: null,
+					password: null,
 				})
 			);
 		});
@@ -256,47 +265,47 @@ const MembersManagement = () => {
 					/>
 				)}
 
-				<table className='table-secondary table table-hover'>
+				<table className='table-secondary table  '>
 					<thead>
 						<tr>
 							<th
 								scope='col'
 								onClick={() => requestSort('name')}
-								className={`${getClassNames('name', sorting)} w-15`}
+								className={`${getClassNames('name', sorting)} w-15 theme`}
 							>
 								Name
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('email')}
-								className={`${getClassNames('email', sorting)} w-15`}
+								className={`${getClassNames('email', sorting)} w-15 theme`}
 							>
 								Email
 							</th>
-							<th scope='col'>Telephone</th>
+							<th scope='col' className={"w-15 theme"}>Telephone</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('organization')}
-								className={`${getClassNames('organization', sorting)} w-10`}
+								className={`${getClassNames('organization', sorting)} w-10 theme`}
 							>
 								Company
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('score')}
-								className={`${getClassNames('score', sorting)} w-15`}
+								className={`${getClassNames('score', sorting)} w-15 theme`}
 							>
 								Score
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('birthday')}
-								className={`${getClassNames('birthday', sorting)} w-15`}
+								className={`${getClassNames('birthday', sorting)} w-15 theme`}
 							>
 								Date of Birth
 							</th>
-							<th scope='col'></th>
-							<th scope='col'></th>
+							<th scope='col' className={"theme"}></th>
+							<th scope='col' className={"theme"}></th>
 						</tr>
 					</thead>
 					<tbody>

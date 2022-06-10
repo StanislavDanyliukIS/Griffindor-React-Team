@@ -97,47 +97,47 @@ const ManagersManagement = () => {
 				</button>
 				{modalOpen && <Modal setModalOpen={setModalOpen} />}
 
-				<table className='table-secondary table table-hover'>
+				<table className='table-secondary table  theme'>
 					<thead>
 						<tr>
 							<th
 								scope='col'
 								onClick={() => requestSort('name')}
-								className={`${getClassNames('name', sorting)} w-15`}
+								className={`${getClassNames('name', sorting)} w-15 theme`}
 							>
 								Name
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('email')}
-								className={`${getClassNames('email', sorting)} w-15`}
+								className={`${getClassNames('email', sorting)} w-15 theme`}
 							>
 								Email
 							</th>
-							<th scope='col'>Telephone</th>
+							<th scope='col' className={"w-15 theme"}>Telephone</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('organization')}
-								className={`${getClassNames('organization', sorting)} w-10`}
+								className={`${getClassNames('organization', sorting)} w-10 theme`}
 							>
 								Company
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('score')}
-								className={`${getClassNames('score', sorting)} w-15`}
+								className={`${getClassNames('score', sorting)} w-15 theme`}
 							>
 								Score
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('birthday')}
-								className={`${getClassNames('birthday', sorting)} w-15`}
+								className={`${getClassNames('birthday', sorting)} w-15 theme`}
 							>
 								Date of Birth
 							</th>
-							<th scope='col'></th>
-							<th scope='col'></th>
+							<th scope='col' className={"theme"}></th>
+							<th scope='col' className={"theme"}></th>
 						</tr>
 					</thead>
 					<tbody>
