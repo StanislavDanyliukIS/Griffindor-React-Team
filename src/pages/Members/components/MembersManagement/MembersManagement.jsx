@@ -19,7 +19,7 @@ import {
 	deleteDoc,
 	setDoc,
 } from 'firebase/firestore';
-import { db, app, auth } from '../../../../firebase';
+import { db } from '../../../../firebase';
 
 import {
 	createUser,
@@ -152,9 +152,6 @@ const MembersManagement = () => {
 			score: editFormData.score,
 			birthday: editFormData.birthday,
 		};
-		/*const newPersons = [...items];*/
-		/*newPersons[index] = editedContact;
-        setMembers(newPersons);*/
 		const item = items.filter(el => el.id === editFormData.id);
 		const document = doc(db, 'users', item[0].id);
 		getDoc(document).then(data => {
@@ -193,7 +190,6 @@ const MembersManagement = () => {
 	};
 
 	const handleDeleteClick = itemId => {
-
 		const user = items.filter(el => el.id === itemId);
 		const document = doc(db, 'users', user[0].id);
 
@@ -282,11 +278,16 @@ const MembersManagement = () => {
 							>
 								Email
 							</th>
-							<th scope='col' className={"w-15 theme"}>Telephone</th>
+							<th scope='col' className={'w-15 theme'}>
+								Telephone
+							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('organization')}
-								className={`${getClassNames('organization', sorting)} w-10 theme`}
+								className={`${getClassNames(
+									'organization',
+									sorting
+								)} w-10 theme`}
 							>
 								Company
 							</th>
@@ -304,8 +305,8 @@ const MembersManagement = () => {
 							>
 								Date of Birth
 							</th>
-							<th scope='col' className={"theme"}></th>
-							<th scope='col' className={"theme"}></th>
+							<th scope='col' className={'theme'}></th>
+							<th scope='col' className={'theme'}></th>
 						</tr>
 					</thead>
 					<tbody>

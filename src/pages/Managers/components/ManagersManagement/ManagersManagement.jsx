@@ -30,8 +30,6 @@ const ManagersManagement = () => {
 	}, []);
 
 	const { items, requestSort, sorting } = useSorting(managers);
-
-	const [addUser, setAddUser] = useState('');
 	const [editFormData, setEditFormData] = useState('');
 	const [editUser, setEditUser] = useState(null);
 
@@ -114,11 +112,16 @@ const ManagersManagement = () => {
 							>
 								Email
 							</th>
-							<th scope='col' className={"w-15 theme"}>Telephone</th>
+							<th scope='col' className={'w-15 theme'}>
+								Telephone
+							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('organization')}
-								className={`${getClassNames('organization', sorting)} w-10 theme`}
+								className={`${getClassNames(
+									'organization',
+									sorting
+								)} w-10 theme`}
 							>
 								Company
 							</th>
@@ -136,8 +139,8 @@ const ManagersManagement = () => {
 							>
 								Date of Birth
 							</th>
-							<th scope='col' className={"theme"}></th>
-							<th scope='col' className={"theme"}></th>
+							<th scope='col' className={'theme'}></th>
+							<th scope='col' className={'theme'}></th>
 						</tr>
 					</thead>
 					<tbody>
