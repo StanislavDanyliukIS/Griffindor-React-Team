@@ -1,20 +1,37 @@
-import { doc, updateDoc } from 'firebase/firestore';
+import {
+	collection,
+	doc,
+	onSnapshot,
+	query,
+	updateDoc,
+	where,
+} from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { db } from '../../../firebase';
 import { getClassNames } from '../../../functions/getClassNames';
 import { useSorting } from '../../../hook/useSorting';
 import './EventData.scss';
 
 const EventData = ({ event }) => {
-	const dispatch = useDispatch();
 	const { items, requestSort, sorting } = useSorting(event.participants);
 	const [editUser, setEditUser] = useState('');
 	const [editUserData, setEditUserData] = useState('');
 	const [participantsData, setParticipantsData] = useState([]);
+	const [scoreForAttending, setScoreForAttending] = useState('');
+	const [users, setUsers] = useState([]);
+	const [oldExtrapoints, setOldExtrapoints] = useState('');
 
 	useEffect(() => {
 		setParticipantsData(event.participants);
+		setScoreForAttending(event.score);
+		const q = query(collection(db, 'users'), where('role', '==', 'user'));
+		const usersData = [];
+		onSnapshot(q, querySnapshot => {
+			querySnapshot.forEach(doc => {
+				usersData.push({ ...doc.data(), id: doc.id });
+			});
+			setUsers(usersData);
+		});
 	}, [event]);
 
 	const handleEditClick = item => {
@@ -25,10 +42,11 @@ const EventData = ({ event }) => {
 			comment: item.comment,
 			attended: item.attended,
 		};
+		setOldExtrapoints(item.extrapoints);
 		setEditUserData(userInputValues);
 	};
 	const handleCancelClick = () => {
-		setEditUser(null);
+		setEditUser('');
 	};
 	const handleEditFormChange = event => {
 		const fieldName = event.target.name;
@@ -37,13 +55,48 @@ const EventData = ({ event }) => {
 		newFormData[fieldName] = fieldValue;
 		setEditUserData(newFormData);
 	};
+	const handleEditExtrapointsChange = event => {
+		const fieldName = event.target.name;
+		const fieldValue = event.target.value;
+		const newFormData = { ...editUserData };
+		newFormData[fieldName] = fieldValue < 0 ? 0 : fieldValue;
+		const updExtrapoints =
+			fieldValue < 0
+				? users
+				: users.map(user =>
+						user.id === editUser
+							? {
+									...user,
+									score:
+										Number(user.score) +
+										Number(fieldValue) -
+										Number(oldExtrapoints),
+							  }
+							: user
+				  );
+		setOldExtrapoints(fieldValue < 0 ? 0 : fieldValue);
+		setUsers(updExtrapoints);
+		setEditUserData(newFormData);
+	};
 	const handleEditCheckChange = event => {
 		const checked = event.target.checked;
 		const newFormData = { ...editUserData };
 		newFormData.attended = checked;
 		setEditUserData(newFormData);
-	};
+		const updScore = checked
+			? users.map(user =>
+					user.id === editUser
+						? { ...user, score: Number(user.score) + Number(scoreForAttending) }
+						: user
+			  )
+			: users.map(user =>
+					user.id === editUser
+						? { ...user, score: Number(user.score) - Number(scoreForAttending) }
+						: user
+			  );
 
+		setUsers(updScore);
+	};
 	const handleEditFormSubmit = e => {
 		e.preventDefault();
 		const newUserData = {
@@ -56,11 +109,18 @@ const EventData = ({ event }) => {
 			el.id === editUserData.id ? { ...el, ...newUserData } : el
 		);
 		const eventRef = doc(db, 'events', event.id);
+		const userRef = doc(db, 'users', editUser);
+		const user = users.filter(user => user.id === editUser);
+		const updUserScore = user[0].score;
 		updateDoc(eventRef, {
 			participants: partData,
 		});
-		setEditUser(null);
+		updateDoc(userRef, {
+			score: updUserScore,
+		});
+		setEditUser('');
 	};
+
 	return (
 		<div className='container-xl table-container'>
 			<table className='table event-table'>
@@ -107,11 +167,12 @@ const EventData = ({ event }) => {
 										<input
 											className='form-control user-form theme'
 											type='number'
+											min='0'
 											name='extrapoints'
 											value={editUserData.extrapoints}
 											required='required'
 											placeholder='Add extra points'
-											onChange={handleEditFormChange}
+											onChange={handleEditExtrapointsChange}
 										/>
 									</td>
 									<td>

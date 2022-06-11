@@ -30,7 +30,6 @@ const EventsManagement = () => {
 	});
 	const [modalOpen, setModalOpen] = useState(false);
 	const [formData, setFormData] = useState(initValue);
-
 	const handleAddFormChange = e => {
 		e.preventDefault();
 
@@ -66,8 +65,8 @@ const EventsManagement = () => {
 				participantsArray.push({
 					id: doc.id,
 					user: doc.data().name,
-					attended: true,
-					extrapoints: '',
+					attended: false,
+					extrapoints: 0,
 					comment: '',
 				});
 			});
