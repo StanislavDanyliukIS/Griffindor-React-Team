@@ -1,8 +1,10 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { doc, updateDoc } from "firebase/firestore";
 import { useDispatch } from "react-redux";
 
+import { db } from "../../firebase";
 import { logIn } from "../../store/authSlice";
 
 import "./Login.scss";
@@ -62,8 +64,15 @@ const Login = () => {
       .then(({ user }) => {
         dispatch(logIn({ uid: user.uid }));
         localStorage.setItem("isAuth", !!user.uid);
+        return user.uid;
       })
-      .then()
+      .then((uid) => {
+        if (uid) {
+          updateDoc(doc(db, "users", uid), {
+            password: userData.password,
+          });
+        }
+      })
       .catch((error) => {
         clearPasword();
         focusOnPasswordInput();
