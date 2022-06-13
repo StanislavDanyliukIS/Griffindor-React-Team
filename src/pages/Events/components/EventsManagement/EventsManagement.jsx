@@ -105,8 +105,8 @@ const EventsManagement = () => {
 			/>
 			{/* )} */}
 			<div className={'container-xl'}>
-				<table className='table  theme'>
-					<thead>
+				<table className='table table-hover theme'>
+					<thead className='table-secondary'>
 						<tr>
 							<th
 								scope='col'

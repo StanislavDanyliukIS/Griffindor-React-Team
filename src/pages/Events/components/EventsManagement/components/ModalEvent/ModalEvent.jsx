@@ -49,7 +49,7 @@ export const ModalEvent = ({
 								Event name:
 							</label>
 							<input
-								className='form-control user-form'
+								className='form-control modal-event user-form'
 								id='event-name'
 								type='text'
 								name='name'
@@ -64,7 +64,7 @@ export const ModalEvent = ({
 								Score:
 							</label>
 							<input
-								className='form-control user-form'
+								className='form-control modal-event user-form'
 								id='event-score'
 								type='number'
 								min='0'
@@ -80,7 +80,7 @@ export const ModalEvent = ({
 								Date:
 							</label>
 							<input
-								className='form-control user-form'
+								className='form-control modal-event user-form'
 								id='event-date'
 								type='date'
 								name='date'

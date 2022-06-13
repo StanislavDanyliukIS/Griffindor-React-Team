@@ -7,9 +7,12 @@
 .table-container {
 	flex-direction: column;
 }
-.event-table {
-	margin-left: auto;
-	margin-right: auto;
+
+.table {
+	box-shadow: none;
+	thead {
+		background-color: #f2f3f4;
+	}
 }
 td {
 	vertical-align: middle;
@@ -24,4 +27,8 @@ td {
 	&::after {
 		content: ' ↑';
 	}
+}
+
+.btn-outline-secondary {
+	box-shadow: none;
 }
