@@ -14,27 +14,27 @@ const EventsUser = () => {
 			</div>
 
 			<div className={'container-xl'}>
-				<table className='table theme'>
+				<table className='table'>
 					<thead>
 						<tr>
 							<th
 								scope='col'
 								onClick={() => requestSort('name')}
-								className={`${getClassNames('name', sorting)} theme w-25`}
+								className={`${getClassNames('name', sorting)} w-25`}
 							>
 								Name
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('date')}
-								className={`${getClassNames('date', sorting)} theme w-25`}
+								className={`${getClassNames('date', sorting)} w-25`}
 							>
 								Date
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('score')}
-								className={`${getClassNames('score', sorting)} theme w-50`}
+								className={`${getClassNames('score', sorting)} w-50`}
 							>
 								Score
 							</th>
@@ -43,7 +43,7 @@ const EventsUser = () => {
 					<tbody>
 						{items.map(item => (
 							<tr key={Math.random() * 100000000}>
-								<td>{item.name}</td>
+								<td className='name-column'>{item.name}</td>
 								<td>
 									{item.date.substr(0, 10) + ' ' + item.date.substr(11, 8)}
 								</td>

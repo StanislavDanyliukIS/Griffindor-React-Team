@@ -4,14 +4,25 @@
 	--text-color: #1e293b;
 	--subtext-color: #626976;
 	--border-color: #e6e7e9;
+	--table-head-color: #f2f3f4;
+	--table-hover-color: #f7f7f7;
+	--input-border-color: #d9dbde;
 }
 
 :root[data-theme='dark'] {
 	--primary: #1e293b;
 	--secondary: #1b2434;
 	--text-color: #ffffff;
-	--subtext-color: #e6e7e9;
+	--subtext-color: #626976;
 	--border-color: #293345;
+	--table-head-color: #1e293b;
+	--table-hover-color: #253249;
+	--input-border-color: #2c3c56;
+
+	//dark theme invert color for date icon from date picker input
+	::-webkit-calendar-picker-indicator {
+		filter: invert(1);
+	}
 }
 .w-10 {
 	width: 10%;
@@ -29,9 +40,9 @@
 	width: 35%;
 }
 .theme {
-	color: var(--text-color) !important;
-	background: var(--primary) !important;
-	border-color: var(--border-color) !important;
+	color: var(--text-color);
+	background: var(--primary);
+	border-color: var(--border-color);
 }
 
 body {
@@ -47,6 +58,45 @@ body {
 	input[type='number']::-webkit-outer-spin-button {
 		-webkit-appearance: none;
 	}
+	input.form-control {
+		color: var(--text-color);
+		background-color: var(--primary);
+		border: 1px solid var(--input-border-color);
+		&:focus {
+			color: var(--text-color);
+			background-color: var(--primary);
+		}
+	}
+}
+
+.table {
+	color: var(--text-color);
+	background: var(--primary);
+
+	thead {
+		background: var(--table-head-color);
+		border-bottom: var(--border-color);
+		th {
+			font-size: 1em;
+			font-weight: 600;
+		}
+	}
+
+	tbody {
+		color: var(--subtext-color);
+		.name-column {
+			color: var(--text-color);
+		}
+		tr {
+			border-bottom: var(--border-color);
+			&:hover {
+				background-color: var(--table-hover-color);
+			}
+		}
+		td {
+			vertical-align: middle;
+		}
+	}
 }
 
 body.modal-open {
@@ -58,22 +108,6 @@ body.modal-open {
 		-o-filter: blur(1px);
 		-ms-filter: blur(1px);
 		filter: blur(1px);
-	}
-	.events {
-		.btn-table-create {
-			-webkit-filter: blur(1px);
-			-moz-filter: blur(1px);
-			-o-filter: blur(1px);
-			-ms-filter: blur(1px);
-			filter: blur(1px);
-		}
-		.container-xl {
-			-webkit-filter: blur(1px);
-			-moz-filter: blur(1px);
-			-o-filter: blur(1px);
-			-ms-filter: blur(1px);
-			filter: blur(1px);
-		}
 	}
 }
 

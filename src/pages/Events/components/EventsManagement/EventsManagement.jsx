@@ -28,7 +28,7 @@ const EventsManagement = () => {
 		score: 0,
 		participants: [],
 	});
-	// const [modalOpen, setModalOpen] = useState(false);
+
 	const [formData, setFormData] = useState(initValue);
 
 	const handleClearForm = () => {
@@ -55,7 +55,7 @@ const EventsManagement = () => {
 				score: formData.score,
 			});
 		}
-		// setModalOpen(false);
+
 		setFormData(initValue);
 	};
 
@@ -83,49 +83,49 @@ const EventsManagement = () => {
 			<div className={'container-xl'}>
 				<h3 className={'page-name pt-2'}> Events </h3>
 			</div>
-			<button
-				type='button'
-				className='btn btn-outline-secondary btn-table-create'
-				data-toggle='modal'
-				data-target='#exampleModalCenter'
-				onClick={() => {
-					// setModalOpen(true);
-					setFormData(initValue);
-				}}
-			>
-				Create a new Event
-			</button>
-			{/* {modalOpen && ( */}
+			<div className={'container-xl'}>
+				<button
+					type='button'
+					className='btn btn-outline-secondary btn-table-create'
+					data-toggle='modal'
+					data-target='#ModalCreateEvent'
+					onClick={() => {
+						setFormData(initValue);
+					}}
+				>
+					Create a new Event
+				</button>
+			</div>
+
 			<ModalEvent
-				// setModalOpen={setModalOpen}
 				handleClearForm={handleClearForm}
 				handleAddFormChange={handleAddFormChange}
 				handleAddFormSubmit={handleAddFormSubmit}
 				formData={formData}
 			/>
-			{/* )} */}
+
 			<div className={'container-xl'}>
-				<table className='table table-hover theme'>
-					<thead className='table-secondary'>
+				<table className='table'>
+					<thead>
 						<tr>
 							<th
 								scope='col'
 								onClick={() => requestSort('name')}
-								className={`${getClassNames('name', sorting)} theme w-25`}
+								className={`${getClassNames('name', sorting)}`}
 							>
 								Name
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('date')}
-								className={`${getClassNames('date', sorting)} theme w-25`}
+								className={`${getClassNames('date', sorting)}`}
 							>
 								Date
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('score')}
-								className={`${getClassNames('score', sorting)} theme w-50`}
+								className={`${getClassNames('score', sorting)}`}
 							>
 								Points for attending
 							</th>

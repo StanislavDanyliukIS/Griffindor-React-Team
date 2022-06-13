@@ -7,15 +7,8 @@
 .table-container {
 	flex-direction: column;
 }
-
-.table {
-	box-shadow: none;
-	thead {
-		background-color: #f2f3f4;
-	}
-}
-td {
-	vertical-align: middle;
+.table-btn {
+	text-align: right;
 }
 
 .ascending {
@@ -29,6 +22,6 @@ td {
 	}
 }
 
-.btn-outline-secondary {
+.btn-edit {
 	box-shadow: none;
 }
