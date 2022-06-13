@@ -29,12 +29,20 @@ const ForgotPassword = () => {
     return re.test(String(email).toLowerCase());
   };
 
-  const auth = getAuth();
-
   const sendPaswordEmail = () => {
-    sendPasswordResetEmail(auth, email).catch((error) => {
-      console.log(error);
-    });
+    const auth = getAuth();
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("Check your email.");
+      })
+      .then(() => {
+        setEmail("");
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error.code);
+        console.log(error.message);
+      });
   };
 
   return (
