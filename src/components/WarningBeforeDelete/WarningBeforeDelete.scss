@@ -1,0 +1,14 @@
+.warning_before_delete{
+  text-align: center;
+  background: var(--secondary);
+  border: 2px var(--border-color) solid;
+  box-shadow: #626976 0px 5px 10px;
+  width: 25vw;
+  height: 15vh;
+  margin: 0 25%;
+}
+.buttons{
+  display: flex;
+  justify-content: center;
+  gap: 4vw;
+}

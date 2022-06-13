@@ -15,12 +15,15 @@ import {createUserWithEmailAndPassword, getAuth, signOut} from "firebase/auth";
 import {createUser, deleteUser, updateUser} from "../../../../store/crudSlice";
 import {logOut} from "../../../../store/authSlice";
 import {clearUserData} from "../../../../store/userDataSlice";
+import WarningBeforeDelete from "../../../../components/WarningBeforeDelete/WarningBeforeDelete";
 
 const ManagersManagement = () => {
 	const auth = getAuth();
 	const password = '111111';
 	const [modalOpen, setModalOpen] = useState(false);
 	const [managers, setManagers] = useState([]);
+	const [warningBeforeDelete, setWarningBeforeDelete] = useState(false);
+	const [deleteManager, setDeleteManager] = useState("");
 	const [addFormData, setAddFormData] = useState('');
 	const [editFormData, setEditFormData] = useState('');
 	const [editUser, setEditUser] = useState(null);
@@ -170,10 +173,19 @@ const ManagersManagement = () => {
 		setEditUser(null);
 	};
 
+	const handleCloseWindow = () => {
+		setWarningBeforeDelete(false);
+	};
+
 	const handleDeleteClick = itemId => {
 		const user = items.filter(el => el.id === itemId);
-		const document = doc(db, 'users', user[0].id);
 
+		setWarningBeforeDelete(true);
+		setDeleteManager(user);
+	};
+
+	const handleDeleteSubmit = () => {
+		const document = doc(db, 'users', deleteManager[0].id);
 		getDoc(document).then(() => {
 			deleteDoc(document);
 			dispatch(
@@ -192,8 +204,10 @@ const ManagersManagement = () => {
 					password: null,
 				})
 			);
-		});
-	};
+		})
+		setWarningBeforeDelete(false);
+		setDeleteManager("");
+	}
 
 	const handleEditClick = (event, item) => {
 		event.preventDefault();
@@ -239,6 +253,14 @@ const ManagersManagement = () => {
 					handleAddFormChange={handleAddFormChange}
 					handleAddFormSubmit={handleAddFormSubmit}
 				/>}
+				{warningBeforeDelete &&(
+					<WarningBeforeDelete
+						user={deleteManager}
+						handleCloseWindow={handleCloseWindow}
+						handleDeleteSubmit={handleDeleteSubmit}
+					/>
+
+				)}
 
 				<table className='table-secondary table  theme'>
 					<thead>

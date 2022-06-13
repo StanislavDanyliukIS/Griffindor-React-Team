@@ -51,34 +51,39 @@ const Scorers = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={'scorers-container col-sm  rounded px-5 py-2 m-2 d-flex'}>
-                        <div className={" p-4 text-center col m-auto "}>
-                            <img className={"scorers-avatar"} src={silver} alt="gold" />
-                        </div>
-                        <div className={'scorers-item p-4 text-center col m-auto'}>
-                            <div className={'scorers-img rounded-circle m-auto mb-2'}></div>
-                            <h5 className={'scorers-text m-0 mb-2 pt-2'}> {!!sortScore.length? sortScore[1].name:""}</h5>
-                            <div className={' py-1'}>
-                                <div>
-                                    <span className={'number-text'}>Score: {!!sortScore.length? sortScore[1].score:""}</span>
+                    {sortScore.length >= 2 &&
+                        <div className={'scorers-container col-sm  rounded px-5 py-2 m-2 d-flex'}>
+                            <div className={" p-4 text-center col m-auto "}>
+                                <img className={"scorers-avatar"} src={silver} alt="gold" />
+                            </div>
+                            <div className={'scorers-item p-4 text-center col m-auto'}>
+                                <div className={'scorers-img rounded-circle m-auto mb-2'}></div>
+                                <h5 className={'scorers-text m-0 mb-2 pt-2'}> {!!sortScore.length? sortScore[1].name:""}</h5>
+                                <div className={' py-1'}>
+                                    <div>
+                                        <span className={'number-text'}>Score: {!!sortScore.length? sortScore[1].score:""}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className={'scorers-container col-sm  rounded px-5 py-2 m-2 d-flex'}>
-                        <div className={" p-4 text-center col m-auto "}>
-                            <img className={"scorers-avatar"} src={bronze} alt="gold" />
-                        </div>
-                        <div className={'scorers-item p-4 text-center col m-auto'}>
-                            <div className={'scorers-img rounded-circle m-auto mb-2'}></div>
-                            <h5 className={'scorers-text m-0 mb-2 pt-2'}> {!!sortScore.length? sortScore[2].name:""}</h5>
-                            <div className={' py-1'}>
-                                <div>
-                                    <span className={'number-text'}>Score: {!!sortScore.length? sortScore[2].score:""}</span>
+                    }
+                    {sortScore.length >= 3 &&
+                        <div className={'scorers-container col-sm  rounded px-5 py-2 m-2 d-flex'}>
+                            <div className={" p-4 text-center col m-auto "}>
+                                <img className={"scorers-avatar"} src={bronze} alt="gold" />
+                            </div>
+                            <div className={'scorers-item p-4 text-center col m-auto'}>
+                                <div className={'scorers-img rounded-circle m-auto mb-2'}></div>
+                                <h5 className={'scorers-text m-0 mb-2 pt-2'}> {!!sortScore.length? sortScore[2].name:""}</h5>
+                                <div className={' py-1'}>
+                                    <div>
+                                        <span className={'number-text'}>Score: {!!sortScore.length? sortScore[2].score:""}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    }
+
                 </div>
             </div>
         </>

@@ -34,11 +34,14 @@ import {
 } from 'firebase/auth';
 import { logOut } from '../../../../store/authSlice';
 import { clearUserData } from '../../../../store/userDataSlice';
+import WarningBeforeDelete from "../../../../components/WarningBeforeDelete/WarningBeforeDelete";
 
 const MembersManagement = () => {
 	const auth = getAuth();
 	const password = '111111';
 	const [modalOpen, setModalOpen] = useState(false);
+	const [warningBeforeDelete, setWarningBeforeDelete] = useState(false);
+	const [deleteMember, setDeleteMember] = useState("");
 	const [members, setMembers] = useState([]);
 	const [addFormData, setAddFormData] = useState('');
 	const [editFormData, setEditFormData] = useState('');
@@ -188,11 +191,19 @@ const MembersManagement = () => {
 	const handleCancelClick = () => {
 		setEditUser(null);
 	};
+	const handleCloseWindow = () => {
+		setWarningBeforeDelete(false);
+	};
 
 	const handleDeleteClick = itemId => {
 		const user = items.filter(el => el.id === itemId);
-		const document = doc(db, 'users', user[0].id);
 
+		setWarningBeforeDelete(true);
+		setDeleteMember(user);
+	};
+
+	const handleDeleteSubmit = () => {
+		const document = doc(db, 'users', deleteMember[0].id);
 		getDoc(document).then(() => {
 			deleteDoc(document);
 			dispatch(
@@ -211,8 +222,10 @@ const MembersManagement = () => {
 					password: null,
 				})
 			);
-		});
-	};
+		})
+		setWarningBeforeDelete(false);
+		setDeleteMember("");
+	}
 
 	const handleEditClick = (event, item) => {
 		event.preventDefault();
@@ -260,7 +273,14 @@ const MembersManagement = () => {
 						handleAddFormSubmit={handleAddFormSubmit}
 					/>
 				)}
+				{warningBeforeDelete &&(
+					<WarningBeforeDelete
+						user={deleteMember}
+						handleCloseWindow={handleCloseWindow}
+						handleDeleteSubmit={handleDeleteSubmit}
+					/>
 
+				)}
 				<table className='table-secondary table  '>
 					<thead>
 						<tr>
