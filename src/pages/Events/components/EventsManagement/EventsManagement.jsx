@@ -25,11 +25,15 @@ const EventsManagement = () => {
 	const [initValue, setInitValue] = useState({
 		date: '',
 		name: '',
-		score: '',
+		score: 0,
 		participants: [],
 	});
-	const [modalOpen, setModalOpen] = useState(false);
+	// const [modalOpen, setModalOpen] = useState(false);
 	const [formData, setFormData] = useState(initValue);
+
+	const handleClearForm = () => {
+		setFormData(initValue);
+	};
 	const handleAddFormChange = e => {
 		e.preventDefault();
 
@@ -51,7 +55,7 @@ const EventsManagement = () => {
 				score: formData.score,
 			});
 		}
-		setModalOpen(false);
+		// setModalOpen(false);
 		setFormData(initValue);
 	};
 
@@ -82,22 +86,24 @@ const EventsManagement = () => {
 			<button
 				type='button'
 				className='btn btn-outline-secondary btn-table-create'
+				data-toggle='modal'
+				data-target='#exampleModalCenter'
 				onClick={() => {
-					setModalOpen(true);
+					// setModalOpen(true);
 					setFormData(initValue);
 				}}
 			>
 				Create a new Event
 			</button>
-			{modalOpen && (
-				<ModalEvent
-					setModalOpen={setModalOpen}
-					setFormData={setFormData}
-					handleAddFormChange={handleAddFormChange}
-					handleAddFormSubmit={handleAddFormSubmit}
-					initValue={initValue}
-				/>
-			)}
+			{/* {modalOpen && ( */}
+			<ModalEvent
+				// setModalOpen={setModalOpen}
+				handleClearForm={handleClearForm}
+				handleAddFormChange={handleAddFormChange}
+				handleAddFormSubmit={handleAddFormSubmit}
+				formData={formData}
+			/>
+			{/* )} */}
 			<div className={'container-xl'}>
 				<table className='table  theme'>
 					<thead>
