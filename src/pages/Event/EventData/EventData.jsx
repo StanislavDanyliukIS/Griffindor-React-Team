@@ -123,7 +123,7 @@ const EventData = ({ event }) => {
 
 	return (
 		<div className='container-xl table-container'>
-			<table className='table event-table'>
+			<table className='table table-hover'>
 				<thead>
 					<tr>
 						<th
@@ -161,9 +161,9 @@ const EventData = ({ event }) => {
 					{items.map(item => (
 						<>
 							{editUser === item.id ? (
-								<tr key={item.id}>
-									<td>{item.user}</td>
-									<td>
+								<tr key={item.id} className='edit-elem'>
+									<td className={'theme'}>{item.user}</td>
+									<td className={'theme'}>
 										<input
 											className='form-control user-form theme'
 											type='number'
@@ -175,7 +175,7 @@ const EventData = ({ event }) => {
 											onChange={handleEditExtrapointsChange}
 										/>
 									</td>
-									<td>
+									<td className={'theme'}>
 										<input
 											className='form-control user-form theme'
 											type='text'
@@ -185,7 +185,7 @@ const EventData = ({ event }) => {
 											onChange={handleEditFormChange}
 										/>
 									</td>
-									<td>
+									<td className={'theme'}>
 										<input
 											className='form-check-input '
 											type='checkbox'
@@ -194,7 +194,7 @@ const EventData = ({ event }) => {
 											checked={editUserData.attended}
 										/>
 									</td>
-									<td>
+									<td className='table-btn table-text-content theme'>
 										<div
 											className='btn-group theme'
 											role='group'
