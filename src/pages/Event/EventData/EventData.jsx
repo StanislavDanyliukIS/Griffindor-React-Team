@@ -123,38 +123,38 @@ const EventData = ({ event }) => {
 
 	return (
 		<div className='container-xl table-container'>
-			<table className='table table-hover'>
+			<table className='table '>
 				<thead>
 					<tr>
 						<th
 							scope='col'
 							onClick={() => requestSort('name')}
-							className={`${getClassNames('name', sorting)} w-20 theme`}
+							className={`${getClassNames('name', sorting)} w-20 `}
 						>
 							Users
 						</th>
 						<th
 							scope='col'
 							onClick={() => requestSort('score')}
-							className={`${getClassNames('score', sorting)} w-20 theme`}
+							className={`${getClassNames('score', sorting)} w-20 `}
 						>
 							Extra points
 						</th>
 						<th
 							scope='col'
 							onClick={() => requestSort('comment')}
-							className={`${getClassNames('comment', sorting)}  w-25 theme`}
+							className={`${getClassNames('comment', sorting)}  w-25 `}
 						>
 							Comment
 						</th>
 						<th
 							scope='col'
 							onClick={() => requestSort('attended')}
-							className={`${getClassNames('attended', sorting)} theme`}
+							className={`${getClassNames('attended', sorting)} `}
 						>
 							Attended the event
 						</th>
-						<th scope='col' className={'theme'}></th>
+						<th scope='col'></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -162,10 +162,10 @@ const EventData = ({ event }) => {
 						<>
 							{editUser === item.id ? (
 								<tr key={item.id} className='edit-elem'>
-									<td className={'theme'}>{item.user}</td>
-									<td className={'theme'}>
+									<td className='name-column'>{item.user}</td>
+									<td>
 										<input
-											className='form-control user-form theme'
+											className='form-control user-form '
 											type='number'
 											min='0'
 											name='extrapoints'
@@ -175,9 +175,9 @@ const EventData = ({ event }) => {
 											onChange={handleEditExtrapointsChange}
 										/>
 									</td>
-									<td className={'theme'}>
+									<td>
 										<input
-											className='form-control user-form theme'
+											className='form-control user-form '
 											type='text'
 											name='comment'
 											value={editUserData.comment}
@@ -185,7 +185,7 @@ const EventData = ({ event }) => {
 											onChange={handleEditFormChange}
 										/>
 									</td>
-									<td className={'theme'}>
+									<td>
 										<input
 											className='form-check-input '
 											type='checkbox'
@@ -194,16 +194,16 @@ const EventData = ({ event }) => {
 											checked={editUserData.attended}
 										/>
 									</td>
-									<td className='table-btn table-text-content theme'>
+									<td className='table-btn table-text-content'>
 										<div
-											className='btn-group theme'
+											className='btn-group '
 											role='group'
 											aria-label='Basic mixed styles example'
 										>
 											<button
 												onClick={handleEditFormSubmit}
 												type='submit'
-												className='btn btn-success'
+												className='btn btn-outline-success'
 											>
 												<svg
 													xmlns='http://www.w3.org/2000/svg'
@@ -219,7 +219,7 @@ const EventData = ({ event }) => {
 											</button>
 											<button
 												type='button'
-												className='btn btn-danger'
+												className='btn btn-outline-danger'
 												onClick={handleCancelClick}
 											>
 												<svg
@@ -239,10 +239,10 @@ const EventData = ({ event }) => {
 								</tr>
 							) : (
 								<tr key={item.id}>
-									<td className={'theme'}>{item.user}</td>
-									<td className={'theme'}>{item.extrapoints}</td>
-									<td className={'theme'}>{item.comment}</td>
-									<td className={'theme'}>
+									<td className='name-column'>{item.user}</td>
+									<td>{item.extrapoints}</td>
+									<td>{item.comment}</td>
+									<td>
 										<input
 											className='form-check-input check '
 											type='checkbox'
@@ -251,7 +251,7 @@ const EventData = ({ event }) => {
 											disabled
 										/>
 									</td>
-									<td className='table-btn table-text-content theme'>
+									<td className='table-btn table-text-content '>
 										<button
 											onClick={() => handleEditClick(item)}
 											type='button'

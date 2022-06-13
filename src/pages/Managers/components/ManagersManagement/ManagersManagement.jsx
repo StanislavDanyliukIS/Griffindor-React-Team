@@ -8,14 +8,32 @@ import { EditField } from '../../../../components/EditField/EditField';
 import { ReadField } from '../../../../components/ReadField/ReadField';
 
 import './ManagersManagement.scss';
-import {collection, deleteDoc, doc, getDoc, onSnapshot, query, setDoc, updateDoc, where} from 'firebase/firestore';
+import {
+	collection,
+	deleteDoc,
+	doc,
+	getDoc,
+	onSnapshot,
+	query,
+	setDoc,
+	updateDoc,
+	where,
+} from 'firebase/firestore';
 import { db } from '../../../../firebase';
-import {useDispatch} from "react-redux";
-import {createUserWithEmailAndPassword, getAuth, signOut} from "firebase/auth";
-import {createUser, deleteUser, updateUser} from "../../../../store/crudSlice";
-import {logOut} from "../../../../store/authSlice";
-import {clearUserData} from "../../../../store/userDataSlice";
-import WarningBeforeDelete from "../../../../components/WarningBeforeDelete/WarningBeforeDelete";
+import { useDispatch } from 'react-redux';
+import {
+	createUserWithEmailAndPassword,
+	getAuth,
+	signOut,
+} from 'firebase/auth';
+import {
+	createUser,
+	deleteUser,
+	updateUser,
+} from '../../../../store/crudSlice';
+import { logOut } from '../../../../store/authSlice';
+import { clearUserData } from '../../../../store/userDataSlice';
+import WarningBeforeDelete from '../../../../components/WarningBeforeDelete/WarningBeforeDelete';
 
 const ManagersManagement = () => {
 	const auth = getAuth();
@@ -23,7 +41,7 @@ const ManagersManagement = () => {
 	const [modalOpen, setModalOpen] = useState(false);
 	const [managers, setManagers] = useState([]);
 	const [warningBeforeDelete, setWarningBeforeDelete] = useState(false);
-	const [deleteManager, setDeleteManager] = useState("");
+	const [deleteManager, setDeleteManager] = useState('');
 	const [addFormData, setAddFormData] = useState('');
 	const [editFormData, setEditFormData] = useState('');
 	const [editUser, setEditUser] = useState(null);
@@ -204,10 +222,10 @@ const ManagersManagement = () => {
 					password: null,
 				})
 			);
-		})
+		});
 		setWarningBeforeDelete(false);
-		setDeleteManager("");
-	}
+		setDeleteManager('');
+	};
 
 	const handleEditClick = (event, item) => {
 		event.preventDefault();
@@ -233,36 +251,26 @@ const ManagersManagement = () => {
 						setModalOpen(true);
 					}}
 					type='button'
-					className='btn btn-primary btn-create-user'
+					className='btn btn-outline-secondary btn-table-create'
 				>
-					<svg
-						xmlns='http://www.w3.org/2000/svg'
-						width='16'
-						height='16'
-						fill='currentColor'
-						className='bi bi-plus-square'
-						viewBox='0 0 16 16'
-					>
-						<path d='M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z' />
-						<path d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z' />
-					</svg>
 					<span className='btn-create-user-text'>Add a new user</span>
 				</button>
-				{modalOpen && <Modal
-					setModalOpen={setModalOpen}
-					handleAddFormChange={handleAddFormChange}
-					handleAddFormSubmit={handleAddFormSubmit}
-				/>}
-				{warningBeforeDelete &&(
+				{modalOpen && (
+					<Modal
+						setModalOpen={setModalOpen}
+						handleAddFormChange={handleAddFormChange}
+						handleAddFormSubmit={handleAddFormSubmit}
+					/>
+				)}
+				{warningBeforeDelete && (
 					<WarningBeforeDelete
 						user={deleteManager}
 						handleCloseWindow={handleCloseWindow}
 						handleDeleteSubmit={handleDeleteSubmit}
 					/>
-
 				)}
 
-				<table className='table-secondary table  theme'>
+				<table className='dary table  theme'>
 					<thead>
 						<tr>
 							<th

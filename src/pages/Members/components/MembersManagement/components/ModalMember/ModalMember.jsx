@@ -1,6 +1,6 @@
-import './ModalEvent.scss';
+import './ModalMember.scss';
 
-export const ModalEvent = ({
+export const ModalMember = ({
 	handleClearForm,
 	handleAddFormSubmit,
 	handleAddFormChange,
@@ -9,16 +9,16 @@ export const ModalEvent = ({
 	return (
 		<div
 			className='modal fade'
-			id='ModalCreateEvent'
+			id='ModalCreateMember'
 			tabIndex='-1'
 			role='dialog'
-			aria-labelledby='ModalCreateEventTitle'
+			aria-labelledby='ModalCreateMemberCenterTitle'
 			aria-hidden='true'
 		>
 			<div className='modal-dialog modal-dialog-centered' role='document'>
 				<div className='modal-content'>
 					<div className='modal-header'>
-						<h5 className='modal-title' id='ModalCreateEventTitle'>
+						<h5 className='modal-title' id='ModalCreateMemberCenterTitle'>
 							Create new event
 						</h5>
 
@@ -46,22 +46,67 @@ export const ModalEvent = ({
 					<div className='modal-body'>
 						<div className='form-group'>
 							<label htmlFor='event-name' className='col-form-label'>
-								Event name:
+								Member name:
 							</label>
 							<input
 								className='form-control user-form'
 								id='event-name'
 								type='text'
 								name='name'
-								value={formData.name}
+								// value={formData.name}
 								required='required'
 								placeholder='Name'
 								onChange={handleAddFormChange}
 							/>
 						</div>
 						<div className='form-group'>
+							<label htmlFor='event-name' className='col-form-label'>
+								Member email:
+							</label>
+							<input
+								className='form-control user-form'
+								id='event-name'
+								type='email'
+								name='email'
+								// value={formData.email}
+								required='required'
+								placeholder='Email'
+								onChange={handleAddFormChange}
+							/>
+						</div>
+						<div className='form-group'>
+							<label htmlFor='event-name' className='col-form-label'>
+								Member phone number:
+							</label>
+							<input
+								className='form-control user-form'
+								id='event-phone'
+								type='phone'
+								name='phone'
+								// value={formData.email}
+								required='required'
+								placeholder='Telephone'
+								onChange={handleAddFormChange}
+							/>
+						</div>
+						<div className='form-group'>
+							<label htmlFor='event-name' className='col-form-label'>
+								Member company name:
+							</label>
+							<input
+								className='form-control user-form'
+								id='event-company'
+								type='text'
+								name='company'
+								// value={formData.email}
+								required='required'
+								placeholder='Company'
+								onChange={handleAddFormChange}
+							/>
+						</div>
+						<div className='form-group'>
 							<label htmlFor='event-score' className='col-form-label'>
-								Score:
+								Member score:
 							</label>
 							<input
 								className='form-control user-form'
@@ -69,7 +114,7 @@ export const ModalEvent = ({
 								type='number'
 								min='0'
 								name='score'
-								value={formData.score}
+								// value={formData.score}
 								required='required'
 								placeholder='Points'
 								onChange={handleAddFormChange}
@@ -77,14 +122,14 @@ export const ModalEvent = ({
 						</div>
 						<div className='form-group'>
 							<label htmlFor='event-date' className='col-form-label'>
-								Date:
+								Member birthday:
 							</label>
 							<input
 								className='form-control user-form'
 								id='event-date'
 								type='date'
 								name='date'
-								value={formData.date}
+								// value={formData.date}
 								required='required'
 								placeholder='Date of birth'
 								onChange={handleAddFormChange}
