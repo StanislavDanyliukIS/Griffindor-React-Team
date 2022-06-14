@@ -48,3 +48,24 @@
     opacity: 0.7 ;
   }
 }
+
+@media (max-width: 990px) {
+  .carrousel{
+    &_box{
+      align-items: center;
+      padding-left: 7vw;
+    }
+    &-container{
+      min-width: 80vw;
+      max-width: 80vw;
+
+    }
+  }
+  .left-arrow {
+    padding: 14vh 0;
+
+  }
+  .right-arrow{
+    padding: 14vh 0;
+  }
+}

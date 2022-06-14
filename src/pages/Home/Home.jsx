@@ -10,9 +10,11 @@ const Home = () => {
 				<h3 className={'page-name pt-2'}>Home</h3>
 			</div>
 			<div className={"page-body pt-4"}>
-				<Scorers/>
+				<div className={"home__first_row"}>
+					<Scorers/>
+				</div>
 				<div className={"container-xl pt-3"}>
-					<div className={"row w-100"}>
+					<div className={"home__second_row row w-100"}>
 						<SoonEvents/>
 						<Carrousel/>
 					</div>

@@ -44,7 +44,12 @@ const SoonEvents = () => {
             <h4>Soon Events</h4>
             <div className={"soon_events-container row w-100 rounded"}>
                 {filteredDate.map((el, idx) => (
-                    <SoonEvent name={el.name} date={el.date} number={idx + 1}/>
+                    <SoonEvent
+                        name={el.name}
+                        date={el.date}
+                        number={idx + 1}
+                        key={Math.random()*999999}
+                    />
                 ))}
             </div>
         </div>
