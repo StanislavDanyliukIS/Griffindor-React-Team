@@ -79,11 +79,20 @@ const Carrousel = () => {
         }
     }
 
+    const widthCarrousel = () =>{
+        if (!!carrouselParent.current.children[0].clientWidth){
+            return carrouselParent.current.children[0].clientWidth
+        } else {
+           return  widthCarrousel();
+        }
+    };
+
+
     const handleLeftClick = () => {
         const children = carrouselParent.current.childElementCount;
-        const res = offset + 40;
+        const res = offset + widthCarrousel();
         if (res > 0) {
-            setOffset(-1 * ((children - 1) * 40));
+            setOffset(-1 * ((children - 1) * widthCarrousel()));
         } else {
             setOffset(res);
         }
@@ -91,8 +100,8 @@ const Carrousel = () => {
 
     const handleRightClick = () => {
         const children = carrouselParent.current.childElementCount;
-        const res = offset - 40;
-        if (res <= (-1 * (children * 40))) {
+        const res = offset - widthCarrousel();
+        if (res <= (-1 * (children * widthCarrousel()))) {
             setOffset(0);
         } else {
             setOffset(res);
@@ -113,7 +122,7 @@ const Carrousel = () => {
                 <div className={"carrousel-container d-flex justify-content-start align-items-center"}>
                     {events.length !== 0 && (
                         <div className={"d-flex"} ref={carrouselParent} style={{
-                            transform: `translateX(${offset}vw)`,
+                            transform: `translateX(${offset}px)`,
                             transition: "translate",
                             transitionProperty: "transform",
                             transitionDuration: "0.5s",

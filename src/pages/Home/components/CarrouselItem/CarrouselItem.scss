@@ -5,3 +5,10 @@
   text-align: center;
 
 }
+@media (max-width: 990px) {
+  .carrousel_item{
+      min-width: 80vw;
+      max-width: 80vw;
+
+  }
+}
