@@ -37,7 +37,7 @@ const EventsManagement = () => {
 	const handleAddFormChange = e => {
 		e.preventDefault();
 
-		const fieldName = e.target.getAttribute('name');
+		const fieldName = e.target.name;
 		const fieldValue = e.target.value;
 
 		const newFormData = { ...formData };

@@ -19,7 +19,7 @@ export const ModalMember = ({
 				<div className='modal-content'>
 					<div className='modal-header'>
 						<h5 className='modal-title' id='ModalCreateMemberCenterTitle'>
-							Create new event
+							Create new member
 						</h5>
 
 						<button

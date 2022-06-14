@@ -252,7 +252,7 @@ const MembersManagement = () => {
 						setModalOpen(true);
 					}}
 					type='button'
-					className='btn  btn-outline-secondary btn-table-create '
+					className='btn create-member-btn btn-outline-secondary btn-table-create '
 					data-toggle='modal'
 					data-target='#ModalCreateMember'
 				>
@@ -278,7 +278,7 @@ const MembersManagement = () => {
 						handleDeleteSubmit={handleDeleteSubmit}
 					/>
 				)}
-				<table className='table'>
+				<table className='table member-table'>
 					<thead>
 						<tr>
 							<th

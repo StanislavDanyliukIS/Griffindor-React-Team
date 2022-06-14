@@ -27,13 +27,27 @@
 	}
 }
 body.modal-open {
-	.events {
-		.container-xl {
-			-webkit-filter: blur(1px);
-			-moz-filter: blur(1px);
-			-o-filter: blur(1px);
-			-ms-filter: blur(1px);
-			filter: blur(1px);
+	.members {
+		.title-management {
+			-webkit-filter: blur(2px);
+			-moz-filter: blur(2px);
+			-o-filter: blur(2px);
+			-ms-filter: blur(2px);
+			filter: blur(2px);
+		}
+		.create-member-btn {
+			-webkit-filter: blur(2px);
+			-moz-filter: blur(2px);
+			-o-filter: blur(2px);
+			-ms-filter: blur(2px);
+			filter: blur(2px);
+		}
+		.member-table {
+			-webkit-filter: blur(2px);
+			-moz-filter: blur(2px);
+			-o-filter: blur(2px);
+			-ms-filter: blur(2px);
+			filter: blur(2px);
 		}
 	}
 }
