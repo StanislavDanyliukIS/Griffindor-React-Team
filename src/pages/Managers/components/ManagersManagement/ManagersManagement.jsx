@@ -78,7 +78,6 @@ const ManagersManagement = () => {
 					createUser({
 						name: addFormData.name,
 						role: 'manager',
-						score: addFormData.score,
 						birthday: addFormData.birthday,
 						organization: addFormData.organization,
 						telephone: addFormData.telephone,
@@ -92,7 +91,6 @@ const ManagersManagement = () => {
 					email: data.email,
 					name: addFormData.name,
 					role: 'manager',
-					score: addFormData.score,
 					birthday: addFormData.birthday,
 					organization: addFormData.organization,
 					telephone: addFormData.telephone,
@@ -106,7 +104,6 @@ const ManagersManagement = () => {
 					email: user.email,
 					name: user.name,
 					role: user.role,
-					score: user.score,
 					birthday: user.birthday,
 					organization: user.organization,
 					telephone: user.telephone,
@@ -143,16 +140,16 @@ const ManagersManagement = () => {
 			email: editFormData.email,
 			telephone: editFormData.telephone,
 			organization: editFormData.organization,
-			score: editFormData.score,
 			birthday: editFormData.birthday,
 		};
+
 		const item = items.filter(el => el.id === editFormData.id);
+		console.log(item[0])
 		const document = doc(db, 'users', item[0].id);
 		getDoc(document).then(data => {
 			dispatch(
 				updateUser({
 					name: editedContact.name,
-					score: editedContact.score,
 					birthday: editedContact.birthday,
 					organization: editedContact.organization,
 					telephone: editedContact.telephone,
@@ -160,7 +157,6 @@ const ManagersManagement = () => {
 			);
 			updateDoc(doc(db, 'users', item[0].id), {
 				name: editedContact.name,
-				score: editedContact.score,
 				birthday: editedContact.birthday,
 				organization: editedContact.organization,
 				telephone: editedContact.telephone,
@@ -195,7 +191,6 @@ const ManagersManagement = () => {
 					id: null,
 					name: null,
 					role: null,
-					score: null,
 					birthday: null,
 					organization: null,
 					telephone: null,
@@ -217,7 +212,6 @@ const ManagersManagement = () => {
 			email: item.email,
 			telephone: item.telephone,
 			organization: item.organization,
-			score: item.score,
 			birthday: item.birthday,
 			id: item.id,
 		};
@@ -313,7 +307,7 @@ const ManagersManagement = () => {
 					<tbody>
 						{items.map(item => (
 							<>
-								{editUser === item.name ? (
+								{editUser === item.id ? (
 									<EditField
 										key={item.id}
 										editFormData={editFormData}

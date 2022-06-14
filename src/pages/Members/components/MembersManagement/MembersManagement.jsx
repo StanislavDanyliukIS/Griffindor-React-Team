@@ -145,6 +145,16 @@ const MembersManagement = () => {
 		});
 	};
 
+	const handleEditFormChange = event => {
+		event.preventDefault();
+
+		const fieldName = event.target.getAttribute('name');
+		const fieldValue = event.target.value;
+		const newFormData = { ...editFormData };
+		newFormData[fieldName] = fieldValue;
+		setEditFormData(newFormData);
+	};
+
 	const handleEditFormSubmit = event => {
 		event.preventDefault();
 		const editedContact = {
@@ -176,16 +186,6 @@ const MembersManagement = () => {
 			});
 		});
 		setEditUser(null);
-	};
-
-	const handleEditFormChange = event => {
-		event.preventDefault();
-
-		const fieldName = event.target.getAttribute('name');
-		const fieldValue = event.target.value;
-		const newFormData = { ...editFormData };
-		newFormData[fieldName] = fieldValue;
-		setEditFormData(newFormData);
 	};
 
 	const handleCancelClick = () => {
