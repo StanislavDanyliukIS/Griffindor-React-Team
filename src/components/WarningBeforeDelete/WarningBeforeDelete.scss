@@ -4,8 +4,12 @@
   border: 2px var(--border-color) solid;
   box-shadow: #626976 0px 5px 10px;
   width: 25vw;
-  height: 15vh;
+  height: 12vh;
   margin: 0 25%;
+  & h5{
+    border-bottom: 2px var(--border-color) solid;
+    color: var(--text-color);
+  }
 }
 .buttons{
   display: flex;
