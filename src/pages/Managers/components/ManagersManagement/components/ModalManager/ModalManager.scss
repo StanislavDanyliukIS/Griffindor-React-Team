@@ -27,7 +27,7 @@
 	}
 }
 body.modal-open {
-	.members {
+	.managers {
 		.title-management {
 			-webkit-filter: blur(2px);
 			-moz-filter: blur(2px);
@@ -35,14 +35,14 @@ body.modal-open {
 			-ms-filter: blur(2px);
 			filter: blur(2px);
 		}
-		.create-member-btn {
+		.create-manager-btn {
 			-webkit-filter: blur(2px);
 			-moz-filter: blur(2px);
 			-o-filter: blur(2px);
 			-ms-filter: blur(2px);
 			filter: blur(2px);
 		}
-		.member-table {
+		.manager-table {
 			-webkit-filter: blur(2px);
 			-moz-filter: blur(2px);
 			-o-filter: blur(2px);

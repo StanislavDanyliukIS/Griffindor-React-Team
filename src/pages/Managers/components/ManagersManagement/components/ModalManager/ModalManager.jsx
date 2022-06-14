@@ -1,25 +1,24 @@
-import './ModalEvent.scss';
+import './ModalManager.scss';
 
-export const ModalEvent = ({
-	handleClearForm,
+export const ModalManager = ({
+	// handleClearForm,
 	handleAddFormSubmit,
 	handleAddFormChange,
-	formData,
 }) => {
 	return (
 		<div
 			className='modal fade'
-			id='ModalCreateEvent'
+			id='ModalCreateManager'
 			tabIndex='-1'
 			role='dialog'
-			aria-labelledby='ModalCreateEventTitle'
+			aria-labelledby='ModalCreateManagerCenterTitle'
 			aria-hidden='true'
 		>
 			<div className='modal-dialog modal-dialog-centered' role='document'>
 				<div className='modal-content'>
 					<div className='modal-header'>
-						<h5 className='modal-title' id='ModalCreateEventTitle'>
-							Create new event
+						<h5 className='modal-title' id='ModalCreateManagerCenterTitle'>
+							Create new manager
 						</h5>
 
 						<button
@@ -27,7 +26,7 @@ export const ModalEvent = ({
 							className='close'
 							data-dismiss='modal'
 							aria-label='Close'
-							onClick={handleClearForm}
+							// onClick={handleClearForm}
 						>
 							<span className='close-btn-header' aria-hidden='true'>
 								<svg
@@ -46,45 +45,75 @@ export const ModalEvent = ({
 					<div className='modal-body'>
 						<div className='form-group'>
 							<label htmlFor='event-name' className='col-form-label'>
-								Event name:
+								Manager name:
 							</label>
 							<input
 								className='form-control user-form'
 								id='event-name'
 								type='text'
 								name='name'
-								value={formData.name}
+								// value={formData.name}
 								required='required'
 								placeholder='Name'
 								onChange={handleAddFormChange}
 							/>
 						</div>
 						<div className='form-group'>
-							<label htmlFor='event-score' className='col-form-label'>
-								Score:
+							<label htmlFor='event-name' className='col-form-label'>
+								Manager email:
 							</label>
 							<input
 								className='form-control user-form'
-								id='event-score'
-								type='number'
-								min='0'
-								name='score'
-								value={formData.score}
+								id='event-name'
+								type='email'
+								name='email'
+								// value={formData.email}
 								required='required'
-								placeholder='Points'
+								placeholder='Email'
 								onChange={handleAddFormChange}
 							/>
 						</div>
 						<div className='form-group'>
+							<label htmlFor='event-name' className='col-form-label'>
+								Manager phone number:
+							</label>
+							<input
+								className='form-control user-form'
+								id='event-phone'
+								type='phone'
+								name='telephone'
+								// value={formData.email}
+								required='required'
+								placeholder='Telephone'
+								onChange={handleAddFormChange}
+							/>
+						</div>
+						<div className='form-group'>
+							<label htmlFor='event-name' className='col-form-label'>
+								Manager company name:
+							</label>
+							<input
+								className='form-control user-form'
+								id='event-company'
+								type='text'
+								name='organization'
+								// value={formData.email}
+								required='required'
+								placeholder='Company'
+								onChange={handleAddFormChange}
+							/>
+						</div>
+
+						<div className='form-group'>
 							<label htmlFor='event-date' className='col-form-label'>
-								Date:
+								Manager birthday:
 							</label>
 							<input
 								className='form-control user-form'
 								id='event-date'
 								type='date'
-								name='date'
-								value={formData.date}
+								name='birthday'
+								// value={formData.date}
 								required='required'
 								placeholder='Date of birth'
 								onChange={handleAddFormChange}
@@ -95,7 +124,7 @@ export const ModalEvent = ({
 						<button
 							type='button'
 							className='btn btn-outline-secondary'
-							onClick={handleClearForm}
+							// onClick={handleClearForm}
 							data-dismiss='modal'
 						>
 							Cancel

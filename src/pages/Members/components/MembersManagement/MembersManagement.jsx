@@ -2,8 +2,6 @@ import { useSorting } from '../../../../hook/useSorting';
 import { useEffect, useState } from 'react';
 
 import { getClassNames } from '../../../../functions/getClassNames';
-
-import { Modal } from '../../../../components/Modal/Modal';
 import { EditField } from '../../../../components/EditField/EditField';
 import { ReadField } from '../../../../components/ReadField/ReadField';
 
@@ -34,14 +32,12 @@ import {
 } from 'firebase/auth';
 import { logOut } from '../../../../store/authSlice';
 import { clearUserData } from '../../../../store/userDataSlice';
-import WarningBeforeDelete from '../../../../components/WarningBeforeDelete/WarningBeforeDelete';
 import { ModalMember } from './components/ModalMember/ModalMember';
+import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal/ConfirmDeleteModal';
 
 const MembersManagement = () => {
 	const auth = getAuth();
 	const password = '111111';
-	const [modalOpen, setModalOpen] = useState(false);
-	const [warningBeforeDelete, setWarningBeforeDelete] = useState(false);
 	const [deleteMember, setDeleteMember] = useState('');
 	const [members, setMembers] = useState([]);
 	const [addFormData, setAddFormData] = useState('');
@@ -192,14 +188,9 @@ const MembersManagement = () => {
 	const handleCancelClick = () => {
 		setEditUser(null);
 	};
-	const handleCloseWindow = () => {
-		setWarningBeforeDelete(false);
-	};
 
 	const handleDeleteClick = itemId => {
 		const user = items.filter(el => el.id === itemId);
-
-		setWarningBeforeDelete(true);
 		setDeleteMember(user);
 	};
 
@@ -224,7 +215,6 @@ const MembersManagement = () => {
 				})
 			);
 		});
-		setWarningBeforeDelete(false);
 		setDeleteMember('');
 	};
 
@@ -248,9 +238,6 @@ const MembersManagement = () => {
 			<main>
 				<h3 className='title-management'>Members Management</h3>
 				<button
-					onClick={() => {
-						setModalOpen(true);
-					}}
 					type='button'
 					className='btn create-member-btn btn-outline-secondary btn-table-create '
 					data-toggle='modal'
@@ -259,25 +246,14 @@ const MembersManagement = () => {
 					<span className='btn-create-user-text'>Add a new user</span>
 				</button>
 				<ModalMember
-					// handleClearForm={handleClearForm}
 					handleAddFormChange={handleAddFormChange}
 					handleAddFormSubmit={handleAddFormSubmit}
-					// formData={formData}
 				/>
-				{/* {modalOpen && (
-					<Modal
-						setModalOpen={setModalOpen}
-						handleAddFormChange={handleAddFormChange}
-						handleAddFormSubmit={handleAddFormSubmit}
-					/>
-				)} */}
-				{warningBeforeDelete && (
-					<WarningBeforeDelete
-						user={deleteMember}
-						handleCloseWindow={handleCloseWindow}
-						handleDeleteSubmit={handleDeleteSubmit}
-					/>
-				)}
+
+				<ConfirmDeleteModal
+					user={deleteMember}
+					handleDeleteSubmit={handleDeleteSubmit}
+				/>
 				<table className='table member-table'>
 					<thead>
 						<tr>

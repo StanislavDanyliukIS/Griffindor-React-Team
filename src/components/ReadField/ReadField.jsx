@@ -38,6 +38,8 @@ export const ReadField = ({ handleEditClick, handleDeleteClick, item }) => {
 					onClick={() => handleDeleteClick(item.id)}
 					type='button'
 					className='btn btn-outline-danger btn-delete'
+					data-toggle='modal'
+					data-target='#ModalConfirmDelete'
 				>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'

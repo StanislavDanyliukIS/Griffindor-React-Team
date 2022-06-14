@@ -1,10 +1,9 @@
 import './ModalMember.scss';
 
 export const ModalMember = ({
-	handleClearForm,
+	// handleClearForm,
 	handleAddFormSubmit,
 	handleAddFormChange,
-	formData,
 }) => {
 	return (
 		<div
@@ -27,7 +26,7 @@ export const ModalMember = ({
 							className='close'
 							data-dismiss='modal'
 							aria-label='Close'
-							onClick={handleClearForm}
+							// onClick={handleClearForm}
 						>
 							<span className='close-btn-header' aria-hidden='true'>
 								<svg
@@ -140,10 +139,10 @@ export const ModalMember = ({
 						<button
 							type='button'
 							className='btn btn-outline-secondary'
-							onClick={handleClearForm}
+							// onClick={handleClearForm}
 							data-dismiss='modal'
 						>
-							Close
+							Cancel
 						</button>
 						<button
 							type='submit'

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 
 import { getClassNames } from '../../../../functions/getClassNames';
 
-import { Modal } from '../../../../components/Modal/Modal';
 import { EditField } from '../../../../components/EditField/EditField';
 import { ReadField } from '../../../../components/ReadField/ReadField';
 
@@ -33,14 +32,13 @@ import {
 } from '../../../../store/crudSlice';
 import { logOut } from '../../../../store/authSlice';
 import { clearUserData } from '../../../../store/userDataSlice';
-import WarningBeforeDelete from '../../../../components/WarningBeforeDelete/WarningBeforeDelete';
+import { ModalManager } from './components/ModalManager/ModalManager';
+import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal/ConfirmDeleteModal';
 
 const ManagersManagement = () => {
 	const auth = getAuth();
 	const password = '111111';
-	const [modalOpen, setModalOpen] = useState(false);
 	const [managers, setManagers] = useState([]);
-	const [warningBeforeDelete, setWarningBeforeDelete] = useState(false);
 	const [deleteManager, setDeleteManager] = useState('');
 	const [addFormData, setAddFormData] = useState('');
 	const [editFormData, setEditFormData] = useState('');
@@ -162,7 +160,7 @@ const ManagersManagement = () => {
 		};
 
 		const item = items.filter(el => el.id === editFormData.id);
-		console.log(item[0])
+		console.log(item[0]);
 		const document = doc(db, 'users', item[0].id);
 		getDoc(document).then(data => {
 			dispatch(
@@ -187,14 +185,9 @@ const ManagersManagement = () => {
 		setEditUser(null);
 	};
 
-	const handleCloseWindow = () => {
-		setWarningBeforeDelete(false);
-	};
-
 	const handleDeleteClick = itemId => {
 		const user = items.filter(el => el.id === itemId);
 
-		setWarningBeforeDelete(true);
 		setDeleteManager(user);
 	};
 
@@ -218,7 +211,6 @@ const ManagersManagement = () => {
 				})
 			);
 		});
-		setWarningBeforeDelete(false);
 		setDeleteManager('');
 	};
 
@@ -241,30 +233,23 @@ const ManagersManagement = () => {
 			<main>
 				<h3 className='title-management'>Managers Management</h3>
 				<button
-					onClick={() => {
-						setModalOpen(true);
-					}}
 					type='button'
-					className='btn btn-outline-secondary btn-table-create'
+					className='btn btn-outline-secondary create-manager-btn btn-table-create'
+					data-toggle='modal'
+					data-target='#ModalCreateManager'
 				>
 					<span className='btn-create-user-text'>Add a new user</span>
 				</button>
-				{modalOpen && (
-					<Modal
-						setModalOpen={setModalOpen}
-						handleAddFormChange={handleAddFormChange}
-						handleAddFormSubmit={handleAddFormSubmit}
-					/>
-				)}
-				{warningBeforeDelete && (
-					<WarningBeforeDelete
-						user={deleteManager}
-						handleCloseWindow={handleCloseWindow}
-						handleDeleteSubmit={handleDeleteSubmit}
-					/>
-				)}
+				<ModalManager
+					handleAddFormChange={handleAddFormChange}
+					handleAddFormSubmit={handleAddFormSubmit}
+				/>
+				<ConfirmDeleteModal
+					user={deleteManager}
+					handleDeleteSubmit={handleDeleteSubmit}
+				/>
 
-				<table className='dary table  theme'>
+				<table className='table manager-table theme'>
 					<thead>
 						<tr>
 							<th

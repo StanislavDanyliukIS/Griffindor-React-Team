@@ -43,12 +43,3 @@ body.modal-open {
 	margin: 4px 0;
 	color: var(--text-color);
 }
-.modal-event {
-	color: var(--text-color);
-	&:focus {
-		color: var(--text-color);
-		background-color: var(--primary);
-	}
-	border: var(--border-color);
-	background-color: var(--primary);
-}
