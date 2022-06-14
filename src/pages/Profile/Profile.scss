@@ -3,6 +3,9 @@
   flex-direction: column;
   padding-top: 10px;
 }
+.main-container {
+  justify-content: center;
+}
 .profil-title {
   margin-bottom: 30px;
 }
@@ -10,7 +13,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40%;
   @media screen and (max-width: 600px) {
     width: 100%;
   }
@@ -21,6 +23,12 @@
     width: 250px;
     height: 250px;
   }
+}
+.container-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .card {
   min-height: 66vh;
@@ -36,6 +44,8 @@
 .info-container {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
+  align-items: center;
   flex-direction: column;
   @media screen and (max-width: 600px) {
     align-items: center;
@@ -44,4 +54,3 @@
 .edit-btn {
   max-width: 200px;
 }
-

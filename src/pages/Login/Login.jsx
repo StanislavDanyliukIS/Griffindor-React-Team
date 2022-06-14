@@ -118,7 +118,7 @@ const Login = () => {
             type={passwordVisibility}
             ref={inputRef}
             name="password"
-            className="form-control login-input "
+            className="form-control login-input"
             id="inputPassword4"
             placeholder="Password"
             value={password}
