@@ -127,7 +127,7 @@ const Carrousel = () => {
                             transitionProperty: "transform",
                             transitionDuration: "0.5s",
                         }}>
-                            <NavLink to={`/events/${hotEvent[0].id}`} className={"carrousel-navlink"}>
+
                                 <CarrouselItem key={Math.random() * 999999999}
                                                title={`HOT event - ${hotEvent[0].name}`}
                                                subtitle={`For this event you can get ${hotEvent[0].score}`}
@@ -135,8 +135,8 @@ const Carrousel = () => {
                                                color={"#F3262D"}
                                                textPaddingTop={15}
                                 />
-                            </NavLink>
-                            <NavLink to={`/events/${topEvent[0].id}`} className={"carrousel-navlink"}>
+
+
                                 <CarrouselItem key={Math.random() * 999999999}
                                                title={`The best event - ${topEvent[0].name}`}
                                                subtitle={`This event was attended by the most people - ${topEvent[0].countAttended}`}
@@ -144,15 +144,15 @@ const Carrousel = () => {
                                                color={"#E6E7E9"}
                                                textPaddingTop={21}
                                 />
-                            </NavLink>
 
-                            <CarrouselItem key={Math.random() * 999999999}
-                                           title={"Hot event 3"}
-                                           subtitle={"For this event you can get a lot of score"}
-                                           img={HOT_EVENT}
-                                           color={"#E6E7E9"}
-                                           textPaddingTop={20}
-                            />
+
+                                <CarrouselItem key={Math.random() * 999999999}
+                                               title={"Hot event 3"}
+                                               subtitle={"For this event you can get a lot of score"}
+                                               img={HOT_EVENT}
+                                               color={"#E6E7E9"}
+                                               textPaddingTop={20}
+                                />
                         </div>
                     )}
                 </div>
