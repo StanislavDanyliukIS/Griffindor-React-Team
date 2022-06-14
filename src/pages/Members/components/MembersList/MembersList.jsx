@@ -1,48 +1,16 @@
 import Member from '../Member/Member';
 
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
 import './MembersList.scss';
-import {collection, limit, onSnapshot, query, where} from "firebase/firestore";
-import {db} from "../../../../firebase";
-
-const membersArr = [
-	{
-		name: 'Lolik',
-		organization: 'EPAM',
-		number: '23545363',
-	},
-	{
-		name: 'Bolik',
-		organization: 'InventorSoft',
-		number: '12343242',
-	},
-	{
-		name: 'Alcoholic',
-		organization: 'ASD',
-		number: '4353234245',
-	},
-	{
-		name: 'Shokoladnyy',
-		organization: 'SoftServe',
-		number: '234243123',
-	},
-	{
-		name: 'Zayats',
-		organization: 'SharpMinds',
-		number: '2342355',
-	},
-	{
-		name: 'Laskavyy',
-		organization: 'Bizico',
-		number: '4574364254',
-	},
-	{
-		name: 'Merzavets',
-		organization: 'eLogic',
-		number: '678674573',
-	},
-];
+import {
+	collection,
+	limit,
+	onSnapshot,
+	query,
+	where,
+} from 'firebase/firestore';
+import { db } from '../../../../firebase';
 
 const Members = () => {
 	const limited = 16;
@@ -53,20 +21,20 @@ const Members = () => {
 	useEffect(() => {
 		let q;
 		q = query(
-			collection(db, "users"),
+			collection(db, 'users'),
 			limit(limitNumber),
-			where("role", "==", "manager"));
+			where('role', '==', 'user')
+		);
 
-		const membersList = onSnapshot(q, (querySnapshot) => {
+		const membersList = onSnapshot(q, querySnapshot => {
 			let membersArray = [];
 
-			querySnapshot.forEach((doc) => {
-				membersArray.push({...doc.data(), id: doc.id});
+			querySnapshot.forEach(doc => {
+				membersArray.push({ ...doc.data(), id: doc.id });
 			});
 			setMembers(membersArray);
 		});
 		return () => membersList();
-
 	}, [limitNumber]);
 
 	const handleChange = event => {
@@ -123,18 +91,21 @@ const Members = () => {
 						)}
 					</div>
 				</div>
-				<div className={"container-xl"}>
-					<div className={"loadMore  m-auto"}>
+				<div className={'container-xl'}>
+					<div className={'loadMore  m-auto'}>
 						{(() => {
-							if (results.length>limited) {
+							if (results.length > limited) {
 								return (
 									<button
-										type={"button"}
-										className={"loadMore__btn btn "}
-										onClick={() => {setLimitNumber(limitNumber + limited)}}>
+										type={'button'}
+										className={'loadMore__btn btn '}
+										onClick={() => {
+											setLimitNumber(limitNumber + limited);
+										}}
+									>
 										Show {limited} more
 									</button>
-								)
+								);
 							}
 						})()}
 					</div>
