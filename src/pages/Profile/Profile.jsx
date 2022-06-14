@@ -37,11 +37,11 @@ const Profile = () => {
       <div className="container-xl">
         <h3 className="profil-title">Profile</h3>
       </div>
-      <div className="container-xl">
+      <div className="main-container container-xl">
         <div className="profile-field col-lg-12 mb-4 mb-sm-5">
           <div className="card card-style1 border-0">
             <div className="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
-              <div className="container-content row align-items-center">
+              <div className="container-content row">
                 <div className="image-container col-lg-6 mb-4 mb-lg-0">
                   <img className="profile-photo" src={userImage} alt="..." />
                 </div>
