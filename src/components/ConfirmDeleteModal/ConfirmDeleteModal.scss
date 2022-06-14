@@ -12,7 +12,10 @@
 .col-form-label {
 	font-weight: 600;
 }
-
+.confirm-btns {
+	display: flex;
+	justify-content: center;
+}
 .modal {
 	color: var(--text-color);
 	&-header {
@@ -25,24 +28,13 @@
 	&-footer {
 		border: 0;
 	}
+	&-deleteConfirm {
+		border-top: 2px solid red;
+	}
 }
 body.modal-open {
-	.members {
-		.title-management {
-			-webkit-filter: blur(2px);
-			-moz-filter: blur(2px);
-			-o-filter: blur(2px);
-			-ms-filter: blur(2px);
-			filter: blur(2px);
-		}
-		.create-member-btn {
-			-webkit-filter: blur(2px);
-			-moz-filter: blur(2px);
-			-o-filter: blur(2px);
-			-ms-filter: blur(2px);
-			filter: blur(2px);
-		}
-		.member-table {
+	.events {
+		.container-xl {
 			-webkit-filter: blur(2px);
 			-moz-filter: blur(2px);
 			-o-filter: blur(2px);
