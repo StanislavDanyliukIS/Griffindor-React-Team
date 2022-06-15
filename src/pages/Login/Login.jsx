@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { useDispatch } from "react-redux";
 
 import { db } from "../../firebase";
 import { logIn } from "../../store/authSlice";
+import { addUserData } from "../../store/userDataSlice";
 
 import "./Login.scss";
 import eye from "../../imgs/eye.png";
@@ -72,6 +73,14 @@ const Login = () => {
             password: userData.password,
           });
         }
+        return uid;
+      })
+      .then((uid) => {
+        const docRef = doc(db, `users`, uid);
+        getDoc(docRef).then((resp) => {
+          dispatch(addUserData(resp.data()));
+          localStorage.setItem("role", resp.data().role);
+        });
       })
       .catch((error) => {
         clearPasword();
