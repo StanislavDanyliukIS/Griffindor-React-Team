@@ -5,7 +5,7 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
   const [user, setUser] = useState({
     name: "",
     email: "",
-    score: "",
+    score: 0,
     birthday: "",
     telephone: "",
     organization: "",

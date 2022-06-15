@@ -45,8 +45,12 @@ const ManagersManagement = () => {
   const [editUser, setEditUser] = useState(null);
 
   const dispatch = useDispatch();
+  const indexedManagers = managers.map((el,idx)=> {
+	  el.index = idx+1;
+	  return el;
+  })
+  const { items, requestSort, sorting } = useSorting(indexedManagers);
 
-  const { items, requestSort, sorting } = useSorting(managers);
 
   useEffect(() => {
     let q = query(collection(db, "users"), where("role", "==", "manager"));
@@ -219,6 +223,7 @@ const ManagersManagement = () => {
     event.preventDefault();
     setEditUser(item.id);
     const formValues = {
+      index: item.index,
       name: item.name,
       email: item.email,
       telephone: item.telephone,
@@ -253,17 +258,24 @@ const ManagersManagement = () => {
         <table className="table manager-table theme">
           <thead>
             <tr>
+				<th
+					scope="col"
+					onClick={() => requestSort("index")}
+					className={`${getClassNames("index", sorting)} w-10 theme pointer`}
+				>
+					№
+				</th>
               <th
                 scope="col"
                 onClick={() => requestSort("name")}
-                className={`${getClassNames("name", sorting)} w-15 theme`}
+                className={`${getClassNames("name", sorting)} w-15 theme pointer`}
               >
                 Name
               </th>
               <th
                 scope="col"
                 onClick={() => requestSort("email")}
-                className={`${getClassNames("email", sorting)} w-15 theme`}
+                className={`${getClassNames("email", sorting)} w-15 theme pointer`}
               >
                 Email
               </th>
@@ -276,21 +288,15 @@ const ManagersManagement = () => {
                 className={`${getClassNames(
                   "organization",
                   sorting
-                )} w-10 theme`}
+                )} w-10 theme pointer`}
               >
                 Company
               </th>
-              <th
-                scope="col"
-                onClick={() => requestSort("score")}
-                className={`${getClassNames("score", sorting)} w-15 theme`}
-              >
-                Score
-              </th>
+
               <th
                 scope="col"
                 onClick={() => requestSort("birthday")}
-                className={`${getClassNames("birthday", sorting)} w-15 theme`}
+                className={`${getClassNames("birthday", sorting)} w-15 theme pointer`}
               >
                 Date of Birth
               </th>
