@@ -111,21 +111,21 @@ const EventsManagement = () => {
 							<th
 								scope='col'
 								onClick={() => requestSort('name')}
-								className={`${getClassNames('name', sorting)}`}
+								className={`${getClassNames('name', sorting)} pointer`}
 							>
 								Name
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('date')}
-								className={`${getClassNames('date', sorting)}`}
+								className={`${getClassNames('date', sorting)} pointer`}
 							>
 								Date
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('score')}
-								className={`${getClassNames('score', sorting)}`}
+								className={`${getClassNames('score', sorting)} pointer`}
 							>
 								Points for attending
 							</th>
