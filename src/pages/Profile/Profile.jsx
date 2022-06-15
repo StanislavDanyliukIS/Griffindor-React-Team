@@ -13,9 +13,8 @@ const Profile = () => {
     role,
     email,
     organization,
-    phone,
+    telephone,
     score,
-    rate,
     birthday,
     userImageUrl,
   } = useUserData();
@@ -77,12 +76,6 @@ const Profile = () => {
                     </li>
                     <li className="mb-2 mb-xl-3 display-28">
                       <span className="display-26 text-secondary me-2 font-weight-600">
-                        Rating:
-                      </span>{" "}
-                      {rate}
-                    </li>
-                    <li className="mb-2 mb-xl-3 display-28">
-                      <span className="display-26 text-secondary me-2 font-weight-600">
                         Points:
                       </span>{" "}
                       {score}
@@ -91,7 +84,7 @@ const Profile = () => {
                       <span className="display-26 text-secondary me-2 font-weight-600">
                         Phone:
                       </span>{" "}
-                      {phone}
+                      {telephone}
                     </li>
                   </ul>
                   <button

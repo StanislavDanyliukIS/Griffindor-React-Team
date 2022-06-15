@@ -18,7 +18,8 @@
   }
 }
 .profile-photo {
-  height: 300px;
+  margin-top: 20px;
+  height: 340px;
   @media screen and (max-width: 600px) {
     width: 250px;
     height: 250px;
@@ -26,14 +27,14 @@
 }
 .container-content {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 .card {
-  min-height: 66vh;
+  min-height: 60vh;
   background-color: var(--primary);
 }
+
 .list-unstyled {
   margin-top: 15px;
 }
@@ -53,4 +54,10 @@
 }
 .edit-btn {
   max-width: 200px;
+}
+.profile-field {
+  width: 45vw;
+  @media screen and(max-width:600px) {
+    width: 95%;
+  }
 }

@@ -12,7 +12,7 @@ const EditUserData = () => {
           <h3 className="profil-title">Profile</h3>
         </div>
         <div className="container-xl">
-          <div className="profile-field col-lg-12 mb-4 mb-sm-5">
+          <div className="profile col-lg-12 mb-4 mb-sm-5">
             <div className="card card-style1 border-0">
               <div className="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
                 <div className="content-container row align-items-center">
