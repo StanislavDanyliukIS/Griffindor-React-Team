@@ -8,7 +8,6 @@ export const Modal = ({
   handleAddFormChange,
 }) => {
   const [emailValidation, setEmailValidation] = useState("hide-text-danger");
-  const [phoneValidation, setPhoneValidation] = useState("hide-text-danger");
   const [score, setScore] = useState(0);
   const [email, setEmail] = useState("");
 

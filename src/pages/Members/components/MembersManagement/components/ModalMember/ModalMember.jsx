@@ -5,15 +5,28 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
   const [user, setUser] = useState({
     name: "",
     email: "",
-    score: "",
+    score: "0",
     birthday: "",
     telephone: "",
     organization: "",
   });
+  const [nameValidation, setNameValidation] = useState("hide-text-danger");
   const [emailValidation, setEmailValidation] = useState("hide-text-danger");
+  const [phoneValidation, setPhoneValidation] = useState("hide-text-danger");
+  const [scoreValidation, setScoreValidation] = useState("hide-text-danger");
+  const [organizationValidation, setOrganithationValidation] =
+    useState("hide-text-danger");
+  const [ageDateValidation, setAgeDateValidation] =
+    useState("hide-text-danger");
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const nameValidationClass = () => {
+    setNameValidation(
+      user.name.length > 2 ? "hide-text-danger" : "text-danger"
+    );
   };
 
   const validateEmailClass = () => {
@@ -27,7 +40,56 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
     return re.test(String(user.email).toLowerCase());
   };
 
-  const clearForm = () => {
+  const validatePhoneClass = () => {
+    const numcheck = user.telephone.split("").slice(1, user.telephone.length);
+    const isNumbers = numcheck.every((elem) => !isNaN(Number(elem)));
+
+    setPhoneValidation(
+      (user.telephone.length === 13 &&
+        user.telephone[0] === "+" &&
+        isNumbers) ||
+        user.telephone.length === 0
+        ? "hide-text-danger"
+        : "text-danger"
+    );
+  };
+
+  const organizationValitationClass = () => {
+    const stringTest = user.organization.split("").slice(0, 1);
+    const firstCharString = isNaN(Number(stringTest));
+    setOrganithationValidation(
+      (user.organization.length > 1 && firstCharString) ||
+        user.organization.length === 0
+        ? "hide-text-danger"
+        : "text-danger"
+    );
+  };
+
+  const ageDateValidationClass = () => {
+    const age =
+      new Date().getFullYear() - new Date(user.birthday).getFullYear();
+    setAgeDateValidation(age >= 16 ? "hide-text-danger" : "text-danger");
+  };
+
+  const scoreValidationClass = () => {
+    setScoreValidation(user.score.length ? "hide-text-danger" : "text-danger");
+  };
+
+  const modalValidation = () => {
+    return [
+      nameValidation,
+      emailValidation,
+      phoneValidation,
+      organizationValidation,
+      ageDateValidation,
+      scoreValidation,
+    ].every((elem) => elem === "hide-text-danger");
+  };
+
+  const checkFormObject = () =>
+    Object.values(user).every((elem) => !!elem === true);
+
+  const handleScore = () => {
     setUser({
       name: "",
       email: "",
@@ -36,6 +98,46 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
       telephone: "",
       organization: "",
     });
+  };
+
+  const checkForm = (e) => {
+    e.preventDefault();
+    user.name.length ? nameValidationClass() : setNameValidation("text-danger");
+
+    user.email.length
+      ? validateEmailClass()
+      : setEmailValidation("text-danger");
+
+    user.telephone.length
+      ? validatePhoneClass()
+      : setPhoneValidation("text-danger");
+
+    user.organization.length
+      ? organizationValitationClass()
+      : setOrganithationValidation("text-danger");
+
+    ageDateValidationClass();
+    scoreValidationClass();
+  };
+
+  const clearForm = () => {
+    setUser({
+      name: "",
+      email: "",
+      score: "0",
+      birthday: "",
+      telephone: "",
+      organization: "",
+    });
+
+    [
+      setNameValidation,
+      setEmailValidation,
+      setPhoneValidation,
+      setOrganithationValidation,
+      setAgeDateValidation,
+      setScoreValidation,
+    ].forEach((elem) => elem("hide-text-danger"));
   };
 
   return (
@@ -81,7 +183,7 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
                 Member name:
               </label>
               <input
-                className="form-control user-form user-modal"
+                className="form-control user-form"
                 id="event-name"
                 type="text"
                 name="name"
@@ -92,7 +194,11 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
                   handleAddFormChange(e);
                   handleChange(e);
                 }}
+                onBlur={checkFormObject}
               />
+              <small className={`${nameValidation} warning-text`}>
+                Incorrect user name.
+              </small>
             </div>
             <div className="form-group">
               <label htmlFor="event-name" className="col-form-label">
@@ -121,7 +227,7 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
                 Member phone number:
               </label>
               <input
-                className="form-control user-form user-modal"
+                className="form-control user-form"
                 id="event-phone"
                 type="phone"
                 name="telephone"
@@ -132,14 +238,18 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
                   handleAddFormChange(e);
                   handleChange(e);
                 }}
+                onBlur={validatePhoneClass}
               />
+              <small className={`${phoneValidation} warning-text`}>
+                Incorrect phone number.
+              </small>
             </div>
             <div className="form-group">
               <label htmlFor="event-name" className="col-form-label">
                 Member company name:
               </label>
               <input
-                className="form-control user-form user-modal"
+                className="form-control user-form"
                 id="event-company"
                 type="text"
                 name="organization"
@@ -150,14 +260,19 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
                   handleAddFormChange(e);
                   handleChange(e);
                 }}
+                onBlur={organizationValitationClass}
               />
+              <small className={`${organizationValidation} warning-text`}>
+                Name should be at least two symbols and first sibol must be a
+                leter.
+              </small>
             </div>
             <div className="form-group">
               <label htmlFor="event-score" className="col-form-label">
                 Member score:
               </label>
               <input
-                className="form-control user-form user-modal"
+                className="form-control user-form"
                 id="event-score"
                 type="number"
                 min="0"
@@ -169,14 +284,19 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
                   handleAddFormChange(e);
                   handleChange(e);
                 }}
+                onFocus={handleScore}
+                onBlur={scoreValidationClass}
               />
+              <small className={`${scoreValidation} warning-text`}>
+                Please enter score.
+              </small>
             </div>
             <div className="form-group">
               <label htmlFor="event-date" className="col-form-label">
                 Member birthday:
               </label>
               <input
-                className="form-control user-form user-modal"
+                className="form-control user-form"
                 id="event-date"
                 type="date"
                 name="birthday"
@@ -187,7 +307,13 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
                   handleAddFormChange(e);
                   handleChange(e);
                 }}
+                onBlur={(e) => {
+                  ageDateValidationClass();
+                }}
               />
+              <small className={`${ageDateValidation} warning-text`}>
+                User should be at least 16 years old.
+              </small>
             </div>
           </div>
           <div className="modal-footer">
@@ -199,14 +325,27 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
             >
               Cancel
             </button>
-            <button
-              type="submit"
-              className="btn btn-outline-primary"
-              data-dismiss="modal"
-              onClick={handleAddFormSubmit}
-            >
-              Submit
-            </button>
+
+            {modalValidation() && checkFormObject() ? (
+              <button
+                type="submit"
+                className="btn btn-outline-primary"
+                data-dismiss="modal"
+                onFocus={checkForm}
+                onClick={handleAddFormSubmit}
+              >
+                Submit
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="btn btn-outline-primary"
+                data-dismiss
+                onClick={checkForm}
+              >
+                Submit
+              </button>
+            )}
           </div>
         </div>
       </div>

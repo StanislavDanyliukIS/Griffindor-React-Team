@@ -94,7 +94,7 @@ const MembersManagement = () => {
           createUser({
             name: addFormData.name,
             role: "user",
-            score: addFormData.score,
+            score: addFormData.score ? addFormData.score : 0,
             birthday: addFormData.birthday,
             organization: addFormData.organization,
             telephone: addFormData.telephone,
@@ -108,7 +108,7 @@ const MembersManagement = () => {
           email: data.email,
           name: addFormData.name,
           role: "user",
-          score: addFormData.score,
+          score: addFormData.score ? addFormData.score : 0,
           birthday: addFormData.birthday,
           organization: addFormData.organization,
           telephone: addFormData.telephone,
