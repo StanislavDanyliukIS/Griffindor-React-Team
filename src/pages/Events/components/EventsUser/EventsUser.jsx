@@ -20,21 +20,21 @@ const EventsUser = () => {
 							<th
 								scope='col'
 								onClick={() => requestSort('name')}
-								className={`${getClassNames('name', sorting)} w-25`}
+								className={`${getClassNames('name', sorting)} w-25 pointer`}
 							>
 								Name
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('date')}
-								className={`${getClassNames('date', sorting)} w-25`}
+								className={`${getClassNames('date', sorting)} w-25 pointer`}
 							>
 								Date
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('score')}
-								className={`${getClassNames('score', sorting)} w-50`}
+								className={`${getClassNames('score', sorting)} w-50 pointer`}
 							>
 								Score
 							</th>

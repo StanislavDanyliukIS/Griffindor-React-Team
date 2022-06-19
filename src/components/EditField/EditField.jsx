@@ -6,8 +6,22 @@ export const EditField = ({
 	handleEditFormSubmit,
 	handleCancelClick,
 }) => {
+
+
 	return (
 		<tr className={'theme'}>
+			<td className={'w-15'}>
+				<input
+					className='form-control user-form'
+					type='text'
+					name='index'
+					value={editFormData.index}
+					required='required'
+					placeholder='Name'
+					disabled
+					onChange={handleEditFormChange}
+				/>
+			</td>
 			<td className={'w-15'}>
 				<input
 					className='form-control user-form'
@@ -52,17 +66,19 @@ export const EditField = ({
 					onChange={handleEditFormChange}
 				/>
 			</td>
-			<td className={'w-15'}>
-				<input
-					className='form-control user-form'
-					type='number'
-					name='score'
-					value={editFormData.score}
-					required='required'
-					placeholder='Score'
-					onChange={handleEditFormChange}
-				/>
-			</td>
+			{editFormData.score &&
+				<td className={'w-15'}>
+					<input
+						className='form-control user-form'
+						type='number'
+						name='score'
+						value={editFormData.score}
+						required='required'
+						placeholder='Score'
+						onChange={handleEditFormChange}
+					/>
+				</td>
+			}
 			<td className={'w-15'}>
 				<input
 					className='form-control user-form'
