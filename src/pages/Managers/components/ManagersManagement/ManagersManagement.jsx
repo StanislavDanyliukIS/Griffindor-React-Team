@@ -165,7 +165,6 @@ const ManagersManagement = () => {
     };
 
     const item = items.filter((el) => el.id === editFormData.id);
-    console.log(item[0]);
     const document = doc(db, "users", item[0].id);
     getDoc(document).then((data) => {
       dispatch(
