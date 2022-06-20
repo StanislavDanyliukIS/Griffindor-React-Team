@@ -15,7 +15,7 @@ export const ConfirmDeleteModal = ({ handleDeleteSubmit, user }) => {
 					<div className='modal-header'>
 						{user && (
 							<h5 className='modal-title' id='ModalConfirmDeleteTitle'>
-								Do you want delete {user[0].name}?
+								Do you want to delete {user[0].name}?
 							</h5>
 						)}
 

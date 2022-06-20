@@ -1,22 +1,22 @@
 import './Home.scss';
-import Scorers from "./components/Scorers/Scorers";
-import SoonEvents from "./components/SoonEvents/SoonEvents";
-import Carrousel from "./components/Carrousel/Carrousel";
+import Scorers from './components/Scorers/Scorers';
+import SoonEvents from './components/SoonEvents/SoonEvents';
+import Carrousel from './components/Carrousel/Carrousel';
 
 const Home = () => {
 	return (
-		<div className={"home"}>
+		<div className={'home'}>
 			<div className='container-xl'>
 				<h3 className={'page-name pt-2'}>Home</h3>
 			</div>
-			<div className={"page-body pt-4"}>
-				<div className={"home__first_row"}>
-					<Scorers/>
+			<div className={'page-body pt-4'}>
+				<div className={'home__first_row'}>
+					<Scorers />
 				</div>
-				<div className={"container-xl pt-3"}>
-					<div className={"home__second_row row w-100"}>
-						<SoonEvents/>
-						<Carrousel/>
+				<div className={'container-xl pt-3'}>
+					<div className={'home__second_row row w-100'}>
+						<SoonEvents />
+						<Carrousel />
 					</div>
 				</div>
 			</div>
