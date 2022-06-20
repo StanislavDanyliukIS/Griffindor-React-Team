@@ -40,9 +40,9 @@ const SoonEvents = () => {
     const filteredDate = sortDate.filter((el)=>new Date(el.date)>Date.now()).slice(0, 6);
 
     return (
-        <div className={"soon_events col"}>
-            <h4>Soon Events</h4>
-            <div className={"soon_events-container row w-100 rounded"}>
+        <div className={"soon_events col px-0"}>
+            <h4 className={"soon_events-title"}>Soon Events</h4>
+            <div className={"soon_events-container row  rounded"}>
                 {filteredDate.map((el, idx) => (
                     <SoonEvent
                         name={el.name}

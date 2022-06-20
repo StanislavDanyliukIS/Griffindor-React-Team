@@ -1,6 +1,24 @@
-.footer-link {
-	color: var(--text-color);
-	&:hover {
+.footer{
+	&-text{
+
+	}
+	&-link {
 		color: var(--text-color);
+		&:hover {
+			color: var(--text-color);
+		}
+	}
+}
+
+@media (max-width: 675px) {
+	.footer{
+		font-size: 0.8rem;
+
+	}
+}
+@media (max-width: 540px) {
+	.footer{
+		font-size: 0.6rem;
+
 	}
 }

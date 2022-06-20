@@ -29,6 +29,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   signOut,
+    sendEmailVerification
 } from "firebase/auth";
 import { logOut } from "../../../../store/authSlice";
 import { clearUserData } from "../../../../store/userDataSlice";
@@ -95,7 +96,7 @@ const MembersManagement = () => {
         };
       })
       .then((data) => {
-
+        const score = addFormData.score?addFormData.score:"-";
         dispatch(
           createUser({
             name: addFormData.name,
