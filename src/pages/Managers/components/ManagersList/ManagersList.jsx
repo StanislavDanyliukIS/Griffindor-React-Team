@@ -75,7 +75,7 @@ const ManagersList = () => {
             <div className={"managers-row row w-100"}>
               {results.map((item) => (
                 <Manager
-                  key={Math.random() * 10000000}
+                  key={item.id}
                   name={item.name}
                   number={item.phone}
                   userImageUrl={item.userImageUrl}
