@@ -29,7 +29,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   signOut,
-    sendEmailVerification
+  sendEmailVerification,
 } from "firebase/auth";
 import { logOut } from "../../../../store/authSlice";
 import { clearUserData } from "../../../../store/userDataSlice";
@@ -45,10 +45,10 @@ const MembersManagement = () => {
   const [editFormData, setEditFormData] = useState("");
   const [editUser, setEditUser] = useState(null);
 
-  const indexedMembers = members.map((el,idx)=> {
-    el.index = idx+1;
+  const indexedMembers = members.map((el, idx) => {
+    el.index = idx + 1;
     return el;
-  })
+  });
 
   const dispatch = useDispatch();
 
@@ -96,7 +96,6 @@ const MembersManagement = () => {
         };
       })
       .then((data) => {
-        const score = addFormData.score?addFormData.score:"-";
         dispatch(
           createUser({
             name: addFormData.name,
@@ -137,7 +136,8 @@ const MembersManagement = () => {
           userImageUrl: null,
           photo: null,
         });
-      });
+      })
+      .catch((error) => console.log(error));
 
     signOut(auth)
       .then(() => {
@@ -230,7 +230,7 @@ const MembersManagement = () => {
   const handleEditClick = (event, item) => {
     event.preventDefault();
     setEditUser(item.id);
-    console.log(item)
+    console.log(item);
     const formValues = {
       index: item.index,
       name: item.name,
@@ -259,6 +259,7 @@ const MembersManagement = () => {
         <ModalMember
           handleAddFormChange={handleAddFormChange}
           handleAddFormSubmit={handleAddFormSubmit}
+          setAddFormData={setAddFormData}
         />
 
         <ConfirmDeleteModal
@@ -295,7 +296,10 @@ const MembersManagement = () => {
               <th
                 scope="col"
                 onClick={() => requestSort("organization")}
-                className={`${getClassNames("organization", sorting)} w-10 pointer`}
+                className={`${getClassNames(
+                  "organization",
+                  sorting
+                )} w-10 pointer`}
               >
                 Company
               </th>
