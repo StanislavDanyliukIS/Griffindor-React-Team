@@ -82,62 +82,64 @@ const MembersManagement = () => {
 	const handleAddFormSubmit = event => {
 		event.preventDefault();
 
-		createUserWithEmailAndPassword(auth, addFormData.email, password)
-			.then(userCredential => {
-				dispatch(
-					createUser({
-						email: userCredential.user.email,
-						id: userCredential.user.uid,
-					})
-				);
-				return {
-					email: userCredential.user.email,
-					id: userCredential.user.uid,
-				};
-			})
-			.then(data => {
-				const score = addFormData.score ? addFormData.score : '-';
-				dispatch(
-					createUser({
-						name: addFormData.name,
-						role: 'user',
-						score: addFormData.score ? addFormData.score : 0,
-						birthday: addFormData.birthday,
-						organization: addFormData.organization,
-						telephone: addFormData.telephone,
-						password: password,
-						userImageUrl: null,
-						photo: null,
-					})
-				);
-				return {
-					id: data.id,
-					email: data.email,
-					name: addFormData.name,
-					role: 'user',
-					score: addFormData.score ? addFormData.score : 0,
-					birthday: addFormData.birthday,
-					organization: addFormData.organization,
-					telephone: addFormData.telephone,
-					password: password,
-					userImageUrl: null,
-					photo: null,
-				};
-			})
-			.then(user => {
-				setDoc(doc(db, 'users', user.id), {
-					email: user.email,
-					name: user.name,
-					role: user.role,
-					score: user.score,
-					birthday: user.birthday,
-					organization: user.organization,
-					telephone: user.telephone,
-					password: password,
-					userImageUrl: null,
-					photo: null,
-				});
-			});
+
+    createUserWithEmailAndPassword(auth, addFormData.email, password)
+      .then((userCredential) => {
+        dispatch(
+          createUser({
+            email: userCredential.user.email,
+            id: userCredential.user.uid,
+          })
+        );
+        return {
+          email: userCredential.user.email,
+          id: userCredential.user.uid,
+        };
+      })
+      .then((data) => {
+        const score = addFormData.score?addFormData.score:"-";
+        dispatch(
+          createUser({
+            name: addFormData.name,
+            role: "user",
+            score: addFormData.score ? addFormData.score : "0",
+            birthday: addFormData.birthday,
+            organization: addFormData.organization,
+            telephone: addFormData.telephone,
+            password: password,
+            userImageUrl: null,
+            photo: null,
+          })
+        );
+        return {
+          id: data.id,
+          email: data.email,
+          name: addFormData.name,
+          role: "user",
+          score: addFormData.score ? addFormData.score : "0",
+          birthday: addFormData.birthday,
+          organization: addFormData.organization,
+          telephone: addFormData.telephone,
+          password: password,
+          userImageUrl: null,
+          photo: null,
+        };
+      })
+      .then((user) => {
+        setDoc(doc(db, "users", user.id), {
+          email: user.email,
+          name: user.name,
+          role: user.role,
+          score: user.score,
+          birthday: user.birthday,
+          organization: user.organization,
+          telephone: user.telephone,
+          password: password,
+          userImageUrl: null,
+          photo: null,
+        });
+      });
+
 
 		signOut(auth)
 			.then(() => {

@@ -91,12 +91,8 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
 
   const handleScore = () => {
     setUser({
-      name: "",
-      email: "",
+      ...user,
       score: "",
-      birthday: "",
-      telephone: "",
-      organization: "",
     });
   };
 
