@@ -55,14 +55,16 @@ const ManagersManagement = () => {
   useEffect(() => {
     let q = query(collection(db, "users"), where("role", "==", "manager"));
 
+    const managersList = onSnapshot(q, (querySnapshot) => {
+      let managersArray = [];
 
-			querySnapshot.forEach(doc => {
-				managersArray.push({ ...doc.data(), id: doc.id });
-			});
-			setManagers(managersArray);
-		});
-		return () => managersList();
-	}, []);
+      querySnapshot.forEach((doc) => {
+        managersArray.push({ ...doc.data(), id: doc.id });
+      });
+      setManagers(managersArray);
+    });
+    return () => managersList();
+  }, []);
 
 	const handleAddFormChange = event => {
 		event.preventDefault();
@@ -231,20 +233,7 @@ const ManagersManagement = () => {
 		setEditFormData(formValues);
 	};
 
-  const handleEditClick = (event, item) => {
-    event.preventDefault();
-    setEditUser(item.id);
-    const formValues = {
-      index: item.index,
-      name: item.name,
-      email: item.email,
-      telephone: item.telephone,
-      organization: item.organization,
-      birthday: item.birthday,
-      id: item.id,
-    };
-    setEditFormData(formValues);
-  };
+
 
   return (
     <div className="container-xl managers-container">
