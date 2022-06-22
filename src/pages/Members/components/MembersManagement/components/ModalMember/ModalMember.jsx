@@ -1,7 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+
+import { collection, query, where, getDocs } from "firebase/firestore";
+
+import { db } from "../../../../../../firebase";
+import { ToastPortal } from "../../../../../../components/ToastPortal/ToastPortal";
+
 import "./ModalMember.scss";
 
-export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
+export const ModalMember = ({
+  handleAddFormSubmit,
+  handleAddFormChange,
+  setAddFormData,
+}) => {
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -10,6 +20,7 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
     telephone: "",
     organization: "",
   });
+  const [usersEmail, setUsersEmail] = useState([]);
   const [nameValidation, setNameValidation] = useState("hide-text-danger");
   const [emailValidation, setEmailValidation] = useState("hide-text-danger");
   const [phoneValidation, setPhoneValidation] = useState("hide-text-danger");
@@ -20,14 +31,38 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
     useState("hide-text-danger");
 
   const handleChange = (e) => {
+    if (e.target.value === " ") {
+      return;
+    }
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+  const toastRef = useRef();
+
   const nameValidationClass = () => {
+    const userName = user.name
+      .trim()
+      .split("")
+      .map((elem) => Number(elem))
+      .filter((elem) => elem !== 0)
+      .every((elem) => isNaN(elem));
     setNameValidation(
-      user.name.length > 2 ? "hide-text-danger" : "text-danger"
+      (user.name.length >= 2 && userName) || user.name.length === 0
+        ? "hide-text-danger"
+        : "text-danger"
     );
   };
+
+  useEffect(() => {
+    let q = query(collection(db, "users"), where("role", "==", "user"));
+    const usersEmailArray = [];
+    getDocs(q).then((data) =>
+      data.forEach((user) => {
+        usersEmailArray.push(user.data().email);
+      })
+    );
+    setUsersEmail(usersEmailArray);
+  }, [user]);
 
   const validateEmailClass = () => {
     const re =
@@ -116,8 +151,27 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
     scoreValidationClass();
   };
 
+  const checkUserEmail = () => {
+    if (usersEmail.includes(user.email)) {
+      toastRef.current.addMessage({
+        mode: "warning",
+        message: "User with this email is already registered.",
+      });
+      setUser({ ...user, email: "" });
+    }
+  };
+
   const clearForm = () => {
     setUser({
+      name: "",
+      email: "",
+      score: "0",
+      birthday: "",
+      telephone: "",
+      organization: "",
+    });
+
+    setAddFormData({
       name: "",
       email: "",
       score: "0",
@@ -135,7 +189,7 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
       setScoreValidation,
     ].forEach((elem) => elem("hide-text-danger"));
   };
-
+  console.log(user);
   return (
     <div
       className="modal fade"
@@ -145,6 +199,7 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
       aria-labelledby="ModalCreateMemberCenterTitle"
       aria-hidden="true"
     >
+      <ToastPortal ref={toastRef} autoClose={false} />
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
           <div className="modal-header">
@@ -190,7 +245,10 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
                   handleAddFormChange(e);
                   handleChange(e);
                 }}
-                onBlur={checkFormObject}
+                onBlur={() => {
+                  checkFormObject();
+                  nameValidationClass();
+                }}
               />
               <small className={`${nameValidation} warning-text`}>
                 Incorrect user name.
@@ -203,12 +261,15 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
               <input
                 className="form-control user-form"
                 id="event-name"
-                type="email"
+                type="text"
                 name="email"
                 value={user.email}
                 required="required"
                 placeholder="example@mail.com"
-                onBlur={validateEmailClass}
+                onBlur={() => {
+                  validateEmailClass();
+                  checkUserEmail();
+                }}
                 onChange={(e) => {
                   handleAddFormChange(e);
                   handleChange(e);
@@ -303,7 +364,7 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
                   handleAddFormChange(e);
                   handleChange(e);
                 }}
-                onBlur={(e) => {
+                onBlur={() => {
                   ageDateValidationClass();
                 }}
               />
@@ -327,7 +388,10 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
                 type="submit"
                 className="btn btn-outline-primary"
                 data-dismiss="modal"
-                onFocus={checkForm}
+                onFocus={(e) => {
+                  checkForm(e);
+                  checkUserEmail();
+                }}
                 onClick={handleAddFormSubmit}
               >
                 Submit
@@ -337,7 +401,10 @@ export const ModalMember = ({ handleAddFormSubmit, handleAddFormChange }) => {
                 type="submit"
                 className="btn btn-outline-primary"
                 data-dismiss
-                onClick={checkForm}
+                onClick={(e) => {
+                  checkForm(e);
+                  checkUserEmail();
+                }}
               >
                 Submit
               </button>

@@ -44,18 +44,17 @@ const ManagersManagement = () => {
 	const [editFormData, setEditFormData] = useState('');
 	const [editUser, setEditUser] = useState(null);
 
-	const dispatch = useDispatch();
-	const indexedManagers = managers.map((el, idx) => {
-		el.index = idx + 1;
-		return el;
-	});
-	const { items, requestSort, sorting } = useSorting(indexedManagers);
 
-	useEffect(() => {
-		let q = query(collection(db, 'users'), where('role', '==', 'manager'));
+  const dispatch = useDispatch();
+  const indexedManagers = managers.map((el, idx) => {
+    el.index = idx + 1;
+    return el;
+  });
+  const { items, requestSort, sorting } = useSorting(indexedManagers);
 
-		const managersList = onSnapshot(q, querySnapshot => {
-			let managersArray = [];
+  useEffect(() => {
+    let q = query(collection(db, "users"), where("role", "==", "manager"));
+
 
 			querySnapshot.forEach(doc => {
 				managersArray.push({ ...doc.data(), id: doc.id });
@@ -232,114 +231,131 @@ const ManagersManagement = () => {
 		setEditFormData(formValues);
 	};
 
-	return (
-		<div className='container-xl managers-container'>
-			<main>
-				<h3 className='title-management'>Managers Management</h3>
-				<button
-					type='button'
-					className='btn btn-outline-secondary create-manager-btn btn-table-create'
-					data-toggle='modal'
-					data-target='#ModalCreateManager'
-				>
-					<span className='btn-create-user-text'>Add a new user</span>
-				</button>
-				<ModalManager
-					handleAddFormChange={handleAddFormChange}
-					handleAddFormSubmit={handleAddFormSubmit}
-				/>
-				<ConfirmDeleteModal
-					item={deleteManager}
-					handleDeleteSubmit={handleDeleteSubmit}
-				/>
+  const handleEditClick = (event, item) => {
+    event.preventDefault();
+    setEditUser(item.id);
+    const formValues = {
+      index: item.index,
+      name: item.name,
+      email: item.email,
+      telephone: item.telephone,
+      organization: item.organization,
+      birthday: item.birthday,
+      id: item.id,
+    };
+    setEditFormData(formValues);
+  };
 
-				<table className='table manager-table theme'>
-					<thead>
-						<tr>
-							<th
-								scope='col'
-								onClick={() => requestSort('index')}
-								className={`${getClassNames(
-									'index',
-									sorting
-								)} w-10 theme pointer`}
-							>
-								№
-							</th>
-							<th
-								scope='col'
-								onClick={() => requestSort('name')}
-								className={`${getClassNames(
-									'name',
-									sorting
-								)} w-15 theme pointer`}
-							>
-								Name
-							</th>
-							<th
-								scope='col'
-								onClick={() => requestSort('email')}
-								className={`${getClassNames(
-									'email',
-									sorting
-								)} w-15 theme pointer`}
-							>
-								Email
-							</th>
-							<th scope='col' className={'w-15 theme'}>
-								Telephone
-							</th>
-							<th
-								scope='col'
-								onClick={() => requestSort('organization')}
-								className={`${getClassNames(
-									'organization',
-									sorting
-								)} w-10 theme pointer`}
-							>
-								Company
-							</th>
+  return (
+    <div className="container-xl managers-container">
+      <main>
+        <h3 className="title-management">Managers Management</h3>
+        <button
+          type="button"
+          className="btn btn-outline-secondary create-manager-btn btn-table-create"
+          data-toggle="modal"
+          data-target="#ModalCreateManager"
+        >
+          <span className="btn-create-user-text">Add a new user</span>
+        </button>
+        <ModalManager
+          handleAddFormChange={handleAddFormChange}
+          handleAddFormSubmit={handleAddFormSubmit}
+          setAddFormData={setAddFormData}
+        />
+        <ConfirmDeleteModal
+          user={deleteManager}
+          handleDeleteSubmit={handleDeleteSubmit}
+        />
 
-							<th
-								scope='col'
-								onClick={() => requestSort('birthday')}
-								className={`${getClassNames(
-									'birthday',
-									sorting
-								)} w-15 theme pointer`}
-							>
-								Date of Birth
-							</th>
-							<th scope='col' className={'theme'}></th>
-							<th scope='col' className={'theme'}></th>
-						</tr>
-					</thead>
-					<tbody>
-						{items.map(item => (
-							<>
-								{editUser === item.id ? (
-									<EditField
-										key={item.id}
-										editFormData={editFormData}
-										handleEditFormChange={handleEditFormChange}
-										handleEditFormSubmit={handleEditFormSubmit}
-										handleCancelClick={handleCancelClick}
-									/>
-								) : (
-									<ReadField
-										key={item.id}
-										item={item}
-										handleEditClick={handleEditClick}
-										handleDeleteClick={handleDeleteClick}
-									/>
-								)}
-							</>
-						))}
-					</tbody>
-				</table>
-			</main>
-		</div>
-	);
+        <table className="table manager-table theme">
+          <thead>
+            <tr>
+              <th
+                scope="col"
+                onClick={() => requestSort("index")}
+                className={`${getClassNames(
+                  "index",
+                  sorting
+                )} w-10 theme pointer`}
+              >
+                №
+              </th>
+              <th
+                scope="col"
+                onClick={() => requestSort("name")}
+                className={`${getClassNames(
+                  "name",
+                  sorting
+                )} w-15 theme pointer`}
+              >
+                Name
+              </th>
+              <th
+                scope="col"
+                onClick={() => requestSort("email")}
+                className={`${getClassNames(
+                  "email",
+                  sorting
+                )} w-15 theme pointer`}
+              >
+                Email
+              </th>
+              <th scope="col" className={"w-15 theme"}>
+                Telephone
+              </th>
+              <th
+                scope="col"
+                onClick={() => requestSort("organization")}
+                className={`${getClassNames(
+                  "organization",
+                  sorting
+                )} w-10 theme pointer`}
+              >
+                Company
+              </th>
+
+              <th
+                scope="col"
+                onClick={() => requestSort("birthday")}
+                className={`${getClassNames(
+                  "birthday",
+                  sorting
+                )} w-15 theme pointer`}
+              >
+                Date of Birth
+              </th>
+              <th scope="col" className={"theme"}></th>
+              <th scope="col" className={"theme"}></th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((item) => (
+              <>
+                {editUser === item.id ? (
+                  <EditField
+                    key={item.id}
+                    editFormData={editFormData}
+                    handleEditFormChange={handleEditFormChange}
+                    handleEditFormSubmit={handleEditFormSubmit}
+                    handleCancelClick={handleCancelClick}
+                  />
+                ) : (
+                  <ReadField
+                    key={item.id}
+                    item={item}
+                    handleEditClick={handleEditClick}
+                    handleDeleteClick={handleDeleteClick}
+                  />
+                )}
+              </>
+            ))}
+          </tbody>
+        </table>
+      </main>
+    </div>
+  );
+
 };
 
 export default ManagersManagement;

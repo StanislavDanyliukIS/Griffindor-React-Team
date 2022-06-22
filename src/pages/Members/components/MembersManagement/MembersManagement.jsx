@@ -26,15 +26,17 @@ import {
 } from '../../../../store/crudSlice';
 import { useDispatch } from 'react-redux';
 import {
-	createUserWithEmailAndPassword,
-	getAuth,
-	signOut,
-	sendEmailVerification,
-} from 'firebase/auth';
-import { logOut } from '../../../../store/authSlice';
-import { clearUserData } from '../../../../store/userDataSlice';
-import { ModalMember } from './components/ModalMember/ModalMember';
-import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal/ConfirmDeleteModal';
+
+  createUserWithEmailAndPassword,
+  getAuth,
+  signOut,
+  sendEmailVerification,
+} from "firebase/auth";
+import { logOut } from "../../../../store/authSlice";
+import { clearUserData } from "../../../../store/userDataSlice";
+import { ModalMember } from "./components/ModalMember/ModalMember";
+import { ConfirmDeleteModal } from "../../../../components/ConfirmDeleteModal/ConfirmDeleteModal";
+
 
 const MembersManagement = () => {
 	const auth = getAuth();
@@ -45,10 +47,13 @@ const MembersManagement = () => {
 	const [editFormData, setEditFormData] = useState('');
 	const [editUser, setEditUser] = useState(null);
 
-	const indexedMembers = members.map((el, idx) => {
-		el.index = idx + 1;
-		return el;
-	});
+
+  const indexedMembers = members.map((el, idx) => {
+    el.index = idx + 1;
+    return el;
+  });
+
+
 
 	const dispatch = useDispatch();
 
@@ -97,7 +102,6 @@ const MembersManagement = () => {
         };
       })
       .then((data) => {
-        const score = addFormData.score?addFormData.score:"-";
         dispatch(
           createUser({
             name: addFormData.name,
@@ -138,7 +142,8 @@ const MembersManagement = () => {
           userImageUrl: null,
           photo: null,
         });
-      });
+      })
+      .catch((error) => console.log(error));
 
 
 		signOut(auth)
@@ -229,124 +234,128 @@ const MembersManagement = () => {
 		setDeleteMember('');
 	};
 
-	const handleEditClick = (event, item) => {
-		event.preventDefault();
-		setEditUser(item.id);
-		const formValues = {
-			index: item.index,
-			name: item.name,
-			email: item.email,
-			telephone: item.telephone,
-			organization: item.organization,
-			score: item.score,
-			birthday: item.birthday,
-			id: item.id,
-		};
-		setEditFormData(formValues);
-	};
 
-	return (
-		<div className='container-xl members-container'>
-			<main>
-				<h3 className='title-management'>Members Management</h3>
-				<button
-					type='button'
-					className='btn create-member-btn btn-outline-secondary btn-table-create '
-					data-toggle='modal'
-					data-target='#ModalCreateMember'
-				>
-					<span className='btn-create-user-text'>Add a new user</span>
-				</button>
-				<ModalMember
-					handleAddFormChange={handleAddFormChange}
-					handleAddFormSubmit={handleAddFormSubmit}
-				/>
+  const handleEditClick = (event, item) => {
+    event.preventDefault();
+    setEditUser(item.id);
+    console.log(item);
+    const formValues = {
+      index: item.index,
+      name: item.name,
+      email: item.email,
+      telephone: item.telephone,
+      organization: item.organization,
+      score: item.score,
+      birthday: item.birthday,
+      id: item.id,
+    };
+    setEditFormData(formValues);
+  };
 
-				<ConfirmDeleteModal
-					item={deleteMember}
-					handleDeleteSubmit={handleDeleteSubmit}
-				/>
-				<table className='table member-table'>
-					<thead>
-						<tr>
-							<th
-								scope='col'
-								onClick={() => requestSort('index')}
-								className={`${getClassNames('index', sorting)} w-10 pointer`}
-							>
-								№
-							</th>
-							<th
-								scope='col'
-								onClick={() => requestSort('name')}
-								className={`${getClassNames('name', sorting)} w-15 pointer`}
-							>
-								Name
-							</th>
-							<th
-								scope='col'
-								onClick={() => requestSort('email')}
-								className={`${getClassNames('email', sorting)} w-15 pointer`}
-							>
-								Email
-							</th>
-							<th scope='col' className={'w-15 '}>
-								Telephone
-							</th>
-							<th
-								scope='col'
-								onClick={() => requestSort('organization')}
-								className={`${getClassNames(
-									'organization',
-									sorting
-								)} w-10 pointer`}
-							>
-								Company
-							</th>
-							<th
-								scope='col'
-								onClick={() => requestSort('score')}
-								className={`${getClassNames('score', sorting)} w-15 pointer`}
-							>
-								Score
-							</th>
-							<th
-								scope='col'
-								onClick={() => requestSort('birthday')}
-								className={`${getClassNames('birthday', sorting)} w-15 pointer`}
-							>
-								Date of Birth
-							</th>
-							<th scope='col'></th>
-							<th scope='col'></th>
-						</tr>
-					</thead>
-					<tbody>
-						{items.map(item => (
-							<>
-								{editUser === item.id ? (
-									<EditField
-										key={item.id}
-										editFormData={editFormData}
-										handleEditFormChange={handleEditFormChange}
-										handleEditFormSubmit={handleEditFormSubmit}
-										handleCancelClick={handleCancelClick}
-									/>
-								) : (
-									<ReadField
-										key={item.id}
-										item={item}
-										handleEditClick={handleEditClick}
-										handleDeleteClick={handleDeleteClick}
-									/>
-								)}
-							</>
-						))}
-					</tbody>
-				</table>
-			</main>
-		</div>
-	);
+  return (
+    <div className="container-xl members-container">
+      <main>
+        <h3 className="title-management">Members Management</h3>
+        <button
+          type="button"
+          className="btn create-member-btn btn-outline-secondary btn-table-create "
+          data-toggle="modal"
+          data-target="#ModalCreateMember"
+        >
+          <span className="btn-create-user-text">Add a new user</span>
+        </button>
+        <ModalMember
+          handleAddFormChange={handleAddFormChange}
+          handleAddFormSubmit={handleAddFormSubmit}
+          setAddFormData={setAddFormData}
+        />
+
+        <ConfirmDeleteModal
+          user={deleteMember}
+          handleDeleteSubmit={handleDeleteSubmit}
+        />
+        <table className="table member-table">
+          <thead>
+            <tr>
+              <th
+                scope="col"
+                onClick={() => requestSort("index")}
+                className={`${getClassNames("index", sorting)} w-10 pointer`}
+              >
+                №
+              </th>
+              <th
+                scope="col"
+                onClick={() => requestSort("name")}
+                className={`${getClassNames("name", sorting)} w-15 pointer`}
+              >
+                Name
+              </th>
+              <th
+                scope="col"
+                onClick={() => requestSort("email")}
+                className={`${getClassNames("email", sorting)} w-15 pointer`}
+              >
+                Email
+              </th>
+              <th scope="col" className={"w-15 "}>
+                Telephone
+              </th>
+              <th
+                scope="col"
+                onClick={() => requestSort("organization")}
+                className={`${getClassNames(
+                  "organization",
+                  sorting
+                )} w-10 pointer`}
+              >
+                Company
+              </th>
+              <th
+                scope="col"
+                onClick={() => requestSort("score")}
+                className={`${getClassNames("score", sorting)} w-15 pointer`}
+              >
+                Score
+              </th>
+              <th
+                scope="col"
+                onClick={() => requestSort("birthday")}
+                className={`${getClassNames("birthday", sorting)} w-15 pointer`}
+              >
+                Date of Birth
+              </th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((item) => (
+              <>
+                {editUser === item.id ? (
+                  <EditField
+                    key={item.id}
+                    editFormData={editFormData}
+                    handleEditFormChange={handleEditFormChange}
+                    handleEditFormSubmit={handleEditFormSubmit}
+                    handleCancelClick={handleCancelClick}
+                  />
+                ) : (
+                  <ReadField
+                    key={item.id}
+                    item={item}
+                    handleEditClick={handleEditClick}
+                    handleDeleteClick={handleDeleteClick}
+                  />
+                )}
+              </>
+            ))}
+          </tbody>
+        </table>
+      </main>
+    </div>
+  );
+
 };
 
 export default MembersManagement;
