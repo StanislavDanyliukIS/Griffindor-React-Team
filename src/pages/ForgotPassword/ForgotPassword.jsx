@@ -54,7 +54,7 @@ const ForgotPassword = () => {
 
 	return (
 		<div className='forgotpassword-page '>
-			<ToastPortal ref={toastRef} autoClose={false} />
+			<ToastPortal ref={toastRef} />
 			<form className='forgotpassword-form'>
 				<h6 className='forgotpassword-title'>Forgot password</h6>
 				<p className='forgotpassword-text'>

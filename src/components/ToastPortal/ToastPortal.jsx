@@ -8,7 +8,9 @@ import './ToastPortal.scss';
 
 export const ToastPortal = forwardRef(
 	({ autoClose = true, autoCloseTime = 5000 }, ref) => {
-		const [toasts, setToasts] = useState([]);
+		const [toasts, setToasts] = useState([
+		
+		]);
 		const { loaded, portalId } = useToastPortal();
 
 		useToastAutoClose({

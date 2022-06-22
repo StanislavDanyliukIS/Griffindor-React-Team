@@ -1,6 +1,6 @@
 import './ConfirmDeleteModal.scss';
 
-export const ConfirmDeleteModal = ({ handleDeleteSubmit, user }) => {
+export const ConfirmDeleteModal = ({ handleDeleteSubmit, item }) => {
 	return (
 		<div
 			className='modal fade'
@@ -13,9 +13,9 @@ export const ConfirmDeleteModal = ({ handleDeleteSubmit, user }) => {
 			<div className='modal-dialog modal-dialog-centered' role='document'>
 				<div className='modal-content modal-deleteConfirm'>
 					<div className='modal-header'>
-						{user && (
+						{item && (
 							<h5 className='modal-title' id='ModalConfirmDeleteTitle'>
-								Do you want to delete {user[0].name}?
+								Do you want to delete {item.name}?
 							</h5>
 						)}
 
@@ -24,7 +24,6 @@ export const ConfirmDeleteModal = ({ handleDeleteSubmit, user }) => {
 							className='close'
 							data-dismiss='modal'
 							aria-label='Close'
-							// onClick={handleClearForm}
 						>
 							<span className='close-btn-header' aria-hidden='true'>
 								<svg
@@ -45,7 +44,6 @@ export const ConfirmDeleteModal = ({ handleDeleteSubmit, user }) => {
 						<button
 							type='button'
 							className='btn btn-outline-secondary'
-							// onClick={handleClearForm}
 							data-dismiss='modal'
 						>
 							Cancel
