@@ -25,6 +25,7 @@ export const ReadField = ({ handleEditClick, handleDeleteClick, item }) => {
         </td>
       )}
 
+
       <td className="table-row-birth table-text-content ">{item.birthday}</td>
       <td className="table-btn table-text-content ">
         <button
