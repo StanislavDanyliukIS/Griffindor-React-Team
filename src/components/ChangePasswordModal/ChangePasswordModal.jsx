@@ -121,6 +121,7 @@ const ChangePasswordModal = () => {
 							className='form-control'
 							placeholder='Password'
 							value={passwordObj.currentPassword}
+							autoComplete='on'
 							onChange={handleChange}
 						/>
 						<small className='form-hint'>Enter your current password.</small>
@@ -139,6 +140,7 @@ const ChangePasswordModal = () => {
 							name='newPassword_1'
 							value={passwordObj.newPassword_1}
 							onChange={handleChange}
+							autoComplete='on'
 							onBlur={checkPasswordLength}
 						/>
 						<small className='form-hint'>
@@ -162,6 +164,7 @@ const ChangePasswordModal = () => {
 							placeholder='Password'
 							value={passwordObj.newPassword_2}
 							onChange={handleChange}
+							autoComplete='on'
 							onBlur={passwordNotMatch}
 						/>
 						<small className='form-hint'>Repeat your new password.</small>

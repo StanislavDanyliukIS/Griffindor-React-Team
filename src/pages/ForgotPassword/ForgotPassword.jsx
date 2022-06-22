@@ -56,6 +56,7 @@ const ForgotPassword = () => {
       });
   };
 
+
   return (
     <div className="forgotpassword-page ">
       <ToastPortal ref={toastRef} autoClose={false} />
@@ -107,6 +108,7 @@ const ForgotPassword = () => {
       </p>
     </div>
   );
+
 };
 
 export default ForgotPassword;
