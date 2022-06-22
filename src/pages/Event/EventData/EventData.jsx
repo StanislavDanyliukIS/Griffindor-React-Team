@@ -181,7 +181,7 @@ const EventData = ({ event }) => {
 											type='text'
 											name='comment'
 											value={editUserData.comment}
-											placeholder='Type some comment'
+											placeholder='Comment'
 											onChange={handleEditFormChange}
 										/>
 									</td>
@@ -251,7 +251,7 @@ const EventData = ({ event }) => {
 											disabled
 										/>
 									</td>
-									<td className='table-btn table-text-content '>
+									<td>
 										<button
 											onClick={() => handleEditClick(item)}
 											type='button'

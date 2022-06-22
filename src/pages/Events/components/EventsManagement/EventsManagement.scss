@@ -20,6 +20,16 @@
 	}
 }
 
+.table-btn {
+	text-align: right;
+}
+
+.btn-delete {
+	display: flex;
+	padding: 10px 20px;
+	margin-left: auto;
+}
+
 .ascending {
 	&::after {
 		content: ' ↓';

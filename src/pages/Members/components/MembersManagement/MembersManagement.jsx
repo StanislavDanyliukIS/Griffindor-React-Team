@@ -39,7 +39,7 @@ import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal/Co
 const MembersManagement = () => {
 	const auth = getAuth();
 	const password = '111111';
-	const [deleteMember, setDeleteMember] = useState('');
+	const [deleteMember, setDeleteMember] = useState({});
 	const [members, setMembers] = useState([]);
 	const [addFormData, setAddFormData] = useState('');
 	const [editFormData, setEditFormData] = useState('');
@@ -200,11 +200,11 @@ const MembersManagement = () => {
 
 	const handleDeleteClick = itemId => {
 		const user = items.filter(el => el.id === itemId);
-		setDeleteMember(user);
+		setDeleteMember(user[0]);
 	};
 
 	const handleDeleteSubmit = () => {
-		const document = doc(db, 'users', deleteMember[0].id);
+		const document = doc(db, 'users', deleteMember.id);
 		getDoc(document).then(() => {
 			deleteDoc(document);
 			dispatch(
@@ -261,7 +261,7 @@ const MembersManagement = () => {
 				/>
 
 				<ConfirmDeleteModal
-					user={deleteMember}
+					item={deleteMember}
 					handleDeleteSubmit={handleDeleteSubmit}
 				/>
 				<table className='table member-table'>
