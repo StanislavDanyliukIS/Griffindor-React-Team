@@ -19,7 +19,7 @@ import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import Login from './pages/Login/Login';
 import RequiredAuth from './hoc/RequiredAuth';
 import LoginAccess from './hoc/LoginAccess';
-import EditUserData from './pages/EditUserData/EditUseerData';
+import EditUserData from './pages/EditUserData/EditUserData';
 
 const App = () => {
 	const theme = useSelector(state => state.theme);

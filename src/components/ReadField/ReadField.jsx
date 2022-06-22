@@ -6,6 +6,7 @@ export const ReadField = ({ handleEditClick, handleDeleteClick, item }) => {
       return (item.score = 6);
     }
   };
+
   return (
     <tr className={" bg-theme"}>
       <th scope="row" className="table-subtitle table-text-content name-column">
@@ -23,6 +24,7 @@ export const ReadField = ({ handleEditClick, handleDeleteClick, item }) => {
           {!!item.score ? item.score : zero()}
         </td>
       )}
+
 
       <td className="table-row-birth table-text-content ">{item.birthday}</td>
       <td className="table-btn table-text-content ">

@@ -1,31 +1,32 @@
-import { useSorting } from "../../../../hook/useSorting";
-import { useEffect, useState } from "react";
+import { useSorting } from '../../../../hook/useSorting';
+import { useEffect, useState } from 'react';
 
-import { getClassNames } from "../../../../functions/getClassNames";
-import { EditField } from "../../../../components/EditField/EditField";
-import { ReadField } from "../../../../components/ReadField/ReadField";
+import { getClassNames } from '../../../../functions/getClassNames';
+import { EditField } from '../../../../components/EditField/EditField';
+import { ReadField } from '../../../../components/ReadField/ReadField';
 
-import "./MembersManagement.scss";
+import './MembersManagement.scss';
 import {
-  collection,
-  onSnapshot,
-  query,
-  where,
-  updateDoc,
-  doc,
-  getDoc,
-  deleteDoc,
-  setDoc,
-} from "firebase/firestore";
-import { db } from "../../../../firebase";
+	collection,
+	onSnapshot,
+	query,
+	where,
+	updateDoc,
+	doc,
+	getDoc,
+	deleteDoc,
+	setDoc,
+} from 'firebase/firestore';
+import { db } from '../../../../firebase';
 
 import {
-  createUser,
-  updateUser,
-  deleteUser,
-} from "../../../../store/crudSlice";
-import { useDispatch } from "react-redux";
+	createUser,
+	updateUser,
+	deleteUser,
+} from '../../../../store/crudSlice';
+import { useDispatch } from 'react-redux';
 import {
+
   createUserWithEmailAndPassword,
   getAuth,
   signOut,
@@ -36,51 +37,56 @@ import { clearUserData } from "../../../../store/userDataSlice";
 import { ModalMember } from "./components/ModalMember/ModalMember";
 import { ConfirmDeleteModal } from "../../../../components/ConfirmDeleteModal/ConfirmDeleteModal";
 
+
 const MembersManagement = () => {
-  const auth = getAuth();
-  const password = "111111";
-  const [deleteMember, setDeleteMember] = useState("");
-  const [members, setMembers] = useState([]);
-  const [addFormData, setAddFormData] = useState("");
-  const [editFormData, setEditFormData] = useState("");
-  const [editUser, setEditUser] = useState(null);
+	const auth = getAuth();
+	const password = '111111';
+	const [deleteMember, setDeleteMember] = useState({});
+	const [members, setMembers] = useState([]);
+	const [addFormData, setAddFormData] = useState('');
+	const [editFormData, setEditFormData] = useState('');
+	const [editUser, setEditUser] = useState(null);
+
 
   const indexedMembers = members.map((el, idx) => {
     el.index = idx + 1;
     return el;
   });
 
-  const dispatch = useDispatch();
 
-  const { items, requestSort, sorting } = useSorting(indexedMembers);
-  useEffect(() => {
-    let q;
-    q = query(collection(db, "users"), where("role", "==", "user"));
 
-    const membersList = onSnapshot(q, (querySnapshot) => {
-      let membersArray = [];
+	const dispatch = useDispatch();
 
-      querySnapshot.forEach((doc) => {
-        membersArray.push({ ...doc.data(), id: doc.id });
-      });
-      setMembers(membersArray);
-    });
-    return () => membersList();
-  }, []);
+	const { items, requestSort, sorting } = useSorting(indexedMembers);
+	useEffect(() => {
+		let q;
+		q = query(collection(db, 'users'), where('role', '==', 'user'));
 
-  const handleAddFormChange = (event) => {
-    event.preventDefault();
+		const membersList = onSnapshot(q, querySnapshot => {
+			let membersArray = [];
 
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
+			querySnapshot.forEach(doc => {
+				membersArray.push({ ...doc.data(), id: doc.id });
+			});
+			setMembers(membersArray);
+		});
+		return () => membersList();
+	}, []);
 
-    const newFormData = { ...addFormData };
-    newFormData[fieldName] = fieldValue;
-    setAddFormData(newFormData);
-  };
+	const handleAddFormChange = event => {
+		event.preventDefault();
 
-  const handleAddFormSubmit = (event) => {
-    event.preventDefault();
+		const fieldName = event.target.getAttribute('name');
+		const fieldValue = event.target.value;
+
+		const newFormData = { ...addFormData };
+		newFormData[fieldName] = fieldValue;
+		setAddFormData(newFormData);
+	};
+
+	const handleAddFormSubmit = event => {
+		event.preventDefault();
+
 
     createUserWithEmailAndPassword(auth, addFormData.email, password)
       .then((userCredential) => {
@@ -139,93 +145,95 @@ const MembersManagement = () => {
       })
       .catch((error) => console.log(error));
 
-    signOut(auth)
-      .then(() => {
-        dispatch(logOut());
-        dispatch(clearUserData());
-        localStorage.removeItem("role");
-        localStorage.removeItem("isAuth");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
-  const handleEditFormChange = (event) => {
-    event.preventDefault();
+		signOut(auth)
+			.then(() => {
+				dispatch(logOut());
+				dispatch(clearUserData());
+				localStorage.removeItem('role');
+				localStorage.removeItem('isAuth');
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
 
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-    const newFormData = { ...editFormData };
-    newFormData[fieldName] = fieldValue;
-    setEditFormData(newFormData);
-  };
+	const handleEditFormChange = event => {
+		event.preventDefault();
 
-  const handleEditFormSubmit = (event) => {
-    event.preventDefault();
-    const editedContact = {
-      name: editFormData.name,
-      email: editFormData.email,
-      telephone: editFormData.telephone,
-      organization: editFormData.organization,
-      score: editFormData.score,
-      birthday: editFormData.birthday,
-    };
-    const item = items.filter((el) => el.id === editFormData.id);
-    const document = doc(db, "users", item[0].id);
-    getDoc(document).then((data) => {
-      dispatch(
-        updateUser({
-          name: editedContact.name,
-          score: editedContact.score,
-          birthday: editedContact.birthday,
-          organization: editedContact.organization,
-          telephone: editedContact.telephone,
-        })
-      );
-      updateDoc(doc(db, "users", item[0].id), {
-        name: editedContact.name,
-        score: editedContact.score,
-        birthday: editedContact.birthday,
-        organization: editedContact.organization,
-        telephone: editedContact.telephone,
-      });
-    });
-    setEditUser(null);
-  };
+		const fieldName = event.target.getAttribute('name');
+		const fieldValue = event.target.value;
+		const newFormData = { ...editFormData };
+		newFormData[fieldName] = fieldValue;
+		setEditFormData(newFormData);
+	};
 
-  const handleCancelClick = () => {
-    setEditUser(null);
-  };
+	const handleEditFormSubmit = event => {
+		event.preventDefault();
+		const editedContact = {
+			name: editFormData.name,
+			email: editFormData.email,
+			telephone: editFormData.telephone,
+			organization: editFormData.organization,
+			score: editFormData.score,
+			birthday: editFormData.birthday,
+		};
+		const item = items.filter(el => el.id === editFormData.id);
+		const document = doc(db, 'users', item[0].id);
+		getDoc(document).then(data => {
+			dispatch(
+				updateUser({
+					name: editedContact.name,
+					score: editedContact.score,
+					birthday: editedContact.birthday,
+					organization: editedContact.organization,
+					telephone: editedContact.telephone,
+				})
+			);
+			updateDoc(doc(db, 'users', item[0].id), {
+				name: editedContact.name,
+				score: editedContact.score,
+				birthday: editedContact.birthday,
+				organization: editedContact.organization,
+				telephone: editedContact.telephone,
+			});
+		});
+		setEditUser(null);
+	};
 
-  const handleDeleteClick = (itemId) => {
-    const user = items.filter((el) => el.id === itemId);
-    setDeleteMember(user);
-  };
+	const handleCancelClick = () => {
+		setEditUser(null);
+	};
 
-  const handleDeleteSubmit = () => {
-    const document = doc(db, "users", deleteMember[0].id);
-    getDoc(document).then(() => {
-      deleteDoc(document);
-      dispatch(
-        deleteUser({
-          email: null,
-          token: null,
-          id: null,
-          name: null,
-          role: null,
-          score: null,
-          birthday: null,
-          organization: null,
-          telephone: null,
-          userImageUrl: null,
-          photo: null,
-          password: null,
-        })
-      );
-    });
-    setDeleteMember("");
-  };
+	const handleDeleteClick = itemId => {
+		const user = items.filter(el => el.id === itemId);
+		setDeleteMember(user[0]);
+	};
+
+	const handleDeleteSubmit = () => {
+		const document = doc(db, 'users', deleteMember.id);
+		getDoc(document).then(() => {
+			deleteDoc(document);
+			dispatch(
+				deleteUser({
+					email: null,
+					token: null,
+					id: null,
+					name: null,
+					role: null,
+					score: null,
+					birthday: null,
+					organization: null,
+					telephone: null,
+					userImageUrl: null,
+					photo: null,
+					password: null,
+				})
+			);
+		});
+		setDeleteMember('');
+	};
+
 
   const handleEditClick = (event, item) => {
     event.preventDefault();
@@ -347,6 +355,7 @@ const MembersManagement = () => {
       </main>
     </div>
   );
+
 };
 
 export default MembersManagement;
