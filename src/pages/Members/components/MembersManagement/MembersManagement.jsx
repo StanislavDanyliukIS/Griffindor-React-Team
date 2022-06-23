@@ -242,7 +242,7 @@ const MembersManagement = () => {
     };
     setEditFormData(formValues);
   };
-
+  console.log(deleteMember);
   return (
     <div className="container-xl members-container">
       <main>
@@ -262,7 +262,7 @@ const MembersManagement = () => {
         />
 
         <ConfirmDeleteModal
-          user={deleteMember}
+          user={deleteMember.name}
           handleDeleteSubmit={handleDeleteSubmit}
         />
         <table className="table member-table">
