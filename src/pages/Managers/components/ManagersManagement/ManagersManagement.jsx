@@ -250,7 +250,7 @@ const ManagersManagement = () => {
           setAddFormData={setAddFormData}
         />
         <ConfirmDeleteModal
-          user={deleteManager}
+          user={deleteManager.name}
           handleDeleteSubmit={handleDeleteSubmit}
         />
 
