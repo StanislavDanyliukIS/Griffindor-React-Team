@@ -1,8 +1,7 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../../../../../firebase";
-import { ToastPortal } from "../../../../../../components/ToastPortal/ToastPortal";
 
 import "./ModalManager.scss";
 
@@ -19,6 +18,8 @@ export const ModalManager = ({
     organization: "",
   });
   const [managersEmail, setManagersEmail] = useState([]);
+  const [checkedEmailValidation, setCheckedEmailValidation] =
+    useState("hide-text-danger");
   const [nameValidation, setNameValidation] = useState("hide-text-danger");
   const [emailValidation, setEmailValidation] = useState("hide-text-danger");
   const [phoneValidation, setPhoneValidation] = useState("hide-text-danger");
@@ -26,8 +27,6 @@ export const ModalManager = ({
     useState("hide-text-danger");
   const [ageDateValidation, setAgeDateValidation] =
     useState("hide-text-danger");
-
-  const toastRef = useRef();
 
   useEffect(() => {
     let q = query(collection(db, "users"), where("role", "==", "manager"));
@@ -135,14 +134,20 @@ export const ModalManager = ({
     ageDateValidationClass();
   };
 
-  const checkManagersEmail = () => {
-    if (managersEmail.includes(user.email)) {
-      toastRef.current.addMessage({
-        mode: "warning",
-        message: "User with this email is already registered.",
-      });
-      setUser({ ...user, email: "" });
+  // const checkManagersEmail = () => {
+  //   if (managersEmail.includes(user.email)) {
+  //     alert("User with this email is already registered.");
+  //     setUser({ ...user, email: "" });
+  //   }
+  // };
+
+  const checkUserEmailClass = () => {
+    if (!managersEmail.includes(user.email)) {
+      setCheckedEmailValidation("hide-text-danger");
+      return;
     }
+    setCheckedEmailValidation("text-danger");
+    setUser({ ...user, email: "" });
   };
 
   const clearForm = () => {
@@ -173,7 +178,6 @@ export const ModalManager = ({
 
   const { name, email, organization, birthday, telephone } = user;
 
- 
   return (
     <div
       className="modal fade"
@@ -183,7 +187,6 @@ export const ModalManager = ({
       aria-labelledby="ModalCreateManagerCenterTitle"
       aria-hidden="true"
     >
-      <ToastPortal ref={toastRef} autoClose={false} />
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
           <div className="modal-header">
@@ -257,11 +260,16 @@ export const ModalManager = ({
                 onBlur={() => {
                   validateEmailClass();
                   checkFormObject();
-                  checkManagersEmail();
+                  checkUserEmailClass();
                 }}
               />
               <small className={`${emailValidation} warning-text`}>
                 Incorrect email address
+              </small>
+              <small
+                className={`${checkedEmailValidation} warning-text email-registered`}
+              >
+                User with this email is already registered.
               </small>
             </div>
             <div className="form-group">
@@ -351,7 +359,6 @@ export const ModalManager = ({
                 data-dismiss="modal"
                 onFocus={(e) => {
                   checkForm(e);
-                  checkManagersEmail();
                 }}
                 onClick={handleAddFormSubmit}
               >
@@ -364,7 +371,6 @@ export const ModalManager = ({
                 data-dismiss
                 onClick={(e) => {
                   checkForm(e);
-                  checkManagersEmail();
                 }}
               >
                 Submit
