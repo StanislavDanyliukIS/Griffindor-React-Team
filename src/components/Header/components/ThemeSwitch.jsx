@@ -2,6 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { toggleTheme } from '../../../store/themeSlice';
 
+import './ThemeSwitch.scss';
+
 const ThemeSwitch = () => {
 	const theme = useSelector(state => state.theme);
 	const dispatch = useDispatch();
@@ -10,7 +12,7 @@ const ThemeSwitch = () => {
 		dispatch(toggleTheme(theme === 'dark' ? 'light' : 'dark'));
 
 	return (
-		<span onClick={handleChange}>
+		<span onClick={handleChange} className='themeSwitch-btn'>
 			{theme === 'dark' ? (
 				<svg
 					xmlns='http://www.w3.org/2000/svg'

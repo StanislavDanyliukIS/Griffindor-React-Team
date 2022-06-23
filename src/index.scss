@@ -24,7 +24,7 @@
 		filter: invert(1);
 	}
 }
-.pointer{
+.pointer {
 	cursor: pointer;
 }
 
@@ -43,6 +43,7 @@
 .w-35 {
 	width: 35%;
 }
+
 .theme {
 	color: var(--text-color);
 	background: var(--primary);
@@ -50,6 +51,7 @@
 }
 
 body {
+	overflow-y: scroll;
 	background-color: var(--secondary);
 	color: var(--subtext-color);
 	margin: 0;
