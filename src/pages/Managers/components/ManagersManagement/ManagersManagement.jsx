@@ -233,17 +233,21 @@ const ManagersManagement = () => {
   };
 
   return (
-    <div className="container-xl managers-container">
+    <div className="managers-container">
       <main>
-        <h3 className="title-management">Managers Management</h3>
-        <button
-          type="button"
-          className="btn btn-outline-secondary create-manager-btn btn-table-create"
-          data-toggle="modal"
-          data-target="#ModalCreateManager"
-        >
-          <span className="btn-create-user-text">Add a new user</span>
-        </button>
+        <div className={"container-xl"}>
+          <h3 className="title-management pt-2">Managers Management</h3>
+        </div>
+        <div className={"container-xl"}>
+          <button
+              type="button"
+              className="btn btn-outline-secondary create-manager-btn btn-table-create"
+              data-toggle="modal"
+              data-target="#ModalCreateManager"
+          >
+            <span className="btn-create-user-text">Add a new user</span>
+          </button>
+        </div>
         <ModalManager
           handleAddFormChange={handleAddFormChange}
           handleAddFormSubmit={handleAddFormSubmit}
@@ -254,36 +258,37 @@ const ManagersManagement = () => {
           handleDeleteSubmit={handleDeleteSubmit}
         />
 
-        <table className="table manager-table theme">
-          <thead>
+        <div className={"container-xl manager-table"}>
+          <table className="table  theme">
+            <thead>
             <tr>
               <th
-                scope="col"
-                onClick={() => requestSort("index")}
-                className={`${getClassNames(
-                  "index",
-                  sorting
-                )} w-10 theme pointer`}
+                  scope="col"
+                  onClick={() => requestSort("index")}
+                  className={`${getClassNames(
+                      "index",
+                      sorting
+                  )} w-10 theme pointer`}
               >
                 №
               </th>
               <th
-                scope="col"
-                onClick={() => requestSort("name")}
-                className={`${getClassNames(
-                  "name",
-                  sorting
-                )} w-15 theme pointer`}
+                  scope="col"
+                  onClick={() => requestSort("name")}
+                  className={`${getClassNames(
+                      "name",
+                      sorting
+                  )} w-15 theme pointer`}
               >
                 Name
               </th>
               <th
-                scope="col"
-                onClick={() => requestSort("email")}
-                className={`${getClassNames(
-                  "email",
-                  sorting
-                )} w-20 theme pointer`}
+                  scope="col"
+                  onClick={() => requestSort("email")}
+                  className={`${getClassNames(
+                      "email",
+                      sorting
+                  )} w-20 theme pointer`}
               >
                 Email
               </th>
@@ -291,63 +296,64 @@ const ManagersManagement = () => {
                 Telephone
               </th>
               <th
-                scope="col"
-                onClick={() => requestSort("organization")}
-                className={`${getClassNames(
-                  "organization",
-                  sorting
-                )} w-10 theme pointer`}
+                  scope="col"
+                  onClick={() => requestSort("organization")}
+                  className={`${getClassNames(
+                      "organization",
+                      sorting
+                  )} w-10 theme pointer`}
               >
                 Company
               </th>
               <th
-                scope="col"
-                onClick={() => requestSort("score")}
-                className={`${getClassNames(
-                  "score",
-                  sorting
-                )} w-10 theme pointer`}
+                  scope="col"
+                  onClick={() => requestSort("score")}
+                  className={`${getClassNames(
+                      "score",
+                      sorting
+                  )} w-10 theme pointer`}
               >
                 Score
               </th>
 
               <th
-                scope="col"
-                onClick={() => requestSort("birthday")}
-                className={`${getClassNames(
-                  "birthday",
-                  sorting
-                )} w-15 theme pointer`}
+                  scope="col"
+                  onClick={() => requestSort("birthday")}
+                  className={`${getClassNames(
+                      "birthday",
+                      sorting
+                  )} w-15 theme pointer`}
               >
                 Date of Birth
               </th>
               <th scope="col" className={"theme"}></th>
               <th scope="col" className={"theme"}></th>
             </tr>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             {items.map((item) => (
-              <>
-                {editUser === item.id ? (
-                  <EditField
-                    key={item.id}
-                    editFormData={editFormData}
-                    handleEditFormChange={handleEditFormChange}
-                    handleEditFormSubmit={handleEditFormSubmit}
-                    handleCancelClick={handleCancelClick}
-                  />
-                ) : (
-                  <ReadField
-                    key={item.id}
-                    item={item}
-                    handleEditClick={handleEditClick}
-                    handleDeleteClick={handleDeleteClick}
-                  />
-                )}
-              </>
+                <>
+                  {editUser === item.id ? (
+                      <EditField
+                          key={item.id}
+                          editFormData={editFormData}
+                          handleEditFormChange={handleEditFormChange}
+                          handleEditFormSubmit={handleEditFormSubmit}
+                          handleCancelClick={handleCancelClick}
+                      />
+                  ) : (
+                      <ReadField
+                          key={item.id}
+                          item={item}
+                          handleEditClick={handleEditClick}
+                          handleDeleteClick={handleDeleteClick}
+                      />
+                  )}
+                </>
             ))}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </main>
     </div>
   );
