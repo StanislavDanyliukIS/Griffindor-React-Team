@@ -244,17 +244,21 @@ const MembersManagement = () => {
   };
 
   return (
-    <div className="container-xl members-container">
+    <div className="members-container">
       <main>
-        <h3 className="title-management">Members Management</h3>
-        <button
-          type="button"
-          className="btn create-member-btn btn-outline-secondary btn-table-create "
-          data-toggle="modal"
-          data-target="#ModalCreateMember"
-        >
-          <span className="btn-create-user-text">Add a new user</span>
-        </button>
+        <div className={"members-container__header container-xl"}>
+          <h3 className="title-management pt-2">Members Management</h3>
+        </div>
+        <div className={"container-xl"}>
+          <button
+              type="button"
+              className="btn create-member-btn btn-outline-secondary btn-table-create "
+              data-toggle="modal"
+              data-target="#ModalCreateMember"
+          >
+            <span className="btn-create-user-text">Add a new user</span>
+          </button>
+        </div>
         <ModalMember
           handleAddFormChange={handleAddFormChange}
           handleAddFormSubmit={handleAddFormSubmit}
@@ -265,27 +269,28 @@ const MembersManagement = () => {
           user={deleteMember.name}
           handleDeleteSubmit={handleDeleteSubmit}
         />
-        <table className="table member-table">
-          <thead>
+        <div className={"container-xl member-table"}>
+          <table className="table ">
+            <thead>
             <tr>
               <th
-                scope="col"
-                onClick={() => requestSort("index")}
-                className={`${getClassNames("index", sorting)} w-10 pointer`}
+                  scope="col"
+                  onClick={() => requestSort("index")}
+                  className={`${getClassNames("index", sorting)} w-10 pointer`}
               >
                 №
               </th>
               <th
-                scope="col"
-                onClick={() => requestSort("name")}
-                className={`${getClassNames("name", sorting)} w-15 pointer`}
+                  scope="col"
+                  onClick={() => requestSort("name")}
+                  className={`${getClassNames("name", sorting)} w-15 pointer`}
               >
                 Name
               </th>
               <th
-                scope="col"
-                onClick={() => requestSort("email")}
-                className={`${getClassNames("email", sorting)} w-15 pointer`}
+                  scope="col"
+                  onClick={() => requestSort("email")}
+                  className={`${getClassNames("email", sorting)} w-15 pointer`}
               >
                 Email
               </th>
@@ -293,34 +298,34 @@ const MembersManagement = () => {
                 Telephone
               </th>
               <th
-                scope="col"
-                onClick={() => requestSort("organization")}
-                className={`${getClassNames(
-                  "organization",
-                  sorting
-                )} w-10 pointer`}
+                  scope="col"
+                  onClick={() => requestSort("organization")}
+                  className={`${getClassNames(
+                      "organization",
+                      sorting
+                  )} w-10 pointer`}
               >
                 Company
               </th>
               <th
-                scope="col"
-                onClick={() => requestSort("score")}
-                className={`${getClassNames("score", sorting)} w-15 pointer`}
+                  scope="col"
+                  onClick={() => requestSort("score")}
+                  className={`${getClassNames("score", sorting)} w-15 pointer`}
               >
                 Score
               </th>
               <th
-                scope="col"
-                onClick={() => requestSort("birthday")}
-                className={`${getClassNames("birthday", sorting)} w-15 pointer`}
+                  scope="col"
+                  onClick={() => requestSort("birthday")}
+                  className={`${getClassNames("birthday", sorting)} w-15 pointer`}
               >
                 Date of Birth
               </th>
               <th scope="col"></th>
               <th scope="col"></th>
             </tr>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             {items.map((item) => (
               <>
                 {editUser === item.id ? (
@@ -343,8 +348,9 @@ const MembersManagement = () => {
                 )}
               </>
             ))}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </main>
     </div>
   );

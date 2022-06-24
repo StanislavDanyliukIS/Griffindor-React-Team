@@ -9,7 +9,7 @@ const Managers = () => {
 	const { role } = useUserData();
 
 	return (
-		<div className={'managers'}>
+		<div className={'managers-general'}>
 			{(() => {
 				if (isAuth && role === 'admin') {
 					return <ManagersManagement />;

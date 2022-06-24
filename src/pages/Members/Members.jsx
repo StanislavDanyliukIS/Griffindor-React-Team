@@ -7,7 +7,7 @@ const Members = () => {
   const role = localStorage.getItem("role");
 
   return (
-    <div className={"members"}>
+    <div className={"members-general"}>
       {role === "user" ? <MembersList /> : <MembersManagement />}
     </div>
   );
