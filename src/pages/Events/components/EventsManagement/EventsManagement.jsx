@@ -9,7 +9,6 @@ import {
 	onSnapshot,
 	where,
 	doc,
-	getDoc,
 	deleteDoc,
 } from 'firebase/firestore';
 
