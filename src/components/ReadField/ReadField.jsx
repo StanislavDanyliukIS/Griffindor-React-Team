@@ -6,7 +6,7 @@ export const ReadField = ({ handleEditClick, handleDeleteClick, item }) => {
       <th scope="row" className="table-subtitle table-text-content name-column">
         {item.index}
       </th>
-      <th scope="row" className="table-subtitle table-text-content name-column">
+      <th scope="row" className="table-subtitle table-text-content name-column ">
         {item.name}
       </th>
       <td className="table-text-content ">{item.email}</td>

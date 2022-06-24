@@ -24,6 +24,7 @@ export const EditField = ({
           value={editFormData.index}
           required="required"
           onChange={handleEditFormChange}
+          disabled
         />
       </td>
       <td className={"w-15"}>
@@ -43,6 +44,7 @@ export const EditField = ({
           type="email"
           name="email"
           value={editFormData.email}
+          disabled
           required="required"
           placeholder="Email"
           onChange={handleEditFormChange}
