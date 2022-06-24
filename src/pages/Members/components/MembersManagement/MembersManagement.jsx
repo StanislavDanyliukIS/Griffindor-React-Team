@@ -242,7 +242,7 @@ const MembersManagement = () => {
     };
     setEditFormData(formValues);
   };
-  console.log(deleteMember);
+
   return (
     <div className="members-container">
       <main>
@@ -327,24 +327,26 @@ const MembersManagement = () => {
             </thead>
             <tbody>
             {items.map((item) => (
-                <>
-                  {editUser === item.id ? (
-                      <EditField
-                          key={item.id}
-                          editFormData={editFormData}
-                          handleEditFormChange={handleEditFormChange}
-                          handleEditFormSubmit={handleEditFormSubmit}
-                          handleCancelClick={handleCancelClick}
-                      />
-                  ) : (
-                      <ReadField
-                          key={item.id}
-                          item={item}
-                          handleEditClick={handleEditClick}
-                          handleDeleteClick={handleDeleteClick}
-                      />
-                  )}
-                </>
+              <>
+                {editUser === item.id ? (
+                  <EditField
+                    key={item.id}
+                    item={item}
+                    editFormData={editFormData}
+                    setEditFormData={setEditFormData}
+                    handleEditFormChange={handleEditFormChange}
+                    handleEditFormSubmit={handleEditFormSubmit}
+                    handleCancelClick={handleCancelClick}
+                  />
+                ) : (
+                  <ReadField
+                    key={item.id}
+                    item={item}
+                    handleEditClick={handleEditClick}
+                    handleDeleteClick={handleDeleteClick}
+                  />
+                )}
+              </>
             ))}
             </tbody>
           </table>

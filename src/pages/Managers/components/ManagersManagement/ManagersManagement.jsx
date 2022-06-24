@@ -307,17 +307,6 @@ const ManagersManagement = () => {
               </th>
               <th
                   scope="col"
-                  onClick={() => requestSort("score")}
-                  className={`${getClassNames(
-                      "score",
-                      sorting
-                  )} w-10 theme pointer`}
-              >
-                Score
-              </th>
-
-              <th
-                  scope="col"
                   onClick={() => requestSort("birthday")}
                   className={`${getClassNames(
                       "birthday",
@@ -332,24 +321,25 @@ const ManagersManagement = () => {
             </thead>
             <tbody>
             {items.map((item) => (
-                <>
-                  {editUser === item.id ? (
-                      <EditField
-                          key={item.id}
-                          editFormData={editFormData}
-                          handleEditFormChange={handleEditFormChange}
-                          handleEditFormSubmit={handleEditFormSubmit}
-                          handleCancelClick={handleCancelClick}
-                      />
-                  ) : (
-                      <ReadField
-                          key={item.id}
-                          item={item}
-                          handleEditClick={handleEditClick}
-                          handleDeleteClick={handleDeleteClick}
-                      />
-                  )}
-                </>
+              <>
+                {editUser === item.id ? (
+                  <EditField
+                    key={item.id}
+                    item={item}
+                    editFormData={editFormData}
+                    handleEditFormChange={handleEditFormChange}
+                    handleEditFormSubmit={handleEditFormSubmit}
+                    handleCancelClick={handleCancelClick}
+                  />
+                ) : (
+                  <ReadField
+                    key={item.id}
+                    item={item}
+                    handleEditClick={handleEditClick}
+                    handleDeleteClick={handleDeleteClick}
+                  />
+                )}
+              </>
             ))}
             </tbody>
           </table>

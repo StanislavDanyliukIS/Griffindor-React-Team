@@ -1,11 +1,19 @@
+
 import "./EditField.scss";
 
 export const EditField = ({
   editFormData,
+  setEditFormData,
   handleEditFormChange,
   handleEditFormSubmit,
   handleCancelClick,
+  item,
 }) => {
+
+  const handleScore = () => {
+    setEditFormData({ ...editFormData, score: "" });
+  };
+
   return (
     <tr className={"theme"}>
       <td className={"w-15"}>
@@ -62,31 +70,33 @@ export const EditField = ({
           onChange={handleEditFormChange}
         />
       </td>
-      {editFormData.score ? (
-        <td className={"w-15"}>
-          <input
-            className="form-control user-form"
-            type="number"
-            name="score"
-            value={editFormData.score}
-            required="required"
-            placeholder="Score"
-            onChange={handleEditFormChange}
-          />
-        </td>
-      ) : (
-        <td className={"w-15"}>
-          <input
-            className="form-control user-form"
-            type="number"
-            name="score"
-            value={0}
-            required="required"
-            placeholder="Score"
-            onChange={handleEditFormChange}
-          />
-        </td>
-      )}
+      {item.role !== "manager" &&
+        (editFormData.score > 0 ? (
+          <td className={"w-15"}>
+            <input
+              className="form-control user-form"
+              type="number"
+              name="score"
+              value={editFormData.score}
+              required="required"
+              placeholder="Score"
+              onChange={handleEditFormChange}
+            />
+          </td>
+        ) : (
+          <td className={"w-15"}>
+            <input
+              className="form-control user-form"
+              type="number"
+              name="score"
+              value={editFormData.score}
+              required="required"
+              placeholder="Score"
+              onFocus={handleScore}
+              onChange={handleEditFormChange}
+            />
+          </td>
+        ))}
       <td className={"w-15"}>
         <input
           className="form-control user-form"
