@@ -300,16 +300,6 @@ const ManagersManagement = () => {
               >
                 Company
               </th>
-              <th
-                scope="col"
-                onClick={() => requestSort("score")}
-                className={`${getClassNames(
-                  "score",
-                  sorting
-                )} w-10 theme pointer`}
-              >
-                Score
-              </th>
 
               <th
                 scope="col"
@@ -331,6 +321,7 @@ const ManagersManagement = () => {
                 {editUser === item.id ? (
                   <EditField
                     key={item.id}
+                    item={item}
                     editFormData={editFormData}
                     handleEditFormChange={handleEditFormChange}
                     handleEditFormSubmit={handleEditFormSubmit}

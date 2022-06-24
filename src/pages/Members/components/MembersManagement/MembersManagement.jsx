@@ -242,7 +242,7 @@ const MembersManagement = () => {
     };
     setEditFormData(formValues);
   };
-  console.log(deleteMember);
+
   return (
     <div className="container-xl members-container">
       <main>
@@ -326,7 +326,9 @@ const MembersManagement = () => {
                 {editUser === item.id ? (
                   <EditField
                     key={item.id}
+                    item={item}
                     editFormData={editFormData}
+                    setEditFormData={setEditFormData}
                     handleEditFormChange={handleEditFormChange}
                     handleEditFormSubmit={handleEditFormSubmit}
                     handleCancelClick={handleCancelClick}
