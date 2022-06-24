@@ -3,15 +3,16 @@ import { useEffect, useState } from "react";
 
 import { db } from "../../../../firebase";
 import {
-  collection,
-  addDoc,
-  query,
-  onSnapshot,
-  where,
-  doc,
-  getDoc,
-  deleteDoc,
-} from "firebase/firestore";
+
+	collection,
+	addDoc,
+	query,
+	onSnapshot,
+	where,
+	doc,
+	deleteDoc,
+} from 'firebase/firestore';
+
 
 import { getClassNames } from "../../../../functions/getClassNames";
 

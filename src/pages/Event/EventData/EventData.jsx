@@ -58,8 +58,9 @@ const EventData = ({ event }) => {
 	const handleEditExtrapointsChange = event => {
 		const fieldName = event.target.name;
 		const fieldValue = event.target.value;
+		console.log(fieldValue);
 		const newFormData = { ...editUserData };
-		newFormData[fieldName] = fieldValue < 0 ? 0 : fieldValue;
+		newFormData[fieldName] = fieldValue < 0 ? 0 : !fieldValue ? 0 : fieldValue;
 		const updExtrapoints =
 			fieldValue < 0
 				? users
