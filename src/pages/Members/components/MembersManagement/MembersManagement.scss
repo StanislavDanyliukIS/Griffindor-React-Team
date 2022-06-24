@@ -1,7 +1,4 @@
 .members-container {
-	display: block;
-	margin: 0 auto;
-	padding: 20px;
 	min-height: 79vh;
 }
 
@@ -46,5 +43,11 @@
 .descending {
 	&::after {
 		content: ' ↑';
+	}
+}
+
+@media  (max-width: 930px){
+	.member-table{
+		overflow-x: scroll;
 	}
 }

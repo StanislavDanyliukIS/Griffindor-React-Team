@@ -1,6 +1,7 @@
 import './ReadField.scss';
 
 export const ReadField = ({ handleEditClick, handleDeleteClick, item }) => {
+
 	return (
 		<tr className={' bg-theme'}>
 			<td className='table-subtitle table-text-content name-column'>
@@ -13,11 +14,13 @@ export const ReadField = ({ handleEditClick, handleDeleteClick, item }) => {
 			<td className='table-text-content '>{item.telephone}</td>
 			<td className='table-text-content '>{item.organization}</td>
 
-			{!!item.score ? (
-				<td className='table-text-content text-left'>{item.score}</td>
-			) : (
-				<td className='table-text-content text-left'>{0}</td>
-			)}
+		{item.role !== "manager" &&
+        (!!item.score ? (
+          <td className="table-text-content text-left">{item.score}</td>
+        ) : (
+          <td className="table-text-content text-left">{0}</td>
+        ))}
+
 
 			<td className='table-row-birth table-text-content '>{item.birthday}</td>
 			<td className='table-btn table-text-content '>
