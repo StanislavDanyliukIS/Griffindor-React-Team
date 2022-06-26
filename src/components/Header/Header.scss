@@ -37,11 +37,12 @@
 	}
 	&__theme {
 		padding-top: 0.6vh;
+		margin-right: 1em;
 		color: var(--subtext-color);
 	}
 	&__user {
 		display: flex;
-		color: var(--subtext-color);
+		color: var(--text-color);
 		&_info {
 			text-align: left;
 		}
@@ -100,8 +101,7 @@ li {
 }
 
 .user-image {
-  border-radius: 4px;
-
+	border-radius: 4px;
 }
 
 @media (max-width: 990px) {
