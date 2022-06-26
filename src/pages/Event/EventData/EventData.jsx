@@ -123,37 +123,40 @@ const EventData = ({ event }) => {
 	};
 
 	return (
-		<div className='container-xl table-container'>
-			<table className='table '>
+		<div className='container-xl event-table'>
+			<table className='table'>
 				<thead>
 					<tr>
 						<th
 							scope='col'
-							onClick={() => requestSort('name')}
-							className={`${getClassNames('name', sorting)} w-20 `}
+							onClick={() => requestSort('user')}
+							className={`${getClassNames('user', sorting)} w-20 pointer`}
 						>
 							Users
 						</th>
 						<th
 							scope='col'
-							onClick={() => requestSort('score')}
-							className={`${getClassNames('score', sorting)} w-20 `}
+							onClick={() => requestSort('extrapoints')}
+							className={`${getClassNames(
+								'extrapoints',
+								sorting
+							)} w-20 pointer`}
 						>
 							Extra points
 						</th>
 						<th
 							scope='col'
 							onClick={() => requestSort('comment')}
-							className={`${getClassNames('comment', sorting)}  w-25 `}
+							className={`${getClassNames('comment', sorting)}  w-25 pointer`}
 						>
 							Comment
 						</th>
 						<th
 							scope='col'
 							onClick={() => requestSort('attended')}
-							className={`${getClassNames('attended', sorting)} `}
+							className={`${getClassNames('attended', sorting)} pointer`}
 						>
-							Attended the event
+							Attended
 						</th>
 						<th scope='col'></th>
 					</tr>
