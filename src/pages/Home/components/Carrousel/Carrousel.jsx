@@ -110,8 +110,8 @@ const Carrousel = () => {
 
     return (
         <div className={"carrousel col "}>
-            <h4>News</h4>
-            <div className={"carrousel_box w-100 d-flex align-items-center"}>
+            <h4 className={"carrousel-title"}>News</h4>
+            <div className={"carrousel_box w-100 d-flex "}>
                 <div className={"left-arrow"} onClick={handleLeftClick}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                          className="bi bi-caret-left-fill " viewBox="0 0 16 16">
