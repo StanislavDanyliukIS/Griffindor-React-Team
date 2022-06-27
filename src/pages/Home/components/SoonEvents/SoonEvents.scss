@@ -1,7 +1,7 @@
 .soon_events{
   margin-left: calc(.5 * var(--bs-gutter-x));
   &-title{
-    margin-left: -0.7vw;
+    margin-left: -0.7vh;
   }
   &-container{
     background-color: var(--primary);
@@ -13,9 +13,6 @@
 @media (max-width: 1195px) {
   .soon_events{
     margin-left: calc(1 * var(--bs-gutter-x));
-    &-title{
-      margin-left: calc(-.5 * var(--bs-gutter-x));
-    }
     &-container{
       width: 97%;
     }
