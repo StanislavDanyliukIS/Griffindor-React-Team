@@ -5,6 +5,9 @@
     max-width: 40vw;
     overflow: hidden;
   }
+  &-title{
+    margin-left: 0.7vh;
+  }
   &_box{
     height: 89%;
   }
@@ -14,8 +17,10 @@
 }
 .left-arrow{
   width: 3vw;
+  min-width: 25px;
   height: 97.5%;
-  padding-top: 14vh;
+  margin-top: 0.5vh;
+  padding: 13.8vh 0;
   margin-right: -3vw;
   color: #ffffff;
   z-index: 10;
@@ -33,8 +38,10 @@
 .right-arrow{
   cursor: pointer;
   width: 3vw;
+  min-width: 25px;
   height: 97.5%;
-  padding-top: 14vh;
+  margin-top: 0.5vh;
+  padding: 13.8vh 0;
   margin-left: -3vw;
   color: #ffffff;
   z-index: 10;
@@ -51,9 +58,9 @@
 
 @media (max-width: 990px) {
   .carrousel{
+    padding-top: 3vh;
     &_box{
-      align-items: center;
-      padding-left: 7vw;
+      justify-content: center;
     }
     &-container{
       min-width: 80vw;
@@ -61,11 +68,11 @@
 
     }
   }
-  .left-arrow {
-    padding: 14vh 0;
-
-  }
-  .right-arrow{
-    padding: 14vh 0;
+}
+@media (max-width: 600px) {
+  .carrousel{
+    &_box{
+      justify-content: start;
+    }
   }
 }

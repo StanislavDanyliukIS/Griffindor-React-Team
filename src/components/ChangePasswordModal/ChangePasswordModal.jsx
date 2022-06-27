@@ -191,7 +191,7 @@ const ChangePasswordModal = () => {
 					</button>
 					<button
 						type='button'
-						className='password-btn btn btn-outline-dark'
+						className='password-btn btn btn-outline-secondary'
 						onClick={moveToprofile}
 					>
 						Cancel

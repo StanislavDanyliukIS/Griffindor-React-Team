@@ -40,3 +40,8 @@
 		content: ' ↑';
 	}
 }
+@media (max-width: 364px) {
+	.events-table {
+		overflow-x: scroll;
+	}
+}
