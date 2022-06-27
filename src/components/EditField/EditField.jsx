@@ -1,4 +1,3 @@
-
 import "./EditField.scss";
 
 export const EditField = ({
@@ -9,9 +8,14 @@ export const EditField = ({
   handleCancelClick,
   item,
 }) => {
-
   const handleScore = () => {
     setEditFormData({ ...editFormData, score: "" });
+  };
+
+  const checkScore = () => {
+    setEditFormData(
+      editFormData.score === "" ? { ...editFormData, score: "0" } : editFormData
+    );
   };
 
   return (
@@ -82,6 +86,7 @@ export const EditField = ({
               value={editFormData.score}
               required="required"
               placeholder="Score"
+              onBlur={checkScore}
               onChange={handleEditFormChange}
             />
           </td>
@@ -94,6 +99,7 @@ export const EditField = ({
               value={editFormData.score}
               required="required"
               placeholder="Score"
+              onBlur={checkScore}
               onFocus={handleScore}
               onChange={handleEditFormChange}
             />
