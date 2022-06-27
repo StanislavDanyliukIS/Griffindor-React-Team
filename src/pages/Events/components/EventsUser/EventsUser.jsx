@@ -42,7 +42,7 @@ const EventsUser = () => {
 					</thead>
 					<tbody>
 						{items.map(item => (
-							<tr key={Math.random() * 100000000}>
+							<tr key={item.id}>
 								<td className='name-column'>{item.name}</td>
 								<td>
 									{item.date.substr(0, 10) + ' ' + item.date.substr(11, 8)}
