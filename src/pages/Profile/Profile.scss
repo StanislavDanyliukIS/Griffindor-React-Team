@@ -1,70 +1,77 @@
 .profile-page {
-	display: flex;
-	flex-direction: column;
-	padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 .main-container {
-	justify-content: center;
+  justify-content: center;
+  padding-top: 24px;
 }
 .profil-title {
-	margin-bottom: 30px;
-	color: var(--text-color);
+  padding-top: 8px;
+  margin-bottom: 8px;
+  color: var(--text-color);
 }
 .image-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	@media screen and (max-width: 600px) {
-		width: 100%;
-	}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 700px) {
+    width: 100%;
+  }
 }
 .profile-photo {
-	margin-top: 20px;
-	height: 340px;
-	@media screen and (max-width: 600px) {
-		width: 250px;
-		height: 250px;
-	}
+  margin-top: 20px;
+  height: 340px;
+  @media screen and (max-width: 1600px) {
+    width: 250px;
+    height: 250px;
+  }
 }
 .container-content {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .card {
-	padding-bottom: 20px;
-	background-color: var(--primary);
+  padding-bottom: 20px;
+  background-color: var(--primary);
+  width: 100%;
 }
 
 .list-unstyled {
-	margin-top: 15px;
+  margin-top: 15px;
 }
 .edit-btn {
-	min-width: 200px;
+  min-width: 200px;
 }
 
 .info-container {
-	display: flex;
-	justify-content: center;
-	margin-top: 20px;
-	align-items: center;
-	flex-direction: column;
-	@media screen and (max-width: 600px) {
-		align-items: center;
-	}
-	&__name {
-		color: var(--text-color);
-	}
-	&__info-title {
-		color: var(--text-color);
-	}
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  align-items: center;
+  flex-direction: column;
+
+  @media screen and (max-width: 800px) {
+    align-items: center;
+  }
+  &__name {
+    color: var(--text-color);
+  }
+  &__info-title {
+    color: var(--text-color);
+  }
 }
 .edit-btn {
-	max-width: 200px;
+  max-width: 200px;
 }
 .profile-field {
-	width: 45vw;
-	@media screen and(max-width:600px) {
-		width: 95%;
-	}
+  width: 45vw;
+  @media screen and(max-width:1600px) {
+    width: 75%;
+  }
+  @media screen and(max-width:800px) {
+    width: 95%;
+  }
 }
