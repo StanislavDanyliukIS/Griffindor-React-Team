@@ -327,7 +327,7 @@ const MembersManagement = () => {
             </thead>
             <tbody>
             {items.map((item) => (
-              <>
+              <tr key={item.id } className={'bg-theme'}>
                 {editUser === item.id ? (
                   <EditField
                     key={item.id}
@@ -346,7 +346,7 @@ const MembersManagement = () => {
                     handleDeleteClick={handleDeleteClick}
                   />
                 )}
-              </>
+              </tr>
             ))}
             </tbody>
           </table>

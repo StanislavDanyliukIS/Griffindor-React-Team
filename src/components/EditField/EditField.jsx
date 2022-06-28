@@ -19,7 +19,7 @@ export const EditField = ({
   };
 
   return (
-    <tr className={"theme"}>
+    <>
       <td className={"w-15"}>
         <input
           className="form-control user-form"
@@ -154,6 +154,6 @@ export const EditField = ({
           </svg>
         </button>
       </td>
-    </tr>
+    </>
   );
 };

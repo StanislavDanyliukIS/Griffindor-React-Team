@@ -3,7 +3,7 @@ import './ReadField.scss';
 export const ReadField = ({ handleEditClick, handleDeleteClick, item }) => {
 
 	return (
-		<tr className={' bg-theme'}>
+		<>
 			<td className='table-subtitle table-text-content name-column'>
 				{item.index}
 			</td>
@@ -69,6 +69,6 @@ export const ReadField = ({ handleEditClick, handleDeleteClick, item }) => {
 					</svg>
 				</button>
 			</td>
-		</tr>
+		</>
 	);
 };
