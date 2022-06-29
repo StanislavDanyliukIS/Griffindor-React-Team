@@ -2,70 +2,67 @@ import { useSorting } from "../../../../hook/useSorting";
 import { useEffect, useState } from "react";
 
 import { getClassNames } from "../../../../functions/getClassNames";
+
 import { EditField } from "../../../../components/EditField/EditField";
 import { ReadField } from "../../../../components/ReadField/ReadField";
 
-import "./MembersManagement.scss";
+import "./ManagersManagement.scss";
 import {
   collection,
-  onSnapshot,
-  query,
-  where,
-  updateDoc,
+  deleteDoc,
   doc,
   getDoc,
-  deleteDoc,
+  onSnapshot,
+  query,
   setDoc,
+  updateDoc,
+  where,
 } from "firebase/firestore";
 import { db } from "../../../../firebase";
-
-import {
-  createUser,
-  updateUser,
-  deleteUser,
-} from "../../../../store/crudSlice";
 import { useDispatch } from "react-redux";
 import {
   createUserWithEmailAndPassword,
   getAuth,
   signOut,
-  sendEmailVerification,
 } from "firebase/auth";
+import {
+  createUser,
+  deleteUser,
+  updateUser,
+} from "../../../../store/crudSlice";
 import { logOut } from "../../../../store/authSlice";
 import { clearUserData } from "../../../../store/userDataSlice";
-import { ModalMember } from "./components/ModalMember/ModalMember";
+import { ModalManager } from "./components/ModalManager/ModalManager";
 import { ConfirmDeleteModal } from "../../../../components/ConfirmDeleteModal/ConfirmDeleteModal";
 
-const MembersManagement = () => {
+const ManagersManagement = () => {
   const auth = getAuth();
   const password = "111111";
-  const [deleteMember, setDeleteMember] = useState({});
-  const [members, setMembers] = useState([]);
+  const [managers, setManagers] = useState([]);
+  const [deleteManager, setDeleteManager] = useState({});
   const [addFormData, setAddFormData] = useState("");
   const [editFormData, setEditFormData] = useState("");
   const [editUser, setEditUser] = useState(null);
 
-  const indexedMembers = members.map((el, idx) => {
+  const dispatch = useDispatch();
+  const indexedManagers = managers.map((el, idx) => {
     el.index = idx + 1;
     return el;
   });
+  const { items, requestSort, sorting } = useSorting(indexedManagers);
 
-  const dispatch = useDispatch();
-
-  const { items, requestSort, sorting } = useSorting(indexedMembers);
   useEffect(() => {
-    let q;
-    q = query(collection(db, "users"), where("role", "==", "user"));
+    let q = query(collection(db, "users"), where("role", "==", "manager"));
 
-    const membersList = onSnapshot(q, (querySnapshot) => {
-      let membersArray = [];
+    const managersList = onSnapshot(q, (querySnapshot) => {
+      let managersArray = [];
 
       querySnapshot.forEach((doc) => {
-        membersArray.push({ ...doc.data(), id: doc.id });
+        managersArray.push({ ...doc.data(), id: doc.id });
       });
-      setMembers(membersArray);
+      setManagers(managersArray);
     });
-    return () => membersList();
+    return () => managersList();
   }, []);
 
   const handleAddFormChange = (event) => {
@@ -76,12 +73,12 @@ const MembersManagement = () => {
 
     const newFormData = { ...addFormData };
     newFormData[fieldName] = fieldValue;
+
     setAddFormData(newFormData);
   };
 
   const handleAddFormSubmit = (event) => {
     event.preventDefault();
-
     createUserWithEmailAndPassword(auth, addFormData.email, password)
       .then((userCredential) => {
         dispatch(
@@ -99,8 +96,7 @@ const MembersManagement = () => {
         dispatch(
           createUser({
             name: addFormData.name,
-            role: "user",
-            score: addFormData.score ? addFormData.score : "0",
+            role: "manager",
             birthday: addFormData.birthday,
             organization: addFormData.organization,
             telephone: addFormData.telephone,
@@ -113,8 +109,7 @@ const MembersManagement = () => {
           id: data.id,
           email: data.email,
           name: addFormData.name,
-          role: "user",
-          score: addFormData.score ? addFormData.score : "0",
+          role: "manager",
           birthday: addFormData.birthday,
           organization: addFormData.organization,
           telephone: addFormData.telephone,
@@ -128,7 +123,6 @@ const MembersManagement = () => {
           email: user.email,
           name: user.name,
           role: user.role,
-          score: user.score,
           birthday: user.birthday,
           organization: user.organization,
           telephone: user.telephone,
@@ -137,18 +131,16 @@ const MembersManagement = () => {
           photo: null,
         });
       })
-      .catch((error) => console.log(error));
-
-    signOut(auth)
-      .then(() => {
-        dispatch(logOut());
-        dispatch(clearUserData());
-        localStorage.removeItem("role");
-        localStorage.removeItem("isAuth");
-      })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
+
+    signOut(auth).then(() => {
+      dispatch(logOut());
+      dispatch(clearUserData());
+      localStorage.removeItem("isAuth");
+      localStorage.removeItem("role");
+    });
   };
 
   const handleEditFormChange = (event) => {
@@ -168,16 +160,15 @@ const MembersManagement = () => {
       email: editFormData.email,
       telephone: editFormData.telephone,
       organization: editFormData.organization,
-      score: editFormData.score,
       birthday: editFormData.birthday,
     };
+
     const item = items.filter((el) => el.id === editFormData.id);
     const document = doc(db, "users", item[0].id);
     getDoc(document).then((data) => {
       dispatch(
         updateUser({
           name: editedContact.name,
-          score: editedContact.score,
           birthday: editedContact.birthday,
           organization: editedContact.organization,
           telephone: editedContact.telephone,
@@ -185,7 +176,6 @@ const MembersManagement = () => {
       );
       updateDoc(doc(db, "users", item[0].id), {
         name: editedContact.name,
-        score: editedContact.score,
         birthday: editedContact.birthday,
         organization: editedContact.organization,
         telephone: editedContact.telephone,
@@ -200,11 +190,12 @@ const MembersManagement = () => {
 
   const handleDeleteClick = (itemId) => {
     const user = items.filter((el) => el.id === itemId);
-    setDeleteMember(user[0]);
+
+    setDeleteManager(user[0]);
   };
 
   const handleDeleteSubmit = () => {
-    const document = doc(db, "users", deleteMember.id);
+    const document = doc(db, "users", deleteManager.id);
     getDoc(document).then(() => {
       deleteDoc(document);
       dispatch(
@@ -214,7 +205,6 @@ const MembersManagement = () => {
           id: null,
           name: null,
           role: null,
-          score: null,
           birthday: null,
           organization: null,
           telephone: null,
@@ -224,7 +214,7 @@ const MembersManagement = () => {
         })
       );
     });
-    setDeleteMember("");
+    setDeleteManager({});
   };
 
   const handleEditClick = (event, item) => {
@@ -236,7 +226,6 @@ const MembersManagement = () => {
       email: item.email,
       telephone: item.telephone,
       organization: item.organization,
-      score: item.score,
       birthday: item.birthday,
       id: item.id,
     };
@@ -244,57 +233,66 @@ const MembersManagement = () => {
   };
 
   return (
-    <div className="members-container">
+    <div className="managers-container">
       <main>
-        <div className={"members-container__header container-xl"}>
-          <h3 className="title-management pt-2">Members Management</h3>
+        <div className={"container-xl"}>
+          <h3 className="title-management pt-2">Managers Management</h3>
         </div>
         <div className={"container-xl"}>
           <button
               type="button"
-              className="btn create-member-btn btn-outline-secondary btn-table-create "
+              className="btn btn-outline-secondary create-manager-btn btn-table-create"
               data-toggle="modal"
-              data-target="#ModalCreateMember"
+              data-target="#ModalCreateManager"
           >
             <span className="btn-create-user-text">Add a new user</span>
           </button>
         </div>
-        <ModalMember
+        <ModalManager
           handleAddFormChange={handleAddFormChange}
           handleAddFormSubmit={handleAddFormSubmit}
           setAddFormData={setAddFormData}
         />
-
         <ConfirmDeleteModal
-          user={deleteMember.name}
+          user={deleteManager.name}
           handleDeleteSubmit={handleDeleteSubmit}
         />
-        <div className={"container-xl member-table"}>
-          <table className="table ">
+
+        <div className={"container-xl manager-table"}>
+          <table className="table  theme">
             <thead>
             <tr>
               <th
                   scope="col"
                   onClick={() => requestSort("index")}
-                  className={`${getClassNames("index", sorting)} w-10 pointer`}
+                  className={`${getClassNames(
+                      "index",
+                      sorting
+                  )} w-10 theme pointer`}
               >
                 №
               </th>
               <th
                   scope="col"
                   onClick={() => requestSort("name")}
-                  className={`${getClassNames("name", sorting)} w-15 pointer`}
+                  className={`${getClassNames(
+                      "name",
+                      sorting
+                  )} w-15 theme pointer`}
               >
                 Name
               </th>
               <th
                   scope="col"
                   onClick={() => requestSort("email")}
-                  className={`${getClassNames("email", sorting)} w-15 pointer`}
+                  className={`${getClassNames(
+                      "email",
+                      sorting
+                  )} w-20 theme pointer`}
               >
                 Email
               </th>
-              <th scope="col" className={"w-15 "}>
+              <th scope="col" className={"w-15 theme"}>
                 Telephone
               </th>
               <th
@@ -303,26 +301,22 @@ const MembersManagement = () => {
                   className={`${getClassNames(
                       "organization",
                       sorting
-                  )} w-10 pointer`}
+                  )} w-10 theme pointer`}
               >
                 Company
               </th>
               <th
                   scope="col"
-                  onClick={() => requestSort("score")}
-                  className={`${getClassNames("score", sorting)} w-15 pointer`}
-              >
-                Score
-              </th>
-              <th
-                  scope="col"
                   onClick={() => requestSort("birthday")}
-                  className={`${getClassNames("birthday", sorting)} w-15 pointer`}
+                  className={`${getClassNames(
+                      "birthday",
+                      sorting
+                  )} w-15 theme pointer`}
               >
                 Date of Birth
               </th>
-              <th scope="col"></th>
-              <th scope="col"></th>
+              <th scope="col" className={"theme"}></th>
+              <th scope="col" className={"theme"}></th>
             </tr>
             </thead>
             <tbody>
@@ -333,7 +327,6 @@ const MembersManagement = () => {
                     key={item.id}
                     item={item}
                     editFormData={editFormData}
-                    setEditFormData={setEditFormData}
                     handleEditFormChange={handleEditFormChange}
                     handleEditFormSubmit={handleEditFormSubmit}
                     handleCancelClick={handleCancelClick}
@@ -356,4 +349,5 @@ const MembersManagement = () => {
   );
 };
 
-export default MembersManagement;
+export default ManagersManagement;
+

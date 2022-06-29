@@ -240,10 +240,10 @@ const ManagersManagement = () => {
         </div>
         <div className={"container-xl"}>
           <button
-              type="button"
-              className="btn btn-outline-secondary create-manager-btn btn-table-create"
-              data-toggle="modal"
-              data-target="#ModalCreateManager"
+            type="button"
+            className="btn btn-outline-secondary create-manager-btn btn-table-create"
+            data-toggle="modal"
+            data-target="#ModalCreateManager"
           >
             <span className="btn-create-user-text">Add a new user</span>
           </button>
@@ -261,86 +261,86 @@ const ManagersManagement = () => {
         <div className={"container-xl manager-table"}>
           <table className="table  theme">
             <thead>
-            <tr>
-              <th
+              <tr>
+                <th
                   scope="col"
                   onClick={() => requestSort("index")}
                   className={`${getClassNames(
-                      "index",
-                      sorting
+                    "index",
+                    sorting
                   )} w-10 theme pointer`}
-              >
-                №
-              </th>
-              <th
+                >
+                  №
+                </th>
+                <th
                   scope="col"
                   onClick={() => requestSort("name")}
                   className={`${getClassNames(
-                      "name",
-                      sorting
+                    "name",
+                    sorting
                   )} w-15 theme pointer`}
-              >
-                Name
-              </th>
-              <th
+                >
+                  Name
+                </th>
+                <th
                   scope="col"
                   onClick={() => requestSort("email")}
                   className={`${getClassNames(
-                      "email",
-                      sorting
+                    "email",
+                    sorting
                   )} w-20 theme pointer`}
-              >
-                Email
-              </th>
-              <th scope="col" className={"w-15 theme"}>
-                Telephone
-              </th>
-              <th
+                >
+                  Email
+                </th>
+                <th scope="col" className={"w-15 theme"}>
+                  Telephone
+                </th>
+                <th
                   scope="col"
                   onClick={() => requestSort("organization")}
                   className={`${getClassNames(
-                      "organization",
-                      sorting
+                    "organization",
+                    sorting
                   )} w-10 theme pointer`}
-              >
-                Company
-              </th>
-              <th
+                >
+                  Company
+                </th>
+                <th
                   scope="col"
                   onClick={() => requestSort("birthday")}
                   className={`${getClassNames(
-                      "birthday",
-                      sorting
+                    "birthday",
+                    sorting
                   )} w-15 theme pointer`}
-              >
-                Date of Birth
-              </th>
-              <th scope="col" className={"theme"}></th>
-              <th scope="col" className={"theme"}></th>
-            </tr>
+                >
+                  Date of Birth
+                </th>
+                <th scope="col" className={"theme"}></th>
+                <th scope="col" className={"theme"}></th>
+              </tr>
             </thead>
             <tbody>
-            {items.map((item) => (
-              <>
-                {editUser === item.id ? (
-                  <EditField
-                    key={item.id}
-                    item={item}
-                    editFormData={editFormData}
-                    handleEditFormChange={handleEditFormChange}
-                    handleEditFormSubmit={handleEditFormSubmit}
-                    handleCancelClick={handleCancelClick}
-                  />
-                ) : (
-                  <ReadField
-                    key={item.id}
-                    item={item}
-                    handleEditClick={handleEditClick}
-                    handleDeleteClick={handleDeleteClick}
-                  />
-                )}
-              </>
-            ))}
+              {items.map((item) => (
+                <tr key={item.id} className={"bg-theme"}>
+                  {editUser === item.id ? (
+                    <EditField
+                      key={item.id}
+                      item={item}
+                      editFormData={editFormData}
+                      handleEditFormChange={handleEditFormChange}
+                      handleEditFormSubmit={handleEditFormSubmit}
+                      handleCancelClick={handleCancelClick}
+                    />
+                  ) : (
+                    <ReadField
+                      key={item.id}
+                      item={item}
+                      handleEditClick={handleEditClick}
+                      handleDeleteClick={handleDeleteClick}
+                    />
+                  )}
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
