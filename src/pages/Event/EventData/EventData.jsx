@@ -183,9 +183,9 @@ const EventData = ({ event }) => {
         </thead>
         <tbody>
           {items.map((item) => (
-            <tr key={item.id} className="edit-elem">
+            <>
               {editUser === item.id ? (
-                <>
+                <tr key={item.id} className="edit-elem">
                   <td className="name-column">{item.user}</td>
                   <td>
                     <input
@@ -264,9 +264,9 @@ const EventData = ({ event }) => {
                       </button>
                     </div>
                   </td>
-                </>
+                </tr>
               ) : (
-                <>
+                <tr key={item.id}>
                   <td className="name-column">{item.user}</td>
                   <td>{item.extrapoints}</td>
                   <td>{item.comment}</td>
@@ -303,9 +303,9 @@ const EventData = ({ event }) => {
                       </svg>
                     </button>
                   </td>
-                </>
+                </tr>
               )}
-            </tr>
+            </>
           ))}
         </tbody>
       </table>
