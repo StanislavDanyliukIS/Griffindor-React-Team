@@ -1,5 +1,7 @@
 import { useSorting } from '../../../../hook/useSorting';
+
 import { Fragment, useEffect, useState } from 'react';
+
 
 import { getClassNames } from '../../../../functions/getClassNames';
 import { EditField } from '../../../../components/EditField/EditField';
@@ -137,7 +139,9 @@ const MembersManagement = () => {
 					photo: null,
 				});
 			})
+
 			.catch(error => console.error(error));
+
 
 		signOut(auth)
 			.then(() => {
@@ -147,7 +151,9 @@ const MembersManagement = () => {
 				localStorage.removeItem('isAuth');
 			})
 			.catch(error => {
+
 				console.error(error);
+
 			});
 	};
 
@@ -246,12 +252,14 @@ const MembersManagement = () => {
 	return (
 		<div className='members-container'>
 			<main>
+
 				<div
 					className={'members-container__header container-xl heading-container'}
 				>
 					<h3 className='title-management pt-2'>Members Management</h3>
 				</div>
 				<div className={'container-xl btn-container'}>
+
 					<button
 						type='button'
 						className='btn create-member-btn btn-outline-secondary btn-table-create '
@@ -327,11 +335,15 @@ const MembersManagement = () => {
 									Date of Birth
 								</th>
 								<th scope='col'></th>
+
+
 							</tr>
 						</thead>
 						<tbody>
 							{items.map(item => (
+
 								<Fragment key={item.id}>
+
 									{editUser === item.id ? (
 										<EditField
 											key={item.id}
@@ -350,7 +362,9 @@ const MembersManagement = () => {
 											handleDeleteClick={handleDeleteClick}
 										/>
 									)}
+
 								</Fragment>
+
 							))}
 						</tbody>
 					</table>

@@ -305,6 +305,7 @@ const EventData = ({ event }) => {
 			</table>
 		</div>
 	);
+
 };
 
 export default EventData;
