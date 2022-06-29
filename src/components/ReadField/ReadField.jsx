@@ -62,6 +62,6 @@ export const ReadField = ({ handleEditClick, handleDeleteClick, item }) => {
 					</button>
 				</div>
 			</td>
-		</>
+		</tr>
 	);
 };
