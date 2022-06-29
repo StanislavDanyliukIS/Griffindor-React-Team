@@ -1,8 +1,9 @@
 import React from "react";
+
 import ChangePasswordModal from "../../components/ChangePasswordModal/ChangePasswordModal";
 import ChangePhoto from "../../components/ChangePhoto/ChangePhoto";
 
-import "./EditUserData.scss"
+import "./EditUserData.scss";
 
 const EditUserData = () => {
   return (
