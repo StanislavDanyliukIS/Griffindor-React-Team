@@ -6,7 +6,7 @@ import Carrousel from './components/Carrousel/Carrousel';
 const Home = () => {
 	return (
 		<div className={'home'}>
-			<div className='container-xl'>
+			<div className='container-xl heading-container'>
 				<h3 className={'page-name pt-2'}>Home</h3>
 			</div>
 			<div className={'page-body pt-4'}>

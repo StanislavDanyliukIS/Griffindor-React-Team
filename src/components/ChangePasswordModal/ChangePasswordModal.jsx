@@ -90,11 +90,11 @@ const ChangePasswordModal = () => {
 						localStorage.clear();
 					})
 					.catch(error => {
-						console.log(error);
+						console.error(error);
 					});
 			})
 			.catch(error => {
-				console.log(error);
+				console.error(error);
 			});
 	};
 

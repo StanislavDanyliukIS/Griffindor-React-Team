@@ -22,11 +22,10 @@
 		transition: 0.1s;
 		text-decoration: none;
 		&_item {
-			width: 6vw;
-			height: 5vh;
+			height: 40px;
 		}
 		&_img {
-			width: 8vh;
+			width: 60px;
 			height: 100%;
 		}
 		&:hover {
@@ -36,8 +35,7 @@
 		}
 	}
 	&__theme {
-		padding-top: 0.6vh;
-		margin-right: 1em;
+		margin: auto 1em;
 		color: var(--subtext-color);
 	}
 	&__user {
@@ -72,7 +70,7 @@ li {
 		padding-left: 0;
 	}
 	&__box {
-		height: 3vh;
+		height: 28px;
 	}
 	&__item {
 		display: flex;
@@ -118,5 +116,32 @@ li {
 		&__item {
 			gap: 1vw;
 		}
+	}
+}
+
+@media only screen and (max-width: 425px) {
+	.navbar > .container-xl {
+		justify-content: center;
+	}
+	.navbar {
+		ul > li {
+			box-sizing: border-box;
+		}
+		&__nav {
+			flex-direction: column;
+			gap: 10px;
+		}
+	}
+}
+
+@media only screen and (min-width: 425px) {
+	.navbar > .container-xl {
+		justify-content: center;
+	}
+}
+
+@media only screen and (min-width: 821px) {
+	.navbar > .container-xl {
+		justify-content: space-between;
 	}
 }

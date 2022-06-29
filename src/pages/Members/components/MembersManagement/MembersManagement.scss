@@ -35,19 +35,8 @@
 	padding: 10px 20px;
 }
 
-.ascending {
-	&::after {
-		content: ' ↓';
-	}
-}
-.descending {
-	&::after {
-		content: ' ↑';
-	}
-}
-
-@media  (max-width: 930px){
-	.member-table{
+@media (max-width: 930px) {
+	.member-table {
 		overflow-x: scroll;
 	}
 }

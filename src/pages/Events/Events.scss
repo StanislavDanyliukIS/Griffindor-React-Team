@@ -18,14 +18,3 @@
 	gap: 20px;
 	padding: 5px;
 }
-
-.ascending {
-	&::after {
-		content: ' ↓';
-	}
-}
-.descending {
-	&::after {
-		content: ' ↑';
-	}
-}

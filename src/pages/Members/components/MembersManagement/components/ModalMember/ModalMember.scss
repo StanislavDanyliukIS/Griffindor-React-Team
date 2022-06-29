@@ -1,68 +1,67 @@
 .close {
-  border: 0;
-  border-radius: 4px;
-  background-color: var(--primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  &:hover {
-    opacity: 0.7;
-  }
+	border: 0;
+	border-radius: 4px;
+	background-color: var(--primary);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	&:hover {
+		opacity: 0.7;
+	}
 }
 .col-form-label {
-  font-weight: 600;
+	font-weight: 600;
 }
 
 .modal {
-  color: var(--text-color);
-  &-header {
-    background-color: var(--primary);
-    border-bottom: var(--border-color);
-  }
-  &-content {
-    background-color: var(--secondary);
-  }
-  &-footer {
-    border: 0;
-  }
+	color: var(--text-color);
+	&-header {
+		background-color: var(--primary);
+		border-bottom: var(--border-color);
+	}
+	&-content {
+		background-color: var(--secondary);
+	}
+	&-footer {
+		border: 0;
+	}
 }
 body.modal-open {
-  .members {
-    .title-management {
-      -webkit-filter: blur(2px);
-      -moz-filter: blur(2px);
-      -o-filter: blur(2px);
-      -ms-filter: blur(2px);
-      filter: blur(2px);
-    }
-    .create-member-btn {
-      -webkit-filter: blur(2px);
-      -moz-filter: blur(2px);
-      -o-filter: blur(2px);
-      -ms-filter: blur(2px);
-      filter: blur(2px);
-    }
-    .member-table {
-      -webkit-filter: blur(2px);
-      -moz-filter: blur(2px);
-      -o-filter: blur(2px);
-      -ms-filter: blur(2px);
-      filter: blur(2px);
-    }
-  }
+	.members-container {
+		.title-management {
+			-webkit-filter: blur(2px);
+			-moz-filter: blur(2px);
+			-o-filter: blur(2px);
+			-ms-filter: blur(2px);
+			filter: blur(2px);
+		}
+		.create-member-btn {
+			-webkit-filter: blur(2px);
+			-moz-filter: blur(2px);
+			-o-filter: blur(2px);
+			-ms-filter: blur(2px);
+			filter: blur(2px);
+		}
+		.member-table {
+			-webkit-filter: blur(2px);
+			-moz-filter: blur(2px);
+			-o-filter: blur(2px);
+			-ms-filter: blur(2px);
+			filter: blur(2px);
+		}
+	}
 }
 
 .close-btn-header {
-  display: flex;
-  margin: 4px 0;
-  color: var(--text-color);
+	display: flex;
+	margin: 4px 0;
+	color: var(--text-color);
 }
 
 .user-modal {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 .email-registered {
-  position: absolute;
-  top: 193px;
-
+	position: absolute;
+	top: 193px;
 }
