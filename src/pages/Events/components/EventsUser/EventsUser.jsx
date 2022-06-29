@@ -9,7 +9,7 @@ const EventsUser = () => {
 	const { items, requestSort, sorting } = useSorting(eventsData);
 	return (
 		<main>
-			<div className={'container-xl'}>
+			<div className={'container-xl heading-container'}>
 				<h3 className={'page-name pt-2'}> Events </h3>
 			</div>
 

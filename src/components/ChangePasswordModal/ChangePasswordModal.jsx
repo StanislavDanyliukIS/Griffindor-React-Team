@@ -15,191 +15,192 @@ import "./ChangePasswordModal.scss";
 import { useDispatch } from "react-redux";
 
 const ChangePasswordModal = () => {
-  const [passwordObj, setPasswordObj] = useState({
-    currentPassword: "",
-    newPassword_1: "",
-    newPassword_2: "",
-  });
-  const [newPassword, setNewPassword] = useState("");
-  const [worning, setWorning] = useState("text-hiden");
-  const [passwordLength, setPasswordLength] = useState("text-hiden");
-  const [passwordCheck, setPasswordCheck] = useState("text-hiden");
 
-  const dispatch = useDispatch();
+	const [passwordObj, setPasswordObj] = useState({
+		currentPassword: '',
+		newPassword_1: '',
+		newPassword_2: '',
+	});
+	const [newPassword, setNewPassword] = useState('');
+	const [worning, setWorning] = useState('text-hiden');
+	const [passwordLength, setPasswordLength] = useState('text-hiden');
+	const [passwordCheck, setPasswordCheck] = useState('text-hiden');
 
-  const { password } = useUserData();
-  const { uid } = useAuth();
+	const dispatch = useDispatch();
 
-  useEffect(() => createNewPassword(), [passwordObj]);
+	const { password } = useUserData();
+	const { uid } = useAuth();
 
-  const handleChange = (e) => {
-    setPasswordObj({ ...passwordObj, [e.target.name]: e.target.value });
-  };
+	useEffect(() => createNewPassword(), [passwordObj]);
 
-  const navigate = useNavigate();
+	const handleChange = e => {
+		setPasswordObj({ ...passwordObj, [e.target.name]: e.target.value });
+	};
 
-  const moveToprofile = () => {
-    navigate(-1);
-  };
+	const navigate = useNavigate();
 
-  const createNewPassword = () => {
-    passwordObj.newPassword_1 === passwordObj.newPassword_2 &&
-    passwordObj.currentPassword === password
-      ? setNewPassword(passwordObj.newPassword_1)
-      : setNewPassword(false);
-  };
+	const moveToprofile = () => {
+		navigate(-1);
+	};
 
-  const checkCurrentPassword = () => {
-    setPasswordCheck(
-      passwordObj.currentPassword === password ? "text-hiden" : "text-danger"
-    );
-  };
+	const createNewPassword = () => {
+		passwordObj.newPassword_1 === passwordObj.newPassword_2 &&
+		passwordObj.currentPassword === password
+			? setNewPassword(passwordObj.newPassword_1)
+			: setNewPassword(false);
+	};
 
-  const checkPasswordLength = () => {
-    setPasswordLength(
-      passwordObj.newPassword_1.length >= 6 ||
-        passwordObj.newPassword_1.length === 0
-        ? "text-hiden"
-        : "text-danger"
-    );
-  };
+	const checkCurrentPassword = () => {
+		setPasswordCheck(
+			passwordObj.currentPassword === password ? 'text-hiden' : 'text-danger'
+		);
+	};
 
-  const changePassword = () => {
-    if (
-      passwordObj.currentPassword !== password ||
-      passwordObj.newPassword_1.length < 6 ||
-      newPassword === false
-    ) {
-      throw new Error("Incorrect password!");
-    }
+	const checkPasswordLength = () => {
+		setPasswordLength(
+			passwordObj.newPassword_1.length >= 6 ||
+				passwordObj.newPassword_1.length === 0
+				? 'text-hiden'
+				: 'text-danger'
+		);
+	};
 
-    const auth = getAuth();
-    const user = auth.currentUser;
+	const changePassword = () => {
+		if (
+			passwordObj.currentPassword !== password ||
+			passwordObj.newPassword_1.length < 6 ||
+			newPassword === false
+		) {
+			throw new Error('Incorrect password!');
+		}
 
-    updatePassword(user, newPassword)
-      .then(() =>
-        updateDoc(doc(db, "users", uid), {
-          password: newPassword,
-        })
-      )
-      .then(() => {
-        signOut(auth)
-          .then(() => {
-            dispatch(logOut());
-            dispatch(clearUserData());
-            localStorage.clear();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+		const auth = getAuth();
+		const user = auth.currentUser;
 
-  const passwordNotMatch = () => {
-    setWorning(
-      passwordObj.newPassword_1 === passwordObj.newPassword_2 ||
-        passwordObj.newPassword_2.length === 0
-        ? "text-hiden"
-        : "text-danger"
-    );
-  };
+		updatePassword(user, newPassword)
+			.then(() =>
+				updateDoc(doc(db, 'users', uid), {
+					password: newPassword,
+				})
+			)
+			.then(() => {
+				signOut(auth)
+					.then(() => {
+						dispatch(logOut());
+						dispatch(clearUserData());
+						localStorage.clear();
+					})
+					.catch(error => {
+						console.error(error);
+					});
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	};
 
-  return (
-    <div className="changepassword-field card-body">
-      <form className="change-password-form">
-        <div className="password-input form-group mb-3 row current-password-input">
-          <label className="password-label form-label col-3 col-form-label">
-            Current Password
-          </label>
-          <div className="col">
-            <input
-              type="password"
-              name="currentPassword"
-              className="form-control"
-              placeholder="Password"
-              value={passwordObj.currentPassword}
-              autoComplete="on"
-              onChange={handleChange}
-            />
-            <small className="form-hint">Enter your current password.</small>
-            <span className={passwordCheck}>Incorrect curent password.</span>
-          </div>
-        </div>
-        <div className="password-input  form-group mb-3 row">
-          <label className="password-label form-label col-3 col-form-label">
-            New Password
-          </label>
-          <div className="col">
-            <input
-              type="password"
-              className={`form-control`}
-              placeholder="Password"
-              name="newPassword_1"
-              value={passwordObj.newPassword_1}
-              onChange={handleChange}
-              autoComplete="on"
-              onBlur={checkPasswordLength}
-            />
-            <small className="form-hint">
-              Enter your new password, your password must be 6-20 characters
-              long.
-            </small>
-            <span className={passwordLength}>
-              Password should contain at least 6 characters.
-            </span>
-          </div>
-        </div>
-        <div className="password-input form-group mb-3 row">
-          <label className="password-label form-label col-3 col-form-label">
-            New Password
-          </label>
-          <div className="col">
-            <input
-              type="password"
-              name="newPassword_2"
-              className="form-control"
-              placeholder="Password"
-              value={passwordObj.newPassword_2}
-              onChange={handleChange}
-              autoComplete="on"
-              onBlur={passwordNotMatch}
-            />
-            <small className="form-hint">Repeat your new password.</small>
-            <span className={worning}>Password does not match.</span>
-          </div>
-        </div>
+	const passwordNotMatch = () => {
+		setWorning(
+			passwordObj.newPassword_1 === passwordObj.newPassword_2 ||
+				passwordObj.newPassword_2.length === 0
+				? 'text-hiden'
+				: 'text-danger'
+		);
+	};
 
-        <div className="form-footer">
-          <button
-            type="submit"
-            className="password-btn btn btn-primary"
-            onClick={(e) => {
-              e.preventDefault();
-              checkCurrentPassword();
-              changePassword();
-              setPasswordObj({
-                currentPassword: "",
-                newPassword_1: "",
-                newPassword_2: "",
-              });
-            }}
-          >
-            Submit
-          </button>
-          <button
-            type="button"
-            className="password-btn btn btn-outline-secondary"
-            onClick={moveToprofile}
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
-    </div>
-  );
+	return (
+		<div className='changepassword-field card-body'>
+			<form className='change-password-form'>
+				<div className='password-input form-group mb-3 row current-password-input'>
+					<label className='password-label form-label col-3 col-form-label'>
+						Current Password
+					</label>
+					<div className='col'>
+						<input
+							type='password'
+							name='currentPassword'
+							className='form-control'
+							placeholder='Password'
+							value={passwordObj.currentPassword}
+							autoComplete='on'
+							onChange={handleChange}
+						/>
+						<small className='form-hint'>Enter your current password.</small>
+						<span className={passwordCheck}>Incorrect curent password.</span>
+					</div>
+				</div>
+				<div className='password-input  form-group mb-3 row'>
+					<label className='password-label form-label col-3 col-form-label'>
+						New Password
+					</label>
+					<div className='col'>
+						<input
+							type='password'
+							className={`form-control`}
+							placeholder='Password'
+							name='newPassword_1'
+							value={passwordObj.newPassword_1}
+							onChange={handleChange}
+							autoComplete='on'
+							onBlur={checkPasswordLength}
+						/>
+						<small className='form-hint'>
+							Enter your new password, your password must be 6-20 characters
+							long.
+						</small>
+						<span className={passwordLength}>
+							Password should contain at least 6 characters.
+						</span>
+					</div>
+				</div>
+				<div className='password-input form-group mb-3 row'>
+					<label className='password-label form-label col-3 col-form-label'>
+						New Password
+					</label>
+					<div className='col'>
+						<input
+							type='password'
+							name='newPassword_2'
+							className='form-control'
+							placeholder='Password'
+							value={passwordObj.newPassword_2}
+							onChange={handleChange}
+							autoComplete='on'
+							onBlur={passwordNotMatch}
+						/>
+						<small className='form-hint'>Repeat your new password.</small>
+						<span className={worning}>Password does not match.</span>
+					</div>
+				</div>
+
+				<div className='form-footer'>
+					<button
+						type='submit'
+						className='password-btn btn btn-primary'
+						onClick={e => {
+							e.preventDefault();
+							checkCurrentPassword();
+							changePassword();
+							setPasswordObj({
+								currentPassword: '',
+								newPassword_1: '',
+								newPassword_2: '',
+							});
+						}}
+					>
+						Submit
+					</button>
+					<button
+						type='button'
+						className='password-btn btn btn-outline-secondary'
+						onClick={moveToprofile}
+					>
+						Cancel
+					</button>
+				</div>
+			</form>
+		</div>
+	);
 };
 
 export default ChangePasswordModal;

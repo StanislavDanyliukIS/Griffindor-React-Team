@@ -32,17 +32,6 @@
 		border-top: 2px solid red;
 	}
 }
-body.modal-open {
-	.events {
-		.container-xl {
-			-webkit-filter: blur(2px);
-			-moz-filter: blur(2px);
-			-o-filter: blur(2px);
-			-ms-filter: blur(2px);
-			filter: blur(2px);
-		}
-	}
-}
 
 .close-btn-header {
 	display: flex;

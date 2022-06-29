@@ -86,7 +86,7 @@ const Login = () => {
 				clearPasword();
 				focusOnPasswordInput();
 				setUserValidation('text-danger');
-				console.log(error);
+				console.error(error);
 			});
 	};
 

@@ -1,16 +1,12 @@
-
-.home{
-  min-height: 79vh;
-  padding: 20px;
-  &__second_row{
-
-  }
+.home {
+	min-height: 79vh;
+	padding: 20px;
 }
 
 @media (min-width: 1196px) {
-  .home{
-    &__second_row{
-      margin-left: 0;
-    }
-  }
+	.home {
+		&__second_row {
+			margin-left: 0;
+		}
+	}
 }

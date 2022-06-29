@@ -20,27 +20,7 @@
 	}
 }
 
-.table-btn {
-	text-align: right;
-}
-
-.btn-delete {
-	display: flex;
-	padding: 10px 20px;
-	margin-left: auto;
-}
-
-.ascending {
-	&::after {
-		content: ' ↓';
-	}
-}
-.descending {
-	&::after {
-		content: ' ↑';
-	}
-}
-@media (max-width: 364px) {
+@media (max-width: 482px) {
 	.events-table {
 		overflow-x: scroll;
 	}
