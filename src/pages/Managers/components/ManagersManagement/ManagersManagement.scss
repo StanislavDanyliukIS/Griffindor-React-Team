@@ -1,5 +1,8 @@
 .managers-container {
-	min-height: 79vh;
+	min-height: 75.8vh;
+}
+.managers-table{
+	overflow-y: auto;
 }
 
 .title-management {
@@ -23,6 +26,7 @@
 .btn-create-user-text {
 	padding: 10px;
 }
+
 
 @media (max-width: 930px) {
 	.manager-table {

@@ -65,11 +65,16 @@
     &-container{
       min-width: 80vw;
       max-width: 80vw;
-
     }
   }
+  .right-arrow{
+    margin-left:  -25px;
+  }
+  .left-arrow{
+    margin-right:  -25px;
+  }
 }
-@media (max-width: 600px) {
+@media (max-width: 420px) {
   .carrousel{
     &_box{
       justify-content: start;

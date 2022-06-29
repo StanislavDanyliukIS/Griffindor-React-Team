@@ -1,7 +1,4 @@
 .footer{
-	&-text{
-
-	}
 	&-link {
 		color: var(--text-color);
 		&:hover {
@@ -19,6 +16,12 @@
 @media (max-width: 540px) {
 	.footer{
 		font-size: 0.6rem;
-
+	}
+}
+@media (max-width: 420px) {
+	.footer{
+		&.container-xl{
+			flex-direction: column;
+		}
 	}
 }

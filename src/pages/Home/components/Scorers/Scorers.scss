@@ -4,17 +4,29 @@
     border: 1px var(--border-color) solid;
   }
   &-avatar{
-    width: 7vw;
+    width: 7em;
   }
   &-item{
     color: var(--subtext-color);
   }
   &-img{
-    width: 4vw;
-    height: 4vw;
+    width: 4em;
+    height: 4em;
     background-color: var(--subtext-color);
   }
   &-text{
     color: var(--text-color);
+  }
+}
+
+@media (max-width: 420px) {
+  .scorers{
+    &-avatar{
+      width: 6em;
+    }
+    &-img{
+      width: 3em;
+      height: 3em;
+    }
   }
 }
