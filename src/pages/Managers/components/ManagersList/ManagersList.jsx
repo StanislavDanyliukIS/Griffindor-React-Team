@@ -10,6 +10,7 @@ import {
 import { db } from '../../../../firebase';
 
 import Manager from '../Manager/Manager';
+
 import './ManagersList.scss';
 
 const ManagersList = () => {

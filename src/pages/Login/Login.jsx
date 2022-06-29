@@ -1,14 +1,16 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, updateDoc, getDoc } from 'firebase/firestore';
-import { useDispatch } from 'react-redux';
 
-import { db } from '../../firebase';
+import { useDispatch } from 'react-redux';
 import { logIn } from '../../store/authSlice';
 import { addUserData } from '../../store/userDataSlice';
 
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, updateDoc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
+
 import './Login.scss';
+
 import eye from '../../imgs/eye.png';
 
 const Login = () => {
