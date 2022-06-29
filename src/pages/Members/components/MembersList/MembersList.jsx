@@ -80,7 +80,7 @@ const Members = () => {
 									<Member
 										key={item.id}
 										name={item.name}
-										number={item.phone}
+										number={item.telephone}
 										organization={item.organization}
 										userImageUrl={item.userImageUrl}
 									/>

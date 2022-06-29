@@ -77,7 +77,7 @@ const ManagersList = () => {
 								<Manager
 									key={item.id}
 									name={item.name}
-									number={item.phone}
+									number={item.telephone}
 									userImageUrl={item.userImageUrl}
 								/>
 							))}
