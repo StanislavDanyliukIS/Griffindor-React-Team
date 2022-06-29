@@ -1,8 +1,5 @@
-import Member from '../Member/Member';
-
 import { useEffect, useState } from 'react';
 
-import './MembersList.scss';
 import {
 	collection,
 	limit,
@@ -11,6 +8,10 @@ import {
 	where,
 } from 'firebase/firestore';
 import { db } from '../../../../firebase';
+
+import Member from '../Member/Member';
+
+import './MembersList.scss';
 
 const Members = () => {
 	const limited = 16;
@@ -61,7 +62,7 @@ const Members = () => {
 				<div>
 					<span> {results.length + ' members'} </span>
 				</div>
-				<div className={"page-input"}>
+				<div className={'page-input'}>
 					<input
 						className={'px-2 border rounded-1'}
 						type={'text'}

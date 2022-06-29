@@ -1,12 +1,14 @@
-import CarrouselItem from "../CarrouselItem/CarrouselItem";
-
-import HOT_EVENT from "../../../../imgs/highScore.png"
-import TOP_EVENT from "../../../../imgs/topEvent.png"
-import "./Carrousel.scss";
 import {useEffect, useRef, useState} from "react";
+
 import {collection, onSnapshot, query} from "firebase/firestore";
 import {db} from "../../../../firebase";
-import {NavLink} from "react-router-dom";
+
+import CarrouselItem from "../CarrouselItem/CarrouselItem";
+
+import "./Carrousel.scss";
+
+import HOT_EVENT from "../../../../imgs/highScore.png";
+import TOP_EVENT from "../../../../imgs/topEvent.png";
 
 const Carrousel = () => {
     const [events, setEvents] = useState([]);
@@ -79,11 +81,11 @@ const Carrousel = () => {
         }
     }
 
-    const widthCarrousel = () =>{
-        if (!!carrouselParent.current.children[0].clientWidth){
+    const widthCarrousel = () => {
+        if (!!carrouselParent.current.children[0].clientWidth) {
             return carrouselParent.current.children[0].clientWidth
         } else {
-           return  widthCarrousel();
+            return widthCarrousel();
         }
     };
 
@@ -128,31 +130,31 @@ const Carrousel = () => {
                             transitionDuration: "0.5s",
                         }}>
 
-                                <CarrouselItem key={Math.random() * 999999999}
-                                               title={`HOT event - ${hotEvent[0].name}`}
-                                               subtitle={`For this event you can get ${hotEvent[0].score}`}
-                                               img={HOT_EVENT}
-                                               color={"#F3262D"}
-                                               textPaddingTop={15}
-                                />
+                            <CarrouselItem key={Math.random() * 999999999}
+                                           title={`HOT event - ${hotEvent[0].name}`}
+                                           subtitle={`For this event you can get ${hotEvent[0].score}`}
+                                           img={HOT_EVENT}
+                                           color={"#F3262D"}
+                                           textPaddingTop={15}
+                            />
 
 
-                                <CarrouselItem key={Math.random() * 999999999}
-                                               title={`The best event - ${topEvent[0].name}`}
-                                               subtitle={`This event was attended by the most people - ${topEvent[0].countAttended}`}
-                                               img={TOP_EVENT}
-                                               color={"#E6E7E9"}
-                                               textPaddingTop={21}
-                                />
+                            <CarrouselItem key={Math.random() * 999999999}
+                                           title={`The best event - ${topEvent[0].name}`}
+                                           subtitle={`This event was attended by the most people - ${topEvent[0].countAttended}`}
+                                           img={TOP_EVENT}
+                                           color={"#E6E7E9"}
+                                           textPaddingTop={21}
+                            />
 
 
-                                <CarrouselItem key={Math.random() * 999999999}
-                                               title={"Hot event 3"}
-                                               subtitle={"For this event you can get a lot of score"}
-                                               img={HOT_EVENT}
-                                               color={"#E6E7E9"}
-                                               textPaddingTop={20}
-                                />
+                            <CarrouselItem key={Math.random() * 999999999}
+                                           title={"Hot event 3"}
+                                           subtitle={"For this event you can get a lot of score"}
+                                           img={HOT_EVENT}
+                                           color={"#E6E7E9"}
+                                           textPaddingTop={20}
+                            />
                         </div>
                     )}
                 </div>

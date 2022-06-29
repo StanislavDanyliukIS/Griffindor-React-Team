@@ -1,5 +1,7 @@
-import { useSorting } from '../../../../hook/useSorting';
 import { useEffect, useState } from 'react';
+
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { db } from '../../../../firebase';
 import {
@@ -12,14 +14,13 @@ import {
 	deleteDoc,
 } from 'firebase/firestore';
 
+import { ModalEvent } from './components/ModalEvent/ModalEvent';
+import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal/ConfirmDeleteModal';
+
+import { useSorting } from '../../../../hook/useSorting';
 import { getClassNames } from '../../../../functions/getClassNames';
 
 import './EventsManagement.scss';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-
-import { ModalEvent } from './components/ModalEvent/ModalEvent';
-import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal/ConfirmDeleteModal';
 
 const EventsManagement = () => {
 	const eventsData = useSelector(state => state.events.eventsData);

@@ -1,12 +1,14 @@
-import { useSorting } from '../../../../hook/useSorting';
-
 import { Fragment, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { getClassNames } from '../../../../functions/getClassNames';
-import { EditField } from '../../../../components/EditField/EditField';
-import { ReadField } from '../../../../components/ReadField/ReadField';
+import { logOut } from '../../../../store/authSlice';
+import { clearUserData } from '../../../../store/userDataSlice';
 
-import './MembersManagement.scss';
+import {
+	createUserWithEmailAndPassword,
+	getAuth,
+	signOut,
+} from 'firebase/auth';
 import {
 	collection,
 	onSnapshot,
@@ -20,22 +22,15 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../../../firebase';
 
-import {
-	createUser,
-	updateUser,
-	deleteUser,
-} from '../../../../store/crudSlice';
-import { useDispatch } from 'react-redux';
-import {
-	createUserWithEmailAndPassword,
-	getAuth,
-	signOut,
-	sendEmailVerification,
-} from 'firebase/auth';
-import { logOut } from '../../../../store/authSlice';
-import { clearUserData } from '../../../../store/userDataSlice';
+import { EditField } from '../../../../components/EditField/EditField';
+import { ReadField } from '../../../../components/ReadField/ReadField';
 import { ModalMember } from './components/ModalMember/ModalMember';
 import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal/ConfirmDeleteModal';
+
+import { useSorting } from '../../../../hook/useSorting';
+import { getClassNames } from '../../../../functions/getClassNames';
+
+import './MembersManagement.scss';
 
 const MembersManagement = () => {
 	const auth = getAuth();
@@ -85,31 +80,12 @@ const MembersManagement = () => {
 
 		createUserWithEmailAndPassword(auth, addFormData.email, password)
 			.then(userCredential => {
-				dispatch(
-					createUser({
-						email: userCredential.user.email,
-						id: userCredential.user.uid,
-					})
-				);
 				return {
 					email: userCredential.user.email,
 					id: userCredential.user.uid,
 				};
 			})
 			.then(data => {
-				dispatch(
-					createUser({
-						name: addFormData.name,
-						role: 'user',
-						score: addFormData.score ? addFormData.score : '0',
-						birthday: addFormData.birthday,
-						organization: addFormData.organization,
-						telephone: addFormData.telephone,
-						password: password,
-						userImageUrl: null,
-						photo: null,
-					})
-				);
 				return {
 					id: data.id,
 					email: data.email,
@@ -176,15 +152,6 @@ const MembersManagement = () => {
 		const item = items.filter(el => el.id === editFormData.id);
 		const document = doc(db, 'users', item[0].id);
 		getDoc(document).then(data => {
-			dispatch(
-				updateUser({
-					name: editedContact.name,
-					score: editedContact.score,
-					birthday: editedContact.birthday,
-					organization: editedContact.organization,
-					telephone: editedContact.telephone,
-				})
-			);
 			updateDoc(doc(db, 'users', item[0].id), {
 				name: editedContact.name,
 				score: editedContact.score,
@@ -209,22 +176,6 @@ const MembersManagement = () => {
 		const document = doc(db, 'users', deleteMember.id);
 		getDoc(document).then(() => {
 			deleteDoc(document);
-			dispatch(
-				deleteUser({
-					email: null,
-					token: null,
-					id: null,
-					name: null,
-					role: null,
-					score: null,
-					birthday: null,
-					organization: null,
-					telephone: null,
-					userImageUrl: null,
-					photo: null,
-					password: null,
-				})
-			);
 		});
 		setDeleteMember('');
 	};
@@ -324,7 +275,7 @@ const MembersManagement = () => {
 									className={`${getClassNames(
 										'birthday',
 										sorting
-									)} w-15 pointer`}
+									)} w-15 pointer table-min-width`}
 								>
 									Date of Birth
 								</th>

@@ -1,12 +1,10 @@
-import { useSorting } from '../../../../hook/useSorting';
 import { Fragment, useEffect, useState } from 'react';
+import { useSorting } from '../../../../hook/useSorting';
 
-import { getClassNames } from '../../../../functions/getClassNames';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../../../../store/authSlice';
+import { clearUserData } from '../../../../store/userDataSlice';
 
-import { EditField } from '../../../../components/EditField/EditField';
-import { ReadField } from '../../../../components/ReadField/ReadField';
-
-import './ManagersManagement.scss';
 import {
 	collection,
 	deleteDoc,
@@ -18,33 +16,31 @@ import {
 	updateDoc,
 	where,
 } from 'firebase/firestore';
-import { db } from '../../../../firebase';
-import { useDispatch } from 'react-redux';
 import {
 	createUserWithEmailAndPassword,
 	getAuth,
 	signOut,
 } from 'firebase/auth';
-import {
-	createUser,
-	deleteUser,
-	updateUser,
-} from '../../../../store/crudSlice';
-import { logOut } from '../../../../store/authSlice';
-import { clearUserData } from '../../../../store/userDataSlice';
+import { db } from '../../../../firebase';
+
+import { EditField } from '../../../../components/EditField/EditField';
+import { ReadField } from '../../../../components/ReadField/ReadField';
 import { ModalManager } from './components/ModalManager/ModalManager';
 import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal/ConfirmDeleteModal';
 
+import { getClassNames } from '../../../../functions/getClassNames';
+
+import './ManagersManagement.scss';
+
 const ManagersManagement = () => {
+	const auth = getAuth();
+	const password = '111111';
 
-  const auth = getAuth();
-  const password = "111111";
-
-  const [managers, setManagers] = useState([]);
-  const [deleteManager, setDeleteManager] = useState({});
-  const [addFormData, setAddFormData] = useState("");
-  const [editFormData, setEditFormData] = useState("");
-  const [editUser, setEditUser] = useState(null);
+	const [managers, setManagers] = useState([]);
+	const [deleteManager, setDeleteManager] = useState({});
+	const [addFormData, setAddFormData] = useState('');
+	const [editFormData, setEditFormData] = useState('');
+	const [editUser, setEditUser] = useState(null);
 
 	const dispatch = useDispatch();
 	const indexedManagers = managers.map((el, idx) => {
@@ -83,30 +79,12 @@ const ManagersManagement = () => {
 		event.preventDefault();
 		createUserWithEmailAndPassword(auth, addFormData.email, password)
 			.then(userCredential => {
-				dispatch(
-					createUser({
-						email: userCredential.user.email,
-						id: userCredential.user.uid,
-					})
-				);
 				return {
 					email: userCredential.user.email,
 					id: userCredential.user.uid,
 				};
 			})
 			.then(data => {
-				dispatch(
-					createUser({
-						name: addFormData.name,
-						role: 'manager',
-						birthday: addFormData.birthday,
-						organization: addFormData.organization,
-						telephone: addFormData.telephone,
-						password: password,
-						userImageUrl: null,
-						photo: null,
-					})
-				);
 				return {
 					id: data.id,
 					email: data.email,
@@ -168,14 +146,6 @@ const ManagersManagement = () => {
 		const item = items.filter(el => el.id === editFormData.id);
 		const document = doc(db, 'users', item[0].id);
 		getDoc(document).then(data => {
-			dispatch(
-				updateUser({
-					name: editedContact.name,
-					birthday: editedContact.birthday,
-					organization: editedContact.organization,
-					telephone: editedContact.telephone,
-				})
-			);
 			updateDoc(doc(db, 'users', item[0].id), {
 				name: editedContact.name,
 				birthday: editedContact.birthday,
@@ -200,21 +170,6 @@ const ManagersManagement = () => {
 		const document = doc(db, 'users', deleteManager.id);
 		getDoc(document).then(() => {
 			deleteDoc(document);
-			dispatch(
-				deleteUser({
-					email: null,
-					token: null,
-					id: null,
-					name: null,
-					role: null,
-					birthday: null,
-					organization: null,
-					telephone: null,
-					userImageUrl: null,
-					photo: null,
-					password: null,
-				})
-			);
 		});
 		setDeleteManager({});
 	};
@@ -304,7 +259,7 @@ const ManagersManagement = () => {
 									className={`${getClassNames(
 										'birthday',
 										sorting
-									)} w-15 pointer`}
+									)} w-15 pointer table-min-width`}
 								>
 									Date of Birth
 								</th>

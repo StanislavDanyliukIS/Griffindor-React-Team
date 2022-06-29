@@ -1,16 +1,20 @@
+import { useEffect, useState, Fragment } from 'react';
+
 import {
-  collection,
-  doc,
-  onSnapshot,
-  query,
-  updateDoc,
-  where,
-} from "firebase/firestore";
-import { useEffect, useState, Fragment } from "react";
-import { db } from "../../../firebase";
-import { getClassNames } from "../../../functions/getClassNames";
-import { useSorting } from "../../../hook/useSorting";
-import "./EventData.scss";
+	collection,
+	doc,
+	onSnapshot,
+	query,
+	updateDoc,
+	where,
+} from 'firebase/firestore';
+import { db } from '../../../firebase';
+
+import { useSorting } from '../../../hook/useSorting';
+import { getClassNames } from '../../../functions/getClassNames';
+
+import './EventData.scss';
+
 
 const EventData = ({ event }) => {
   const { items, requestSort, sorting } = useSorting(event.participants);
@@ -308,6 +312,7 @@ const EventData = ({ event }) => {
       </table>
     </div>
   );
+
 };
 
 export default EventData;
