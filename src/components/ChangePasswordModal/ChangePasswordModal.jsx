@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
-import { doc, updateDoc } from 'firebase/firestore';
-import { getAuth, updatePassword, signOut } from 'firebase/auth';
-import { db } from '../../firebase';
+import { doc, updateDoc } from "firebase/firestore";
+import { getAuth, updatePassword, signOut } from "firebase/auth";
+import { db } from "../../firebase";
 
-import { useUserData } from '../../hook/useUserData';
-import { useAuth } from '../../hook/useAuth';
+import { useUserData } from "../../hook/useUserData";
+import { useAuth } from "../../hook/useAuth";
 
-import { logOut } from '../../store/authSlice';
-import { clearUserData } from '../../store/userDataSlice';
+import { logOut } from "../../store/authSlice";
+import { clearUserData } from "../../store/userDataSlice";
 
-import './ChangePasswordModal.scss';
-import { useDispatch } from 'react-redux';
+import "./ChangePasswordModal.scss";
+import { useDispatch } from "react-redux";
 
 const ChangePasswordModal = () => {
+
 	const [passwordObj, setPasswordObj] = useState({
 		currentPassword: '',
 		newPassword_1: '',
@@ -90,11 +91,11 @@ const ChangePasswordModal = () => {
 						localStorage.clear();
 					})
 					.catch(error => {
-						console.log(error);
+						console.error(error);
 					});
 			})
 			.catch(error => {
-				console.log(error);
+				console.error(error);
 			});
 	};
 

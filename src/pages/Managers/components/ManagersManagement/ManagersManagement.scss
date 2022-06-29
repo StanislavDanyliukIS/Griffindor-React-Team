@@ -27,19 +27,9 @@
 	padding: 10px;
 }
 
-.ascending {
-	&::after {
-		content: ' ↓';
-	}
-}
-.descending {
-	&::after {
-		content: ' ↑';
-	}
-}
 
-@media  (max-width: 930px){
-	.managers-table{
+@media (max-width: 930px) {
+	.manager-table {
 		overflow-x: scroll;
 	}
 }

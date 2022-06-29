@@ -43,3 +43,13 @@
 		transform: translateX(0);
 	}
 }
+@media only screen and (max-width: 380px) {
+	.cstoast {
+		width: 320px;
+	}
+}
+@media only screen and (max-width: 345px) {
+	.cstoast {
+		width: 270px;
+	}
+}

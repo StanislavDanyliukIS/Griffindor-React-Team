@@ -50,7 +50,7 @@
 	border-color: var(--border-color);
 }
 
-th{
+th {
 	min-width: 70px;
 }
 
@@ -76,6 +76,15 @@ body {
 		&:focus {
 			color: var(--text-color);
 			background-color: var(--primary);
+		}
+	}
+}
+@media only screen and (max-width: 425px) {
+	.btn-container,
+	.heading-container {
+		justify-content: center;
+		.btn-table-create {
+			margin: 20px 0;
 		}
 	}
 }
@@ -107,6 +116,29 @@ body {
 		td {
 			vertical-align: middle;
 		}
+	}
+	&-btn {
+		display: flex;
+		padding: 10px 20px;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+.td-buttons {
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+}
+
+.ascending {
+	&::after {
+		content: ' ↓';
+	}
+}
+.descending {
+	&::after {
+		content: ' ↑';
 	}
 }
 

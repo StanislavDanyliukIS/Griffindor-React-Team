@@ -22,7 +22,7 @@ const Event = () => {
 
 	return event ? (
 		<div className='event'>
-			<div className={'container-xl'}>
+			<div className={'container-xl heading-container'}>
 				<h3 className={'page-name pt-2'}> {`${event.name} event`} </h3>
 			</div>
 			<EventData event={event} />
