@@ -1,8 +1,9 @@
 import ReactDOM from 'react-dom';
-import { Toast } from '../Toast/Toast';
+import { useState, forwardRef, useImperativeHandle } from 'react';
 import { useToastPortal } from '../../hook/useToastPortal';
 import { useToastAutoClose } from '../../hook/useToastAutoClose';
-import { useState, forwardRef, useImperativeHandle } from 'react';
+
+import { Toast } from '../Toast/Toast';
 
 import './ToastPortal.scss';
 

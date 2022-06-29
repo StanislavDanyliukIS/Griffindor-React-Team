@@ -1,4 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { useAuth } from '../../hook/useAuth';
+import { useUserData } from '../../hook/useUserData';
+
+import { useDispatch } from 'react-redux';
+import { addUserData } from '../../store/userDataSlice';
+
 import { doc, updateDoc, getDoc } from 'firebase/firestore';
 import {
 	getDownloadURL,
@@ -7,13 +14,6 @@ import {
 	deleteObject,
 } from 'firebase/storage';
 import { db, storage } from '../../firebase';
-import { useNavigate } from 'react-router';
-
-import { useAuth } from '../../hook/useAuth';
-import { useUserData } from '../../hook/useUserData';
-import { useDispatch } from 'react-redux';
-
-import { addUserData } from '../../store/userDataSlice';
 
 import './ChangePhoto.scss';
 

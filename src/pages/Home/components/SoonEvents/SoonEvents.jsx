@@ -1,8 +1,11 @@
-import "./SoonEvents.scss";
-import SoonEvent from "../SoonEvent/SoonEvent";
 import {useEffect, useState} from "react";
+
 import {collection, onSnapshot, query, } from "firebase/firestore";
 import {db} from "../../../../firebase";
+
+import SoonEvent from "../SoonEvent/SoonEvent";
+
+import "./SoonEvents.scss";
 
 const SoonEvents = () => {
 

@@ -1,25 +1,23 @@
 import { useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router';
+import { useUserData } from '../../hook/useUserData';
+import { addUserData, clearUserData } from '../../store/userDataSlice';
+import { logOut, logIn } from '../../store/authSlice';
+import { logined, unlogined } from '../../store/statusSlicer';
 
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../../firebase';
 
-import { useUserData } from '../../hook/useUserData';
-
 import ThemeSwitch from './components/ThemeSwitch';
 
-import { addUserData, clearUserData } from '../../store/userDataSlice';
-import { logOut, logIn } from '../../store/authSlice';
-import { logined, unlogined } from '../../store/statusSlicer';
+import './Header.scss';
 
 import logo_white from './../../imgs/logo_white.png';
 import logo_black from './../../imgs/logo_black.png';
-
-import './Header.scss';
 
 const Header = () => {
 	const navigate = useNavigate();

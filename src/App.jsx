@@ -1,9 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
+
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-
 import { setEventsData } from './store/eventsSlice';
+
 import { db } from './firebase';
 import { collection, onSnapshot, query } from 'firebase/firestore';
 

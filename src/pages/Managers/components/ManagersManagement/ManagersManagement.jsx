@@ -1,12 +1,15 @@
-import { useSorting } from '../../../../hook/useSorting';
 import { Fragment, useEffect, useState } from 'react';
+import { useSorting } from '../../../../hook/useSorting';
 
-import { getClassNames } from '../../../../functions/getClassNames';
+import { useDispatch } from 'react-redux';
+import {
+	createUser,
+	deleteUser,
+	updateUser,
+} from '../../../../store/crudSlice';
+import { logOut } from '../../../../store/authSlice';
+import { clearUserData } from '../../../../store/userDataSlice';
 
-import { EditField } from '../../../../components/EditField/EditField';
-import { ReadField } from '../../../../components/ReadField/ReadField';
-
-import './ManagersManagement.scss';
 import {
 	collection,
 	deleteDoc,
@@ -18,22 +21,21 @@ import {
 	updateDoc,
 	where,
 } from 'firebase/firestore';
-import { db } from '../../../../firebase';
-import { useDispatch } from 'react-redux';
 import {
 	createUserWithEmailAndPassword,
 	getAuth,
 	signOut,
 } from 'firebase/auth';
-import {
-	createUser,
-	deleteUser,
-	updateUser,
-} from '../../../../store/crudSlice';
-import { logOut } from '../../../../store/authSlice';
-import { clearUserData } from '../../../../store/userDataSlice';
+import { db } from '../../../../firebase';
+
+import { EditField } from '../../../../components/EditField/EditField';
+import { ReadField } from '../../../../components/ReadField/ReadField';
 import { ModalManager } from './components/ModalManager/ModalManager';
 import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal/ConfirmDeleteModal';
+
+import { getClassNames } from '../../../../functions/getClassNames';
+
+import './ManagersManagement.scss';
 
 const ManagersManagement = () => {
 

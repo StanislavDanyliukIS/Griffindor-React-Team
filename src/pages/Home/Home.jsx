@@ -1,7 +1,8 @@
-import './Home.scss';
 import Scorers from './components/Scorers/Scorers';
 import SoonEvents from './components/SoonEvents/SoonEvents';
 import Carrousel from './components/Carrousel/Carrousel';
+
+import './Home.scss';
 
 const Home = () => {
 	return (
