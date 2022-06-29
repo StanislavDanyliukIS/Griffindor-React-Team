@@ -2,11 +2,6 @@ import { Fragment, useEffect, useState } from 'react';
 import { useSorting } from '../../../../hook/useSorting';
 
 import { useDispatch } from 'react-redux';
-import {
-	createUser,
-	deleteUser,
-	updateUser,
-} from '../../../../store/crudSlice';
 import { logOut } from '../../../../store/authSlice';
 import { clearUserData } from '../../../../store/userDataSlice';
 
@@ -84,30 +79,12 @@ const ManagersManagement = () => {
 		event.preventDefault();
 		createUserWithEmailAndPassword(auth, addFormData.email, password)
 			.then(userCredential => {
-				dispatch(
-					createUser({
-						email: userCredential.user.email,
-						id: userCredential.user.uid,
-					})
-				);
 				return {
 					email: userCredential.user.email,
 					id: userCredential.user.uid,
 				};
 			})
 			.then(data => {
-				dispatch(
-					createUser({
-						name: addFormData.name,
-						role: 'manager',
-						birthday: addFormData.birthday,
-						organization: addFormData.organization,
-						telephone: addFormData.telephone,
-						password: password,
-						userImageUrl: null,
-						photo: null,
-					})
-				);
 				return {
 					id: data.id,
 					email: data.email,
@@ -169,14 +146,6 @@ const ManagersManagement = () => {
 		const item = items.filter(el => el.id === editFormData.id);
 		const document = doc(db, 'users', item[0].id);
 		getDoc(document).then(data => {
-			dispatch(
-				updateUser({
-					name: editedContact.name,
-					birthday: editedContact.birthday,
-					organization: editedContact.organization,
-					telephone: editedContact.telephone,
-				})
-			);
 			updateDoc(doc(db, 'users', item[0].id), {
 				name: editedContact.name,
 				birthday: editedContact.birthday,
@@ -201,21 +170,6 @@ const ManagersManagement = () => {
 		const document = doc(db, 'users', deleteManager.id);
 		getDoc(document).then(() => {
 			deleteDoc(document);
-			dispatch(
-				deleteUser({
-					email: null,
-					token: null,
-					id: null,
-					name: null,
-					role: null,
-					birthday: null,
-					organization: null,
-					telephone: null,
-					userImageUrl: null,
-					photo: null,
-					password: null,
-				})
-			);
 		});
 		setDeleteManager({});
 	};
