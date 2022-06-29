@@ -1,5 +1,5 @@
 import { useSorting } from "../../../../hook/useSorting";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { getClassNames } from "../../../../functions/getClassNames";
 
@@ -38,6 +38,7 @@ import { ConfirmDeleteModal } from "../../../../components/ConfirmDeleteModal/Co
 const ManagersManagement = () => {
   const auth = getAuth();
   const password = "111111";
+
   const [managers, setManagers] = useState([]);
   const [deleteManager, setDeleteManager] = useState({});
   const [addFormData, setAddFormData] = useState("");
@@ -258,7 +259,7 @@ const ManagersManagement = () => {
           handleDeleteSubmit={handleDeleteSubmit}
         />
 
-        <div className={"container-xl manager-table"}>
+        <div className={"container-xl managers-table"}>
           <table className="table  theme">
             <thead>
             <tr>

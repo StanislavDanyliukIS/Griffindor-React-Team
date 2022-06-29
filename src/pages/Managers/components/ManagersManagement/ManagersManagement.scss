@@ -1,5 +1,8 @@
 .managers-container {
-	min-height: 79vh;
+	min-height: 75.8vh;
+}
+.managers-table{
+	overflow-y: auto;
 }
 
 .title-management {
@@ -36,7 +39,7 @@
 }
 
 @media  (max-width: 930px){
-	.manager-table{
+	.managers-table{
 		overflow-x: scroll;
 	}
 }

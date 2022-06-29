@@ -61,7 +61,7 @@ const Members = () => {
         <div>
           <span> {results.length + " members"} </span>
         </div>
-        <div>
+        <div className={"page-input"}>
           <input
             className={"px-2 border rounded-1"}
             type={"text"}
@@ -80,7 +80,7 @@ const Members = () => {
                   <Member
                     key={item.id}
                     name={item.name}
-                    number={item.phone}
+                    number={item.telephone}
                     organization={item.organization}
                     userImageUrl={item.userImageUrl}
                   />

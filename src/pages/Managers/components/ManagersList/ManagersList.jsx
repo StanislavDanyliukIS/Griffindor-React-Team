@@ -55,11 +55,10 @@ const ManagersList = () => {
       <div className={"page-search container-xl "}>
         <div>
           <span className={"page-result"}>
-            {" "}
-            {results.length + " managers"}{" "}
+            {results.length + " managers"}
           </span>
         </div>
-        <div>
+        <div className={"page-input"}>
           <input
             className={"px-2 border rounded-1"}
             type={"text"}
@@ -77,7 +76,7 @@ const ManagersList = () => {
                 <Manager
                   key={item.id}
                   name={item.name}
-                  number={item.phone}
+                  number={item.telephone}
                   userImageUrl={item.userImageUrl}
                 />
               ))}
