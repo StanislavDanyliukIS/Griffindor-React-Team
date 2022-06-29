@@ -36,15 +36,14 @@ import { ModalManager } from './components/ModalManager/ModalManager';
 import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal/ConfirmDeleteModal';
 
 const ManagersManagement = () => {
+	const auth = getAuth();
+	const password = '111111';
 
-  const auth = getAuth();
-  const password = "111111";
-
-  const [managers, setManagers] = useState([]);
-  const [deleteManager, setDeleteManager] = useState({});
-  const [addFormData, setAddFormData] = useState("");
-  const [editFormData, setEditFormData] = useState("");
-  const [editUser, setEditUser] = useState(null);
+	const [managers, setManagers] = useState([]);
+	const [deleteManager, setDeleteManager] = useState({});
+	const [addFormData, setAddFormData] = useState('');
+	const [editFormData, setEditFormData] = useState('');
+	const [editUser, setEditUser] = useState(null);
 
 	const dispatch = useDispatch();
 	const indexedManagers = managers.map((el, idx) => {
@@ -304,7 +303,7 @@ const ManagersManagement = () => {
 									className={`${getClassNames(
 										'birthday',
 										sorting
-									)} w-15 pointer`}
+									)} w-15 pointer table-min-width`}
 								>
 									Date of Birth
 								</th>

@@ -1,3 +1,5 @@
+import { useEffect, useState, Fragment } from 'react';
+
 import {
 	collection,
 	doc,
@@ -6,10 +8,11 @@ import {
 	updateDoc,
 	where,
 } from 'firebase/firestore';
-import { useEffect, useState, Fragment } from 'react';
 import { db } from '../../../firebase';
-import { getClassNames } from '../../../functions/getClassNames';
+
 import { useSorting } from '../../../hook/useSorting';
+import { getClassNames } from '../../../functions/getClassNames';
+
 import './EventData.scss';
 
 const EventData = ({ event }) => {
@@ -156,7 +159,7 @@ const EventData = ({ event }) => {
 							className={`${getClassNames(
 								'extrapoints',
 								sorting
-							)} w-20 pointer`}
+							)} w-20 pointer table-min-width`}
 						>
 							Extra points
 						</th>
@@ -305,7 +308,6 @@ const EventData = ({ event }) => {
 			</table>
 		</div>
 	);
-
 };
 
 export default EventData;

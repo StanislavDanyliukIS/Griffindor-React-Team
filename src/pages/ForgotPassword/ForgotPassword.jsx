@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 
-import './ForgotPassword.scss';
-import letter from '../../imgs/white-letter.png';
-import { useRef } from 'react';
 import { ToastPortal } from '../../components/ToastPortal/ToastPortal';
+
+import './ForgotPassword.scss';
+
+import letter from '../../imgs/white-letter.png';
 
 const ForgotPassword = () => {
 	const toastRef = useRef();

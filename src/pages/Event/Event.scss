@@ -1,4 +1,7 @@
 .event {
 	min-height: 79vh;
 	padding: 20px;
+	&__page-name {
+		margin-bottom: 30px;
+	}
 }

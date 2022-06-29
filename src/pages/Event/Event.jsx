@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import './Event.scss';
 import EventData from './EventData/EventData';
+
+import './Event.scss';
 
 const Event = () => {
 	const { id } = useParams();
@@ -23,7 +25,10 @@ const Event = () => {
 	return event ? (
 		<div className='event'>
 			<div className={'container-xl heading-container'}>
-				<h3 className={'page-name pt-2'}> {`${event.name} event`} </h3>
+				<h3 className={'page-name event__page-name pt-2'}>
+					{' '}
+					{`${event.name} event`}{' '}
+				</h3>
 			</div>
 			<EventData event={event} />
 		</div>

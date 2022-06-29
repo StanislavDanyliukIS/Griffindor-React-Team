@@ -1,12 +1,19 @@
-import { useSorting } from '../../../../hook/useSorting';
-
 import { Fragment, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { getClassNames } from '../../../../functions/getClassNames';
-import { EditField } from '../../../../components/EditField/EditField';
-import { ReadField } from '../../../../components/ReadField/ReadField';
+import {
+	createUser,
+	updateUser,
+	deleteUser,
+} from '../../../../store/crudSlice';
+import { logOut } from '../../../../store/authSlice';
+import { clearUserData } from '../../../../store/userDataSlice';
 
-import './MembersManagement.scss';
+import {
+	createUserWithEmailAndPassword,
+	getAuth,
+	signOut,
+} from 'firebase/auth';
 import {
 	collection,
 	onSnapshot,
@@ -20,22 +27,15 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../../../firebase';
 
-import {
-	createUser,
-	updateUser,
-	deleteUser,
-} from '../../../../store/crudSlice';
-import { useDispatch } from 'react-redux';
-import {
-	createUserWithEmailAndPassword,
-	getAuth,
-	signOut,
-	sendEmailVerification,
-} from 'firebase/auth';
-import { logOut } from '../../../../store/authSlice';
-import { clearUserData } from '../../../../store/userDataSlice';
+import { EditField } from '../../../../components/EditField/EditField';
+import { ReadField } from '../../../../components/ReadField/ReadField';
 import { ModalMember } from './components/ModalMember/ModalMember';
 import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal/ConfirmDeleteModal';
+
+import { useSorting } from '../../../../hook/useSorting';
+import { getClassNames } from '../../../../functions/getClassNames';
+
+import './MembersManagement.scss';
 
 const MembersManagement = () => {
 	const auth = getAuth();
@@ -324,7 +324,7 @@ const MembersManagement = () => {
 									className={`${getClassNames(
 										'birthday',
 										sorting
-									)} w-15 pointer`}
+									)} w-15 pointer table-min-width`}
 								>
 									Date of Birth
 								</th>

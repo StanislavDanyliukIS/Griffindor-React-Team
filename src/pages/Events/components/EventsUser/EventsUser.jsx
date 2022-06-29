@@ -1,8 +1,9 @@
+import { useSelector } from 'react-redux';
+
 import { useSorting } from '../../../../hook/useSorting';
 import { getClassNames } from '../../../../functions/getClassNames';
 
 import './EventsUser.scss';
-import { useSelector } from 'react-redux';
 
 const EventsUser = () => {
 	const eventsData = useSelector(state => state.events.eventsData);
