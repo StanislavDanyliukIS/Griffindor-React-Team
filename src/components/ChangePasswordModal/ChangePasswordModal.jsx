@@ -1,15 +1,20 @@
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+
 import { useUserData } from '../../hook/useUserData';
 import { useAuth } from '../../hook/useAuth';
+
 
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../store/slices/authSlice';
 import { clearUserData } from '../../store/slices/userDataSlice';
 
+
 import { doc, updateDoc } from 'firebase/firestore';
 import { getAuth, updatePassword, signOut } from 'firebase/auth';
 import { db } from '../../firebase';
+
 
 import './ChangePasswordModal.scss';
 
@@ -199,6 +204,7 @@ const ChangePasswordModal = () => {
 			</form>
 		</div>
 	);
+
 };
 
 export default ChangePasswordModal;

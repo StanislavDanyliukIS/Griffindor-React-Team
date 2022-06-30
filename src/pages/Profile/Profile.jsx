@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import { useUserData } from "../../hook/useUserData";
+
+import { useNavigate } from "react-router";
+
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../../firebase";
 
 import "./Profile.scss";
 
 const Profile = () => {
   const [photo, setPhoto] = useState();
+  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
   const {
@@ -21,6 +26,18 @@ const Profile = () => {
 
   const moveToEdit = () => {
     navigate("edit-data");
+  };
+
+  useEffect(() => getUsersData, []);
+
+  const getUsersData = async () => {
+    const arr = [];
+    const q = query(collection(db, "users"), where("role", "==", "user"));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      arr.push(doc.data().score);
+    });
+    setUsers(arr.sort((a, b) => b - a));
   };
 
   useEffect(() => {
@@ -50,6 +67,14 @@ const Profile = () => {
                     <h3 className="info-container__name h2 mb-0">{name}</h3>
                   </div>
                   <ul className="list-unstyled mb-1-9">
+                    {role === "user" && (
+                      <li className="mb-2 mb-xl-3 display-28">
+                        <span className="info-container__info-title display-26  me-2 font-weight-600">
+                          Rating:
+                        </span>{" "}
+                        {users.indexOf(score) + 1}
+                      </li>
+                    )}
                     <li className="mb-2 mb-xl-3 display-28">
                       <span className="info-container__info-title display-26  me-2 font-weight-600">
                         Role:
