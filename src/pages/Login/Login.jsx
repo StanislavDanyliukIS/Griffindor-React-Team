@@ -2,8 +2,8 @@ import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import { useDispatch } from 'react-redux';
-import { logIn } from '../../store/authSlice';
-import { addUserData } from '../../store/userDataSlice';
+import { logIn } from '../../store/slices/authSlice';
+import { addUserData } from '../../store/slices/userDataSlice';
 
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, updateDoc, getDoc } from 'firebase/firestore';

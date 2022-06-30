@@ -4,7 +4,7 @@ import { useAuth } from '../../hook/useAuth';
 import { useUserData } from '../../hook/useUserData';
 
 import { useDispatch } from 'react-redux';
-import { addUserData } from '../../store/userDataSlice';
+import { addUserData } from '../../store/slices/userDataSlice';
 
 import { doc, updateDoc, getDoc } from 'firebase/firestore';
 import {

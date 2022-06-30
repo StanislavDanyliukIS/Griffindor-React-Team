@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-import { useUserData } from "../../hook/useUserData";
-import { useAuth } from "../../hook/useAuth";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { useUserData } from '../../hook/useUserData';
+import { useAuth } from '../../hook/useAuth';
 
-import { useDispatch } from "react-redux";
-import { logOut } from "../../store/authSlice";
-import { clearUserData } from "../../store/userDataSlice";
+import { useDispatch } from 'react-redux';
+import { logOut } from '../../store/slices/authSlice';
+import { clearUserData } from '../../store/slices/userDataSlice';
 
-import { doc, updateDoc } from "firebase/firestore";
-import { getAuth, updatePassword, signOut } from "firebase/auth";
-import { db } from "../../firebase";
+import { doc, updateDoc } from 'firebase/firestore';
+import { getAuth, updatePassword, signOut } from 'firebase/auth';
+import { db } from '../../firebase';
 
-import "./ChangePasswordModal.scss";
+import './ChangePasswordModal.scss';
 
 const ChangePasswordModal = () => {
-
 	const [passwordObj, setPasswordObj] = useState({
 		currentPassword: '',
 		newPassword_1: '',
