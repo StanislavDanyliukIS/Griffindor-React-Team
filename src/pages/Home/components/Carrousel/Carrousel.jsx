@@ -9,6 +9,7 @@ import "./Carrousel.scss";
 
 import HOT_EVENT from "../../../../imgs/highScore.png";
 import TOP_EVENT from "../../../../imgs/topEvent.png";
+import BOBR from "../../../../imgs/bobr.png";
 
 const Carrousel = () => {
     const [events, setEvents] = useState([]);
@@ -149,11 +150,11 @@ const Carrousel = () => {
 
 
                             <CarrouselItem key={Math.random() * 999999999}
-                                           title={"Hot event 3"}
-                                           subtitle={"For this event you can get a lot of score"}
-                                           img={HOT_EVENT}
-                                           color={"#E6E7E9"}
-                                           textPaddingTop={20}
+                                           title={""}
+                                           subtitle={""}
+                                           img={BOBR}
+                                           color={""}
+                                           textPaddingTop={0}
                             />
                         </div>
                     )}
