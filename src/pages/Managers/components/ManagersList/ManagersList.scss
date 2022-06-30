@@ -16,10 +16,10 @@
 }
 
 @media (max-width: 420px) {
-	.page-input{
+	.page-input {
 		display: flex;
-		justify-content: end;
-		& input{
+		justify-content: flex-end;
+		& input {
 			width: 80%;
 		}
 	}
