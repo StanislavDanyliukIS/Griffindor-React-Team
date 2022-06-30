@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../../hook/useAuth";
 import { useUserData } from "../../hook/useUserData";
 
-
-import { useDispatch } from 'react-redux';
-import { addUserData } from '../../store/slices/userDataSlice';
-
+import { useDispatch } from "react-redux";
+import { addUserData } from "../../store/slices/userDataSlice";
 
 import { useNavigate } from "react-router";
 
@@ -37,9 +35,8 @@ const ChangePhoto = () => {
 
   const loadData = (e) => {
     e.preventDefault();
-    const file = photoUser;
-    const storageRef = ref(storage, `photos/${file.name}`);
-    uploadBytes(storageRef, file)
+    const storageRef = ref(storage, `photos/${photoUser.name}`);
+    uploadBytes(storageRef, photoUser)
       .then(() => {
         const desertRef = ref(storage, `photos/${photo}`);
         deleteObject(desertRef).catch((error) => {
@@ -51,7 +48,6 @@ const ChangePhoto = () => {
           photo: photoUser.name,
         })
       )
-      .then(() => setPhoto({ name: photo }))
       .then(() => getData());
   };
 
@@ -61,10 +57,9 @@ const ChangePhoto = () => {
         setImage(url);
         updateDoc(doc(db, "users", uid), {
           userImageUrl: url,
-        }).then((data) => {
+        }).then(() => {
           const docRef = doc(db, `users`, uid);
           getDoc(docRef).then((resp) => dispatch(addUserData(resp.data())));
-          return data;
         });
       })
       .then(() => {

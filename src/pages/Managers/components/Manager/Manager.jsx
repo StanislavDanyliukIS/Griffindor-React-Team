@@ -1,14 +1,18 @@
 import "./Manager.scss";
 
 const Manager = ({ name, number, userImageUrl }) => {
+  const userImage = userImageUrl
+    ? userImageUrl
+    : "https://bootdey.com/img/Content/avatar/avatar7.png";
+
   return (
     <>
       <div className={"manager-container col-md  p-5 py-2 m-2 "}>
         <div className={"managers-item p-4 text-center"}>
-          {userImageUrl ? (
+          {userImage ? (
             <img
               className={"managers-img rounded-circle m-auto mb-2"}
-              src={userImageUrl}
+              src={userImage}
               alt="user"
             />
           ) : (
