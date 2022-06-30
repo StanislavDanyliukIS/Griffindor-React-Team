@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useSorting } from '../../../../hook/useSorting';
+import usePagination from "../../../../hook/usePagination";
 
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../../../store/slices/authSlice';
@@ -47,7 +48,20 @@ const ManagersManagement = () => {
 		el.index = idx + 1;
 		return el;
 	});
+
 	const { items, requestSort, sorting } = useSorting(indexedManagers);
+	const {
+		firstContentIndex,
+		lastContentIndex,
+		nextPage,
+		prevPage,
+		page,
+		setPage,
+		totalPages,
+	} = usePagination({
+		contentPerPage: 9,
+		count: items.length,
+	});
 
 	useEffect(() => {
 		let q = query(collection(db, 'users'), where('role', '==', 'manager'));
@@ -216,7 +230,7 @@ const ManagersManagement = () => {
 				/>
 
 				<div className={'container-xl manager-table'}>
-					<table className='table'>
+					<table className='table' style={{ }}>
 						<thead>
 							<tr>
 								<th
@@ -267,7 +281,7 @@ const ManagersManagement = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{items.map(item => (
+							{items.slice(firstContentIndex, lastContentIndex).map(item => (
 								<Fragment key={item.id}>
 									{editUser === item.id ? (
 										<EditField
@@ -290,6 +304,34 @@ const ManagersManagement = () => {
 							))}
 						</tbody>
 					</table>
+				</div>
+				<div className="container-xl d-flex align-items-center">
+					<p className="text">
+						Showing {firstContentIndex+1} to {lastContentIndex} of {page}/{totalPages} pages
+					</p>
+					<ul className={"pagination m-0 ms-auto"}>
+						<li>
+							<button onClick={prevPage} className="page-item btn btn-outline-secondary">
+								&larr;
+							</button>
+						</li>
+						{[...Array(totalPages).keys()].map((el) => (
+							<li>
+								<button
+									onClick={() => setPage(el + 1)}
+									key={el}
+									className={`page-item btn btn-outline-${page === el + 1 ? "primary" : "secondary"}`}
+								>
+									{el + 1}
+								</button>
+							</li>
+						))}
+						<li>
+							<button onClick={nextPage} className="page-item btn btn-outline-secondary">
+								&rarr;
+							</button>
+						</li>
+					</ul>
 				</div>
 			</main>
 		</div>
