@@ -101,7 +101,7 @@ const Members = () => {
 								return (
 									<button
 										type={'button'}
-										className={'loadMore__btn btn '}
+										className={'btn btn-primary mt-3'}
 										onClick={() => {
 											setLimitNumber(prevState => prevState + limited);
 										}}
