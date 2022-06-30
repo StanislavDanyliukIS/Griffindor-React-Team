@@ -97,13 +97,13 @@ const Members = () => {
 				<div className={'container-xl'}>
 					<div className={'loadMore  m-auto'}>
 						{(() => {
-							if (results.length > limited) {
+							if (results.length >= limitNumber) {
 								return (
 									<button
 										type={'button'}
-										className={'loadMore__btn btn '}
+										className={'btn btn-primary mt-3'}
 										onClick={() => {
-											setLimitNumber(limitNumber + limited);
+											setLimitNumber(prevState => prevState + limited);
 										}}
 									>
 										Show {limited} more

@@ -8,24 +8,23 @@ const Pagination = ({firstContentIndex, lastContentIndex, page, totalPages, prev
                 Showing {firstContentIndex + 1} to {lastContentIndex} of {page}/{totalPages} pages
             </p>
             <ul className={"pagination m-0 ms-auto"}>
-                <li>
-                    <button onClick={prevPage} className="page-item btn btn-outline-secondary">
+                <li key={Math.random()}>
+                    <button onClick={prevPage} className="page-item btn btn-outline-secondary" >
                         &larr;
                     </button>
                 </li>
                 {[...Array(totalPages).keys()].map((el) => (
-                    <li>
+                    <li key={el}>
                         <button
                             onClick={() => setPage(el + 1)}
-                            key={el}
                             className={`page-item btn btn-outline-${page === el + 1 ? "primary" : "secondary"}`}
                         >
                             {el + 1}
                         </button>
                     </li>
                 ))}
-                <li>
-                    <button onClick={nextPage} className="page-item btn btn-outline-secondary">
+                <li key={Math.random()}>
+                    <button onClick={nextPage} className="page-item btn btn-outline-secondary" >
                         &rarr;
                     </button>
                 </li>
