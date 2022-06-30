@@ -1,4 +1,6 @@
 import { useEffect, useState, Fragment } from 'react';
+import { useSorting } from '../../../hook/useSorting';
+import usePagination from "../../../hook/usePagination";
 
 import {
 	collection,
@@ -10,11 +12,11 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../../firebase';
 
-import { useSorting } from '../../../hook/useSorting';
 import { getClassNames } from '../../../functions/getClassNames';
 
-import './EventData.scss';
+import Pagination from "../../../components/Pagination/Pagination";
 
+import './EventData.scss';
 
 const EventData = ({ event }) => {
   const { items, requestSort, sorting } = useSorting(event.participants);
@@ -24,6 +26,18 @@ const EventData = ({ event }) => {
   const [scoreForAttending, setScoreForAttending] = useState("");
   const [users, setUsers] = useState([]);
   const [oldExtrapoints, setOldExtrapoints] = useState("");
+  const {
+    firstContentIndex,
+    lastContentIndex,
+    nextPage,
+    prevPage,
+    page,
+    setPage,
+    totalPages,
+  } = usePagination({
+    contentPerPage: 10,
+    count: items.length,
+  });
 
   useEffect(() => {
     setParticipantsData(event.participants);
@@ -146,7 +160,7 @@ const EventData = ({ event }) => {
   };
 
   return (
-    <div className="container-xl event-table">
+    <div className="container-xl event-table flex-column">
       <table className="table ">
         <thead>
           <tr>
@@ -163,7 +177,7 @@ const EventData = ({ event }) => {
               className={`${getClassNames(
                 "extrapoints",
                 sorting
-              )} w-20 pointer`}
+              )} w-25 pointer`}
             >
               Extra points
             </th>
@@ -177,7 +191,7 @@ const EventData = ({ event }) => {
             <th
               scope="col"
               onClick={() => requestSort("attended")}
-              className={`${getClassNames("attended", sorting)} pointer`}
+              className={`${getClassNames("attended", sorting)} w-20 pointer`}
             >
               Attended
             </th>
@@ -185,7 +199,7 @@ const EventData = ({ event }) => {
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => (
+          {items.slice(firstContentIndex, lastContentIndex).map((item) => (
             <Fragment key={item.id}>
               {editUser === item.id ? (
                 <tr className="edit-elem">
@@ -310,6 +324,15 @@ const EventData = ({ event }) => {
           ))}
         </tbody>
       </table>
+      <Pagination
+          firstContentIndex={firstContentIndex}
+          lastContentIndex={lastContentIndex}
+          page={page}
+          totalPages={totalPages}
+          prevPage={prevPage}
+          setPage={setPage}
+          nextPage={nextPage}
+      />
     </div>
   );
 

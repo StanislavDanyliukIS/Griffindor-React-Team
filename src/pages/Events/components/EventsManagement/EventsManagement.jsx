@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import usePagination from "../../../../hook/usePagination";
 
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -16,6 +17,7 @@ import {
 
 import { ModalEvent } from './components/ModalEvent/ModalEvent';
 import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal/ConfirmDeleteModal';
+import Pagination from "../../../../components/Pagination/Pagination";
 
 import { useSorting } from '../../../../hook/useSorting';
 import { getClassNames } from '../../../../functions/getClassNames';
@@ -25,6 +27,18 @@ import './EventsManagement.scss';
 const EventsManagement = () => {
 	const eventsData = useSelector(state => state.events.eventsData);
 	const { items, requestSort, sorting } = useSorting(eventsData);
+	const {
+		firstContentIndex,
+		lastContentIndex,
+		nextPage,
+		prevPage,
+		page,
+		setPage,
+		totalPages,
+	} = usePagination({
+		contentPerPage: 8,
+		count: items.length,
+	});
 
 	const [initValue, setInitValue] = useState({
 		date: '',
@@ -136,21 +150,21 @@ const EventsManagement = () => {
 							<th
 								scope='col'
 								onClick={() => requestSort('name')}
-								className={`${getClassNames('name', sorting)} pointer`}
+								className={`${getClassNames('name', sorting)} pointer w-30`}
 							>
 								Name
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('date')}
-								className={`${getClassNames('date', sorting)} pointer`}
+								className={`${getClassNames('date', sorting)} pointer w-30`}
 							>
 								Date
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('score')}
-								className={`${getClassNames('score', sorting)} pointer`}
+								className={`${getClassNames('score', sorting)} pointer w-30`}
 							>
 								Points
 							</th>
@@ -158,7 +172,7 @@ const EventsManagement = () => {
 						</tr>
 					</thead>
 					<tbody className='events-list'>
-						{items.map(item => (
+						{items.slice(firstContentIndex, lastContentIndex).map(item => (
 							<tr key={item.id}>
 								<td>
 									<Link to={`/events/${item.id}`}>{item.name}</Link>
@@ -198,6 +212,15 @@ const EventsManagement = () => {
 					</tbody>
 				</table>
 			</div>
+			<Pagination
+				firstContentIndex={firstContentIndex}
+				lastContentIndex={lastContentIndex}
+				page={page}
+				totalPages={totalPages}
+				prevPage={prevPage}
+				setPage={setPage}
+				nextPage={nextPage}
+			/>
 		</main>
 	);
 };

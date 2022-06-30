@@ -1,13 +1,28 @@
 import { useSelector } from 'react-redux';
-
+import usePagination from "../../../../hook/usePagination";
 import { useSorting } from '../../../../hook/useSorting';
+
 import { getClassNames } from '../../../../functions/getClassNames';
+
+import Pagination from "../../../../components/Pagination/Pagination";
 
 import './EventsUser.scss';
 
 const EventsUser = () => {
 	const eventsData = useSelector(state => state.events.eventsData);
 	const { items, requestSort, sorting } = useSorting(eventsData);
+	const {
+		firstContentIndex,
+		lastContentIndex,
+		nextPage,
+		prevPage,
+		page,
+		setPage,
+		totalPages,
+	} = usePagination({
+		contentPerPage: 8,
+		count: items.length,
+	});
 	return (
 		<main>
 			<div className={'container-xl heading-container'}>
@@ -21,28 +36,28 @@ const EventsUser = () => {
 							<th
 								scope='col'
 								onClick={() => requestSort('name')}
-								className={`${getClassNames('name', sorting)} w-25 pointer`}
+								className={`${getClassNames('name', sorting)} w-30 pointer`}
 							>
 								Name
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('date')}
-								className={`${getClassNames('date', sorting)} w-25 pointer`}
+								className={`${getClassNames('date', sorting)} w-30 pointer`}
 							>
 								Date
 							</th>
 							<th
 								scope='col'
 								onClick={() => requestSort('score')}
-								className={`${getClassNames('score', sorting)} w-50 pointer`}
+								className={`${getClassNames('score', sorting)} w-30 pointer`}
 							>
 								Score
 							</th>
 						</tr>
 					</thead>
 					<tbody>
-						{items.map(item => (
+						{items.slice(firstContentIndex, lastContentIndex).map(item => (
 							<tr key={item.id}>
 								<td className='name-column'>{item.name}</td>
 								<td>
@@ -54,6 +69,15 @@ const EventsUser = () => {
 					</tbody>
 				</table>
 			</div>
+			<Pagination
+				firstContentIndex={firstContentIndex}
+				lastContentIndex={lastContentIndex}
+				page={page}
+				totalPages={totalPages}
+				prevPage={prevPage}
+				setPage={setPage}
+				nextPage={nextPage}
+			/>
 		</main>
 	);
 };

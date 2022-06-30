@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import usePagination from "../../../../hook/usePagination";
 
 import { logOut } from '../../../../store/slices/authSlice';
 import { clearUserData } from '../../../../store/slices/userDataSlice';
@@ -26,6 +27,7 @@ import { EditField } from '../../../../components/EditField/EditField';
 import { ReadField } from '../../../../components/ReadField/ReadField';
 import { ModalMember } from './components/ModalMember/ModalMember';
 import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal/ConfirmDeleteModal';
+import Pagination from "../../../../components/Pagination/Pagination";
 
 import { useSorting } from '../../../../hook/useSorting';
 import { getClassNames } from '../../../../functions/getClassNames';
@@ -45,10 +47,22 @@ const MembersManagement = () => {
 		el.index = idx + 1;
 		return el;
 	});
+	const { items, requestSort, sorting } = useSorting(indexedMembers);
+	const {
+		firstContentIndex,
+		lastContentIndex,
+		nextPage,
+		prevPage,
+		page,
+		setPage,
+		totalPages,
+	} = usePagination({
+		contentPerPage: 8,
+		count: items.length,
+	});
 
 	const dispatch = useDispatch();
 
-	const { items, requestSort, sorting } = useSorting(indexedMembers);
 	useEffect(() => {
 		let q;
 		q = query(collection(db, 'users'), where('role', '==', 'user'));
@@ -283,7 +297,7 @@ const MembersManagement = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{items.map(item => (
+							{items.slice(firstContentIndex, lastContentIndex).map(item => (
 								<Fragment key={item.id}>
 									{editUser === item.id ? (
 										<EditField
@@ -308,6 +322,15 @@ const MembersManagement = () => {
 						</tbody>
 					</table>
 				</div>
+				<Pagination
+					firstContentIndex={firstContentIndex}
+					lastContentIndex={lastContentIndex}
+					page={page}
+					totalPages={totalPages}
+					prevPage={prevPage}
+					setPage={setPage}
+					nextPage={nextPage}
+				/>
 			</main>
 		</div>
 	);

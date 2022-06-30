@@ -64,12 +64,10 @@ const Scorers = () => {
                                     {" "}
                                     {!!sortScore.length ? sortScore[0].name : ""}
                                 </h5>
-                                <div className={" py-1"}>
-                                    <div>
-                    <span className={"number-text"}>
-                      Score: {!!sortScore.length ? sortScore[0].score : ""}
-                    </span>
-                                    </div>
+                                <div className={"scorers-score py-1"}>
+                                    <span>
+                                      Score: {!!sortScore.length ? sortScore[0].score : ""}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -92,12 +90,10 @@ const Scorers = () => {
                                         {" "}
                                         {!!sortScore.length ? sortScore[1].name : ""}
                                     </h5>
-                                    <div className={" py-1"}>
-                                        <div>
-                      <span className={"number-text"}>
-                        Score: {!!sortScore.length ? sortScore[1].score : ""}
-                      </span>
-                                        </div>
+                                    <div className={"scorers-score py-1"}>
+                                      <span>
+                                        Score: {!!sortScore.length ? sortScore[1].score : ""}
+                                      </span>
                                     </div>
                                 </div>
                             </div>
@@ -121,12 +117,10 @@ const Scorers = () => {
                                         {" "}
                                         {!!sortScore.length ? sortScore[2].name : ""}
                                     </h5>
-                                    <div className={" py-1"}>
-                                        <div>
-                      <span className={"number-text"}>
-                        Score: {!!sortScore.length ? sortScore[2].score : ""}
-                      </span>
-                                        </div>
+                                    <div className={"scorers-score py-1"}>
+                                      <span>
+                                        Score: {!!sortScore.length ? sortScore[2].score : ""}
+                                      </span>
                                     </div>
                                 </div>
                             </div>
