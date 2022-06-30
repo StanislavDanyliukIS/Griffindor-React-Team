@@ -15,14 +15,6 @@
 	color: var(--subtext-color);
 }
 
-.loadMore {
-	&__btn {
-		background: var(--primary);
-		color: var(--text-color);
-		border: 1px solid var(--secondary);
-	}
-}
-
 @media (max-width: 420px) {
 	.page-input{
 		display: flex;
