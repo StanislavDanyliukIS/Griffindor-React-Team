@@ -2,8 +2,8 @@ import { Fragment, useEffect, useState } from 'react';
 import { useSorting } from '../../../../hook/useSorting';
 
 import { useDispatch } from 'react-redux';
-import { logOut } from '../../../../store/authSlice';
-import { clearUserData } from '../../../../store/userDataSlice';
+import { logOut } from '../../../../store/slices/authSlice';
+import { clearUserData } from '../../../../store/slices/userDataSlice';
 
 import {
 	collection,

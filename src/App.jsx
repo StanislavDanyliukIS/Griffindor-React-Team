@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { setEventsData } from './store/eventsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { setEventsData } from './store/slices/eventsSlice';
 
 import { db } from './firebase';
 import { collection, onSnapshot, query } from 'firebase/firestore';

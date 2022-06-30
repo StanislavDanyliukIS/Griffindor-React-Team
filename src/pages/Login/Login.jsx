@@ -1,8 +1,9 @@
 import { useRef, useState } from "react";
 
-import { useDispatch } from "react-redux";
-import { logIn } from "../../store/authSlice";
-import { addUserData } from "../../store/userDataSlice";
+import { useDispatch } from 'react-redux';
+import { logIn } from '../../store/slices/authSlice';
+import { addUserData } from '../../store/slices/userDataSlice';
+
 
 import { useNavigate } from "react-router";
 

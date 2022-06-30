@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../../hook/useAuth";
 import { useUserData } from "../../hook/useUserData";
 
-import { useDispatch } from "react-redux";
-import { addUserData } from "../../store/userDataSlice";
+
+import { useDispatch } from 'react-redux';
+import { addUserData } from '../../store/slices/userDataSlice';
+
 
 import { useNavigate } from "react-router";
 

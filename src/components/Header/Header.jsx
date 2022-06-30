@@ -4,9 +4,9 @@ import { useLocation } from 'react-router';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useUserData } from '../../hook/useUserData';
-import { addUserData, clearUserData } from '../../store/userDataSlice';
-import { logOut, logIn } from '../../store/authSlice';
-import { logined, unlogined } from '../../store/statusSlicer';
+import { addUserData, clearUserData } from '../../store/slices/userDataSlice';
+import { logOut, logIn } from '../../store/slices/authSlice';
+import { logined, unlogined } from '../../store/slices/statusSlicer';
 
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
