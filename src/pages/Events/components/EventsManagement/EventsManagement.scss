@@ -1,0 +1,27 @@
+.events {
+	min-height: 79vh;
+}
+.page-name {
+	color: var(--text-color);
+}
+
+.events-manager-add {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	padding: 5px;
+}
+
+.events-list {
+	color: var(--text-color);
+	a {
+		color: var(--text-color);
+		text-decoration: none;
+	}
+}
+
+@media (max-width: 482px) {
+	.events-table {
+		overflow-x: scroll;
+	}
+}

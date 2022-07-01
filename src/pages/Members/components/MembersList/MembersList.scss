@@ -1,0 +1,13 @@
+.members {
+	min-height: 79vh;
+	&-img {
+		display: block;
+		background: #282c34;
+		width: 7em;
+		height: 7em;
+	}
+}
+
+.page-name {
+	color: var(--text-color);
+}

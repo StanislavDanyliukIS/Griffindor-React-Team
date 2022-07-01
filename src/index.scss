@@ -1,0 +1,164 @@
+:root[data-theme='light'] {
+	--primary: #ffffff;
+	--secondary: #f5f7fb;
+	--text-color: #1e293b;
+	--subtext-color: #626976;
+	--border-color: #e6e7e9;
+	--table-head-color: #f2f3f4;
+	--table-hover-color: #f7f7f7;
+	--input-border-color: #d9dbde;
+}
+
+:root[data-theme='dark'] {
+	--primary: #1e293b;
+	--secondary: #1b2434;
+	--text-color: #ffffff;
+	--subtext-color: #626976;
+	--border-color: #293345;
+	--table-head-color: #1e293b;
+	--table-hover-color: #253249;
+	--input-border-color: #2c3c56;
+
+	//dark theme invert color for date icon from date picker input
+	::-webkit-calendar-picker-indicator {
+		filter: invert(1);
+	}
+}
+.pointer {
+	cursor: pointer;
+}
+
+.w-10 {
+	width: 10%;
+}
+.w-15 {
+	width: 15%;
+}
+.w-20 {
+	width: 20%;
+}
+.w-30 {
+	width: 30%;
+}
+.w-35 {
+	width: 35%;
+}
+
+.theme {
+	color: var(--text-color);
+	background: var(--primary);
+	border-color: var(--border-color);
+}
+
+th {
+	min-width: 70px;
+}
+
+body {
+	overflow-x: hidden;
+	background-color: var(--secondary);
+	color: var(--subtext-color);
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	input[type='number']::-webkit-inner-spin-button,
+	input[type='number']::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+	}
+	input.form-control {
+		color: var(--text-color);
+		background-color: var(--primary);
+		border: 1px solid var(--input-border-color);
+		&:focus {
+			color: var(--text-color);
+			background-color: var(--primary);
+		}
+	}
+}
+@media only screen and (max-width: 425px) {
+	.btn-container,
+	.heading-container {
+		justify-content: center;
+		.btn-table-create {
+			margin: 20px 0;
+		}
+	}
+}
+
+.table-min-width {
+	min-width: 122px;
+}
+
+.table {
+	color: var(--text-color);
+	background: var(--primary);
+
+	thead {
+		background: var(--table-head-color);
+		border-bottom: var(--border-color);
+		th {
+			font-size: 1em;
+			font-weight: 600;
+		}
+	}
+
+	tbody {
+		color: var(--subtext-color);
+		.name-column {
+			color: var(--text-color);
+		}
+		tr {
+			border-bottom: var(--border-color);
+			&:hover {
+				background-color: var(--table-hover-color);
+			}
+		}
+		td {
+			vertical-align: middle;
+		}
+	}
+	&-btn {
+		display: flex;
+		padding: 10px 20px;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+.td-buttons {
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+}
+
+.ascending {
+	&::after {
+		content: ' ↓';
+	}
+}
+.descending {
+	&::after {
+		content: ' ↑';
+	}
+}
+
+body.modal-open {
+	.navbar,
+	.header,
+	.footer,
+	.pag-blur {
+		-webkit-filter: blur(2px);
+		-moz-filter: blur(2px);
+		-o-filter: blur(2px);
+		-ms-filter: blur(2px);
+		filter: blur(2px);
+	}
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
+}

@@ -1,0 +1,20 @@
+.events {
+	min-height: 79vh;
+	padding: 20px;
+}
+.page-name {
+	color: var(--text-color);
+}
+
+.btn-table-create {
+	display: block;
+	margin: 20px 0 20px auto;
+	padding: 10px;
+}
+
+.events-manager-add {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	padding: 5px;
+}

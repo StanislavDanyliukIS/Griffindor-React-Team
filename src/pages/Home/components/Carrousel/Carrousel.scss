@@ -1,0 +1,83 @@
+.carrousel{
+  &-container{
+    height: 31vh;
+    min-width: 40vw;
+    max-width: 40vw;
+    overflow: hidden;
+  }
+  &-title{
+    margin-left: 0.7vh;
+  }
+  &_box{
+    height: 89%;
+  }
+  &-navlink{
+    text-decoration: none;
+  }
+}
+.left-arrow{
+  width: 3vw;
+  min-width: 25px;
+  height: 97.5%;
+  margin-top: 0.5vh;
+  padding: 13.8vh 0;
+  margin-right: -3vw;
+  color: #ffffff;
+  z-index: 10;
+  text-align: center;
+  opacity: 0.4 ;
+  background: #1E293B;
+  transition: 0.1s;
+  cursor: pointer;
+  border-right: 1px #ffffff solid;
+  &:hover{
+    transition: 0.1s;
+    opacity: 0.7 ;
+  }
+}
+.right-arrow{
+  cursor: pointer;
+  width: 3vw;
+  min-width: 25px;
+  height: 97.5%;
+  margin-top: 0.5vh;
+  padding: 13.8vh 0;
+  margin-left: -3vw;
+  color: #ffffff;
+  z-index: 10;
+  opacity: 0.4 ;
+  text-align: center;
+  background: #1E293B;
+  transition: 0.1s;
+  border-left: 1px #ffffff solid;
+  &:hover{
+    transition: 0.1s;
+    opacity: 0.7 ;
+  }
+}
+
+@media (max-width: 990px) {
+  .carrousel{
+    padding-top: 3vh;
+    &_box{
+      justify-content: center;
+    }
+    &-container{
+      min-width: 80vw;
+      max-width: 80vw;
+    }
+  }
+  .right-arrow{
+    margin-left:  -25px;
+  }
+  .left-arrow{
+    margin-right:  -25px;
+  }
+}
+@media (max-width: 420px) {
+  .carrousel{
+    &_box{
+      justify-content: start;
+    }
+  }
+}

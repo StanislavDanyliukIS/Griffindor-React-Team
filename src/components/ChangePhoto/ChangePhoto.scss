@@ -1,0 +1,25 @@
+.change-photo-form,
+.image-change-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.image-change-container {
+  width: 40%;
+  @media screen and (max-width: 700px) {
+    width: 100%;
+  }
+}
+.change-photo {
+  max-height: 300px;
+  max-width: 340px;
+  margin-top: 16px;
+}
+.change-photo-form {
+  margin-top: 24px;
+  @media screen and (max-width: 700px) {
+    width: 100%;
+  }
+}

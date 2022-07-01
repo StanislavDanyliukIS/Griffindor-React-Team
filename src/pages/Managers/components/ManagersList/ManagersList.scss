@@ -1,0 +1,26 @@
+.managers {
+	min-height: 79vh;
+	background-color: var(--secondary);
+	&-img {
+		display: block;
+		background: #282c34;
+		width: 7em;
+		height: 7em;
+	}
+}
+.page-name {
+	color: var(--text-color);
+}
+.page-result {
+	color: var(--subtext-color);
+}
+
+@media (max-width: 420px) {
+	.page-input {
+		display: flex;
+		justify-content: flex-end;
+		& input {
+			width: 80%;
+		}
+	}
+}

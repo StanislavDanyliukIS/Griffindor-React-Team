@@ -1,0 +1,35 @@
+.managers-container {
+	min-height: 75.8vh;
+}
+.managers-table{
+	overflow-y: auto;
+}
+
+.title-management {
+	color: var(--text-color);
+}
+
+.btn-create-user {
+	display: block;
+	margin-left: auto;
+	padding: 10px;
+	margin-bottom: 1rem;
+}
+
+.members-add-user {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	padding: 10px;
+}
+
+.btn-create-user-text {
+	padding: 10px;
+}
+
+
+@media (max-width: 930px) {
+	.manager-table {
+		overflow-x: scroll;
+	}
+}

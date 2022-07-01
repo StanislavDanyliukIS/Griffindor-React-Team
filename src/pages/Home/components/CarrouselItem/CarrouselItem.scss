@@ -1,0 +1,14 @@
+.carrousel_item{
+  min-width: 40vw;
+  max-width: 40vw;
+  height: 30vh;
+  text-align: center;
+
+}
+@media (max-width: 990px) {
+  .carrousel_item{
+      min-width: 80vw;
+      max-width: 80vw;
+
+  }
+}

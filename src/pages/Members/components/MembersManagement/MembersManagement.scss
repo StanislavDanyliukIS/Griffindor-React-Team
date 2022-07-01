@@ -1,0 +1,42 @@
+.members-container {
+	min-height: 75.8vh;
+}
+
+.title-management {
+	color: var(--text-color);
+}
+
+.btn-create-user {
+	display: block;
+	margin-left: auto;
+	padding: 10px;
+	margin-bottom: 1rem;
+}
+
+.members-add-user {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	padding: 10px;
+}
+
+.btn-create-user-text {
+	padding: 10px;
+}
+
+.btn-edit {
+	display: flex;
+	padding: 10px 20px;
+	margin-left: auto;
+}
+
+.btn-delete {
+	display: flex;
+	padding: 10px 20px;
+}
+
+@media (max-width: 930px) {
+	.member-table {
+		overflow-x: scroll;
+	}
+}

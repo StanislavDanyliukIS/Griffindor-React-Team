@@ -1,0 +1,9 @@
+.themeSwitch-btn {
+	cursor: pointer;
+	transition: 0.2s;
+	&:hover {
+		color: var(--subtext-color);
+		transition: 0.2s;
+		opacity: 0.7;
+	}
+}

@@ -1,0 +1,50 @@
+.scorers{
+  justify-content: center;
+  &-container{
+    background-color: var(--primary);
+    border: 1px var(--border-color) solid;
+  }
+  &-avatar{
+    width: 7em;
+  }
+  &-item{
+    color: var(--subtext-color);
+  }
+  &-img{
+    width: 4em;
+    height: 4em;
+    background-color: var(--subtext-color);
+  }
+  &-text{
+    color: var(--text-color);
+  }
+}
+
+@media (max-width: 420px) {
+  .scorers{
+    &-avatar{
+      width: 6em;
+    }
+    &-img{
+      width: 3em;
+      height: 3em;
+    }
+  }
+}
+@media (max-width: 380px) {
+  .scorers{
+    &-avatar{
+      width: 4.5em;
+    }
+    &-img{
+      width: 2.5em;
+      height: 2.5em;
+    }
+    &-text{
+      font-size: 0.8em;
+    }
+    &-score{
+      font-size: 0.8em;
+    }
+  }
+}
