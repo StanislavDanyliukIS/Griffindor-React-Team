@@ -148,7 +148,8 @@ body {
 body.modal-open {
 	.navbar,
 	.header,
-	.footer {
+	.footer,
+	.pag-blur {
 		-webkit-filter: blur(2px);
 		-moz-filter: blur(2px);
 		-o-filter: blur(2px);
