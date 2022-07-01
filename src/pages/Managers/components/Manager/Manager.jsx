@@ -19,7 +19,7 @@ const Manager = ({ name, number, userImageUrl }) => {
             <span className={"managers-img rounded-circle m-auto mb-2"}></span>
           )}
           <h5 className={"m-0 mb-2 pt-2"}> {name}</h5>
-          <div>
+          <div className={"number-box"}>
             <span className={"number-icon px-1"}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
