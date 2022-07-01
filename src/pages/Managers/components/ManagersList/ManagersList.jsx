@@ -70,8 +70,8 @@ const ManagersList = () => {
 					/>
 				</div>
 			</div>
-			<div className={'page-body pt-4'}>
-				<div className={'container-xl'}>
+			<div className={'pt-4'}>
+				<div className={'justify-content-center container-xl'}>
 					{results.length !== 0 ? (
 						<div className={'managers-row row w-100'}>
 							{results.map(item => (

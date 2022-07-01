@@ -14,7 +14,7 @@ import Member from '../Member/Member';
 import './MembersList.scss';
 
 const Members = () => {
-	const limited = 16;
+	const limited = 8;
 	const [members, setMembers] = useState([]);
 	const [searchField, setSearchField] = useState('');
 	const [limitNumber, setLimitNumber] = useState(limited);
@@ -74,7 +74,7 @@ const Members = () => {
 			</div>
 			<div className={'page-body pt-4'}>
 				<div className={'container-xl'}>
-					<div className={'container-xl'}>
+					<div className={'justify-content-center container-xl'}>
 						{results.length !== 0 ? (
 							<div className={'members-row row w-100'}>
 								{results.map(item => (
