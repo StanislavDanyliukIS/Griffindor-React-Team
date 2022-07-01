@@ -47,8 +47,8 @@ const Members = () => {
 		? members
 		: members.filter(
 				member =>
-					member.name.includes(searchField) ||
-					member.organization.includes(searchField)
+					member.name.toLowerCase().includes(searchField.toLowerCase()) ||
+					member.organization.toLowerCase().includes(searchField.toLowerCase())
 		  );
 
 	return (

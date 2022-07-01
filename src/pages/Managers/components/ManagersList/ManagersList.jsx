@@ -45,7 +45,7 @@ const ManagersList = () => {
 
 	const results = !searchName
 		? managers
-		: managers.filter(manager => manager.name.includes(searchName));
+		: managers.filter(manager => manager.name.toLowerCase().includes(searchName.toLowerCase()));
 	return (
 		<div className={'managers'}>
 			<div className={'page-header'}>

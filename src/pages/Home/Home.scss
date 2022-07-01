@@ -1,6 +1,10 @@
 .home {
 	min-height: 79vh;
 	padding: 20px;
+	&__second_container{
+		display: flex;
+		justify-content: center;
+	}
 }
 
 @media (min-width: 1196px) {
